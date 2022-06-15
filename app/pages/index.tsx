@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import styles from '../styles/Index.module.scss';
+import styles from '../styles/Home.module.scss';
 
-const Index: NextPage = () => {
+const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -11,12 +11,14 @@ const Index: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <h1>Choose a starter!</h1>
+      
       <div>
-        hi
+        
       </div>
 
     </div>
   )
 }
 
-export default Index;
+export default Home;
