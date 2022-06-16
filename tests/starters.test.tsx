@@ -8,7 +8,25 @@ configure({ adapter: new Adapter() });
 describe('Testing Starters Component', () => {
   it('Loads three pokemon card components.', () => {
     const wrapper = shallow( <Starters /> );
-    const container = wrapper.find('.container');
+    const container = wrapper.find('.container').children();
     expect(container).toHaveLength(3);
-  })
+  });
+
+  it('First pokemon is grass type.', () => {
+    const wrapper = shallow( <Starters /> );
+    const container = wrapper.find('.container').childAt(0);
+    expect(container.text()).toBe("grass");
+  });
+
+  it('Second pokemon is fire type.', () => {
+    const wrapper = shallow( <Starters /> );
+    const container = wrapper.find('.container').childAt(1);
+    expect(container.text()).toBe("fire");
+  });
+
+  it('Third pokemon is water type.', () => {
+    const wrapper = shallow( <Starters /> );
+    const container = wrapper.find('.container').childAt(2);
+    expect(container.text()).toBe("water");
+  });
 })

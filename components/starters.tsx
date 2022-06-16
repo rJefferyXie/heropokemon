@@ -3,10 +3,10 @@ import React from 'react';
 
 const Starters = () => {
   return (
-    <div className={styles.container}>
-      <div>p1</div>
-      <div>p2</div>
-      <div>p3</div>
+    <div id="Starters" className={styles.container}>
+      <div>grass</div>
+      <div>fire</div>
+      <div>water</div>
     </div>
   )
 }
