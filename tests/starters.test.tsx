@@ -5,9 +5,10 @@ import Starters from '../components/starters';
 
 configure({ adapter: new Adapter() });
 
-describe('Starters component renders without crashing.', () => {
+describe('Testing Starters Component', () => {
   it('Loads three pokemon card components.', () => {
     const wrapper = shallow( <Starters /> );
-    expect(wrapper).toHaveLength(1);
+    const container = wrapper.find('.container');
+    expect(container).toHaveLength(3);
   })
 })
