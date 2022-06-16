@@ -18,12 +18,19 @@ jobs:
         with:
           node-version: 16
     
-      - name: Clean install packages
-        run: npm ci
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run all automated tests
-        run: npm test
+        run: pnpm test
       
       - name: Build and export
-        run: npm run build
+        run: pnpm run build
     
