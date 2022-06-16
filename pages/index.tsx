@@ -2,6 +2,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.scss';
 
+import Starters from '../components/starters';
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -12,10 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <h1>Choose a starter!</h1>
-      
-      <div>
-        
-      </div>
+      <Starters></Starters>
 
     </div>
   )
