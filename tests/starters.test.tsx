@@ -15,18 +15,18 @@ describe('Testing Starters Component', () => {
   it('First pokemon is grass type.', () => {
     const wrapper = shallow( <Starters /> );
     const container = wrapper.find('.container').childAt(0);
-    expect(container.text()).toBe("grass");
+    expect(container.render().text()).toBe("grass");
   });
 
   it('Second pokemon is fire type.', () => {
     const wrapper = shallow( <Starters /> );
     const container = wrapper.find('.container').childAt(1);
-    expect(container.text()).toBe("fire");
+    expect(container.render().text()).toBe("fire");
   });
 
   it('Third pokemon is water type.', () => {
     const wrapper = shallow( <Starters /> );
     const container = wrapper.find('.container').childAt(2);
-    expect(container.text()).toBe("water");
+    expect(container.render().text()).toBe("water");
   });
-})
+});
