@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 // React and Styling
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.scss';
 
 // Database
@@ -14,25 +14,27 @@ import { doc, getDoc } from 'firebase/firestore';
 import Starters from '../components/starters';
 
 const Home: NextPage = () => {
+  const [pokedex, setPokedex] = useState({});
+
   useEffect(() => {
     const retrievePokedex = async () => {
+      localStorage.setItem("region", "kanto");
       const regionPokedex = localStorage.getItem("kanto");
       if (regionPokedex) {
-
+        setPokedex(JSON.parse(regionPokedex));
+        return;
       }
 
       const ref = doc(db, "regions", "kanto");
       const snapshot = await getDoc(ref);
       if (snapshot.exists()) {
-        localStorage.setItem("kanto", JSON.stringify(snapshot.data().pokedex));
-      } else {
-        console.log("No pokedex for this region.");
+        const snapData = snapshot.data().pokedex;
+        localStorage.setItem("kanto", JSON.stringify(snapData));
+        setPokedex(snapData);
       }
     }
 
     retrievePokedex();
-
-    // getPokedex("kanto");
   }, []);
 
   return (
