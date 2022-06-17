@@ -1,12 +1,14 @@
-import styles from '../styles/Starters.module.scss';
 import React from 'react';
+import styles from '../styles/Starters.module.scss';
+
+import StarterCard from './starterCard';
 
 const Starters = () => {
   return (
     <div id="Starters" className={styles.container}>
-      <div>grass</div>
-      <div>fire</div>
-      <div>water</div>
+      <StarterCard name="grass"></StarterCard>
+      <StarterCard name="fire"></StarterCard>
+      <StarterCard name="water"></StarterCard>
     </div>
   )
 }
