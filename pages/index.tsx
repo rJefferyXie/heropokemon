@@ -1,10 +1,40 @@
+// Next
 import type { NextPage } from 'next';
 import Head from 'next/head';
+
+// React and Styling
+import React, { useEffect } from 'react';
 import styles from '../styles/Home.module.scss';
 
+// Database
+import { db } from '../server'
+import { doc, getDoc } from 'firebase/firestore'; 
+
+// Components
 import Starters from '../components/starters';
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    const retrievePokedex = async () => {
+      const regionPokedex = localStorage.getItem("kanto");
+      if (regionPokedex) {
+
+      }
+
+      const ref = doc(db, "regions", "kanto");
+      const snapshot = await getDoc(ref);
+      if (snapshot.exists()) {
+        localStorage.setItem("kanto", JSON.stringify(snapshot.data().pokedex));
+      } else {
+        console.log("No pokedex for this region.");
+      }
+    }
+
+    retrievePokedex();
+
+    // getPokedex("kanto");
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
