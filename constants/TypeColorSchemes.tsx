@@ -1,4 +1,8 @@
-const TypeColorSchemes = { 
+interface ColorMap {
+  [key: string]: string
+}
+
+const TypeColorSchemes: ColorMap = { 
   "bug": "#C6D16E",
   "dark": "#A29288",
   "dragon": "#A27DFA",
