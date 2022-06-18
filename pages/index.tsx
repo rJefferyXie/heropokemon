@@ -12,6 +12,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 // Components
 import Starters from '../components/starters';
+import Navbar from '../components/navbar';
 
 const Home: NextPage = () => {
   const [pokedex, setPokedex] = useState({});
@@ -45,7 +46,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Choose a starter!</h1>
+      <Navbar></Navbar>
       <Starters></Starters>
 
     </div>
