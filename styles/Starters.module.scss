@@ -1,15 +1,28 @@
+@import './constants.scss';
+
 .container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: calc(100vw - 420px);
+}
+
+.title {
+  margin: auto auto 1rem;
+  color: $text-primary;
+  text-shadow: none;
+}
+
+.cardContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  min-height: 100vh;
-  width: min(100vw, 960px);
-  margin: auto;
+  width: min(100%, 900px);
+  margin: 1rem auto auto;
 }
 
 @media screen and (max-width: 960px) {
-  .container {
+  .cardContainer {
     flex-direction: column;
     margin: 2rem auto 4rem;
   }

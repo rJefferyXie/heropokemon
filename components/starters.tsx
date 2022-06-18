@@ -18,9 +18,12 @@ const Starters = () => {
 
   return (
     <div id="Starters" className={styles.container}>
-      {starterPokemon.map((pokemon, idx) => {
-        return <StarterCard name={pokemon} key={idx}></StarterCard>
-      })}
+      <h1 className={styles.title}>Choose a starter!</h1>
+      <div className={styles.cardContainer}>
+        {starterPokemon.map((pokemon, idx) => {
+          return <StarterCard name={pokemon} key={idx}></StarterCard>
+        })}
+      </div>
     </div>
   )
 }
