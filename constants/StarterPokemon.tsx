@@ -3,7 +3,13 @@ interface StarterMap {
 }
 
 const StarterPokemon: StarterMap = {
-  "kanto": ["bulbasaur", "charmander", "squirtle"]
+  "kanto": ["bulbasaur", "charmander", "squirtle"],
+  "johto": ["ivysaur", "charmeleon", "wartortle"],
+  "hoenn": ["venusaur", "charizard", "blastoise"],
+  "sinnoh": ["zapdos", "moltres", "articuno"],
+  "unova": ["oddish", "vulpix", "poliwag"],
+  "kalos": ["gloom", "ninetales", "poliwhirl"],
+  "alola": ["vileplume", "arcanine", "poliwrath"]
 }
 
 export default StarterPokemon;
