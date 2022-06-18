@@ -20,6 +20,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     const retrievePokedex = async () => {
       localStorage.setItem("region", "kanto");
+      localStorage.setItem("artwork", "official");
       const regionPokedex = localStorage.getItem("kanto");
       if (regionPokedex) {
         setPokedex(JSON.parse(regionPokedex));
@@ -46,9 +47,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar></Navbar>
       <Starters></Starters>
-
     </div>
   )
 }
