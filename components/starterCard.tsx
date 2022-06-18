@@ -30,11 +30,9 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
   }, [name]);
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.card} style={{backgroundColor: theme}}>
-        <img className={styles.cardImage} src={image} alt={`An image of " + ${name}`}></img>
-        <p className={styles.cardName}>{name}</p>
-      </div>
+    <div className={styles.container} style={{backgroundColor: theme}}>
+      <img className={styles.cardImage} src={image} alt={`An image of " + ${name}`}></img>
+      <p className={styles.cardName}>{name}</p>
     </div>
   )
 }
