@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  width: 100%;
+  margin-left: 1rem;
+  height: 40px;
+}
+
+.regionButton {
+  padding: 0 1rem;
+  border-radius: 0px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+}
+
+.regionButton:hover {
+  filter: brightness(110%);
+}
