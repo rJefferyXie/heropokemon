@@ -1,0 +1,11 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($bg-primary, 0.9);
+  height: 80px;
+  font-size: 1.5rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.27);
+}
