@@ -11,16 +11,14 @@ import { db } from '../server'
 import { doc, getDoc } from 'firebase/firestore'; 
 
 // Components
-import Starters from '../components/starters';
-import Navbar from '../components/navbar';
+import Regions from '../components/regions';
 
 const Home: NextPage = () => {
   const [pokedex, setPokedex] = useState({});
+  const [unlockedRegions, setUnlockedRegions] = useState<string[]>([]);
 
   useEffect(() => {
     const retrievePokedex = async () => {
-      localStorage.setItem("region", "kanto");
-      localStorage.setItem("artwork", "official");
       const regionPokedex = localStorage.getItem("kanto");
       if (regionPokedex) {
         setPokedex(JSON.parse(regionPokedex));
@@ -36,6 +34,19 @@ const Home: NextPage = () => {
       }
     }
 
+    const setDefaults = () => {
+      localStorage.setItem("region", "kanto");
+      localStorage.setItem("artwork", "official");
+      const unlockedRegions = localStorage.getItem("unlockedRegions");
+      if (!unlockedRegions) {
+        localStorage.setItem("unlockedRegions", JSON.stringify(["kanto"]));
+        setUnlockedRegions(["kanto"]);
+      } else {
+        setUnlockedRegions(JSON.parse(unlockedRegions));
+      }    
+    }
+    
+    setDefaults();
     retrievePokedex();
   }, []);
 
@@ -47,7 +58,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Starters></Starters>
+      <Regions unlockedRegions={unlockedRegions}></Regions>
     </div>
   )
 }
