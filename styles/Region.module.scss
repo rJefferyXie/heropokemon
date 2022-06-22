@@ -1,9 +1,43 @@
 @import './constants.scss';
 
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.wrapper {
+  display: flex;
+  height: min(80%, 600px);
+  width: min(90%, 1000px);
+  margin: auto;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
   margin: auto;
+  z-index: 100;
+  background-color: $bg-secondary;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
+}
+
+.starters {
+  display: flex;
+  flex-wrap: wrap;
+  width: min(100%, 720px);
+  margin: 4px auto;
+}
+
+.exitButton, .playButton {
+  display: none !important;
 }
