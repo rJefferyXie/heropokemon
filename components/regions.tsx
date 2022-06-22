@@ -12,12 +12,8 @@ import { doc, getDoc } from 'firebase/firestore';
 // Components
 import Region from './region';
 
-interface RegionsProps {
-  unlockedRegions: string[]
-}
-
-const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
-  const { unlockedRegions } = props;
+const Regions = () => {
+  const [unlockedRegions, setUnlockedRegions] = useState([""]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedPokedex, setSelectedPokedex] = useState({});
 
@@ -47,9 +43,16 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
     retrievePokedex();
   }, [selectedRegion]);
 
+  useEffect(() => {
+    const unlocked = localStorage.getItem("unlockedRegions");
+    if (unlocked) {
+      setUnlockedRegions(JSON.parse(unlocked));
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
-      {selectedRegion === "" ? null : 
+      {selectedRegion === "" || selectedPokedex === {} ? null : 
         <Region 
           region={selectedRegion} 
           pokedex={selectedPokedex}
