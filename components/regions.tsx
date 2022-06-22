@@ -5,10 +5,6 @@ import styles from '../styles/Regions.module.scss';
 // Constants
 import RegionImages from '../constants/RegionImages';
 
-// Database
-import { db } from '../server'
-import { doc, getDoc } from 'firebase/firestore'; 
-
 // Components
 import Region from './region';
 
