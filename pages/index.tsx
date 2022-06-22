@@ -6,37 +6,19 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.scss';
 
-// Database
-import { db } from '../server'
-import { doc, getDoc } from 'firebase/firestore'; 
-
 // Components
 import Regions from '../components/regions';
 
 const Home: NextPage = () => {
-  const [pokedex, setPokedex] = useState({});
   const [unlockedRegions, setUnlockedRegions] = useState<string[]>([]);
 
   useEffect(() => {
-    const retrievePokedex = async () => {
-      const regionPokedex = localStorage.getItem("kanto");
-      if (regionPokedex) {
-        setPokedex(JSON.parse(regionPokedex));
-        return;
-      }
-
-      const ref = doc(db, "regions", "kanto");
-      const snapshot = await getDoc(ref);
-      if (snapshot.exists()) {
-        const snapData = snapshot.data().pokedex;
-        localStorage.setItem("kanto", JSON.stringify(snapData));
-        setPokedex(snapData);
-      }
-    }
-
     const setDefaults = () => {
-      localStorage.setItem("region", "kanto");
-      localStorage.setItem("artwork", "official");
+      const artwork = localStorage.getItem("artwork");
+      if (!artwork) {
+        localStorage.setItem("artwork", "official");
+      }
+
       const unlockedRegions = localStorage.getItem("unlockedRegions");
       if (!unlockedRegions) {
         localStorage.setItem("unlockedRegions", JSON.stringify(["kanto"]));
@@ -47,7 +29,6 @@ const Home: NextPage = () => {
     }
     
     setDefaults();
-    retrievePokedex();
   }, []);
 
   return (
