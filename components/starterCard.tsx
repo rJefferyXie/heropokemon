@@ -25,7 +25,6 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
 
     const pokemonType = pokemon.types[0];
     const pokemonImage = pokemon.sprites[artwork];
-    console.log(pokemonImage)
     setTheme(TypeColorSchemes[pokemonType]);
     setImage(pokemonImage);
   }, [pokemon, artwork]);
