@@ -9,8 +9,33 @@ import styles from '../styles/Home.module.scss';
 // Components
 import Regions from '../components/regions';
 
+// Constants
+import RegionList from '../constants/RegionList';
+
+// Database
+import { db } from '../server'
+import { doc, getDoc } from 'firebase/firestore'; 
+
 const Home: NextPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    const downloadPokedexes = async () => {
+      for (const region of RegionList) {
+        const regionPokedex = localStorage.getItem(region);
+        if (regionPokedex) continue;
+
+        console.log("downloading " + region)
+
+        const ref = doc(db, "regions", region);
+        const snapshot = await getDoc(ref);
+        if (snapshot.exists()) {
+          const snapData = snapshot.data().pokedex;
+          localStorage.setItem(region, JSON.stringify(snapData));
+        }
+      }
+    }
+
     const setDefaults = () => {
       const artwork = localStorage.getItem("artwork");
       if (!artwork) {
@@ -37,6 +62,7 @@ const Home: NextPage = () => {
     }
     
     setDefaults();
+    downloadPokedexes();
   }, []);
 
   return (
