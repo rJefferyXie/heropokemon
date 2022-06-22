@@ -6,6 +6,7 @@ interface PokemonMap {
   name: string,
   height: number,
   weight: number,
+  habitat: string,
   is_mythical: boolean,
   is_legendary: boolean,
   stats: number[],
