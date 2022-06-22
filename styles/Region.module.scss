@@ -76,9 +76,17 @@
 .exitButton {
   width: fit-content;
   margin: auto 4px auto auto !important;
+  background-color: rgba($btn-exit, 0.8) !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .playButton {
   width: fit-content;
   margin: auto auto auto 4px !important;
+  background-color: rgba($btn-play, 0.8) !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.exitButton:hover, .playButton:hover {
+  filter: brightness(110%);
 }
