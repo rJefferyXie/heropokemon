@@ -10,8 +10,6 @@ import styles from '../styles/Home.module.scss';
 import Regions from '../components/regions';
 
 const Home: NextPage = () => {
-  const [unlockedRegions, setUnlockedRegions] = useState<string[]>([]);
-
   useEffect(() => {
     const setDefaults = () => {
       const artwork = localStorage.getItem("artwork");
@@ -19,13 +17,23 @@ const Home: NextPage = () => {
         localStorage.setItem("artwork", "official");
       }
 
+      const discoveredPokemon = localStorage.getItem("discoveredPokemon");
+      if (!discoveredPokemon) {
+        localStorage.setItem("discoveredPokemon", JSON.stringify([
+          "bulbasaur", "charmander", "squirtle",
+          "chikorita", "cyndaquil", "totodile",
+          "treecko", "torchic", "mudkip",
+          "turtwig", "chimchar", "piplup",
+          "snivy", "tepig", "oshawott",
+          "chespin", "fennekin", "froakie",
+          "rowlet", "litten", "popplio"
+        ]));
+      }
+
       const unlockedRegions = localStorage.getItem("unlockedRegions");
       if (!unlockedRegions) {
         localStorage.setItem("unlockedRegions", JSON.stringify(["kanto"]));
-        setUnlockedRegions(["kanto"]);
-      } else {
-        setUnlockedRegions(JSON.parse(unlockedRegions));
-      }    
+      } 
     }
     
     setDefaults();
@@ -39,7 +47,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Regions unlockedRegions={unlockedRegions}></Regions>
+      <Regions></Regions>
     </div>
   )
 }
