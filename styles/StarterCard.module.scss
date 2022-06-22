@@ -6,7 +6,7 @@
   width: 220px;
   height: 260px;
   border-radius: 8px;
-  filter: brightness(80%);
+  filter: brightness(50%);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   margin: 4px auto;
@@ -14,7 +14,7 @@
 }
 
 .container:hover {
-  filter: brightness(100%);
+  filter: brightness(75%);
 }
 
 .containerSelected {
@@ -23,7 +23,6 @@
   width: 225px;
   height: 265px;
   border-radius: 8px;
-  filter: brightness(110%);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   margin: 4px auto;
