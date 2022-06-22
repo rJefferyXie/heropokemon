@@ -34,13 +34,12 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
 
   useEffect(() => {
     setStarterPokemon(StarterPokemon[region]);
+    setStarter(StarterPokemon[region][Math.floor(Math.random() * 3)]);
   }, [region]);
 
   useEffect(() => {
-    const discovered = localStorage.getItem("discoveredPokemon");
-    if (discovered) {
-      setDiscoveredPokemon(JSON.parse(discovered));
-    }
+    const discovered = localStorage.getItem("discoveredPokemon") || '[]';
+    setDiscoveredPokemon(JSON.parse(discovered));
 
     const artwork = localStorage.getItem('artwork') || 'official';
     setArtwork(artwork);
