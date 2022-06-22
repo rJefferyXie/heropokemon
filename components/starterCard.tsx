@@ -6,11 +6,13 @@ import styles from '../styles/StarterCard.module.scss';
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 interface StarterCardProps {
-  name: string;
+  name: string,
+  selected: boolean,
+  select: Function
 }
 
 const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
-  const { name } = props;
+  const { name, select, selected } = props;
   const [theme, setTheme] = useState('');
   const [image, setImage] = useState('');
 
@@ -29,8 +31,15 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
     }
   }, [name]);
 
+  const selectStarter = () => {
+    select(name);
+  }
+
   return (
-    <div className={styles.container} style={{backgroundColor: theme}}>
+    <div 
+      className={selected ? styles.containerSelected : styles.container}
+      style={{backgroundColor: theme}} 
+      onClick={selectStarter}>
       <img className={styles.cardImage} src={image} alt={`An image of " + ${name}`}></img>
       <p className={styles.cardName}>{name}</p>
     </div>

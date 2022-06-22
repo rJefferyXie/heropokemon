@@ -1,18 +1,33 @@
+@import './constants.scss';
+
 .container {
   display: flex;
   flex-direction: column;
-  width: 260px;
-  height: 300px;
+  width: 220px;
+  height: 260px;
   border-radius: 8px;
+  filter: brightness(80%);
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 4px auto;
+  overflow: hidden;
 }
 
-.container:hover {
-  filter: brightness(105%);
+.containerSelected {
+  display: flex;
+  flex-direction: column;
+  width: 225px;
+  height: 265px;
+  border-radius: 8px;
+  filter: brightness(110%);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 4px auto;
+  overflow: hidden;
 }
 
 .cardImage {
-  width: 196px;
+  width: 90%;
   margin: auto;
 }
 
@@ -22,10 +37,23 @@
   font-size: 1.2rem;
   text-align: center;
   text-transform: uppercase;
+  padding: 4px 0;
 }
 
 @media screen and (max-width: 960px) {
   .container {
+    width: 30%;
+    height: fit-content;    
+    margin: 4px auto;
+  }
+
+  .cardName {
+    font-size: 0.8rem;
+  }
+
+  .containerSelected {
+    width: 31%;
+    height: fit-content;    
     margin: 4px auto;
   }
 }
