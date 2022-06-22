@@ -30,14 +30,6 @@ const Regions = () => {
         setSelectedPokedex(JSON.parse(regionPokedex));
         return;
       }
-
-      const ref = doc(db, "regions", selectedRegion);
-      const snapshot = await getDoc(ref);
-      if (snapshot.exists()) {
-        const snapData = snapshot.data().pokedex;
-        localStorage.setItem(selectedRegion, JSON.stringify(snapData));
-        setSelectedPokedex(snapData);
-      }
     }
 
     retrievePokedex();
