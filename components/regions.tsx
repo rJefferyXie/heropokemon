@@ -5,6 +5,13 @@ import styles from '../styles/Regions.module.scss';
 // Constants
 import RegionImages from '../constants/RegionImages';
 
+// Database
+import { db } from '../server'
+import { doc, getDoc } from 'firebase/firestore'; 
+
+// Components
+import Region from './region';
+
 interface RegionsProps {
   unlockedRegions: string[]
 }
@@ -12,13 +19,45 @@ interface RegionsProps {
 const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
   const { unlockedRegions } = props;
   const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedPokedex, setSelectedPokedex] = useState({});
 
   const changeRegion = ( newRegion: string ) => {
     setSelectedRegion(newRegion);
   }
 
+  useEffect(() => {
+    if (selectedRegion === "") return;
+
+    const retrievePokedex = async () => {
+      const regionPokedex = localStorage.getItem(selectedRegion);
+      if (regionPokedex) {
+        setSelectedPokedex(JSON.parse(regionPokedex));
+        return;
+      }
+
+      const ref = doc(db, "regions", selectedRegion);
+      const snapshot = await getDoc(ref);
+      if (snapshot.exists()) {
+        const snapData = snapshot.data().pokedex;
+        localStorage.setItem(selectedRegion, JSON.stringify(snapData));
+        setSelectedPokedex(snapData);
+      }
+    }
+
+    retrievePokedex();
+  }, [selectedRegion]);
+
   return (
     <div className={styles.container}>
+      {selectedRegion === "" ? null : 
+        <Region 
+          region={selectedRegion} 
+          pokedex={selectedPokedex}
+          exit={() => setSelectedRegion('')}
+          unlocked={unlockedRegions.includes(selectedRegion)}>
+        </Region>
+      }
+
       <div className={unlockedRegions.includes("kanto") ? styles.regionContainer : styles.regionContainerLocked} onClick={() => changeRegion("kanto")}>
         <h1 className={styles.regionName}>KANTO</h1>
         <h1 className={styles.regionUnlocked}>SELECT</h1>

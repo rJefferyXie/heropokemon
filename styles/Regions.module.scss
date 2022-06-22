@@ -34,6 +34,7 @@
 .regionWallpaper {
   object-fit: cover;
   height: 100%;
+  z-index: -1;
 }
 
 .regionImage {
