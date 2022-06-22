@@ -2,37 +2,36 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/StarterCard.module.scss';
 
+// Interfaces 
+import PokemonMap from '../interfaces/PokemonMap';
+
 // Constants
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 interface StarterCardProps {
-  name: string,
+  pokemon: PokemonMap,
+  select: Function,
   selected: boolean,
-  select: Function
+  artwork: string
 }
 
 const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
-  const { name, select, selected } = props;
+  const { pokemon, select, selected, artwork } = props;
   const [theme, setTheme] = useState('');
   const [image, setImage] = useState('');
 
   useEffect(() => {
-    if (!name) return;
+    if (!pokemon || !artwork) return;
 
-    const pokedex = localStorage.getItem('kanto');
-    const artwork = localStorage.getItem('artwork') || 'official';
-    if (pokedex) {
-      const pokedexMap = JSON.parse(pokedex);
-      const pokemonInfo = pokedexMap[name];
-      const pokemonType = pokemonInfo.types[0];
-      const pokemonImage = pokemonInfo.sprites[artwork];
-      setTheme(TypeColorSchemes[pokemonType]);
-      setImage(pokemonImage);
-    }
-  }, [name]);
+    const pokemonType = pokemon.types[0];
+    const pokemonImage = pokemon.sprites[artwork];
+    console.log(pokemonImage)
+    setTheme(TypeColorSchemes[pokemonType]);
+    setImage(pokemonImage);
+  }, [pokemon, artwork]);
 
   const selectStarter = () => {
-    select(name);
+    select(pokemon.name);
   }
 
   return (
@@ -40,8 +39,8 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
       className={selected ? styles.containerSelected : styles.container}
       style={{backgroundColor: theme}} 
       onClick={selectStarter}>
-      <img className={styles.cardImage} src={image} alt={`An image of " + ${name}`}></img>
-      <p className={styles.cardName}>{name}</p>
+      <img className={styles.cardImage} src={image} alt={`An image of " + ${pokemon.name}`}></img>
+      <p className={styles.cardName}>{pokemon.name}</p>
     </div>
   )
 }

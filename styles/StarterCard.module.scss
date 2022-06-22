@@ -13,6 +13,10 @@
   overflow: hidden;
 }
 
+.container:hover {
+  filter: brightness(100%);
+}
+
 .containerSelected {
   display: flex;
   flex-direction: column;
