@@ -9,7 +9,7 @@ const StarterPokemon: StarterMap = {
   "sinnoh": ["turtwig", "chimchar", "piplup"],
   "unova": ["snivy", "tepig", "oshawott"],
   "kalos": ["chespin", "fennekin", "froakie"],
-  "alola": ["rowlett", "litten", "popplio"]
+  "alola": ["rowlet", "litten", "popplio"]
 }
 
 export default StarterPokemon;
