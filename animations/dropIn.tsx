@@ -1,6 +1,6 @@
 const dropIn = {
   hidden: {
-    y: "-20vh",
+    y: "-15vh",
     transition: {
         duration: 0.1,
         type: "spring"
@@ -10,7 +10,7 @@ const dropIn = {
     y: "0",
   },
   exit: {
-    y: "20vh",
+    y: "15vh",
     transition: {
         duration: 0.1
     }
