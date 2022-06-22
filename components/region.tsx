@@ -51,6 +51,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
 
   const selectStarter = (pokemon: string) => {
     setStarter(pokemon);
+    console.log(pokedex["bulbasaur"]);
   }
 
   return (
@@ -72,6 +73,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
                         key={idx}></StarterCard>
                       })}
                     </div>
+                    <p className={styles.selectedPokemon}>{"Selected Pokemon: " + starter}</p>
                     <div className={styles.buttonContainer}>
                       <Button variant="contained" onClick={reset} className={styles.exitButton}>EXIT</Button>
                       <Button variant="contained" onClick={reset} className={styles.playButton}>PLAY</Button>
