@@ -21,7 +21,6 @@
 
 .container {
   display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
   margin: auto;
@@ -29,6 +28,19 @@
   background-color: $bg-secondary;
   border-radius: 8px;
   box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
+  padding: 1rem;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+}
+
+.regionTitle {
+  text-transform: uppercase;
+  margin: 0 auto;
 }
 
 .starters {
@@ -38,6 +50,35 @@
   margin: 4px auto;
 }
 
-.exitButton, .playButton {
-  display: none !important;
+.rightContainer {
+  width: 20%;
+  height: 100%;
+  overflow: auto;
+}
+
+.pokedexEntry {
+  display: flex;
+  align-items: center;
+  margin: 2px auto;
+  text-transform: uppercase;
+}
+
+.pokedexImage {
+  width: 27px;
+  margin: auto 4px auto 0px;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+}
+
+.exitButton {
+  width: fit-content;
+  margin: auto 4px auto auto !important;
+}
+
+.playButton {
+  width: fit-content;
+  margin: auto auto auto 4px !important;
 }

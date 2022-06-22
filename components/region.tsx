@@ -9,6 +9,9 @@ import DropIn from '../animations/dropIn';
 // MUI
 import { Button, ClickAwayListener } from '@mui/material';
 
+// Interfaces 
+import PokedexMap from '../interfaces/PokedexMap';
+
 // Constants
 import StarterPokemon from '../constants/StarterPokemon';
 
@@ -17,19 +20,31 @@ import StarterCard from './starterCard';
 
 interface RegionProps {
   region: string,
-  pokedex: {}
+  pokedex: PokedexMap,
   unlocked: boolean,
   exit: Function
 }
 
 const Region = (props: React.PropsWithChildren<RegionProps>) => {
   const [starterPokemon, setStarterPokemon] = useState<string[]>([]);
+  const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
   const [starter, setStarter] = useState("");
+  const [artwork, setArtwork] = useState("");
   const { region, pokedex, unlocked, exit } = props;
 
   useEffect(() => {
     setStarterPokemon(StarterPokemon[region]);
   }, [region]);
+
+  useEffect(() => {
+    const discovered = localStorage.getItem("discoveredPokemon");
+    if (discovered) {
+      setDiscoveredPokemon(JSON.parse(discovered));
+    }
+
+    const artwork = localStorage.getItem('artwork') || 'official';
+    setArtwork(artwork);
+  }, []);
 
   const reset = () => {
     setStarterPokemon([]);
@@ -46,18 +61,36 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
           <AnimatePresence onExitComplete={() => exit()}>
               {starterPokemon.length > 0 &&
                 <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropIn}>
-                  <div className={styles.starters}>
-                    {starterPokemon.map((pokemon, idx) => {
-                      return <StarterCard 
-                      name={pokemon} 
-                      select={selectStarter} 
-                      selected={starter === pokemon} 
-                      key={idx}
-                      ></StarterCard>
+                  <div className={styles.leftContainer}>
+                    <h2 className={styles.regionTitle}>{region}</h2>
+                    <div className={styles.starters}>
+                      {starterPokemon.map((pokemon, idx) => {
+                        return <StarterCard 
+                        pokemon={pokedex[pokemon]}
+                        artwork={artwork}
+                        select={selectStarter} 
+                        selected={starter === pokemon} 
+                        key={idx}></StarterCard>
+                      })}
+                    </div>
+                    <div className={styles.buttonContainer}>
+                      <Button variant="contained" onClick={reset} className={styles.exitButton}>EXIT</Button>
+                      <Button variant="contained" onClick={reset} className={styles.playButton}>PLAY</Button>
+                    </div>
+                  </div>
+                  <div className={styles.rightContainer}>
+                    <strong>Pokedex Entries</strong>
+                    {Object.keys(pokedex).sort().map((pokemon, idx) => {
+                      return discoveredPokemon.includes(pokedex[pokemon].name) ? 
+                      <div className={styles.pokedexEntry} key={idx}>
+                        <img className={styles.pokedexImage} src={pokedex[pokemon].sprites[artwork]} alt={"An image of " + pokedex[pokemon].name}></img>
+                        <p>{pokedex[pokemon].name}</p> 
+                      </div> :
+                      <div className={styles.pokedexEntry} key={idx}>
+                        <p>???</p> 
+                      </div>
                     })}
                   </div>
-                  <Button variant="contained" onClick={reset} className={styles.exitButton}>EXIT</Button>
-                  <Button variant="contained" onClick={reset} className={styles.playButton}>PLAY</Button>
                 </motion.div>
               }
             </AnimatePresence>
