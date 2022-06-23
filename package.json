@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build && next export && next-image-export-optimizer",
     "start": "next start",
-    "test": "jest",
+    "e2e": "cypress open",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,20 +24,13 @@
     "sass": "^1.52.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.5",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "@types/enzyme": "^3.10.12",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/jest": "^28.1.1",
     "@types/node": "17.0.44",
     "@types/react": "18.0.12",
     "@types/react-dom": "18.0.5",
-    "enzyme": "^3.11.0",
+    "cypress": "^10.2.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6",
-    "jest": "^28.1.1",
     "typescript": "4.7.3"
   }
 }
