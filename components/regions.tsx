@@ -51,7 +51,6 @@ const Regions = () => {
         name="kanto"
         unlocked={unlockedRegions.includes("kanto")} 
         styling={{objectPosition: "left"}}
-        wallpaper="kanto"
         images={["venusaur", "charizard", "blastoise", "articuno", "zapdos", "moltres"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -60,7 +59,6 @@ const Regions = () => {
         name="johto" 
         unlocked={unlockedRegions.includes("johto")} 
         styling={{}}
-        wallpaper="johto"
         images={["meganium", "typhlosion", "feraligatr", "ho-oh", "lugia", "celibi"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -69,7 +67,6 @@ const Regions = () => {
         name="hoenn"
         unlocked={unlockedRegions.includes("hoenn")} 
         styling={{}}
-        wallpaper="hoenn"
         images={["sceptile", "blaziken", "swampert", "groudon", "kyogre", "rayquaza"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -78,7 +75,6 @@ const Regions = () => {
         name="sinnoh" 
         unlocked={unlockedRegions.includes("sinnoh")} 
         styling={{}}
-        wallpaper="sinnoh"
         images={["torterra", "infernape", "empoleon", "dialga", "palkia", "giratina"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -87,7 +83,6 @@ const Regions = () => {
         name="unova"
         unlocked={unlockedRegions.includes("unova")} 
         styling={{}}
-        wallpaper="unova"
         images={["serperior", "emboar", "samurott", "reshiram", "zekrom", "kyurem"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -96,7 +91,6 @@ const Regions = () => {
         name="kalos"
         unlocked={unlockedRegions.includes("kalos")} 
         styling={{}}
-        wallpaper="kalos"
         images={["chesnaught", "delphox", "greninja", "xerneas", "yveltal", "zygarde"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -105,7 +99,6 @@ const Regions = () => {
         name="alola"
         unlocked={unlockedRegions.includes("alola")} 
         styling={{}}
-        wallpaper="alola"
         images={["decidueye", "incineroar", "primarina", "lunala", "solgaleo", "necrozma"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
