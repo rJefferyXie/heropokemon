@@ -61,7 +61,11 @@ import solgaleo from "../public/images/alola/solgaleo.png";
 import necrozma from "../public/images/alola/necrozma.png";
 import alola from "../public/images/alola/alola.png";
 
-const RegionImages = {
+interface RegionImagesMap {
+  [key: string]: any
+}
+
+const RegionImages: RegionImagesMap = {
   "venusaur": venusaur.src,
   "charizard": charizard.src,
   "blastoise": blastoise.src,
