@@ -1,227 +1,175 @@
-@import './constants.scss';
-
-.overlay {
+.regionContainer {
   display: flex;
-  position: fixed;
-  z-index: 99;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 8px;
+  width: calc(100% / 7);
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  margin: 0px 3px;
+  box-shadow: 0px 0px 4px rgb(0, 0, 0, 27%);
+}
+
+.regionContainerLocked {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 8px;
+  width: calc(100% / 7);
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  margin: 0px 3px;
+  box-shadow: 0px 0px 4px rgb(0, 0, 0, 27%);
+  filter: brightness(25%);
+}
+
+.regionWallpaper {
+  object-fit: cover;
+  height: 100%;
+  z-index: -1;
+}
+
+.regionImage {
+  position: absolute;
+  width: 84px;
+  opacity: 0;
+  z-index: 1;
+  background-color: rgba(33, 202, 224, 0.3);
+  padding: 4px;
+  margin: 2px;
+  border-radius: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.regionImage:first-of-type {
+  left: 0px;
+}
+
+.regionImage:nth-of-type(3) {
+  right: 0px;
+  top: 13%;
+}
+
+.regionImage:nth-of-type(4) {
+  top: 26%;
+}
+
+.regionImage:nth-of-type(5) {
+  bottom: 26%;
+  right: 0px;
+}
+
+.regionImage:nth-of-type(6) {
+  bottom: 13%;
+}
+
+.regionImage:last-of-type {
+  bottom: 0%;
+  right: 0px;
+}
+
+.regionName {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.wrapper {
-  display: flex;
-  height: min(80%, 600px);
-  width: min(90%, 1000px);
-  margin: auto;
-}
-
-.container {
-  display: flex;
-  height: 100%;
-  min-height: 100%;
+  font-size: 2.7rem;
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  z-index: 100;
-  background-color: $bg-secondary;
-  border-radius: 8px;
-  box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
-  padding: 1rem;
-  overflow: auto;
-}
-
-.leftContainer {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: auto;
-  min-height: 100%;
-}
-
-.regionTitle {
+  text-align: center;
   text-transform: uppercase;
-  margin: 0 auto;
+  text-shadow: 
+      0 0 2px rgba(255,255,255,0.8), 
+      2px 2px 2px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
 }
 
-.starters {
-  display: flex;
-  width: min(100%, 640px);
-  margin: auto;
-}
-
-.statsAndTypes {
-  display: flex;
-  width: fit-content;
-  margin: auto;
-}
-
-.stats {
-  display: flex;
-  flex-direction: column;
-  margin: auto 0px auto auto;
-  padding: 0.25rem 1rem;
-}
-
-.stat {
-  display: flex;
-}
-
-.statBarWrapper {
+.regionUnlocked, .regionLocked {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.7rem;
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  color: #fff;
+  background-color: rgba(33, 202, 224, 0.3);
   width: 100%;
-  max-width: 200px;
-  margin: 4px;
-  height: 1.7rem;
-  background-color:gray;
-  border-radius: 16px;
-  box-shadow: 1px 1px 4px rgb(0, 0, 0, 27%);
+  text-align: center;
+  text-shadow: 
+      0 0 2px rgba(255,255,255,0.8), 
+      2px 2px 2px rgba(0,0,0,0.2);
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
 }
 
-.statBar {
-  display: flex;
-  padding: 4px;
-  max-width: 200px;
-  min-width: 40px;
-  height: 1.7rem;
-  border-radius: 16px;
-  transition: width 600ms ease-in-out;
+.regionContainer:hover .regionName, .regionContainerLocked:hover .regionName {
+  opacity: 0;
 }
 
-.statName {
-  margin: 4px;
-  padding: 4px;
-  width: 200px;
-  height: 1.7rem;
-  text-align: right;
+.regionContainer:hover .regionImage, .regionContainer:hover .regionUnlocked {
+  opacity: 1;
 }
 
-.statValue {
-  width: 100%;
-  margin: auto 4px;
-  text-align: right;
-  color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+.regionContainerLocked:hover .regionLocked {
+  opacity: 1;
 }
 
-.typesAndSelected {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 0.25rem 1rem;
+.regionContainerLocked:hover {
+  filter: none;
 }
 
-.types {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+.regionContainer:hover .regionWallpaper, .regionContainerLocked:hover .regionWallpaper {
+  filter: brightness(25%);
 }
 
-.type {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  border-radius: 4px;
-  margin: auto 2px;
-  text-transform: uppercase;
-}
-
-.selectedPokemonName {
-  text-transform: uppercase;
-  margin: 0 auto;
-}
-
-.selectedPokemonImage {
-  width: 148px;
-  margin: 0 auto;
-}
-
-.rightContainer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  overflow: auto;
-}
-
-.pokedexHeader {
-  width: 100%;
-}
-
-.pokedexEntry {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: 2px auto;
-  text-transform: uppercase;
-}
-
-.pokedexImage {
-  width: 27px;
-  margin: auto 4px auto 0px;
-}
-
-.buttonContainer {
-  display: flex;
-  width: 100%;
-  padding: 0 1rem 0 0;
-}
-
-.exitButton {
-  width: fit-content;
-  margin: auto 2px auto auto !important;
-  background-color: rgba($btn-exit, 0.8) !important;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.playButton {
-  width: fit-content;
-  margin: auto auto auto 2px !important;
-  background-color: rgba($btn-play, 0.8) !important;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.exitButton:hover, .playButton:hover {
-  filter: brightness(110%);
-}
-
-@media screen and (max-width: 1300px) {
-  .container {
-    flex-direction: column;
-    overflow: auto;
+@media screen and (max-width: 1200px) {
+  .regionContainer, .regionContainerLocked {
+      width: calc(calc(100% - 12px) / 2);
+      height: 240px;
+      margin: 3px;
   }
 
-  .leftContainer {
-    width: 100%;
+  .regionImage:first-of-type {
+    left: 0px;
   }
-
-  .rightContainer {
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    overflow: initial;
+  
+  .regionImage:nth-of-type(3) {
+    left: 50%;
+    transform: translateX(-50%);
+    top: initial;
   }
-
-  .pokedexEntry {
-    width: 33.33333%;
+  
+  .regionImage:nth-of-type(4) {
+    top: initial;
+    right: 0px;  
+  }
+  
+  .regionImage:nth-of-type(5) {
+    bottom: 0%;
+    left: 0px;
+  }
+  
+  .regionImage:nth-of-type(6) {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0%;  
+  }
+  
+  .regionImage:last-of-type {
+    bottom: 0%;
+    right: 0px;
   }
 }
 
-@media screen and (max-width: 960px) {
-  .statsAndTypes {
-    flex-direction: column;
-  }
-
-  .wrapper {
-    height: 80%;
-  }
-
-  .pokedexEntry {
-    width: 100%;
-  }
-
-  .buttonContainer {
-    order: 1;
+@media screen and (max-width: 960px){
+  .regionContainer, .regionContainerLocked {
+      width: 100%;
+      height: 240px;
+      margin: 8px 0px;
   }
 }

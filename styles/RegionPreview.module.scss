@@ -1,0 +1,227 @@
+@import './constants.scss';
+
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.wrapper {
+  display: flex;
+  height: min(80%, 600px);
+  width: min(90%, 1000px);
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: $bg-secondary;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
+  padding: 1rem;
+  overflow: auto;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: auto;
+  min-height: 100%;
+}
+
+.regionTitle {
+  text-transform: uppercase;
+  margin: 0 auto;
+}
+
+.starters {
+  display: flex;
+  width: min(100%, 640px);
+  margin: auto;
+}
+
+.statsAndTypes {
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0px auto auto;
+  padding: 0.25rem 1rem;
+}
+
+.stat {
+  display: flex;
+}
+
+.statBarWrapper {
+  width: 100%;
+  max-width: 200px;
+  margin: 4px;
+  height: 1.7rem;
+  background-color:gray;
+  border-radius: 16px;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0, 27%);
+}
+
+.statBar {
+  display: flex;
+  padding: 4px;
+  max-width: 200px;
+  min-width: 40px;
+  height: 1.7rem;
+  border-radius: 16px;
+  transition: width 600ms ease-in-out;
+}
+
+.statName {
+  margin: 4px;
+  padding: 4px;
+  width: 200px;
+  height: 1.7rem;
+  text-align: right;
+}
+
+.statValue {
+  width: 100%;
+  margin: auto 4px;
+  text-align: right;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.typesAndSelected {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 0.25rem 1rem;
+}
+
+.types {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  margin: auto 2px;
+  text-transform: uppercase;
+}
+
+.selectedPokemonName {
+  text-transform: uppercase;
+  margin: 0 auto;
+}
+
+.selectedPokemonImage {
+  width: 148px;
+  margin: 0 auto;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: auto;
+}
+
+.pokedexHeader {
+  width: 100%;
+}
+
+.pokedexEntry {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 2px auto;
+  text-transform: uppercase;
+}
+
+.pokedexImage {
+  width: 27px;
+  margin: auto 4px auto 0px;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  padding: 0 1rem 0 0;
+}
+
+.exitButton {
+  width: fit-content;
+  margin: auto 2px auto auto !important;
+  background-color: rgba($btn-exit, 0.8) !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.playButton {
+  width: fit-content;
+  margin: auto auto auto 2px !important;
+  background-color: rgba($btn-play, 0.8) !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.exitButton:hover, .playButton:hover {
+  filter: brightness(110%);
+}
+
+@media screen and (max-width: 1300px) {
+  .container {
+    flex-direction: column;
+    overflow: auto;
+  }
+
+  .leftContainer {
+    width: 100%;
+  }
+
+  .rightContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow: initial;
+  }
+
+  .pokedexEntry {
+    width: 33.33333%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .statsAndTypes {
+    flex-direction: column;
+  }
+
+  .wrapper {
+    height: 80%;
+  }
+
+  .pokedexEntry {
+    width: 100%;
+  }
+
+  .buttonContainer {
+    order: 1;
+  }
+}
