@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import DropIn from '../animations/dropIn';
 
 // MUI
-import { Button, ClickAwayListener } from '@mui/material';
+import { Button, ClickAwayListener, Snackbar } from '@mui/material';
 
 // Interfaces 
 import PokedexMap from '../interfaces/PokedexMap';
@@ -33,6 +33,8 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
   const [starter, setStarter] = useState("");
   const [artwork, setArtwork] = useState("");
   const [theme, setTheme] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [showUnlock, setShowUnlock] = useState(false);
   const { region, pokedex, unlocked, exit } = props;
 
   useEffect(() => {
@@ -58,6 +60,24 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     setStarterPokemon([]);
   }
 
+  const play = () => {
+    console.log("play");
+  }
+
+  const unlock = () => {
+    setShowError(true);
+  }
+
+  const handleErrorClose = (_: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") return;
+    setShowError(false);
+  }
+
+  const handleUnlockClose = (_: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") return;
+    setShowUnlock(false);
+  }
+
   const selectStarter = (pokemon: string) => {
     setStarter(pokemon);
   }
@@ -66,6 +86,23 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     <div className={styles.overlay}>
       <ClickAwayListener onClickAway={reset}>
         <div className={styles.wrapper}>
+          <Snackbar
+            open={showUnlock}
+            message={"Unlock this region?"}
+            onClose={handleUnlockClose}
+            action={<div>
+              <Button className={styles.exitButton} variant="contained" onClick={handleUnlockClose}>CANCEL</Button>
+              <Button className={styles.playButton} variant="contained">UNLOCK</Button>
+            </div>}></Snackbar>
+
+          <Snackbar
+            open={showError}
+            message={"You cannot unlock any more regions at this moment. Keep playing to unlock more!"}
+            autoHideDuration={6000}
+            onClose={handleErrorClose}
+            action={<Button className={styles.exitButton} variant="contained" onClick={handleErrorClose}>DISMISS</Button>}
+          ></Snackbar>
+
           <AnimatePresence onExitComplete={() => exit()}>
               {starterPokemon.length > 0 &&
                 <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropIn}>
@@ -84,7 +121,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                     <div className={styles.statsAndTypes}>
                       <div className={styles.buttonContainer}>
                         <Button variant="contained" onClick={reset} className={styles.exitButton}>EXIT</Button>
-                        <Button variant="contained" onClick={reset} className={styles.playButton}>PLAY</Button>
+                        <Button variant="contained" onClick={unlocked ? play : unlock} className={styles.playButton}>{unlocked ? "PLAY" : "UNLOCK"}</Button>
                       </div>
                       <div className={styles.typesAndSelected}>
                         <strong className={styles.selectedPokemonName}>{starter}</strong>

@@ -74,7 +74,7 @@ const Regions = () => {
       <Region 
         name="sinnoh" 
         unlocked={unlockedRegions.includes("sinnoh")} 
-        styling={{}}
+        styling={{objectPosition: "right"}}
         images={["torterra", "infernape", "empoleon", "dialga", "palkia", "giratina"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
