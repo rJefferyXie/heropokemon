@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Loads Home Page', () => {
+describe('Loads all seven regions.', () => {
   before(() => {
     cy.visit('http://localhost:3000');
   });

@@ -1,3 +1,6 @@
+// Next
+import { useRouter } from 'next/router';
+
 // React and Styling
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/RegionPreview.module.scss';
@@ -28,6 +31,9 @@ interface RegionPreviewProps {
 }
 
 const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
+  const { region, pokedex, unlocked, exit } = props;
+  const router = useRouter();
+
   const [starterPokemon, setStarterPokemon] = useState<string[]>([]);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
   const [starter, setStarter] = useState("");
@@ -35,7 +41,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
   const [theme, setTheme] = useState("");
   const [showError, setShowError] = useState(false);
   const [showUnlock, setShowUnlock] = useState(false);
-  const { region, pokedex, unlocked, exit } = props;
 
   useEffect(() => {
     setStarterPokemon(StarterPokemon[region]);
@@ -60,8 +65,22 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     setStarterPokemon([]);
   }
 
-  const play = () => {
-    console.log("play");
+  const play = () => {    
+    const selectedRegion = localStorage.getItem(region + 'SaveExists');
+    if (selectedRegion === 'true') {
+      router.push('/game');
+      return;
+    }
+
+    const RegionTeam: PokedexMap = {};
+    RegionTeam[starter] = pokedex[starter];
+    localStorage.setItem('selectedRegion', region);
+    localStorage.setItem(region + 'SaveExists', 'true');
+    localStorage.setItem(region + 'Currency', '0');
+    localStorage.setItem(region + 'Items', '{}');
+    localStorage.setItem(region + 'Storage', '{}');
+    localStorage.setItem(region + 'Team', JSON.stringify(RegionTeam));
+    router.push('/game');
   }
 
   const unlock = () => {
