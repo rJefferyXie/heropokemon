@@ -1,0 +1,46 @@
+.container {
+  color: black;
+  text-shadow: none;
+}
+
+.enemyImage {
+  width: 50%;
+  cursor: pointer;
+}
+
+.enemyName {
+  text-transform: uppercase;
+}
+
+.enemyLevel {
+}
+
+.healthBarWrapper {
+  max-width: 200px;
+  margin: 4px;
+  height: 1.7rem;
+  background-color: gray;
+  border-radius: 16px;
+}
+
+.healthBar {
+  display: flex;
+  padding: 4px;
+  max-width: 200px;
+  min-width: 40px;
+  height: 1.7rem;
+  border-radius: 16px;
+  transition: width 600ms ease-in-out;
+}
+
+.healthValue {
+  width: 100%;
+  margin: auto 4px;
+  text-align: right;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.hit {
+  transform: translateY(-5px);
+}
