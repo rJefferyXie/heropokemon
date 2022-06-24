@@ -74,11 +74,13 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
 
     const RegionTeam: PokedexMap = {};
     RegionTeam[starter] = pokedex[starter];
+    RegionTeam[starter].level = 5;
+    for (let i = 0; i < 6; i++) {
+      RegionTeam[starter].stats[i] += Math.floor(Math.random() * 5);
+    }
+    
     localStorage.setItem('selectedRegion', region);
     localStorage.setItem(region + 'SaveExists', 'true');
-    localStorage.setItem(region + 'Currency', '0');
-    localStorage.setItem(region + 'Items', '{}');
-    localStorage.setItem(region + 'Storage', '{}');
     localStorage.setItem(region + 'Team', JSON.stringify(RegionTeam));
     router.push('/game');
   }
