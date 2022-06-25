@@ -22,17 +22,19 @@ const Game: NextPage = () => {
   const [clickDamage, setClickDamage] = useState(0.1);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
-  const [badges, setBadges] = useState([]);
   const [region, setRegion] = useState('');
   const [artwork, setArtwork] = useState('');
   const [storage, setStorage] = useState({});
-  const [currency, setCurrency] = useState('0');
+  const [currency, setCurrency] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [team, setTeam] = useState<PokedexMap>({});
+  const [badges, setBadges] = useState<string[]>([]);
   const [pokedex, setPokedex] = useState<PokedexMap>({});
-  const [enemy, setEnemy] = useState({});
-  const [enemyHealth, setEnemyHealth] = useState(0);
+
+  /* @ts-expect-error */
+  const [enemy, setEnemy] = useState<PokemonMap>({});
   const [enemies, setEnemies] = useState<PokemonMap[]>([]);
+  const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
 
   useEffect(() => {
     if (!router) return;
@@ -56,16 +58,18 @@ const Game: NextPage = () => {
     const gameBadges = localStorage.getItem(gameRegion + 'Badges') || '[]';
     const gameStorage = localStorage.getItem(gameRegion + 'Storage') || '{}';
     const gameCurrency = localStorage.getItem(gameRegion + 'Currency') || '0';
+    const pokemonDiscovered = localStorage.getItem('discoveredPokemon') || '[]';
 
     setRegion(gameRegion);
     setArtwork(gameArtwork);
-    setCurrency(gameCurrency);
     setTeam(JSON.parse(gameTeam));
     setItems(JSON.parse(gameItems));
     setFloor(JSON.parse(gameFloor));
     setBadges(JSON.parse(gameBadges));
     setStorage(JSON.parse(gameStorage));
     setPokedex(JSON.parse(gamePokedex));
+    setCurrency(JSON.parse(gameCurrency));
+    setDiscoveredPokemon(JSON.parse(pokemonDiscovered));
   }, [router]);
 
   useEffect(() => {
@@ -109,16 +113,19 @@ const Game: NextPage = () => {
 
       // adjust enemy stats according to level
       for (let i = 0; i < 6; i++) {
-        enemyInfo.stats[i] += Math.floor(Math.random() * level);
+        const statBoost = Math.floor(Math.random() * level * 2);
+        enemyInfo.statBoosts[i] = statBoost;
+        enemyInfo.stats[i + 1] += statBoost
       }
 
+      enemyInfo.stats[0] += enemyInfo.statBoosts[0];
       enemyList.push(enemyInfo);
     }
 
     setIsLoading(false);
     setEnemies(enemyList);
     setEnemy(enemyList[0]);
-    setEnemyHealth(enemyList[0].stats[0]);
+    setDiscoveredPokemon(discovered => [...discovered, enemyList[0].name]);
   }, [pokedex, floor]);
 
   useEffect(() => {
@@ -126,9 +133,12 @@ const Game: NextPage = () => {
     if (enemies.length === 0) setFloor(f => f + 1);
   }, [enemies, isLoading]);
 
-  const damageEnemy = (damage: number) => {
-    setEnemyHealth(enemyHealth - damage);
-  }
+  // const damageEnemy = (damage: number) => {
+  //   const enemyData = enemy;
+  //   enemyData.stats[0] -= damage;
+  //   setEnemy(enemyData);
+  //   console.log(enemy.stats[0]);
+  // }
 
   return (
     <div className={styles.container}>
@@ -140,9 +150,9 @@ const Game: NextPage = () => {
 
       {isLoading && <Loading></Loading>}
 
-      <Navbar></Navbar>
-      { /* @ts-expect-error */ }
-      {Object.keys(enemy).length > 0 && <Enemy enemy={enemy} health={enemyHealth} takeDamage={() => damageEnemy(clickDamage)} artwork={artwork}></Enemy>}
+      <Navbar currency={currency} items={items} storage={storage} team={team} badges={badges} artwork={artwork}></Navbar>
+      {Object.keys(enemy).length > 0 && 
+        <Enemy enemy={enemy} clickDamage={clickDamage} artwork={artwork}></Enemy>}
     </div>
   )
 }
