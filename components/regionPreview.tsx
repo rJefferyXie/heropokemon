@@ -78,8 +78,12 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
 
     // adjust pokemon stats according to pokemon level
     for (let i = 0; i < 6; i++) {
-      RegionTeam[starter].statBoosts[i] += Math.floor(Math.random() * starterLevel * 2);
+      const statBoost = Math.floor(Math.random() * starterLevel * 2);
+      RegionTeam[starter].statBoosts[i] = statBoost;
+      RegionTeam[starter].stats[i + 1] += statBoost;
     }
+
+    RegionTeam[starter].stats[0] += RegionTeam[starter].statBoosts[0];
     
     localStorage.setItem('selectedRegion', region);
     localStorage.setItem(region + 'SaveExists', 'true');
