@@ -34,11 +34,11 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
   const { region, pokedex, unlocked, exit } = props;
   const router = useRouter();
 
+  const [theme, setTheme] = useState("");
+  const [artwork, setArtwork] = useState("");
+  const [starter, setStarter] = useState("");
   const [starterPokemon, setStarterPokemon] = useState<string[]>([]);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
-  const [starter, setStarter] = useState("");
-  const [artwork, setArtwork] = useState("");
-  const [theme, setTheme] = useState("");
   const [showError, setShowError] = useState(false);
   const [showUnlock, setShowUnlock] = useState(false);
 
@@ -49,7 +49,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
 
   useEffect(() => {
     if (starter === "") return;
-
     setTheme(TypeColorSchemes[pokedex[starter].types[0]]);
   }, [starter, pokedex])
 
@@ -75,9 +74,14 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     const RegionTeam: PokedexMap = {};
     RegionTeam[starter] = pokedex[starter];
     RegionTeam[starter].level = 5;
-    for (let i = 0; i < 6; i++) {
+
+    // adjust pokemon stats according to pokemon level
+    for (let i = 1; i < 7; i++) {
       RegionTeam[starter].stats[i] += Math.floor(Math.random() * 5);
     }
+
+    // adjust current health (index 0) to max health (index 1)
+    RegionTeam[starter].stats[0] = RegionTeam[starter].stats[1];
     
     localStorage.setItem('selectedRegion', region);
     localStorage.setItem(region + 'SaveExists', 'true');
@@ -111,17 +115,22 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
             open={showUnlock}
             message={"Unlock this region?"}
             onClose={handleUnlockClose}
-            action={<div>
-              <Button className={styles.exitButton} variant="contained" onClick={handleUnlockClose}>CANCEL</Button>
-              <Button className={styles.playButton} variant="contained">UNLOCK</Button>
-            </div>}></Snackbar>
+            action={
+              <div>
+                <Button className={styles.exitButton} variant="contained" onClick={handleUnlockClose}>CANCEL</Button>
+                <Button className={styles.playButton} variant="contained">UNLOCK</Button>
+              </div>
+            }
+          ></Snackbar>
 
           <Snackbar
             open={showError}
             message={"You cannot unlock any more regions at this moment. Keep playing to unlock more!"}
             autoHideDuration={6000}
             onClose={handleErrorClose}
-            action={<Button className={styles.exitButton} variant="contained" onClick={handleErrorClose}>DISMISS</Button>}
+            action={
+            <Button className={styles.exitButton} variant="contained" onClick={handleErrorClose}>DISMISS</Button>
+            }
           ></Snackbar>
 
           <AnimatePresence onExitComplete={() => exit()}>
@@ -154,7 +163,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                         </div>
                       </div>
                       <div className={styles.stats}>
-                        {pokedex[starter].stats.map((stat, idx) => {
+                        {pokedex[starter].stats.slice(1).map((stat, idx) => {
                           return <div className={styles.stat} key={idx}>
                             <p className={styles.statName}>{StatMap[idx]}</p>
                             <div className={styles.statBarWrapper}>
