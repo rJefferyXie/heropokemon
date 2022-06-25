@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/Currency.module.scss';
 
 interface CurrencyProps {
-  currency: string;
+  currency: number
 }
 
 const Currency = (props: React.PropsWithChildren<CurrencyProps>) => {
