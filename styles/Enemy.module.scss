@@ -4,45 +4,43 @@
   color: black;
   text-shadow: none;
   margin: auto;
+  width: 75%;
+  height: 100vh;
 }
 
 .enemyImage {
-  width: 50%;
+  width: 20%;
   padding: 4px;
-  margin: auto;
+  margin: auto auto 0 auto;
   cursor: pointer;
 }
 
 .enemyImage:active {
-  width: calc(50% + 4px);
   padding: 0;
 }
 
 .enemyName {
   text-transform: uppercase;
-  margin: auto;
+  margin: 0 auto 0 auto;
 }
 
 .enemyLevel {
-  margin: auto;
+  margin: 0 auto 0 auto;
 }
 
 .healthBarWrapper {
-  max-width: 300px;
-  width: 90%;
-  min-width: 200px;
-  margin: 4px;
+  width: 100%;
+  max-width: 420px;
   height: 2rem;
   background-color: gray;
   border-radius: 16px;
-  margin: auto;
+  margin: 0 auto auto auto;
+  position: relative;
+  overflow: hidden;
 }
 
 .healthBar {
   display: flex;
-  padding: 4px;
-  max-width: 300px;
-  min-width: 40px;
   height: 2rem;
   border-radius: 16px;
   background-color: red;
@@ -50,13 +48,11 @@
 }
 
 .healthValue {
-  width: 100%;
-  margin: auto 4px;
-  text-align: right;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
   color: white;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.hit {
-  transform: translateY(-5px);
 }

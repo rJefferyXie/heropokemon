@@ -28,7 +28,7 @@ const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
       <p className={styles.enemyLevel}>{"LEVEL: " + enemy.level}</p>
       <div className={styles.healthBarWrapper}>
         <div className={styles.healthBar} style={{width: Math.floor(health / enemy.stats[1] * 100) + "%"}}>
-          <p className={styles.healthValue}>{Math.floor(health)}</p>
+          <p className={styles.healthValue}>{`${Math.floor(health)}/${enemy.stats[0]}`}</p>
         </div>
       </div>
     </div>
