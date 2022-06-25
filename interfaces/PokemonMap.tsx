@@ -11,6 +11,7 @@ interface PokemonMap {
   is_mythical: boolean,
   is_legendary: boolean,
   stats: number[],
+  statBoosts: number[],
   types: string[],
   evolutions: string[],
   sprites: PokemonSprites
