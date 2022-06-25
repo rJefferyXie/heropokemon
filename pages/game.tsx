@@ -19,7 +19,7 @@ import Enemy from '../components/enemy';
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(0.1);
+  const [clickDamage, setClickDamage] = useState(1);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [region, setRegion] = useState('');
