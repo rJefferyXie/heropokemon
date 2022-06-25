@@ -8,8 +8,14 @@
 
 .enemyImage {
   width: 50%;
+  padding: 4px;
   margin: auto;
   cursor: pointer;
+}
+
+.enemyImage:active {
+  width: calc(50% + 4px);
+  padding: 0;
 }
 
 .enemyName {
