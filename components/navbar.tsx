@@ -28,21 +28,6 @@ const Navbar = (props: React.PropsWithChildren<NavbarProps>) => {
       {Object.keys(team).map((pokemon, idx) => {
         return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
       })}
-      {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
-      })}
-            {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
-      })}
-            {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
-      })}
-            {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
-      })}
-            {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
-      })}
       {/* <GameDetails></GameDetails> */}
     </nav>
   )
