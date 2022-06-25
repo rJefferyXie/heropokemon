@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  text-shadow: none;
+}
+
+.topRow {
+  display: flex;
+}
+
+.pokemonImage {
+  width: 20%;
+}
+
+.pokemonInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemonName {
+  text-transform: uppercase;
+}
+
+.pokemonLevel {
+
+}
