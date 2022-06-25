@@ -72,16 +72,14 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     }
 
     const RegionTeam: PokedexMap = {};
+    const starterLevel = 5;
     RegionTeam[starter] = pokedex[starter];
-    RegionTeam[starter].level = 5;
+    RegionTeam[starter].level = starterLevel;
 
     // adjust pokemon stats according to pokemon level
-    for (let i = 1; i < 7; i++) {
-      RegionTeam[starter].stats[i] += Math.floor(Math.random() * 5);
+    for (let i = 0; i < 6; i++) {
+      RegionTeam[starter].statBoosts[i] += Math.floor(Math.random() * starterLevel * 2);
     }
-
-    // adjust current health (index 0) to max health (index 1)
-    RegionTeam[starter].stats[0] = RegionTeam[starter].stats[1];
     
     localStorage.setItem('selectedRegion', region);
     localStorage.setItem(region + 'SaveExists', 'true');
