@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_apiKey || process.env.apiKey,
-  authDomain: process.env.NEXT_PUBLIC_authDomain || process.env.authDomain,
-  projectId: process.env.NEXT_PUBLIC_projectId || process.env.projectId,
-  storageBucket: process.env.NEXT_PUBLIC_storageBucket || process.env.storageBucket,
-  messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId || process.env.messagingSenderId,
-  appId: process.env.NEXT_PUBLIC_appId || process.env.appId
+  apiKey: "AIzaSyAgItNhQBLdKwB-uBp7Vj8ldhZc5rTu7W0",
+  authDomain: "heropokemon.firebaseapp.com",
+  projectId: "heropokemon",
+  storageBucket: "heropokemon.appspot.com",
+  messagingSenderId: "577621292826",
+  appId: "1:577621292826:web:bd35f57322bda16eccdea3"
 };
 
 const app = initializeApp(firebaseConfig);
