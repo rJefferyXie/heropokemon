@@ -162,6 +162,7 @@ const Game: NextPage = () => {
       });
 
       // get the next enemy
+      setCurrency(currency => currency + Math.floor(enemy.level * floor * ((enemy.stats[1] + enemy.statBoosts[0]) / 100) + 1));
       setEnemies(enemies => enemies.slice(1));
       setEnemy(enemies[0]);
     }
