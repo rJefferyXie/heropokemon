@@ -134,7 +134,7 @@ const Game: NextPage = () => {
     } else {
       // randomly determine if the defeated pokemon will join our team
       const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-      if (joinTeamChance > 95 && !Object.keys(team).includes(enemy.name)) {
+      if (joinTeamChance >= 98 && !Object.keys(team).includes(enemy.name)) {
         setTeam(team => {
           team[enemy.name] = JSON.parse(JSON.stringify(enemy));
           return team;
@@ -144,7 +144,7 @@ const Game: NextPage = () => {
       // all pokemon that are lower level than the enemy have a chance to level up
       Object.keys(team).map(pokemon => {
         const levelUpChance =  Math.floor(Math.random() * 100 + 1);
-        if (team[pokemon].level < enemy.level && levelUpChance > 80) {
+        if (team[pokemon].level < enemy.level && levelUpChance > 80) {          
           setTeam(team => {
             team[pokemon].level += 1;
 
@@ -155,14 +155,34 @@ const Game: NextPage = () => {
               team[pokemon].statBoosts[i] += statBoost;
               team[pokemon].stats[i + 1] += statBoost;
             }
-            
+
+            // pokemon evolutions
+            if (team[pokemon].evolutions.length > 0) {
+              if (team[pokemon].evolves_from === '' && team[pokemon].level === 18
+                || team[pokemon].evolves_from !== '' && team[pokemon].level === 36) {
+                const evolutions = team[pokemon].evolutions;
+                const evolution = Math.floor(Math.random() * evolutions.length);   
+                const evolvedPokemon = JSON.parse(JSON.stringify(pokedex[evolutions[evolution]]));    
+                evolvedPokemon.level = team[pokemon].level;
+                evolvedPokemon.statBoosts = team[pokemon].statBoosts;
+                evolvedPokemon.stats[0] += evolvedPokemon.statBoosts[0];
+                evolvedPokemon.stats[0] -= team[pokemon].stats[1] - team[pokemon].stats[0];
+                
+                for (let i = 0; i < 6; i++) {
+                  evolvedPokemon.stats[i + 1] += evolvedPokemon.statBoosts[i];
+                }
+
+                team[pokemon] = evolvedPokemon;
+              }
+            }
+
             return team;
           });
         }
       });
 
       // get the next enemy
-      setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 100) + floor));
+      setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
       setEnemies(enemies => enemies.slice(1));
       setEnemy(enemies[0]);
     }
