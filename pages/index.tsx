@@ -19,6 +19,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [unlockedRegions, setUnlockedRegions] = useState<string[]>(["kanto"]);
 
   useEffect(() => {
     const downloadPokedexes = async () => {
@@ -58,10 +59,12 @@ const Home: NextPage = () => {
         ]));
       }
 
-      const unlockedRegions = localStorage.getItem("unlockedRegions");
-      if (!unlockedRegions) {
+      const regionsUnlocked = localStorage.getItem("unlockedRegions");
+      if (!regionsUnlocked) {
         localStorage.setItem("unlockedRegions", JSON.stringify(["kanto"]));
-      } 
+      } else {
+        setUnlockedRegions(JSON.parse(regionsUnlocked));
+      }
     }
     
     setDefaults();
