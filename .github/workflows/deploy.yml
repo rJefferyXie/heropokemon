@@ -28,6 +28,13 @@ jobs:
 
       - name: Build and export
         run: pnpm build
+        env:
+          apiKey: ${{ secrets.APIKEY }}
+          authDomain: ${{ secrets.AUTHDOMAIN }}
+          projectId: ${{ secrets.PROJECTID }}
+          storageBucket: ${{ secrets.STORAGEBUCKET }}
+          messagingSenderId: ${{ secrets.MESSAGINGSENDERID }}
+          appId: ${{ secrets.APPID }}
 
       - name: Deploy to firebase hosting
         uses: w9jds/firebase-action@master
