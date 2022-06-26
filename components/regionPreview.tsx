@@ -119,8 +119,19 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
             onClose={handleUnlockClose}
             action={
               <div>
-                <Button className={styles.exitButton} variant="contained" onClick={handleUnlockClose}>CANCEL</Button>
-                <Button className={styles.playButton} variant="contained">UNLOCK</Button>
+                <Button 
+                  className={styles.exitButton} 
+                  variant="contained" 
+                  onClick={handleUnlockClose}
+                  >
+                  CANCEL
+                </Button>
+                <Button 
+                  className={styles.playButton} 
+                  variant="contained"
+                  >
+                  UNLOCK
+                </Button>
               </div>
             }
           ></Snackbar>
@@ -131,7 +142,13 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
             autoHideDuration={6000}
             onClose={handleErrorClose}
             action={
-            <Button className={styles.exitButton} variant="contained" onClick={handleErrorClose}>DISMISS</Button>
+            <Button 
+              className={styles.exitButton} 
+              variant="contained" 
+              onClick={handleErrorClose}
+              >
+              DISMISS
+            </Button>
             }
           ></Snackbar>
 
