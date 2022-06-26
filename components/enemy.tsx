@@ -1,5 +1,5 @@
 // React and Styling
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Enemy.module.scss';
 
 // Interfaces
@@ -9,17 +9,26 @@ interface EnemyProps {
   enemy: PokemonMap,
   takeDamage?: Function,
   dealDamage?: Function,
+  nextEnemy: Function,
   clickDamage: number,
   artwork: string
 }
 
 const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
-  const { enemy, takeDamage, dealDamage, clickDamage, artwork } = props;
+  const { enemy, takeDamage, dealDamage, nextEnemy, clickDamage, artwork } = props;
   const [health, setHealth] = useState(enemy.stats[0]);
 
   const clickHit = () => {
     setHealth(health - clickDamage);
   }
+
+  useEffect(() => {
+    setHealth(enemy.stats[0]);
+  }, [enemy]);
+
+  useEffect(() => {
+    if (health <= 0) nextEnemy();
+  }, [health, nextEnemy]);
 
   return (
     <div className={styles.container}>
