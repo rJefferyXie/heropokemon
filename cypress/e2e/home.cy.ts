@@ -7,37 +7,37 @@ describe('Loads all seven regions.', () => {
 
   it('Should load the Kanto region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('KANTO').and('be.visible');
+    container.contains('kanto').and('be.visible');
   });
 
   it('Should load the Johto region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('JOHTO').and('be.visible');
+    container.contains('johto').and('be.visible');
   });
 
   it('Should load the Hoenn region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('HOENN').and('be.visible');
+    container.contains('hoenn').and('be.visible');
   });
 
   it('Should load the Sinnoh region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('SINNOH').and('be.visible');
+    container.contains('sinnoh').and('be.visible');
   });
 
   it('Should load the Unova region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('UNOVA').and('be.visible');
+    container.contains('unova').and('be.visible');
   });
 
   it('Should load the Kalos region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('KALOS').and('be.visible');
+    container.contains('kalos').and('be.visible');
   });
 
   it('Should load the Alola region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
-    container.contains('ALOLA').and('be.visible');
+    container.contains('alola').and('be.visible');
   });
 });
 
