@@ -19,7 +19,7 @@ import Enemy from '../components/enemy';
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(1);
+  const [clickDamage, setClickDamage] = useState(5);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [region, setRegion] = useState('');
@@ -80,7 +80,7 @@ const Game: NextPage = () => {
     const minLevel = floor - 2;
     const maxLevel = floor + 2;
 
-    while (enemyList.length < 1) {
+    while (enemyList.length < 10) {
       const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)];
       const enemyInfo = pokedex[enemyName];
 
@@ -98,9 +98,9 @@ const Game: NextPage = () => {
         }
       }
 
-      // only pokemon that haven't evolved yet or do not evolve
+      // only pokemon that haven't evolved and have less than 50 hp
       if (floor < 10) {
-        if (enemyInfo.evolves_from !== '') {
+        if (enemyInfo.evolves_from !== '' || enemyInfo.stats[0] > 50) {
           continue;
         }
       }
@@ -128,17 +128,15 @@ const Game: NextPage = () => {
     setDiscoveredPokemon(discovered => [...discovered, enemyList[0].name]);
   }, [pokedex, floor]);
 
-  useEffect(() => {
-    if (isLoading) return;
-    if (enemies.length === 0) setFloor(f => f + 1);
-  }, [enemies, isLoading]);
-
-  // const damageEnemy = (damage: number) => {
-  //   const enemyData = enemy;
-  //   enemyData.stats[0] -= damage;
-  //   setEnemy(enemyData);
-  //   console.log(enemy.stats[0]);
-  // }
+  const nextEnemy = async () => {
+    if (enemies.length === 0) {
+      setFloor(floor + 1);
+    } else {
+      setEnemies(enemies => enemies.slice(1));
+      setEnemy(enemies[0]);
+    }
+    console.log(floor, enemies.length);
+  }
 
   return (
     <div className={styles.container}>
@@ -152,7 +150,7 @@ const Game: NextPage = () => {
 
       <Navbar currency={currency} items={items} storage={storage} team={team} badges={badges} artwork={artwork}></Navbar>
       {Object.keys(enemy).length > 0 && 
-        <Enemy enemy={enemy} clickDamage={clickDamage} artwork={artwork}></Enemy>}
+        <Enemy enemy={enemy} nextEnemy={nextEnemy} clickDamage={clickDamage} artwork={artwork}></Enemy>}
     </div>
   )
 }
