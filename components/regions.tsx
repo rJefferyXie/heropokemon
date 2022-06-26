@@ -24,10 +24,7 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
 
     const retrievePokedex = async () => {
       const regionPokedex = localStorage.getItem(selectedRegion);
-      if (regionPokedex) {
-        setSelectedPokedex(JSON.parse(regionPokedex));
-        return;
-      }
+      if (regionPokedex) setSelectedPokedex(JSON.parse(regionPokedex));
     }
 
     retrievePokedex();
@@ -55,7 +52,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="johto" 
         unlocked={unlockedRegions.includes("johto")} 
-        styling={{}}
         images={["meganium", "typhlosion", "feraligatr", "ho-oh", "lugia", "celibi"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -63,7 +59,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="hoenn"
         unlocked={unlockedRegions.includes("hoenn")} 
-        styling={{}}
         images={["sceptile", "blaziken", "swampert", "groudon", "kyogre", "rayquaza"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -79,7 +74,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="unova"
         unlocked={unlockedRegions.includes("unova")} 
-        styling={{}}
         images={["serperior", "emboar", "samurott", "reshiram", "zekrom", "kyurem"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -87,7 +81,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="kalos"
         unlocked={unlockedRegions.includes("kalos")} 
-        styling={{}}
         images={["chesnaught", "delphox", "greninja", "xerneas", "yveltal", "zygarde"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -95,7 +88,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="alola"
         unlocked={unlockedRegions.includes("alola")} 
-        styling={{}}
         images={["decidueye", "incineroar", "primarina", "lunala", "solgaleo", "necrozma"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
