@@ -1,5 +1,5 @@
 // React and Styling
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/PokemonCard.module.scss';
 
 // MUI
@@ -29,6 +29,11 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
     pokemon.stats[0] = pokemon.stats[1];
     setHealth(pokemon.stats[1]);
   }
+
+  useEffect(() => {
+    setHealth(pokemon.stats[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pokemon.level]);
 
   return (
     <div className={styles.container}>

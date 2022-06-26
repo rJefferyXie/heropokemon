@@ -19,7 +19,7 @@ import Enemy from '../components/enemy';
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(50);
+  const [clickDamage, setClickDamage] = useState(10);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [region, setRegion] = useState('');
@@ -31,7 +31,7 @@ const Game: NextPage = () => {
   const [badges, setBadges] = useState<string[]>([]);
   const [pokedex, setPokedex] = useState<PokedexMap>({});
 
-  /* @ts-expect-error */
+  // @ts-expect-error
   const [enemy, setEnemy] = useState<PokemonMap>({});
   const [enemies, setEnemies] = useState<PokemonMap[]>([]);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
@@ -147,6 +147,15 @@ const Game: NextPage = () => {
         if (team[pokemon].level < enemy.level && levelUpChance > 80) {
           setTeam(team => {
             team[pokemon].level += 1;
+
+            // level up raises pokemon stats by up to 2 points each
+            for (let i = 0; i < 6; i++) {
+              const statBoost = Math.floor(Math.random() * 2);
+              if (i === 0) team[pokemon].stats[i] += statBoost;
+              team[pokemon].statBoosts[i] += statBoost;
+              team[pokemon].stats[i + 1] += statBoost;
+            }
+            console.log(team[pokemon].name, team[pokemon].stats[0], team[pokemon].stats[1]);
             return team;
           });
         }
