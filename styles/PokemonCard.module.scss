@@ -21,7 +21,7 @@
 .pokemonInfo {
   display: flex;
   flex-direction: column;
-  margin: auto 0;
+  margin: auto 0 auto 4px;
 }
 
 .pokemonName {
@@ -41,6 +41,7 @@
   margin: 4px;
   height: 1.5rem;
   background-color: gray;
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
   border-radius: 16px;
   margin: auto 8px auto auto;
   position: relative;
