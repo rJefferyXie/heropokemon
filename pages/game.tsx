@@ -155,7 +155,7 @@ const Game: NextPage = () => {
               team[pokemon].statBoosts[i] += statBoost;
               team[pokemon].stats[i + 1] += statBoost;
             }
-            console.log(team[pokemon].name, team[pokemon].stats[0], team[pokemon].stats[1]);
+            
             return team;
           });
         }
