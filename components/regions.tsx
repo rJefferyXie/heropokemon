@@ -6,8 +6,12 @@ import styles from '../styles/Regions.module.scss';
 import RegionPreview from './regionPreview';
 import Region from './region';
 
-const Regions = () => {
-  const [unlockedRegions, setUnlockedRegions] = useState([""]);
+interface RegionsProps {
+  unlockedRegions: string[]
+}
+
+const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
+  const { unlockedRegions } = props;
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedPokedex, setSelectedPokedex] = useState({});
 
@@ -28,13 +32,6 @@ const Regions = () => {
 
     retrievePokedex();
   }, [selectedRegion]);
-
-  useEffect(() => {
-    const unlocked = localStorage.getItem("unlockedRegions");
-    if (unlocked) {
-      setUnlockedRegions(JSON.parse(unlocked));
-    }
-  }, []);
 
   return (
     <div className={styles.container}>
