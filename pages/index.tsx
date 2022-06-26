@@ -81,7 +81,7 @@ const Home: NextPage = () => {
 
       {isLoading && <Loading></Loading>}
 
-      <Regions></Regions>
+      <Regions unlockedRegions={unlockedRegions}></Regions>
     </div>
   )
 }
