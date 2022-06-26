@@ -68,4 +68,9 @@
   width: fit-content;
   height: fit-content;
   padding: 0 !important;
+  background-color: $btn-play !important;
+}
+
+.healButton:hover {
+  filter: brightness(105%);
 }
