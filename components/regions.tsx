@@ -44,7 +44,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="kanto"
         unlocked={unlockedRegions.includes("kanto")} 
-        styling={{objectPosition: "left"}}
         images={["venusaur", "charizard", "blastoise", "articuno", "zapdos", "moltres"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
@@ -66,7 +65,6 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
       <Region 
         name="sinnoh" 
         unlocked={unlockedRegions.includes("sinnoh")} 
-        styling={{objectPosition: "right"}}
         images={["torterra", "infernape", "empoleon", "dialga", "palkia", "giratina"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
