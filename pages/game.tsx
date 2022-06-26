@@ -19,7 +19,7 @@ import Enemy from '../components/enemy';
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(10);
+  const [clickDamage, setClickDamage] = useState(50);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [region, setRegion] = useState('');
@@ -91,7 +91,7 @@ const Game: NextPage = () => {
         }
       }
 
-      // only pokemon that either haven't evolved yet or have evolved one stage
+      // only pokemon that have evolved once or less and have less than 100 hp
       if (floor < 30) {
         if (enemyInfo.evolutions.length === 0 && enemyInfo.evolves_from !== '') {
           continue;
@@ -132,10 +132,30 @@ const Game: NextPage = () => {
     if (enemies.length === 0) {
       setFloor(floor + 1);
     } else {
+      // randomly determine if the defeated pokemon will join our team
+      const joinTeamChance = Math.floor(Math.random() * 100 + 1);
+      if (joinTeamChance > 95 && !Object.keys(team).includes(enemy.name)) {
+        setTeam(team => {
+          team[enemy.name] = JSON.parse(JSON.stringify(enemy));
+          return team;
+        });
+      } 
+
+      // all pokemon that are lower level than the enemy have a chance to level up
+      Object.keys(team).map(pokemon => {
+        const levelUpChance =  Math.floor(Math.random() * 100 + 1);
+        if (team[pokemon].level < enemy.level && levelUpChance > 80) {
+          setTeam(team => {
+            team[pokemon].level += 1;
+            return team;
+          });
+        }
+      });
+
+      // get the next enemy
       setEnemies(enemies => enemies.slice(1));
       setEnemy(enemies[0]);
     }
-    console.log(floor, enemies.length);
   }
 
   return (
@@ -148,9 +168,25 @@ const Game: NextPage = () => {
 
       {isLoading && <Loading></Loading>}
 
-      <Navbar currency={currency} items={items} storage={storage} team={team} badges={badges} artwork={artwork}></Navbar>
+      <Navbar 
+        currency={currency} 
+        items={items} 
+        storage={storage} 
+        team={team} 
+        badges={badges} 
+        artwork={artwork}
+      >
+      </Navbar>
+
       {Object.keys(enemy).length > 0 && 
-        <Enemy enemy={enemy} nextEnemy={nextEnemy} clickDamage={clickDamage} artwork={artwork}></Enemy>}
+        <Enemy 
+          enemy={enemy} 
+          nextEnemy={nextEnemy} 
+          clickDamage={clickDamage} 
+          artwork={artwork}
+        >
+        </Enemy>
+      }
     </div>
   )
 }
