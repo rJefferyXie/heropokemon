@@ -138,6 +138,7 @@ const Game: NextPage = () => {
       if (joinTeamChance >= 98 && !Object.keys(team).includes(enemy.name)) {
         setTeam(team => {
           team[enemy.name] = JSON.parse(JSON.stringify(enemy));
+          team[enemy.name].stats[0] = team[enemy.name].stats[1];
           return team;
         });
       } 
@@ -223,7 +224,7 @@ const Game: NextPage = () => {
         }
       </div>
 
-      <button onClick={() => setDPS(DPS => DPS + 1)}>INCREASE DPS: {DPS}</button>
+      <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
     </div>
   )
 }
