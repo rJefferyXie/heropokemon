@@ -19,7 +19,17 @@ import { doc, getDoc } from 'firebase/firestore';
 
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [artwork, setArtwork] = useState("official");
   const [unlockedRegions, setUnlockedRegions] = useState<string[]>(["kanto"]);
+  const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([
+    "bulbasaur", "charmander", "squirtle",
+    "chikorita", "cyndaquil", "totodile",
+    "treecko", "torchic", "mudkip",
+    "turtwig", "chimchar", "piplup",
+    "snivy", "tepig", "oshawott",
+    "chespin", "fennekin", "froakie",
+    "rowlet", "litten", "popplio"
+  ]);
 
   useEffect(() => {
     const downloadPokedexes = async () => {
@@ -44,26 +54,28 @@ const Home: NextPage = () => {
       const artwork = localStorage.getItem("artwork");
       if (!artwork) {
         localStorage.setItem("artwork", "official");
-      }
-
-      const discoveredPokemon = localStorage.getItem("discoveredPokemon");
-      if (!discoveredPokemon) {
-        localStorage.setItem("discoveredPokemon", JSON.stringify([
-          "bulbasaur", "charmander", "squirtle",
-          "chikorita", "cyndaquil", "totodile",
-          "treecko", "torchic", "mudkip",
-          "turtwig", "chimchar", "piplup",
-          "snivy", "tepig", "oshawott",
-          "chespin", "fennekin", "froakie",
-          "rowlet", "litten", "popplio"
-        ]));
-      }
-
-      const regionsUnlocked = localStorage.getItem("unlockedRegions");
-      if (!regionsUnlocked) {
-        localStorage.setItem("unlockedRegions", JSON.stringify(["kanto"]));
       } else {
-        setUnlockedRegions(JSON.parse(regionsUnlocked));
+        setArtwork(artwork);
+      }
+
+      const gameUnlocked = localStorage.getItem("gameUnlocked");
+      if (!gameUnlocked) {
+        localStorage.setItem("gameUnlocked", JSON.stringify({
+          "discoveredPokemon": [
+            "bulbasaur", "charmander", "squirtle",
+            "chikorita", "cyndaquil", "totodile",
+            "treecko", "torchic", "mudkip",
+            "turtwig", "chimchar", "piplup",
+            "snivy", "tepig", "oshawott",
+            "chespin", "fennekin", "froakie",
+            "rowlet", "litten", "popplio"
+          ],
+          "unlockedRegions": ["kanto"]
+        }));
+      } else {
+        const gameData = JSON.parse(gameUnlocked);
+        setUnlockedRegions(gameData.unlockedRegions);
+        setDiscoveredPokemon(gameData.discoveredPokemon);
       }
     }
     
@@ -81,7 +93,12 @@ const Home: NextPage = () => {
 
       {isLoading && <Loading></Loading>}
 
-      <Regions unlockedRegions={unlockedRegions}></Regions>
+      <Regions 
+        artwork={artwork}
+        unlockedRegions={unlockedRegions} 
+        discoveredPokemon={discoveredPokemon} 
+      >
+      </Regions>
     </div>
   )
 }

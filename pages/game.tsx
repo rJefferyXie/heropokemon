@@ -23,7 +23,6 @@ const Game: NextPage = () => {
   const [DPS, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
-  const [region, setRegion] = useState('');
   const [artwork, setArtwork] = useState('');
   const [storage, setStorage] = useState({});
   const [currency, setCurrency] = useState(0);
@@ -40,37 +39,37 @@ const Game: NextPage = () => {
   useEffect(() => {
     if (!router) return;
 
-    const gameRegion = localStorage.getItem('selectedRegion');
-    if (!gameRegion) {
+    const region = localStorage.getItem('selectedRegion');
+    if (!region) {
       router.push('/');
       return;
     }
 
-    const gamePokedex = localStorage.getItem(gameRegion);
+    const gamePokedex = localStorage.getItem(region);
     if (!gamePokedex) {
       router.push('/');
       return;
-    }
+    } 
 
-    const gameArtwork = localStorage.getItem('artwork') || 'official';
-    const gameTeam = localStorage.getItem(gameRegion + 'Team') || '{}';
-    const gameFloor = localStorage.getItem(gameRegion + 'Floor') || '1';
-    const gameItems = localStorage.getItem(gameRegion + 'Items') || '{}';
-    const gameBadges = localStorage.getItem(gameRegion + 'Badges') || '[]';
-    const gameStorage = localStorage.getItem(gameRegion + 'Storage') || '{}';
-    const gameCurrency = localStorage.getItem(gameRegion + 'Currency') || '0';
-    const pokemonDiscovered = localStorage.getItem('discoveredPokemon') || '[]';
+    const gameData = localStorage.getItem(region + 'Save') || '{}';
+    if (!gameData) {
+      router.push('/');
+      return;
+    } 
 
-    setRegion(gameRegion);
-    setArtwork(gameArtwork);
-    setTeam(JSON.parse(gameTeam));
-    setItems(JSON.parse(gameItems));
-    setFloor(JSON.parse(gameFloor));
-    setBadges(JSON.parse(gameBadges));
-    setStorage(JSON.parse(gameStorage));
+    // Set all game save related data
+    const game = JSON.parse(gameData);
+    setTeam(game.team);
+    setItems(game.items);
+    setFloor(game.floor);
+    setBadges(game.badges);
+    setStorage(game.storage);
+    setCurrency(game.currency);
+
+    // Set pokedex, artwork, and other settings
     setPokedex(JSON.parse(gamePokedex));
-    setCurrency(JSON.parse(gameCurrency));
-    setDiscoveredPokemon(JSON.parse(pokemonDiscovered));
+    setArtwork(localStorage.getItem('artwork') || 'official');
+    setDiscoveredPokemon(JSON.parse(localStorage.getItem('discoveredPokemon') || '[]'));
   }, [router]);
 
   useEffect(() => {
@@ -135,7 +134,7 @@ const Game: NextPage = () => {
     } else {
       // randomly determine if the defeated pokemon will join our team
       const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-      if (joinTeamChance >= 98 && !Object.keys(team).includes(enemy.name)) {
+      if (joinTeamChance >= 100 && !Object.keys(team).includes(enemy.name)) {
         setTeam(team => {
           team[enemy.name] = JSON.parse(JSON.stringify(enemy));
           team[enemy.name].stats[0] = team[enemy.name].stats[1];
@@ -211,7 +210,9 @@ const Game: NextPage = () => {
       </Navbar>
 
       <div className={styles.column}>
-        <p>{"Floor: " + floor}</p>
+        <p style={{textShadow: "none", color: "black"}}>{"Floor: " + floor}</p>      
+        <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
+
         {Object.keys(enemy).length > 0 && 
           <Enemy 
             enemy={enemy} 
@@ -224,7 +225,6 @@ const Game: NextPage = () => {
         }
       </div>
 
-      <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
     </div>
   )
 }
