@@ -144,6 +144,7 @@ const Game: NextPage = () => {
         ]
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokedex, floor]);
 
   const nextEnemy = async () => {
