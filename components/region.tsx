@@ -27,16 +27,13 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         className={styles.regionWallpaper}
         layout="fill" 
         alt={name} 
-        src={RegionImages[name]} 
-        quality={unlocked ? 100 : 10}
+        src={"images/" + name + ".png"}
       >
       </ExportedImage>
       
       
       {unlocked && images.map((image, idx) => {
-        return <div className={styles.regionImage} key={idx}>
-          <ExportedImage layout="fixed" width={64} height={64} alt={image} src={RegionImages[image]}></ExportedImage>
-        </div>
+        return <img className={styles.regionImage} alt={image} src={RegionImages[image]} key={idx}></img>
       })}
     </div>
   )
