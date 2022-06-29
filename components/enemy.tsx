@@ -26,7 +26,7 @@ const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
   useEffect(() => {
     const dpsInterval = setInterval(() => {
       setHealth(health => health - dps);
-    }, 1000); 
+    }, 100); 
     
     return () => clearInterval(dpsInterval);
   }, [dps]);
