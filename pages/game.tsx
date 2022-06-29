@@ -186,6 +186,7 @@ const Game: NextPage = () => {
       setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
       setEnemies(enemies => enemies.slice(1));
       setEnemy(enemies[0]);
+      setDiscoveredPokemon(discovered => [...discovered, enemies[0].name]);
     }
   }
 
