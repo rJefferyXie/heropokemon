@@ -5,14 +5,14 @@ import blastoise from "../public/images/kanto/blastoise.png";
 import articuno from "../public/images/kanto/articuno.png";
 import zapdos from "../public/images/kanto/zapdos.png";
 import moltres from "../public/images/kanto/moltres.png";
-import kantoBadge1 from "../public/images/kanto/Badge1.webp";
-import kantoBadge2 from "../public/images/kanto/Badge2.webp";
-import kantoBadge3 from "../public/images/kanto/Badge3.webp";
-import kantoBadge4 from "../public/images/kanto/Badge4.webp";
-import kantoBadge5 from "../public/images/kanto/Badge5.webp";
-import kantoBadge6 from "../public/images/kanto/Badge6.webp";
-import kantoBadge7 from "../public/images/kanto/Badge7.webp";
-import kantoBadge8 from "../public/images/kanto/Badge8.webp";
+// import kantoBadge1 from "../public/images/kanto/Badge1.webp";
+// import kantoBadge2 from "../public/images/kanto/Badge2.webp";
+// import kantoBadge3 from "../public/images/kanto/Badge3.webp";
+// import kantoBadge4 from "../public/images/kanto/Badge4.webp";
+// import kantoBadge5 from "../public/images/kanto/Badge5.webp";
+// import kantoBadge6 from "../public/images/kanto/Badge6.webp";
+// import kantoBadge7 from "../public/images/kanto/Badge7.webp";
+// import kantoBadge8 from "../public/images/kanto/Badge8.webp";
 
 // Johto
 import meganium from "../public/images/johto/meganium.png";
@@ -73,14 +73,14 @@ const RegionImages: RegionImagesMap = {
   "articuno": articuno.src,
   "zapdos": zapdos.src,
   "moltres": moltres.src,
-  "kantoBadge1": kantoBadge1.src,
-  "kantoBadge2": kantoBadge2.src,
-  "kantoBadge3": kantoBadge3.src,
-  "kantoBadge4": kantoBadge4.src,
-  "kantoBadge5": kantoBadge5.src,
-  "kantoBadge6": kantoBadge6.src,
-  "kantoBadge7": kantoBadge7.src,
-  "kantoBadge8": kantoBadge8.src,
+  // "kantoBadge1": kantoBadge1.src,
+  // "kantoBadge2": kantoBadge2.src,
+  // "kantoBadge3": kantoBadge3.src,
+  // "kantoBadge4": kantoBadge4.src,
+  // "kantoBadge5": kantoBadge5.src,
+  // "kantoBadge6": kantoBadge6.src,
+  // "kantoBadge7": kantoBadge7.src,
+  // "kantoBadge8": kantoBadge8.src,
 
   "meganium": meganium.src,
   "typhlosion": typhlosion.src,
