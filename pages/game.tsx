@@ -20,6 +20,7 @@ const Game: NextPage = () => {
   const router = useRouter();
 
   const [clickDamage, setClickDamage] = useState(10);
+  const [DPS, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [region, setRegion] = useState('');
@@ -118,7 +119,7 @@ const Game: NextPage = () => {
         enemyInfo.stats[i + 1] += statBoost
       }
 
-      enemyInfo.stats[0] += enemyInfo.statBoosts[0];
+      enemyInfo.stats[0] *= floor;
       enemyList.push(enemyInfo);
     }
 
@@ -208,15 +209,21 @@ const Game: NextPage = () => {
       >
       </Navbar>
 
-      {Object.keys(enemy).length > 0 && 
-        <Enemy 
-          enemy={enemy} 
-          nextEnemy={nextEnemy} 
-          clickDamage={clickDamage} 
-          artwork={artwork}
-        >
-        </Enemy>
-      }
+      <div className={styles.column}>
+        <p>{"Floor: " + floor}</p>
+        {Object.keys(enemy).length > 0 && 
+          <Enemy 
+            enemy={enemy} 
+            nextEnemy={nextEnemy} 
+            clickDamage={clickDamage} 
+            dps={DPS}
+            artwork={artwork}
+          >
+          </Enemy>
+        }
+      </div>
+
+      <button onClick={() => setDPS(DPS => DPS + 1)}>INCREASE DPS: {DPS}</button>
     </div>
   )
 }
