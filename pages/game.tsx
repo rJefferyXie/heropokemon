@@ -7,6 +7,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Game.module.scss';
 
+// MUI
+import { Snackbar } from '@mui/material';
+
 // Interfaces
 import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
@@ -30,6 +33,9 @@ const Game: NextPage = () => {
   const [team, setTeam] = useState<PokedexMap>({});
   const [badges, setBadges] = useState<string[]>([]);
   const [pokedex, setPokedex] = useState<PokedexMap>({});
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alerts, setAlerts] = useState<string[]>([]);
 
   // @ts-expect-error
   const [enemy, setEnemy] = useState<PokemonMap>({});
@@ -69,7 +75,10 @@ const Game: NextPage = () => {
     // Set pokedex, artwork, and other settings
     setPokedex(JSON.parse(gamePokedex));
     setArtwork(localStorage.getItem('artwork') || 'official');
-    setDiscoveredPokemon(JSON.parse(localStorage.getItem('discoveredPokemon') || '[]'));
+
+    // Set Discovered Pokemon
+    const gameUnlocks = localStorage.getItem('gameUnlocked');
+    if (gameUnlocks) setDiscoveredPokemon(JSON.parse(gameUnlocks).discoveredPokemon);
   }, [router]);
 
   useEffect(() => {
@@ -107,8 +116,8 @@ const Game: NextPage = () => {
 
       // randomly generate a level from range (floor - 2 to floor + 2)
       let level = Math.floor((Math.random() * (maxLevel - minLevel + 1)) + minLevel);
-      level = Math.max(level, 2); // min level is 2
-      level = Math.min(level, 100); // max level is 100
+      level = Math.max(level, 2);
+      level = Math.min(level, 100);
       enemyInfo.level = level;
 
       // adjust enemy stats according to level
@@ -125,13 +134,23 @@ const Game: NextPage = () => {
     setIsLoading(false);
     setEnemies(enemyList);
     setEnemy(enemyList[0]);
-    setDiscoveredPokemon(discovered => [...discovered, enemyList[0].name]);
+
+    if (floor === 1 && !discoveredPokemon.includes(enemyList[0].name)) {
+      setDiscoveredPokemon(discovered => [...discovered, enemyList[0].name]);
+      setAlerts(alerts => 
+        [...alerts, 
+          enemyList[0].name.toUpperCase() + 
+          " added to the pokedex."
+        ]
+      );
+    }
   }, [pokedex, floor]);
 
   const nextEnemy = async () => {
     if (enemies.length === 0) {
       setFloor(floor + 1);
     } else {
+
       // randomly determine if the defeated pokemon will join our team
       const joinTeamChance = Math.floor(Math.random() * 100 + 1);
       if (joinTeamChance >= 100 && !Object.keys(team).includes(enemy.name)) {
@@ -186,8 +205,28 @@ const Game: NextPage = () => {
       setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
       setEnemies(enemies => enemies.slice(1));
       setEnemy(enemies[0]);
-      setDiscoveredPokemon(discovered => [...discovered, enemies[0].name]);
+
+      if (!discoveredPokemon.includes(enemies[0].name)) {
+        setDiscoveredPokemon(discovered => [...discovered, enemies[0].name]);
+        setAlerts(alerts => 
+          [...alerts, 
+            enemies[0].name.toUpperCase() + 
+            " added to the pokedex."
+          ]
+        );
+      }
     }
+  }
+
+  useEffect(() => {
+    if (alerts.length === 0) setShowAlert(false);
+    if (alerts.length >= 1) setShowAlert(true);
+  }, [alerts.length])
+
+  const closeSnackbar = (_: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") return;
+    setShowAlert(false);
+    setAlerts(alerts => alerts.slice(1));
   }
 
   return (
@@ -210,9 +249,20 @@ const Game: NextPage = () => {
       >
       </Navbar>
 
+      <Snackbar 
+        open={showAlert}
+        message={alerts[0]}
+        autoHideDuration={2000}
+        onClose={closeSnackbar}
+        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+      ></Snackbar>
+
+      {/* <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button> */}
+
+
       <div className={styles.column}>
-        <p style={{textShadow: "none", color: "black"}}>{"Floor: " + floor}</p>      
-        <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
+        <strong>{"Route " + floor}</strong>    
+        <p>{enemies.length + " wild pokemon left."}</p>  
 
         {Object.keys(enemy).length > 0 && 
           <Enemy 

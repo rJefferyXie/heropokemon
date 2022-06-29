@@ -5,6 +5,8 @@
 .column {
   display: flex;
   flex-direction: column;
+  text-shadow: none;
+  color: black;
   height: 100vh;
   width: 75%;
 }
