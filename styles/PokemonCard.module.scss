@@ -3,11 +3,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  color: black;
-  text-shadow: none;
-  background: rgba(130, 130, 130, 0.2);
+  background: radial-gradient(circle, #313c47, #25303a);
   padding: 0.5rem;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
+  // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
+  outline: 0.5px solid black;
 }
 
 .topRow {
@@ -52,7 +51,7 @@
   display: flex;
   height: 1.5rem;
   border-radius: 16px;
-  background-color: red;
+  background-color: $btn-exit;
   transition: width 500ms ease-in-out;
 }
 
@@ -69,7 +68,7 @@
   width: fit-content;
   height: fit-content;
   padding: 0 !important;
-  background-color: $btn-play !important;
+  background-color: rgba($btn-play, 0.9) !important;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 

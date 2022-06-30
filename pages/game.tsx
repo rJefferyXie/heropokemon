@@ -15,21 +15,19 @@ import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 
 // Components
-import Loading from '../components/loading';
 import Navbar from '../components/navbar';
 import Enemy from '../components/enemy';
 
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(10);
-  const [DPS, setDPS] = useState(1);
+  const [clickDamage, setClickDamage] = useState(100);
+  const [DPS, setDPS] = useState(10);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [artwork, setArtwork] = useState('');
   const [storage, setStorage] = useState({});
   const [currency, setCurrency] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [team, setTeam] = useState<PokedexMap>({});
   const [badges, setBadges] = useState<string[]>([]);
   const [pokedex, setPokedex] = useState<PokedexMap>({});
@@ -91,7 +89,7 @@ const Game: NextPage = () => {
 
     while (enemyList.length < 10) {
       const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)];
-      const enemyInfo = pokedex[enemyName];
+      const enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyName]));
 
       // no mythical or legendary pokemon until after floor 50
       if (floor < 50) {
@@ -127,11 +125,9 @@ const Game: NextPage = () => {
         enemyInfo.stats[i + 1] += statBoost
       }
 
-      enemyInfo.stats[0] *= floor;
       enemyList.push(enemyInfo);
     }
 
-    setIsLoading(false);
     setEnemies(enemyList);
     setEnemy(enemyList[0]);
 
@@ -144,6 +140,7 @@ const Game: NextPage = () => {
         ]
       );
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokedex, floor]);
 
@@ -238,8 +235,6 @@ const Game: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {isLoading && <Loading></Loading>}
-
       <Navbar 
         currency={currency} 
         items={items} 
@@ -258,12 +253,10 @@ const Game: NextPage = () => {
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       ></Snackbar>
 
-      {/* <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button> */}
-
-
       <div className={styles.column}>
         <strong>{"Route " + floor}</strong>    
         <p>{enemies.length + " wild pokemon left."}</p>  
+        <button onClick={() => setDPS(DPS => DPS + 10)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
 
         {Object.keys(enemy).length > 0 && 
           <Enemy 
