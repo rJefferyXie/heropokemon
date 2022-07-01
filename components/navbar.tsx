@@ -1,11 +1,11 @@
 // React and Styling
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Navbar.module.scss';
 
 // Components
 import Currency from './currency';
-import GameDetails from './gameDetails';
-import PokemonCard from './pokemonCard';
+import Team from './team';
+import Options from './options';
 
 // Interfaces
 import PokedexMap from '../interfaces/PokedexMap';
@@ -21,14 +21,14 @@ interface NavbarProps {
 
 const Navbar = (props: React.PropsWithChildren<NavbarProps>) => {
   const { currency, items, storage, team, badges, artwork } = props;
+  const [option, setOption] = useState(0);
 
   return (
     <nav className={styles.container}>
       <Currency currency={currency}></Currency>
-      {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
-      })}
-      {/* <GameDetails></GameDetails> */}
+      <Options selected={option} select={setOption}></Options>
+
+      {option === 0 && <Team team={team} artwork={artwork}></Team>}
     </nav>
   )
 }
