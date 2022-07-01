@@ -103,9 +103,16 @@ const Game: NextPage = () => {
         }
       }
 
-      // only pokemon that haven't evolved and have less than 50 hp
+      // only pokemon that haven't evolved
+      if (floor < 18) {
+        if (pokemonEntry.evolves_from !== '') {
+          continue;
+        }
+      }
+
+      // only pokemon that have less than 50 hp
       if (floor < 10) {
-        if (pokemonEntry.evolves_from !== '' || pokemonEntry.stats[0] > 50) {
+        if (pokemonEntry.stats[0] > 50) {
           continue;
         }
       }
