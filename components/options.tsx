@@ -23,7 +23,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
       <Button 
         className={styles.muiButton} 
         variant="contained" 
-        style={selected === 0 ? {backgroundColor: "#4C5A68"} : {backgroundColor: "#3F4953"}}
+        style={selected === 0 ? {backgroundColor: "#264E78"} : {backgroundColor: "#4C5A68"}}
         onClick={() => select(0)}>
         <CatchingPokemonIcon></CatchingPokemonIcon>
       </Button>
@@ -31,7 +31,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
       <Button 
         className={styles.muiButton} 
         variant="contained" 
-        style={selected === 1 ? {backgroundColor: "#4C5A68"} : {backgroundColor: "#3F4953"}}
+        style={selected === 1 ? {backgroundColor: "#264E78"} : {backgroundColor: "#4C5A68"}}
         onClick={() => select(1)}>
         <DesktopWindowsIcon></DesktopWindowsIcon>
       </Button>
@@ -39,7 +39,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
       <Button 
         className={styles.muiButton} 
         variant="contained" 
-        style={selected === 2 ? {backgroundColor: "#4C5A68"} : {backgroundColor: "#3F4953"}}
+        style={selected === 2 ? {backgroundColor: "#264E78"} : {backgroundColor: "#4C5A68"}}
         onClick={() => select(2)}>
         <CategoryIcon></CategoryIcon>
       </Button>
@@ -47,7 +47,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
       <Button 
         className={styles.muiButton} 
         variant="contained" 
-        style={selected === 3 ? {backgroundColor: "#4C5A68"} : {backgroundColor: "#3F4953"}}
+        style={selected === 3 ? {backgroundColor: "#264E78"} : {backgroundColor: "#4C5A68"}}
         onClick={() => select(3)}>        
         <ShoppingCartIcon></ShoppingCartIcon>
       </Button>
@@ -55,7 +55,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
       <Button 
         className={styles.muiButton} 
         variant="contained" 
-        style={selected === 4 ? {backgroundColor: "#4C5A68"} : {backgroundColor: "#3F4953"}}
+        style={selected === 4 ? {backgroundColor: "#264E78"} : {backgroundColor: "#4C5A68"}}
         onClick={() => select(4)}>
         <LeaderboardIcon></LeaderboardIcon>
       </Button>
