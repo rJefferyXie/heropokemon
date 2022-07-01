@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/PokemonCard.module.scss';
 
+// Animations
+import { motion, AnimatePresence } from 'framer-motion';
+import DropInRight from '../animations/dropInRight';
+
 // MUI
 import { Button } from '@mui/material';
 
@@ -36,7 +40,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   }, [pokemon.level]);
 
   return (
-    <div className={styles.container}>
+    <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInRight}>
       <div className={styles.topRow}>
         <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} onClick={getHit}></img>
         <div className={styles.pokemonInfo}>
@@ -52,7 +56,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
         </div>
         <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

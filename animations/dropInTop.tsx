@@ -1,4 +1,4 @@
-const dropIn = {
+const dropInTop = {
   hidden: {
     y: "-15vh",
     transition: {
@@ -17,4 +17,4 @@ const dropIn = {
   }
 }
 
-export default dropIn;
+export default dropInTop;

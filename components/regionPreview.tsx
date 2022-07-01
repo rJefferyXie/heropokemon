@@ -7,7 +7,7 @@ import styles from '../styles/RegionPreview.module.scss';
 
 // Animations
 import { motion, AnimatePresence } from 'framer-motion';
-import DropIn from '../animations/dropIn';
+import DropInTop from '../animations/dropInTop';
 
 // MUI
 import { Button, ClickAwayListener, Snackbar } from '@mui/material';
@@ -163,7 +163,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
           Object.keys(gameSave).length > 0 ? 
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
-                  <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropIn}>
+                  <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
                     <h2 className={styles.regionTitle}>{region}</h2>
                     <p>{"Currency: $" + gameSave.currency}</p>
                     <p>{"Floor: " + gameSave.floor}</p>
@@ -209,7 +209,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
 
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
-                  <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropIn}>
+                  <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
                     <h2 className={styles.regionTitle}>{region}</h2>
                     <div className={styles.starters}>
                       {starterPokemon.map((pokemon, idx) => {
