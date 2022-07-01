@@ -13,9 +13,16 @@ import { Snackbar } from '@mui/material';
 // Interfaces
 import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
+import GameSave from '../interfaces/GameSave';
+
+// Game Functions
+import getEnemy from '../gameFunctions/getEnemy';
+import getGameSave from '../gameFunctions/getGameSave';
+import enemyFainted from '../gameFunctions/enemyFainted';
 
 // Components
 import Navbar from '../components/navbar';
+import Floors from '../components/floors';
 import Enemy from '../components/enemy';
 
 const Game: NextPage = () => {
@@ -35,222 +42,70 @@ const Game: NextPage = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
 
-  // @ts-expect-error
-  const [enemy, setEnemy] = useState<PokemonMap>({});
-  const [enemies, setEnemies] = useState<PokemonMap[]>([]);
+  const [enemy, setEnemy] = useState<PokemonMap>();
+  const [enemiesLeft, setEnemiesLeft] = useState(10);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
 
   useEffect(() => {
     if (!router) return;
 
-    const region = localStorage.getItem('selectedRegion');
-    if (!region) {
-      router.push('/');
-      return;
-    }
-
-    const gamePokedex = localStorage.getItem(region);
-    if (!gamePokedex) {
-      router.push('/');
+    const gameUnlocks = JSON.parse(localStorage.getItem('gameUnlocked') || '{}');
+    const game: GameSave | boolean = getGameSave();
+    if (typeof game === "boolean") {
+      router.push("/");
       return;
     } 
-
-    const gameData = localStorage.getItem(region + 'Save') || '{}';
-    if (!gameData) {
-      router.push('/');
-      return;
-    } 
-
-    // Set all game save related data
-    const game = JSON.parse(gameData);
+    
     setTeam(game.team);
     setItems(game.items);
     setFloor(game.floor);
     setBadges(game.badges);
+    setPokedex(game.pokedex);
     setStorage(game.storage);
     setCurrency(game.currency);
-
-    // Set pokedex, artwork, and other settings
-    setPokedex(JSON.parse(gamePokedex));
+    setDiscoveredPokemon(gameUnlocks.discoveredPokemon);
     setArtwork(localStorage.getItem('artwork') || 'official');
-
-    // Set Discovered Pokemon
-    const gameUnlocks = localStorage.getItem('gameUnlocked');
-    if (gameUnlocks) setDiscoveredPokemon(JSON.parse(gameUnlocks).discoveredPokemon);
   }, [router]);
 
   useEffect(() => {
     if (pokedex === {} || floor === 0) return;
 
-    const pokemonList = Object.keys(pokedex);
-    const enemyList: PokemonMap[] = [];
+    const enemyInfo = getEnemy(pokedex, floor);
+    const enemyName = enemyInfo.name;
+    setEnemy(enemyInfo);
 
-    while (enemyList.length < 10) {
-      const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)]; 
-      const pokemonEntry = pokedex[enemyName];
-
-      // no mythical or legendary pokemon until after floor 40
-      if (floor < 40) {
-        if (pokemonEntry.is_legendary || pokemonEntry.is_mythical) {
-          continue;
-        }
-      }
-
-      // only pokemon that have evolved once or less and have less than 100 hp
-      if (floor < 36) {
-        if (pokemonEntry.evolutions.length === 0 && pokemonEntry.evolves_from !== '') {
-          continue;
-        }
-      }
-
-      // only pokemon that haven't evolved
-      if (floor < 18) {
-        if (pokemonEntry.evolves_from !== '') {
-          continue;
-        }
-      }
-
-      // only pokemon that have less than 50 hp
-      if (floor < 10) {
-        if (pokemonEntry.stats[0] > 50) {
-          continue;
-        }
-      }
-
-      // make a deep copy of the pokemon to avoid mutating state
-      let enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyName]));
-
-      // all pokemon after and during floor 36 will be fully evolved
-      if (floor >= 36) {
-
-        // get first evolution if it exists
-        if (enemyInfo.evolutions.length > 0) {
-          const evolution = Math.floor(Math.random() * enemyInfo.evolutions.length);   
-          enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyInfo.evolutions[evolution]])); 
-
-          // get second evolution if it exists
-          if (enemyInfo.evolutions.length > 0) {
-            const evolution = Math.floor(Math.random() * enemyInfo.evolutions.length);   
-            enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyInfo.evolutions[evolution]]));
-          }
-        }
-      } 
-
-      // all pokemon after and during floor 18 will have evolved once if they are able
-      if (floor >= 18) {
-
-        // get first evolution if it exists
-        if (enemyInfo.evolutions.length > 0) {
-          const evolution = Math.floor(Math.random() * enemyInfo.evolutions.length);   
-          enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyInfo.evolutions[evolution]])); 
-        }
-      }
-
-      // Use the floor as the pokemon's level, ( min: 2, max: 100 )
-      enemyInfo.level = Math.max(Math.min(floor, 100), 2);
-
-      // adjust enemy stats according to level
-      for (let i = 0; i < 6; i++) {
-        const statBoost = Math.floor(Math.random() * floor * 2);
-        enemyInfo.statBoosts[i] = statBoost;
-        enemyInfo.stats[i + 1] += statBoost
-      }
-
-      enemyList.push(enemyInfo);
-    }
-
-    setEnemies(enemyList);
-    setEnemy(enemyList[0]);
-
-    if (floor === 1 && !discoveredPokemon.includes(enemyList[0].name)) {
-      setDiscoveredPokemon(discovered => [...discovered, enemyList[0].name]);
-      setAlerts(alerts => 
-        [...alerts, 
-          enemyList[0].name.toUpperCase() + 
-          " added to the pokedex."
-        ]
-      );
+    if (!discoveredPokemon.includes(enemyName)) {
+      setDiscoveredPokemon(discovered => [...discovered, enemyName]);
+      setAlerts(alerts => [...alerts, enemyName.toUpperCase() + " added to the pokedex."]);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokedex, floor]);
+  }, [pokedex, enemiesLeft]);
 
-  const nextEnemy = async () => {
-    if (enemies.length === 0) {
-      setFloor(floor + 1);
-    } else {
-
-      // 3% chance for the defeated pokemon to join our team
-      const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-      if (joinTeamChance >= 98) {
-        setTeam(team => {
-          team[enemy.name] = JSON.parse(JSON.stringify(enemy));
-          team[enemy.name].stats[0] = team[enemy.name].stats[1];
-          return team;
-        });
-      } 
-
-      // all pokemon that are lower level than the enemy have a chance to level up
-      Object.keys(team).map(pokemon => {
-        const levelUpChance =  Math.floor(Math.random() * 100 + 1);
-        if (team[pokemon].level < enemy.level && levelUpChance > 80) {          
-          setTeam(team => {
-            team[pokemon].level += 1;
-
-            // level up raises pokemon stats by up to 2 points each
-            for (let i = 0; i < 6; i++) {
-              const statBoost = Math.floor(Math.random() * 2);
-              if (i === 0) team[pokemon].stats[i] += statBoost;
-              team[pokemon].statBoosts[i] += statBoost;
-              team[pokemon].stats[i + 1] += statBoost;
-            }
-
-            // pokemon evolutions
-            if (team[pokemon].evolutions.length > 0) {
-              if (team[pokemon].evolves_from === '' && team[pokemon].level === 18
-                || team[pokemon].evolves_from !== '' && team[pokemon].level === 36) {
-                const evolutions = team[pokemon].evolutions;
-                const evolution = Math.floor(Math.random() * evolutions.length);   
-                const evolvedPokemon = JSON.parse(JSON.stringify(pokedex[evolutions[evolution]]));    
-                evolvedPokemon.level = team[pokemon].level;
-                evolvedPokemon.statBoosts = team[pokemon].statBoosts;
-                evolvedPokemon.stats[0] += evolvedPokemon.statBoosts[0];
-                evolvedPokemon.stats[0] -= team[pokemon].stats[1] - team[pokemon].stats[0];
-                
-                for (let i = 0; i < 6; i++) {
-                  evolvedPokemon.stats[i + 1] += evolvedPokemon.statBoosts[i];
-                }
-
-                team[pokemon] = evolvedPokemon;
-              }
-            }
-
-            return team;
-          });
-        }
-      });
-
-      // get the next enemy
-      setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
-      setEnemies(enemies => enemies.slice(1));
-      setEnemy(enemies[0]);
-
-      if (!discoveredPokemon.includes(enemies[0].name)) {
-        setDiscoveredPokemon(discovered => [...discovered, enemies[0].name]);
-        setAlerts(alerts => 
-          [...alerts, 
-            enemies[0].name.toUpperCase() + 
-            " added to the pokedex."
-          ]
-        );
-      }
-    }
-  }
+  useEffect(() => {
+    setEnemiesLeft(10);
+  }, [floor])
 
   useEffect(() => {
     if (alerts.length === 0) setShowAlert(false);
     if (alerts.length >= 1) setShowAlert(true);
   }, [alerts.length])
+
+  const nextEnemy = () => {
+    if (enemy === undefined) return;
+
+    if (enemiesLeft === 1) {
+      setFloor(floor + 1);
+    } else {
+      // level ups, enemy joining team, and evolutions
+      const newTeam = enemyFainted(team, pokedex, enemy);
+      setTeam(newTeam);
+
+      // calculate currency and get the next enemy
+      setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
+      setEnemiesLeft(enemiesLeft => enemiesLeft - 1);
+    }
+  }
 
   const closeSnackbar = (_: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") return;
@@ -284,12 +139,13 @@ const Game: NextPage = () => {
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       ></Snackbar>
 
+
       <div className={styles.column}>
-        <strong>{"Route " + floor}</strong>    
-        <p>{enemies.length + " wild pokemon left."}</p>  
+        <Floors floor={floor} setFloor={setFloor}></Floors>
+        <p className={styles.enemiesLeft}>{enemiesLeft + " wild pokemon left."}</p>  
         <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
 
-        {Object.keys(enemy).length > 0 && 
+        {enemy !== undefined && 
           <Enemy 
             enemy={enemy} 
             nextEnemy={nextEnemy} 
