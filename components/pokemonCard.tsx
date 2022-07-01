@@ -36,8 +36,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
 
   useEffect(() => {
     setHealth(pokemon.stats[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokemon.level]);
+  }, [pokemon]);
 
   return (
     <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInRight}>
