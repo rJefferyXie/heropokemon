@@ -91,7 +91,8 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
       "team": RegionTeam,
       "storage": {},
       "items": {},
-      "badges": []
+      "badges": [],
+      "pokedex": pokedex
     }));
 
     localStorage.setItem('selectedRegion', region);
