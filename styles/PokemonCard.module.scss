@@ -3,10 +3,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle, #313c47, #25303a);
   padding: 0.5rem;
-  // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
-  outline: 0.5px solid black;
+  border-bottom: 1px solid rgb(27, 27, 27);
 }
 
 .topRow {
@@ -52,7 +50,8 @@
   height: 1.5rem;
   border-radius: 16px;
   background-color: $btn-exit;
-  transition: width 500ms ease-in-out;
+  box-shadow: 1px 1px 2px rgb(0, 0, 0, 27%);
+  transition: width 200ms ease-in-out;
 }
 
 .healthValue {
@@ -68,7 +67,7 @@
   width: fit-content;
   height: fit-content;
   padding: 0 !important;
-  background-color: rgba($btn-play, 0.9) !important;
+  background-color: rgba($btn-play, 0.8) !important;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
