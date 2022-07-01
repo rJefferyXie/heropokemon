@@ -1,0 +1,9 @@
+@import './constants.scss';
+
+.container {
+  width: 100%;
+  flex-grow: 1;
+  background-color: $bg-primary;
+  overflow-y: auto;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
+}
