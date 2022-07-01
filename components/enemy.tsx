@@ -24,7 +24,7 @@ const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
   }
 
   const dpsCallback = () => {
-    setHealth(health - dps);
+    if (health > 0) setHealth(health - dps);
   }
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
   // if health reaches 0, get the next enemy in enemy list
   useEffect(() => {
     if (health <= 0) nextEnemy();
-  }, [health, nextEnemy]);
+  }, [health]);
 
   return (
     <div className={styles.container}>
