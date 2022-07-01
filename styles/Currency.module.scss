@@ -4,8 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba($bg-primary, 0.9);
+  background: radial-gradient(circle, #3a4652, #323f4b);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
   height: 60px;
   font-size: 1.5rem;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
+  margin: 0.5rem;
 }
