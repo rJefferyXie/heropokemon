@@ -22,7 +22,7 @@ const Game: NextPage = () => {
   const router = useRouter();
 
   const [clickDamage, setClickDamage] = useState(100);
-  const [DPS, setDPS] = useState(10);
+  const [DPS, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [items, setItems] = useState({});
   const [artwork, setArtwork] = useState('');
@@ -84,43 +84,67 @@ const Game: NextPage = () => {
 
     const pokemonList = Object.keys(pokedex);
     const enemyList: PokemonMap[] = [];
-    const minLevel = floor - 2;
-    const maxLevel = floor + 2;
 
     while (enemyList.length < 10) {
-      const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)];
-      const enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyName]));
+      const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)]; 
+      const pokemonEntry = pokedex[enemyName];
 
-      // no mythical or legendary pokemon until after floor 50
-      if (floor < 50) {
-        if (enemyInfo.is_legendary || enemyInfo.is_mythical) {
+      // no mythical or legendary pokemon until after floor 40
+      if (floor < 40) {
+        if (pokemonEntry.is_legendary || pokemonEntry.is_mythical) {
           continue;
         }
       }
 
       // only pokemon that have evolved once or less and have less than 100 hp
-      if (floor < 30) {
-        if (enemyInfo.evolutions.length === 0 && enemyInfo.evolves_from !== '') {
+      if (floor < 36) {
+        if (pokemonEntry.evolutions.length === 0 && pokemonEntry.evolves_from !== '') {
           continue;
         }
       }
 
       // only pokemon that haven't evolved and have less than 50 hp
       if (floor < 10) {
-        if (enemyInfo.evolves_from !== '' || enemyInfo.stats[0] > 50) {
+        if (pokemonEntry.evolves_from !== '' || pokemonEntry.stats[0] > 50) {
           continue;
         }
       }
 
-      // randomly generate a level from range (floor - 2 to floor + 2)
-      let level = Math.floor((Math.random() * (maxLevel - minLevel + 1)) + minLevel);
-      level = Math.max(level, 2);
-      level = Math.min(level, 100);
-      enemyInfo.level = level;
+      // make a deep copy of the pokemon to avoid mutating state
+      let enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyName]));
+
+      // all pokemon after and during floor 36 will be fully evolved
+      if (floor >= 36) {
+
+        // get first evolution if it exists
+        if (enemyInfo.evolutions.length > 0) {
+          const evolution = Math.floor(Math.random() * enemyInfo.evolutions.length);   
+          enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyInfo.evolutions[evolution]])); 
+
+          // get second evolution if it exists
+          if (enemyInfo.evolutions.length > 0) {
+            const evolution = Math.floor(Math.random() * enemyInfo.evolutions.length);   
+            enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyInfo.evolutions[evolution]]));
+          }
+        }
+      } 
+
+      // all pokemon after and during floor 18 will have evolved once if they are able
+      if (floor >= 18) {
+
+        // get first evolution if it exists
+        if (enemyInfo.evolutions.length > 0) {
+          const evolution = Math.floor(Math.random() * enemyInfo.evolutions.length);   
+          enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyInfo.evolutions[evolution]])); 
+        }
+      }
+
+      // Use the floor as the pokemon's level, ( min: 2, max: 100 )
+      enemyInfo.level = Math.max(Math.min(floor, 100), 2);
 
       // adjust enemy stats according to level
       for (let i = 0; i < 6; i++) {
-        const statBoost = Math.floor(Math.random() * level * 2);
+        const statBoost = Math.floor(Math.random() * floor * 2);
         enemyInfo.statBoosts[i] = statBoost;
         enemyInfo.stats[i + 1] += statBoost
       }
@@ -149,9 +173,9 @@ const Game: NextPage = () => {
       setFloor(floor + 1);
     } else {
 
-      // randomly determine if the defeated pokemon will join our team
+      // 3% chance for the defeated pokemon to join our team
       const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-      if (joinTeamChance >= 100 && !Object.keys(team).includes(enemy.name)) {
+      if (joinTeamChance >= 98) {
         setTeam(team => {
           team[enemy.name] = JSON.parse(JSON.stringify(enemy));
           team[enemy.name].stats[0] = team[enemy.name].stats[1];
@@ -256,7 +280,7 @@ const Game: NextPage = () => {
       <div className={styles.column}>
         <strong>{"Route " + floor}</strong>    
         <p>{enemies.length + " wild pokemon left."}</p>  
-        <button onClick={() => setDPS(DPS => DPS + 10)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
+        <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
 
         {Object.keys(enemy).length > 0 && 
           <Enemy 
