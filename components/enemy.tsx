@@ -37,7 +37,7 @@ const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
       savedCallback.current();
     }
 
-    const dpsInterval = setInterval(tick, 200);
+    const dpsInterval = setInterval(tick, 100);
     return () => clearInterval(dpsInterval);
   }, []);
 
