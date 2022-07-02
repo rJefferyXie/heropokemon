@@ -1,11 +1,8 @@
-// Interfaces
-import GameSave from '../interfaces/GameSave';
-
-const getGameSave = () : GameSave | boolean => {
+const getGameSave = () => {
   const region = localStorage.getItem('selectedRegion');
   if (!region) return false;
 
-  const gameData = localStorage.getItem(region + 'Save') || '{}';
+  const gameData = localStorage.getItem(region + 'Save');
   if (!gameData) return false;
 
   // get all game save related data
