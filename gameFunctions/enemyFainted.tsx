@@ -2,16 +2,26 @@
 import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 
-const enemyFainted = (team: PokedexMap, pokedex: PokedexMap, enemy: PokemonMap) => {
+const enemyFainted = (team: PokedexMap, storage: PokedexMap, pokedex: PokedexMap, enemy: PokemonMap) => {
   
-  // make a deep copy of the team to avoid mutating state
+  // make a deep copy of the team and storage to avoid mutating state
   const newTeam = JSON.parse(JSON.stringify(team));
+  const newStorage = JSON.parse(JSON.stringify(storage));
 
   // 3% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
   if (joinTeamChance >= 98) {
-    newTeam[enemy.name] = JSON.parse(JSON.stringify(enemy));
-    newTeam[enemy.name].stats[0] = newTeam[enemy.name].stats[1];
+    if (Object.keys(newTeam).length < 6) {
+      if (!Object.keys(newTeam).includes(enemy.name)) {
+        newTeam[enemy.name] = JSON.parse(JSON.stringify(enemy));
+        newTeam[enemy.name].stats[0] = newTeam[enemy.name].stats[1];
+      }
+    } else {
+      if (!Object.keys(storage).includes(enemy.name)) {
+        newStorage[enemy.name] = JSON.parse(JSON.stringify(enemy));
+        newStorage[enemy.name].stats[0] = newStorage[enemy.name].stats[1];
+      }
+    }
   } 
 
   // all pokemon that are lower level than the enemy have a chance to level up
@@ -50,7 +60,7 @@ const enemyFainted = (team: PokedexMap, pokedex: PokedexMap, enemy: PokemonMap) 
     }
   });
 
-  return newTeam;
+  return { newTeam, newStorage };
 }
 
 export default enemyFainted;
