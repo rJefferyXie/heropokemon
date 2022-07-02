@@ -1,0 +1,17 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 1rem;
+  padding: 1rem;
+  width: 128px;
+  height: 64px;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  border: 1px solid $bg-secondary;
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.27);
+  background: radial-gradient(circle, #323d49, #29343f);
+}
