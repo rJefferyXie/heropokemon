@@ -7,7 +7,7 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   margin: 0.5rem auto;
   padding: 1rem;
-  background-color: $bg-secondary;
+  background: radial-gradient(circle, #323d49, #29343f);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.27);
   border-radius: 8px;
   position: relative;
@@ -46,4 +46,8 @@
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+}
+
+.iconContainer {
+  display: flex;
 }

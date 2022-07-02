@@ -31,6 +31,7 @@ const Game: NextPage = () => {
   const [clickDamage, setClickDamage] = useState(100);
   const [DPS, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
+  const [highestFloor, setHighestFloor] = useState(1);
   const [items, setItems] = useState({});
   const [artwork, setArtwork] = useState('');
   const [storage, setStorage] = useState({});
@@ -71,9 +72,9 @@ const Game: NextPage = () => {
     if (pokedex === {} || floor === 0) return;
 
     const enemyInfo = getEnemy(pokedex, floor);
-    const enemyName = enemyInfo.name;
     setEnemy(enemyInfo);
 
+    const enemyName = enemyInfo.name;
     if (!discoveredPokemon.includes(enemyName)) {
       setDiscoveredPokemon(discovered => [...discovered, enemyName]);
       setAlerts(alerts => [...alerts, enemyName.toUpperCase() + " added to the pokedex."]);
@@ -84,6 +85,7 @@ const Game: NextPage = () => {
 
   useEffect(() => {
     setEnemiesLeft(10);
+    setHighestFloor(highestFloor => Math.max(floor, highestFloor));
   }, [floor])
 
   useEffect(() => {
@@ -141,9 +143,10 @@ const Game: NextPage = () => {
 
 
       <div className={styles.column}>
-        <Floors floor={floor} setFloor={setFloor}></Floors>
-        <p className={styles.enemiesLeft}>{enemiesLeft + " wild pokemon left."}</p>  
+        <Floors floor={floor} setFloor={setFloor} highestFloor={highestFloor}></Floors>
+        <strong className={styles.enemiesLeft}>{enemiesLeft + " wild pokemon left."}</strong>  
         <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
+        <p>{floor + " --> " + highestFloor}</p>
 
         {enemy !== undefined && 
           <Enemy 
