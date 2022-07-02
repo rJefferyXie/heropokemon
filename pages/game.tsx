@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 // React and Styling
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from '../styles/Game.module.scss';
 
 // MUI
@@ -15,6 +15,9 @@ import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 import GameSave from '../interfaces/GameSave';
 
+// Constants
+import TypeAdvantages from '../constants/TypeAdvantages';
+
 // Game Functions
 import getEnemy from '../gameFunctions/getEnemy';
 import getGameSave from '../gameFunctions/getGameSave';
@@ -24,15 +27,17 @@ import enemyFainted from '../gameFunctions/enemyFainted';
 import Navbar from '../components/navbar';
 import Floors from '../components/floors';
 import Enemy from '../components/enemy';
+import DPS from '../components/dps';
 
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(100);
-  const [DPS, setDPS] = useState(1);
+  const [clickDamage, setClickDamage] = useState(1);
+  const [dps, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [highestFloor, setHighestFloor] = useState(1);
   const [items, setItems] = useState({});
+  const [region, setRegion] = useState('');
   const [artwork, setArtwork] = useState('');
   const [storage, setStorage] = useState({});
   const [currency, setCurrency] = useState(0);
@@ -47,12 +52,14 @@ const Game: NextPage = () => {
   const [enemiesLeft, setEnemiesLeft] = useState(10);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
 
+  const gameSaveCallback = useRef<any>();
+  const gameFlowCallback = useRef<any>();
+
   useEffect(() => {
     if (!router) return;
 
-    const gameUnlocks = JSON.parse(localStorage.getItem('gameUnlocked') || '{}');
-    const game: GameSave | boolean = getGameSave();
-    if (typeof game === "boolean") {
+    const game: GameSave | false = getGameSave();
+    if (game === false) {
       router.push("/");
       return;
     } 
@@ -64,7 +71,8 @@ const Game: NextPage = () => {
     setPokedex(game.pokedex);
     setStorage(game.storage);
     setCurrency(game.currency);
-    setDiscoveredPokemon(gameUnlocks.discoveredPokemon);
+    setDiscoveredPokemon(JSON.parse(localStorage.getItem("discoveredPokemon") || '[]'));
+    setRegion(localStorage.getItem("selectedRegion") || "kanto");
     setArtwork(localStorage.getItem('artwork') || 'official');
   }, [router]);
 
@@ -86,7 +94,78 @@ const Game: NextPage = () => {
   useEffect(() => {
     setEnemiesLeft(10);
     setHighestFloor(highestFloor => Math.max(floor, highestFloor));
-  }, [floor])
+  }, [floor]);
+
+  const saveGame = () => {
+    localStorage.setItem(region + 'Save', JSON.stringify({
+      "floor": highestFloor,
+      "currency": currency,
+      "team": team,
+      "storage": storage,
+      "items": items,
+      "badges": badges,
+      "pokedex": pokedex
+    }));
+  
+    localStorage.setItem("discoveredPokemon", JSON.stringify(discoveredPokemon));
+  }
+
+  useEffect(() => {
+    gameSaveCallback.current = saveGame;
+  });
+
+  const getDPS = () => {
+    if (enemy === undefined || team === {}) return;
+
+    let totalDPS = 0;
+    Object.keys(team).map((pokemonName) => {
+      const pokemon = team[pokemonName];
+      
+      let pokemonDPS = 0;
+      pokemon.stats[2] - enemy.stats[3] > 0 ? pokemonDPS++ : pokemonDPS--;
+      pokemon.stats[4] - enemy.stats[5] > 0 ? pokemonDPS++ : pokemonDPS--;
+      pokemon.stats[6] - enemy.stats[6] > 0 ? pokemonDPS++ : pokemonDPS--;
+
+      // calculate multipliers from type advantages or disadvantages
+      for (let i = 0; i < pokemon.types.length; i++) {
+        const typeAdvantages = TypeAdvantages[pokemon.types[i]];
+        for (let j = 0; j < enemy.types.length; j++) {
+          if (typeAdvantages.strong.includes(enemy.types[j])) pokemonDPS += Math.abs(pokemonDPS) * 2;
+          if (typeAdvantages.weak.includes(enemy.types[j])) pokemonDPS -= Math.abs(pokemonDPS) / 2;
+          if (typeAdvantages.resist.includes(enemy.types[j])) pokemonDPS *= 0;          
+        }
+      }
+
+      totalDPS += pokemonDPS;
+    });
+  
+    setDPS(Math.max(totalDPS, 1) / 10);
+  }
+
+  useEffect(() => {
+    gameFlowCallback.current = getDPS;
+  });
+
+  useEffect(() => {
+    if (!region) return;
+
+    const gameSaveTick = () => {
+      gameSaveCallback.current();
+    }
+
+    const gameSaveInterval = setInterval(gameSaveTick, 30000);
+
+    const gameFlowTick = () => {
+      gameFlowCallback.current();
+    }
+
+    const gameFlowInterval = setInterval(gameFlowTick, 100);
+
+    return () => {
+      clearInterval(gameFlowInterval);
+      clearInterval(gameSaveInterval);
+    };        
+  }, [region]);
 
   useEffect(() => {
     if (alerts.length === 0) setShowAlert(false);
@@ -100,8 +179,9 @@ const Game: NextPage = () => {
       setFloor(floor + 1);
     } else {
       // level ups, enemy joining team, and evolutions
-      const newTeam = enemyFainted(team, pokedex, enemy);
+      const { newTeam, newStorage } = enemyFainted(team, storage, pokedex, enemy);
       setTeam(newTeam);
+      setStorage(newStorage);
 
       // calculate currency and get the next enemy
       setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
@@ -141,19 +221,21 @@ const Game: NextPage = () => {
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       ></Snackbar>
 
-
       <div className={styles.column}>
-        <Floors floor={floor} setFloor={setFloor} highestFloor={highestFloor}></Floors>
+        <div className={styles.row}>
+          <DPS dps={dps}></DPS>
+          <Floors floor={floor} setFloor={setFloor} highestFloor={highestFloor}></Floors>
+          <div className={styles.spacer}></div>
+        </div>
         <strong className={styles.enemiesLeft}>{enemiesLeft + " wild pokemon left."}</strong>  
-        <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button>
-        <p>{floor + " --> " + highestFloor}</p>
+        {/* <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button> */}
 
         {enemy !== undefined && 
           <Enemy 
             enemy={enemy} 
             nextEnemy={nextEnemy} 
             clickDamage={clickDamage} 
-            dps={DPS}
+            dps={dps}
             artwork={artwork}
           >
           </Enemy>
