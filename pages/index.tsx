@@ -58,10 +58,16 @@ const Home: NextPage = () => {
         setArtwork(artwork);
       }
 
-      const gameUnlocked = localStorage.getItem("gameUnlocked");
-      if (!gameUnlocked) {
-        localStorage.setItem("gameUnlocked", JSON.stringify({
-          "discoveredPokemon": [
+      const regionsUnlocked = localStorage.getItem("unlockedRegions");
+      if (!regionsUnlocked) {
+        localStorage.setItem("regionsUnlocked", JSON.stringify(["kanto"]));
+      } else {
+        setUnlockedRegions(JSON.parse(regionsUnlocked));
+      }
+
+      const pokemonDiscovered = localStorage.getItem("discoveredPokemon");
+      if (!pokemonDiscovered) {
+        localStorage.setItem("pokemonDiscovered", JSON.stringify([
             "bulbasaur", "charmander", "squirtle",
             "chikorita", "cyndaquil", "totodile",
             "treecko", "torchic", "mudkip",
@@ -69,13 +75,8 @@ const Home: NextPage = () => {
             "snivy", "tepig", "oshawott",
             "chespin", "fennekin", "froakie",
             "rowlet", "litten", "popplio"
-          ],
-          "unlockedRegions": ["kanto"]
-        }));
-      } else {
-        const gameData = JSON.parse(gameUnlocked);
-        setUnlockedRegions(gameData.unlockedRegions);
-        setDiscoveredPokemon(gameData.discoveredPokemon);
+          ])
+        );
       }
     }
     
