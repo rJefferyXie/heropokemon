@@ -8,9 +8,9 @@ const enemyFainted = (team: PokedexMap, storage: PokedexMap, pokedex: PokedexMap
   const newTeam = JSON.parse(JSON.stringify(team));
   const newStorage = JSON.parse(JSON.stringify(storage));
 
-  // 3% chance for the defeated pokemon to join our newTeam
+  // 5% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-  if (joinTeamChance >= 98) {
+  if (joinTeamChance >= 96) {
     if (Object.keys(newTeam).length < 6) {
       if (!Object.keys(newTeam).includes(enemy.name)) {
         newTeam[enemy.name] = JSON.parse(JSON.stringify(enemy));
