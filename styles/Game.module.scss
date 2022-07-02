@@ -11,6 +11,17 @@
   width: 75%;
 }
 
+.row {
+  display: flex;
+}
+
+.spacer {
+  margin: auto 1rem;
+  padding: 1rem;
+  width: 128px;
+  height: 64px;
+}
+
 .enemiesLeft {
   margin: auto auto 0;
 }
