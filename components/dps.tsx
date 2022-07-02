@@ -10,7 +10,7 @@ const DPS = (props: React.PropsWithChildren<DPSProps>) => {
 
   return (
     <div className={styles.container}>
-      <p>DPS: {dps * 10}</p>
+      <p>DPS: {Math.round(dps * 10 * 100) / 100}</p>
     </div>
   )
 }

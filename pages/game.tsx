@@ -71,6 +71,7 @@ const Game: NextPage = () => {
     setPokedex(game.pokedex);
     setStorage(game.storage);
     setCurrency(game.currency);
+    setHighestFloor(game.floor);
     setDiscoveredPokemon(JSON.parse(localStorage.getItem("discoveredPokemon") || '[]'));
     setRegion(localStorage.getItem("selectedRegion") || "kanto");
     setArtwork(localStorage.getItem('artwork') || 'official');
@@ -118,13 +119,20 @@ const Game: NextPage = () => {
     if (enemy === undefined || team === {}) return;
 
     let totalDPS = 0;
+    const enemyHP = enemy.stats[0] * 0.05;
     Object.keys(team).map((pokemonName) => {
       const pokemon = team[pokemonName];
       
       let pokemonDPS = 0;
-      pokemon.stats[2] - enemy.stats[3] > 0 ? pokemonDPS++ : pokemonDPS--;
-      pokemon.stats[4] - enemy.stats[5] > 0 ? pokemonDPS++ : pokemonDPS--;
-      pokemon.stats[6] - enemy.stats[6] > 0 ? pokemonDPS++ : pokemonDPS--;
+      
+      // attack --> defense
+      pokemon.stats[2] - enemy.stats[3] > 0 ? pokemonDPS += enemyHP : pokemonDPS -= enemyHP;
+
+      // sp.atk --> sp.def
+      pokemon.stats[4] - enemy.stats[5] > 0 ? pokemonDPS += enemyHP : pokemonDPS -= enemyHP;
+
+      // speed --> speed
+      pokemon.stats[6] - enemy.stats[6] > 0 ? pokemonDPS += enemyHP : pokemonDPS -= enemyHP;
 
       // calculate multipliers from type advantages or disadvantages
       for (let i = 0; i < pokemon.types.length; i++) {
@@ -139,7 +147,7 @@ const Game: NextPage = () => {
       totalDPS += pokemonDPS;
     });
   
-    setDPS(Math.max(totalDPS, 1) / 10);
+    setDPS(Math.max(totalDPS, enemyHP) / 10);
   }
 
   useEffect(() => {
@@ -149,11 +157,11 @@ const Game: NextPage = () => {
   useEffect(() => {
     if (!region) return;
 
-    const gameSaveTick = () => {
-      gameSaveCallback.current();
-    }
+    // const gameSaveTick = () => {
+    //   gameSaveCallback.current();
+    // }
 
-    const gameSaveInterval = setInterval(gameSaveTick, 30000);
+    // const gameSaveInterval = setInterval(gameSaveTick, 30000);
 
     const gameFlowTick = () => {
       gameFlowCallback.current();
@@ -162,8 +170,8 @@ const Game: NextPage = () => {
     const gameFlowInterval = setInterval(gameFlowTick, 100);
 
     return () => {
+      // clearInterval(gameSaveInterval);
       clearInterval(gameFlowInterval);
-      clearInterval(gameSaveInterval);
     };        
   }, [region]);
 
