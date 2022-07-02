@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import styles from '../styles/Navbar.module.scss';
 
 // Components
-import Currency from './currency';
 import Team from './team';
 import Options from './options';
+import Storage from './storage';
+import Currency from './currency';
 
 // Interfaces
 import PokedexMap from '../interfaces/PokedexMap';
@@ -29,6 +30,7 @@ const Navbar = (props: React.PropsWithChildren<NavbarProps>) => {
       <Options selected={option} select={setOption}></Options>
 
       {option === 0 && <Team team={team} artwork={artwork}></Team>}
+      {option === 1 && <Storage storage={storage} artwork={artwork}></Storage>}
     </nav>
   )
 }
