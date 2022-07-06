@@ -9,7 +9,7 @@
   transform: translate(-50%, -50%);
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba($zinc-900, 0.9);
 }
 
 .wrapper {
@@ -26,9 +26,9 @@
   min-height: 100%;
   width: 100%;
   z-index: 100;
-  background-color: $bg-secondary;
+  background-color: $zinc-800;
   border-radius: 8px;
-  box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
+  box-shadow: 2px 2px 4px $zinc-900;
   padding: 1rem;
   overflow: auto;
 }
@@ -66,9 +66,9 @@
   max-width: 200px;
   margin: 4px;
   height: 1.7rem;
-  background-color:gray;
+  background-color: rgba($zinc-100, 0.5);
   border-radius: 16px;
-  box-shadow: 1px 1px 4px rgb(0, 0, 0, 27%);
+  box-shadow: 1px 1px 4px $zinc-900;
 }
 
 .statBar {
@@ -93,8 +93,7 @@
   width: 100%;
   margin: auto 4px;
   text-align: right;
-  color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  color: $zinc-100;
 }
 
 .typesAndSelected {
@@ -164,15 +163,15 @@
 .exitButton {
   width: fit-content;
   margin: auto 2px auto auto !important;
-  background-color: rgba($btn-exit, 0.8) !important;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  background-color: $rose-700 !important;
+  text-shadow: 1px 1px 1px $zinc-900;
 }
 
 .playButton {
   width: fit-content;
   margin: auto auto auto 2px !important;
-  background-color: rgba($btn-play, 0.8) !important;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  background-color: $emerald-700 !important;
+  text-shadow: 1px 1px 1px $zinc-900;
 }
 
 .exitButton:hover, .playButton:hover {

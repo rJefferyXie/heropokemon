@@ -8,10 +8,9 @@
   padding: 1rem;
   width: 128px;
   height: 64px;
-  color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  border: 1px solid $bg-secondary;
+  color: $zinc-50;
   border-radius: 4px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.27);
-  background: radial-gradient(circle, #323d49, #29343f);
+  text-shadow: 1px 1px 1px $zinc-900;
+  box-shadow: 1px 1px 4px $zinc-900;
+  background-color: $zinc-800;
 }

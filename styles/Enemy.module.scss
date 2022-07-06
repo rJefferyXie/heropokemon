@@ -1,8 +1,8 @@
+@import './constants.scss';
+
 .container {
   display: flex;
   flex-direction: column;
-  color: black;
-  text-shadow: none;
   width: 75%;
   height: 100%;
   margin: auto;
@@ -30,12 +30,12 @@
 
 .healthBarWrapper {
   width: 100%;
-  max-width: 360px;
+  max-width: 300px;
   height: 2rem;
-  background-color: gray;
+  background-color: rgba($zinc-900, 0.5);
   box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
   border-radius: 16px;
-  margin: 0 auto auto auto;
+  margin: 4px auto auto auto;
   position: relative;
   overflow: hidden;
 }
@@ -44,7 +44,7 @@
   display: flex;
   height: 2rem;
   border-radius: 16px;
-  background-color: red;
+  background-color: $red-500;
   transition: width 100ms ease-in-out;
 }
 
@@ -55,5 +55,5 @@
   transform: translate(-50%, -50%);
   margin: auto;
   color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 1px rgba($zinc-800, 0.5);
 }
