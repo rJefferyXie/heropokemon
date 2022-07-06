@@ -1,7 +1,15 @@
-.muiButton {
+@import './constants.scss';
+
+.optionSelected {
+  background-color: $cyan-600 !important;
   border-radius: 0px !important;
 }
 
-.muiButton:hover {
-  filter: brightness(105%);
+.option {
+  background-color: $sky-700 !important;
+  border-radius: 0px !important;
+}
+
+.option:hover {
+  filter: brightness(110%);
 }
