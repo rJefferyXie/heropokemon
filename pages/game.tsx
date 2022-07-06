@@ -32,7 +32,7 @@ import DPS from '../components/dps';
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(100);
+  const [clickDamage, setClickDamage] = useState(1);
   const [dps, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [highestFloor, setHighestFloor] = useState(1);

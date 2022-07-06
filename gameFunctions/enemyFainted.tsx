@@ -18,9 +18,9 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
     capturedPokemon.push(pokemon.name);
   })
 
-  // 5% chance for the defeated pokemon to join our newTeam
+  // 10% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-  if (joinTeamChance >= 1) {
+  if (joinTeamChance >= 90) {
     if (newTeam.length < 6) {
       if (!capturedPokemon.includes(enemy.name)) {
         newTeam.push(JSON.parse(JSON.stringify(enemy)));
