@@ -6,10 +6,10 @@ import styles from '../styles/Team.module.scss';
 import PokemonCard from './pokemonCard';
 
 // Interfaces
-import PokedexMap from '../interfaces/PokedexMap';
+import PokemonMap from '../interfaces/PokemonMap';
 
 interface TeamProps {
-  team: PokedexMap,
+  team: PokemonMap[],
   artwork: string
 }
 
@@ -18,8 +18,8 @@ const Team = (props: React.PropsWithChildren<TeamProps>) => {
 
   return (
     <div className={styles.container}>
-      {Object.keys(team).map((pokemon, idx) => {
-        return <PokemonCard pokemon={team[pokemon]} artwork={artwork} key={idx}></PokemonCard>
+      {team.map((pokemon, idx) => {
+        return <PokemonCard pokemon={pokemon} artwork={artwork} key={idx}></PokemonCard>
       })}
     </div>
   )

@@ -1,9 +1,11 @@
+// Interfaces
 import PokedexMap from './PokedexMap';
+import PokemonMap from '../interfaces/PokemonMap';
 
 interface GameSave {
-  "team": {},
+  "team": PokemonMap[],
   "items": {},
-  "storage": {},
+  "storage": PokemonMap[],
   "floor": number,
   "badges": string[],
   "currency": number,

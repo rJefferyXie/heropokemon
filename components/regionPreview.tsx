@@ -14,6 +14,7 @@ import { Button, ClickAwayListener, Snackbar } from '@mui/material';
 
 // Interfaces 
 import PokedexMap from '../interfaces/PokedexMap';
+import PokemonMap from '../interfaces/PokemonMap';
 import GameSave from '../interfaces/GameSave';
 
 // Constants
@@ -72,24 +73,23 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     }
 
     const starterLevel = 5;
-    const RegionTeam: PokedexMap = {};
-    RegionTeam[starter] = pokedex[starter];
-    RegionTeam[starter].level = starterLevel;
+    const starterInfo = pokedex[starter];
+    starterInfo.level = starterLevel;
 
     // adjust pokemon stats according to pokemon level
     for (let i = 0; i < 6; i++) {
       const statBoost = Math.floor(Math.random() * starterLevel * 2);
-      RegionTeam[starter].statBoosts[i] = statBoost;
-      RegionTeam[starter].stats[i + 1] += statBoost;
+      starterInfo.statBoosts[i] = statBoost;
+      starterInfo.stats[i + 1] += statBoost;
     }
 
-    RegionTeam[starter].stats[0] += RegionTeam[starter].statBoosts[0];
+    starterInfo.stats[0] += starterInfo.statBoosts[0];
     
     localStorage.setItem(region + 'Save', JSON.stringify({
       "floor": 1,
       "currency": 0,
-      "team": RegionTeam,
-      "storage": {},
+      "team": [starterInfo],
+      "storage": [],
       "items": {},
       "badges": [],
       "pokedex": pokedex

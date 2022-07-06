@@ -6,10 +6,10 @@ import styles from '../styles/Storage.module.scss';
 import PokemonCard from './pokemonCard';
 
 // Interfaces
-import PokedexMap from '../interfaces/PokedexMap';
+import PokemonMap from '../interfaces/PokemonMap';
 
 interface StorageProps {
-  storage: PokedexMap,
+  storage: PokemonMap[],
   artwork: string
 }
 
@@ -18,8 +18,8 @@ const Storage = (props: React.PropsWithChildren<StorageProps>) => {
 
   return (
     <div className={styles.container}>
-      {Object.keys(storage).map((pokemon, idx) => {
-        return <PokemonCard pokemon={storage[pokemon]} artwork={artwork} key={idx}></PokemonCard>
+      {storage.map((pokemon, idx) => {
+        return <PokemonCard pokemon={pokemon} artwork={artwork} key={idx}></PokemonCard>
       })}
     </div>
   )

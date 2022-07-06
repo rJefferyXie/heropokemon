@@ -32,18 +32,18 @@ import DPS from '../components/dps';
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(1);
+  const [clickDamage, setClickDamage] = useState(100);
   const [dps, setDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [highestFloor, setHighestFloor] = useState(1);
   const [items, setItems] = useState({});
   const [region, setRegion] = useState('');
   const [artwork, setArtwork] = useState('');
-  const [storage, setStorage] = useState({});
   const [currency, setCurrency] = useState(0);
-  const [team, setTeam] = useState<PokedexMap>({});
+  const [team, setTeam] = useState<PokemonMap[]>([]);
   const [badges, setBadges] = useState<string[]>([]);
   const [pokedex, setPokedex] = useState<PokedexMap>({});
+  const [storage, setStorage] = useState<PokemonMap[]>([]);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alerts, setAlerts] = useState<string[]>([]);
@@ -116,36 +116,32 @@ const Game: NextPage = () => {
   });
 
   const getDPS = () => {
-    if (enemy === undefined || team === {}) return;
+    if (enemy === undefined || team.length === 0) return;
 
     let totalDPS = 0;
     const enemyHP = enemy.stats[0] * 0.05;
-    Object.keys(team).map((pokemonName) => {
-      const pokemon = team[pokemonName];
-      
-      let pokemonDPS = 0;
-      
-      // attack --> defense
-      pokemon.stats[2] - enemy.stats[3] > 0 ? pokemonDPS += enemyHP : pokemonDPS -= enemyHP;
+    const pokemon = team[0];
+        
+    // attack --> defense
+    pokemon.stats[2] - enemy.stats[3] > 0 ? totalDPS += enemyHP : totalDPS -= enemyHP;
 
-      // sp.atk --> sp.def
-      pokemon.stats[4] - enemy.stats[5] > 0 ? pokemonDPS += enemyHP : pokemonDPS -= enemyHP;
+    // sp.atk --> sp.def
+    pokemon.stats[4] - enemy.stats[5] > 0 ? totalDPS += enemyHP : totalDPS -= enemyHP;
 
-      // speed --> speed
-      pokemon.stats[6] - enemy.stats[6] > 0 ? pokemonDPS += enemyHP : pokemonDPS -= enemyHP;
+    // speed --> speed
+    pokemon.stats[6] - enemy.stats[6] > 0 ? totalDPS += enemyHP : totalDPS -= enemyHP;
 
-      // calculate multipliers from type advantages or disadvantages
-      for (let i = 0; i < pokemon.types.length; i++) {
-        const typeAdvantages = TypeAdvantages[pokemon.types[i]];
-        for (let j = 0; j < enemy.types.length; j++) {
-          if (typeAdvantages.strong.includes(enemy.types[j])) pokemonDPS += Math.abs(pokemonDPS) * 2;
-          if (typeAdvantages.weak.includes(enemy.types[j])) pokemonDPS -= Math.abs(pokemonDPS) / 2;
-          if (typeAdvantages.resist.includes(enemy.types[j])) pokemonDPS *= 0;          
-        }
+    // calculate multipliers from type advantages or disadvantages
+    for (let i = 0; i < pokemon.types.length; i++) {
+      const typeAdvantages = TypeAdvantages[pokemon.types[i]];
+      for (let j = 0; j < enemy.types.length; j++) {
+        if (typeAdvantages.strong.includes(enemy.types[j])) totalDPS += Math.abs(totalDPS) * 2;
+        if (typeAdvantages.weak.includes(enemy.types[j])) totalDPS -= Math.abs(totalDPS) / 2;
+        if (typeAdvantages.resist.includes(enemy.types[j])) totalDPS *= 0;          
       }
+    }
 
-      totalDPS += pokemonDPS;
-    });
+    totalDPS += totalDPS;
   
     setDPS(Math.max(totalDPS, enemyHP) / 10);
   }
@@ -236,7 +232,6 @@ const Game: NextPage = () => {
           <div className={styles.spacer}></div>
         </div>
         <strong className={styles.enemiesLeft}>{enemiesLeft + " wild pokemon left."}</strong>  
-        {/* <button onClick={() => setDPS(DPS => DPS + 1)} style={{width: "fit-content", height: "fit-content"}}>INCREASE DPS: {DPS}</button> */}
 
         {enemy !== undefined && 
           <Enemy 

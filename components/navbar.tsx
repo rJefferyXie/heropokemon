@@ -9,13 +9,13 @@ import Storage from './storage';
 import Currency from './currency';
 
 // Interfaces
-import PokedexMap from '../interfaces/PokedexMap';
+import PokemonMap from '../interfaces/PokemonMap';
 
 interface NavbarProps {
   currency: number,
   items: {},
-  storage: {},
-  team: PokedexMap,
+  storage: PokemonMap[],
+  team: PokemonMap[],
   badges: string[],
   artwork: string
 }
