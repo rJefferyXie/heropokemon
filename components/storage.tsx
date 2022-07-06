@@ -19,7 +19,7 @@ const Storage = (props: React.PropsWithChildren<StorageProps>) => {
   return (
     <div className={styles.container}>
       {storage.map((pokemon, idx) => {
-        return <PokemonCard pokemon={pokemon} artwork={artwork} key={idx}></PokemonCard>
+        return <PokemonCard pokemon={pokemon} firstSlot={false} dps={0} artwork={artwork} key={idx}></PokemonCard>
       })}
     </div>
   )
