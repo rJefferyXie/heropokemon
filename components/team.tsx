@@ -10,16 +10,17 @@ import PokemonMap from '../interfaces/PokemonMap';
 
 interface TeamProps {
   team: PokemonMap[],
-  artwork: string
+  artwork: string,
+  dps: number
 }
 
 const Team = (props: React.PropsWithChildren<TeamProps>) => {
-  const { team, artwork } = props;
+  const { team, dps, artwork } = props;
 
   return (
     <div className={styles.container}>
       {team.map((pokemon, idx) => {
-        return <PokemonCard pokemon={pokemon} artwork={artwork} key={idx}></PokemonCard>
+        return <PokemonCard pokemon={pokemon} firstSlot={idx === 0} dps={dps} artwork={artwork} key={idx}></PokemonCard>
       })}
     </div>
   )

@@ -15,10 +15,8 @@ import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 import GameSave from '../interfaces/GameSave';
 
-// Constants
-import TypeAdvantages from '../constants/TypeAdvantages';
-
 // Game Functions
+import getDPS from '../gameFunctions/getDPS';
 import getEnemy from '../gameFunctions/getEnemy';
 import getGameSave from '../gameFunctions/getGameSave';
 import enemyFainted from '../gameFunctions/enemyFainted';
@@ -33,7 +31,7 @@ const Game: NextPage = () => {
   const router = useRouter();
 
   const [clickDamage, setClickDamage] = useState(1);
-  const [dps, setDPS] = useState(1);
+  const [playerDPS, setPlayerDPS] = useState(1);
   const [floor, setFloor] = useState(0);
   const [highestFloor, setHighestFloor] = useState(1);
   const [items, setItems] = useState({});
@@ -49,6 +47,7 @@ const Game: NextPage = () => {
   const [alerts, setAlerts] = useState<string[]>([]);
 
   const [enemy, setEnemy] = useState<PokemonMap>();
+  const [enemyDPS, setEnemyDPS] = useState(1);
   const [enemiesLeft, setEnemiesLeft] = useState(10);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
 
@@ -115,39 +114,17 @@ const Game: NextPage = () => {
     gameSaveCallback.current = saveGame;
   });
 
-  const getDPS = () => {
+  const gameFlow = () => {
     if (enemy === undefined || team.length === 0) return;
 
-    let totalDPS = 0;
-    const enemyHP = enemy.stats[0] * 0.05;
-    const pokemon = team[0];
-        
-    // attack --> defense
-    pokemon.stats[2] - enemy.stats[3] > 0 ? totalDPS += enemyHP : totalDPS -= enemyHP;
-
-    // sp.atk --> sp.def
-    pokemon.stats[4] - enemy.stats[5] > 0 ? totalDPS += enemyHP : totalDPS -= enemyHP;
-
-    // speed --> speed
-    pokemon.stats[6] - enemy.stats[6] > 0 ? totalDPS += enemyHP : totalDPS -= enemyHP;
-
-    // calculate multipliers from type advantages or disadvantages
-    for (let i = 0; i < pokemon.types.length; i++) {
-      const typeAdvantages = TypeAdvantages[pokemon.types[i]];
-      for (let j = 0; j < enemy.types.length; j++) {
-        if (typeAdvantages.strong.includes(enemy.types[j])) totalDPS += Math.abs(totalDPS) * 2;
-        if (typeAdvantages.weak.includes(enemy.types[j])) totalDPS -= Math.abs(totalDPS) / 2;
-        if (typeAdvantages.resist.includes(enemy.types[j])) totalDPS *= 0;          
-      }
-    }
-
-    totalDPS += totalDPS;
+    const { playerDPS, enemyDPS } = getDPS(enemy, team[0]);
   
-    setDPS(Math.max(totalDPS, enemyHP) / 10);
+    setPlayerDPS(playerDPS);
+    setEnemyDPS(enemyDPS);
   }
 
   useEffect(() => {
-    gameFlowCallback.current = getDPS;
+    gameFlowCallback.current = gameFlow;
   });
 
   useEffect(() => {
@@ -212,6 +189,7 @@ const Game: NextPage = () => {
         items={items} 
         storage={storage} 
         team={team} 
+        dps={enemyDPS}
         badges={badges} 
         artwork={artwork}
       >
@@ -227,7 +205,7 @@ const Game: NextPage = () => {
 
       <div className={styles.column}>
         <div className={styles.row}>
-          <DPS dps={dps}></DPS>
+          <DPS dps={playerDPS}></DPS>
           <Floors floor={floor} setFloor={setFloor} highestFloor={highestFloor}></Floors>
           <div className={styles.spacer}></div>
         </div>
@@ -238,7 +216,7 @@ const Game: NextPage = () => {
             enemy={enemy} 
             nextEnemy={nextEnemy} 
             clickDamage={clickDamage} 
-            dps={dps}
+            dps={playerDPS}
             artwork={artwork}
           >
           </Enemy>

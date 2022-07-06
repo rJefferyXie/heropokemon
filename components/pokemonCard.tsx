@@ -1,47 +1,61 @@
 // React and Styling
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from '../styles/PokemonCard.module.scss';
 
 // Animations
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import DropInRight from '../animations/dropInRight';
 
 // MUI
 import { Button } from '@mui/material';
 
-// Constants
-import TypeColorSchemes from '../constants/TypeColorSchemes';
-
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
 interface PokemonCardProps {
+  dps: number,
   artwork: string,
+  firstSlot: boolean,
   pokemon: PokemonMap
 }
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
-  const { pokemon, artwork } = props;
+  const { pokemon, firstSlot, dps, artwork } = props;
   const [health, setHealth] = useState(pokemon.stats[0]);
-
-  const getHit = () => {
-    pokemon.stats[0] -= 2;
-    setHealth(health - 2);
-  }
+  const savedCallback = useRef<any>();
 
   const heal = () => {
-    pokemon.stats[0] = pokemon.stats[1];
     setHealth(pokemon.stats[1]);
   }
 
+  const dpsCallback = () => {
+    if (health > 0) setHealth(Math.max(health - dps, 0));
+  }
+
   useEffect(() => {
-    setHealth(pokemon.stats[0]);
+    savedCallback.current = dpsCallback;
+  });
+
+  // interval for dealing damage based on team's dps
+  useEffect(() => {
+    if (!firstSlot) return;
+
+    const tick = () => {
+      savedCallback.current();
+    }
+
+    const dpsInterval = setInterval(tick, 100);
+    return () => clearInterval(dpsInterval);
+  }, [firstSlot]);
+
+  useEffect(() => {
+    setHealth(health => pokemon.stats[0] - (pokemon.stats[0] - health));
   }, [pokemon]);
 
   return (
     <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInRight}>
       <div className={styles.topRow}>
-        <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} onClick={getHit}></img>
+        <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
         <div className={styles.pokemonInfo}>
           <strong className={styles.pokemonName}>{pokemon.name}</strong>
           <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>

@@ -12,6 +12,7 @@ import Currency from './currency';
 import PokemonMap from '../interfaces/PokemonMap';
 
 interface NavbarProps {
+  dps: number,
   currency: number,
   items: {},
   storage: PokemonMap[],
@@ -21,7 +22,7 @@ interface NavbarProps {
 }
 
 const Navbar = (props: React.PropsWithChildren<NavbarProps>) => {
-  const { currency, items, storage, team, badges, artwork } = props;
+  const { dps, currency, items, storage, team, badges, artwork } = props;
   const [option, setOption] = useState(0);
 
   return (
@@ -29,7 +30,7 @@ const Navbar = (props: React.PropsWithChildren<NavbarProps>) => {
       <Currency currency={currency}></Currency>
       <Options selected={option} select={setOption}></Options>
 
-      {option === 0 && <Team team={team} artwork={artwork}></Team>}
+      {option === 0 && <Team team={team} dps={dps} artwork={artwork}></Team>}
       {option === 1 && <Storage storage={storage} artwork={artwork}></Storage>}
     </nav>
   )
