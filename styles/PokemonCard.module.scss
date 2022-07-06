@@ -29,10 +29,6 @@
   text-transform: uppercase;
 }
 
-.pokemonLevel {
-
-}
-
 .bottomRow {
   display: flex;
 }
@@ -71,7 +67,7 @@
   width: fit-content;
   height: fit-content;
   padding: 0 !important;
-  background-color: $emerald-500 !important;
+  background-color: $teal-700 !important;
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
