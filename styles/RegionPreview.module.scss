@@ -14,8 +14,8 @@
 
 .wrapper {
   display: flex;
-  height: min(80%, 600px);
-  width: min(90%, 1000px);
+  height: min(100%, 600px);
+  width: min(100%, 1000px);
   margin: auto;
 }
 
@@ -199,17 +199,23 @@
 @media screen and (max-width: 960px) {
   .statsAndTypes {
     flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .starters {
+    margin: 1rem auto 0;
   }
 
   .wrapper {
-    height: 80%;
+    height: 100%;
   }
 
-  .pokedexEntry {
-    width: 100%;
+  .pokedex {
+    display: none;
   }
 
   .buttonContainer {
     order: 1;
+    margin: 1rem auto auto;
   }
 }
