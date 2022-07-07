@@ -5,9 +5,6 @@ import ExportedImage from 'next-image-export-optimizer';
 import React from 'react';
 import styles from '../styles/Region.module.scss';
 
-// Constants
-import RegionImages from '../constants/RegionImages';
-
 interface RegionProps {
   name: string,
   unlocked: boolean,
@@ -34,7 +31,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
       
       {unlocked && images.map((image, idx) => {
         return <div className={styles.regionImage} key={idx}>
-          <ExportedImage layout="fixed" width="64px" height="64px" alt={image} src={RegionImages[image]} ></ExportedImage>
+          <ExportedImage layout="fixed" width="64px" height="64px" alt={image} src={"images/" + image + ".png"} ></ExportedImage>
         </div>
       })}
     </div>
