@@ -7,6 +7,7 @@ import Team from './team';
 import Options from './options';
 import Storage from './storage';
 import Currency from './currency';
+import Placeholder from './placeholder';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
@@ -32,6 +33,9 @@ const Navbar = (props: React.PropsWithChildren<NavbarProps>) => {
 
       {option === 0 && <Team team={team} dps={dps} artwork={artwork}></Team>}
       {option === 1 && <Storage storage={storage} artwork={artwork}></Storage>}
+      {option === 2 && <Placeholder></Placeholder>}
+      {option === 3 && <Placeholder></Placeholder>}
+      {option === 4 && <Placeholder></Placeholder>}
     </nav>
   )
 }
