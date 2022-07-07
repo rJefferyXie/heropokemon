@@ -132,7 +132,11 @@ const Game: NextPage = () => {
 
     const newEnemy = JSON.parse(JSON.stringify(enemy));
     newEnemy.stats[0] -= playerDPS;
-    if (newEnemy.stats[0] <= 0) nextEnemy();
+    if (newEnemy.stats[0] <= 0) {
+      nextEnemy();
+      return;
+    }
+
     setEnemy(newEnemy);
   
     setPlayerDPS(playerDPS);
@@ -231,6 +235,7 @@ const Game: NextPage = () => {
           <Enemy 
             enemy={enemy} 
             setEnemy={setEnemy}
+            player={team[0]}
             clickDamage={clickDamage} 
             artwork={artwork}
           >

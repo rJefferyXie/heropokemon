@@ -8,15 +8,18 @@ import PokemonMap from '../interfaces/PokemonMap';
 interface EnemyProps {
   enemy: PokemonMap,
   setEnemy: Function,
+  player: PokemonMap,
   clickDamage: number,
   artwork: string
 }
 
 const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
-  const { enemy, setEnemy, clickDamage, artwork } = props;
+  const { enemy, setEnemy, player, clickDamage, artwork } = props;
 
   // damage dealt to enemy upon clicking image
   const clickHit = () => {
+    if (Math.floor(player.stats[0]) <= 0) return;
+
     const newEnemy = JSON.parse(JSON.stringify(enemy));
     newEnemy.stats[0] -= clickDamage;
     setEnemy(newEnemy);
