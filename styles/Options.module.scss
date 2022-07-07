@@ -13,3 +13,9 @@
 .option:hover {
   filter: brightness(110%);
 }
+
+@media screen and (max-width: 960px){
+  .option, .optionSelected {
+    width: calc(100% / 5);
+  }
+}

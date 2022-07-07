@@ -57,3 +57,19 @@
   color: white;
   text-shadow: 1px 1px 1px rgba($zinc-800, 0.5);
 }
+
+@media screen and (max-width: 960px) {
+  .container {
+    height: 40%;
+    margin: 0 auto 0;
+  }
+
+  .enemyImage {
+    width: 50%;
+    padding: 2px;
+  }
+  
+  .enemyImage:active {
+    padding: 0;
+  }
+}

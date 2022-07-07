@@ -28,3 +28,21 @@
   margin: auto auto 0;
   text-transform: uppercase;
 }
+
+@media screen and (max-width: 960px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .enemiesLeft {
+    margin: 0 auto;
+  }
+}
