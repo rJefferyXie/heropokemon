@@ -1,5 +1,5 @@
 // React and Styling
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import styles from '../styles/PokemonCard.module.scss';
 
 // Animations
@@ -13,44 +13,21 @@ import { Button } from '@mui/material';
 import PokemonMap from '../interfaces/PokemonMap';
 
 interface PokemonCardProps {
-  dps: number,
   artwork: string,
-  firstSlot: boolean,
-  pokemon: PokemonMap
+  index: number,
+  pokemon: PokemonMap,
+  team: PokemonMap[],
+  setTeam: Function
 }
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
-  const { pokemon, firstSlot, dps, artwork } = props;
-  const [health, setHealth] = useState(pokemon.stats[0]);
-  const savedCallback = useRef<any>();
+  const { pokemon, team, setTeam, index, artwork } = props;
 
   const heal = () => {
-    setHealth(pokemon.stats[1]);
+    const newTeam = JSON.parse(JSON.stringify(team));
+    newTeam[index].stats[0] = newTeam[index].stats[1];
+    setTeam(newTeam);
   }
-
-  const dpsCallback = () => {
-    if (health > 0) setHealth(Math.max(health - dps, 0));
-  }
-
-  useEffect(() => {
-    savedCallback.current = dpsCallback;
-  });
-
-  // interval for dealing damage based on team's dps
-  useEffect(() => {
-    if (!firstSlot) return;
-
-    const tick = () => {
-      savedCallback.current();
-    }
-
-    const dpsInterval = setInterval(tick, 100);
-    return () => clearInterval(dpsInterval);
-  }, [firstSlot]);
-
-  useEffect(() => {
-    setHealth(health => pokemon.stats[0] - (pokemon.stats[0] - health));
-  }, [pokemon]);
 
   return (
     <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInRight}>
@@ -63,8 +40,8 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       </div>
       <div className={styles.bottomRow}>
         <div className={styles.healthBarWrapper}>
-          <div className={styles.healthBar} style={{width: Math.floor(health / pokemon.stats[1] * 100) + "%"}}>
-            <p className={styles.healthValue}>{`${Math.floor(health)}/${pokemon.stats[1]}`}</p>
+          <div className={styles.healthBar} style={{width: Math.floor(pokemon.stats[0] / pokemon.stats[1] * 100) + "%"}}>
+            <p className={styles.healthValue}>{Math.floor(pokemon.stats[0])}/{pokemon.stats[1]}</p>
           </div>
         </div>
         <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>

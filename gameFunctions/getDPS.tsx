@@ -14,8 +14,8 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap) => {
   let playerDPS = 0;
   let enemyDPS = 0;
 
-  const playerHP = pokemon.stats[0] * 0.05;
-  const enemyHP = enemy.stats[0] * 0.05;
+  const playerHP = pokemon.stats[1] * 0.05;
+  const enemyHP = enemy.stats[1] * 0.05;
 
   pokemon.stats[2] >= enemy.stats[3] ? playerDPS += enemyHP : playerDPS -= enemyHP;
   pokemon.stats[4] >= enemy.stats[5] ? playerDPS += enemyHP : playerDPS -= enemyHP;
