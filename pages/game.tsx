@@ -100,8 +100,8 @@ const Game: NextPage = () => {
     localStorage.setItem(region + 'Save', JSON.stringify({
       "floor": highestFloor,
       "currency": currency,
-      "team": team,
       "storage": storage,
+      "team": team,
       "items": items,
       "badges": badges,
       "pokedex": pokedex
@@ -118,6 +118,22 @@ const Game: NextPage = () => {
     if (enemy === undefined || team.length === 0) return;
 
     const { playerDPS, enemyDPS } = getDPS(enemy, team[0]);
+
+    const newTeam = JSON.parse(JSON.stringify(team));
+    newTeam[0].stats[0] -= enemyDPS;
+    if (newTeam[0].stats[0] <= 0) {
+      const newEnemy = JSON.parse(JSON.stringify(enemy));
+      newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.05, newEnemy.stats[1]);
+      setEnemy(newEnemy);
+      return;
+    }
+
+    setTeam(newTeam);
+
+    const newEnemy = JSON.parse(JSON.stringify(enemy));
+    newEnemy.stats[0] -= playerDPS;
+    if (newEnemy.stats[0] <= 0) nextEnemy();
+    setEnemy(newEnemy);
   
     setPlayerDPS(playerDPS);
     setEnemyDPS(enemyDPS);
@@ -189,7 +205,7 @@ const Game: NextPage = () => {
         items={items} 
         storage={storage} 
         team={team} 
-        dps={enemyDPS}
+        setTeam={setTeam}
         badges={badges} 
         artwork={artwork}
       >
@@ -214,9 +230,8 @@ const Game: NextPage = () => {
         {enemy !== undefined && 
           <Enemy 
             enemy={enemy} 
-            nextEnemy={nextEnemy} 
+            setEnemy={setEnemy}
             clickDamage={clickDamage} 
-            dps={playerDPS}
             artwork={artwork}
           >
           </Enemy>
