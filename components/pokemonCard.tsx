@@ -16,7 +16,7 @@ interface PokemonCardProps {
   artwork: string,
   index: number,
   pokemon: PokemonMap,
-  team: PokemonMap[],
+  team?: PokemonMap[],
   setTeam: Function
 }
 
