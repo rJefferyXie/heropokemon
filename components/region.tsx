@@ -33,7 +33,9 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
       
       
       {unlocked && images.map((image, idx) => {
-        return <img className={styles.regionImage} alt={image} src={RegionImages[image]} key={idx}></img>
+        return <div className={styles.regionImage} key={idx}>
+          <ExportedImage layout="fixed" width="64px" height="64px" alt={image} src={RegionImages[image]} ></ExportedImage>
+        </div>
       })}
     </div>
   )
