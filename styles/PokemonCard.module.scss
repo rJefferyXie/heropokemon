@@ -75,7 +75,16 @@
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
-.healButton:hover {
+.swapButton {
+  width: fit-content;
+  height: fit-content;
+  padding: 0 !important;
+  margin: auto 0px auto auto;
+  background-color: $teal-600 !important;
+  text-shadow: 1px 1px 1px $zinc-900;
+}
+
+.healButton:hover, .swapButton:hover {
   filter: brightness(110%);
 }
 
