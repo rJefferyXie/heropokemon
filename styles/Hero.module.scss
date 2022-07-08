@@ -1,0 +1,78 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.heroWallpaper {
+  z-index: -1;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 4rem 1rem 4rem 4rem;
+  border-radius: 8px;
+  background-color: rgba($slate-900, 0.6);
+  box-shadow: 0px 0px 8px rgba($slate-50, 0.3);
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-radius: 8px;
+  margin: 4rem 4rem 4rem 1rem;
+  background-color: rgba($slate-900, 0.6);
+  box-shadow: 0px 0px 8px rgba($slate-50, 0.3);
+}
+
+.heroImage {
+  width: 50%;
+  padding: 4px;
+  margin: auto auto 0;
+  cursor: pointer;
+  z-index: 99;
+  animation-name: jump;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: 3;
+}
+
+@keyframes jump {
+	0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+	40% {
+    transform: translateY(-10px);
+  }
+	60% {
+    transform: translateY(-5px);
+  }
+}
+
+.heroImage:hover {
+  padding: 0px;
+  animation: none;
+}
+
+.heroHeader {
+  margin: 4px auto 0px;
+}
+
+.heroText {
+  margin: 0 auto;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.heroTip {
+  margin: 4px auto auto;
+}
+
+.heroFooter {
+  margin: auto 4px 4px;
+}

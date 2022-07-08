@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.scss';
 
 // Components
+import Hero from '../components/hero';
 import Regions from '../components/regions';
 import Loading from '../components/loading';
 
@@ -19,6 +20,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFirstTime, setIsFirstTime] = useState(true);
   const [artwork, setArtwork] = useState("official");
   const [unlockedRegions, setUnlockedRegions] = useState<string[]>(["kanto"]);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([
@@ -84,6 +86,10 @@ const Home: NextPage = () => {
     downloadPokedexes();
   }, []);
 
+  const proceed = () => {
+    setIsFirstTime(false);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -94,12 +100,20 @@ const Home: NextPage = () => {
 
       {isLoading && <Loading></Loading>}
 
-      <Regions 
-        artwork={artwork}
-        unlockedRegions={unlockedRegions} 
-        discoveredPokemon={discoveredPokemon} 
-      >
-      </Regions>
+      {(isFirstTime && !isLoading) && 
+        <Hero 
+          artwork={artwork} 
+          proceed={proceed}
+        >
+        </Hero>}
+
+      {!isFirstTime && 
+        <Regions 
+          artwork={artwork}
+          unlockedRegions={unlockedRegions} 
+          discoveredPokemon={discoveredPokemon} 
+        >
+        </Regions>}
     </div>
   )
 }
