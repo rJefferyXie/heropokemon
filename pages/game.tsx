@@ -150,11 +150,11 @@ const Game: NextPage = () => {
   useEffect(() => {
     if (!region) return;
 
-    // const gameSaveTick = () => {
-    //   gameSaveCallback.current();
-    // }
+    const gameSaveTick = () => {
+      gameSaveCallback.current();
+    }
 
-    // const gameSaveInterval = setInterval(gameSaveTick, 30000);
+    const gameSaveInterval = setInterval(gameSaveTick, 300000);
 
     const gameFlowTick = () => {
       gameFlowCallback.current();
@@ -163,7 +163,7 @@ const Game: NextPage = () => {
     const gameFlowInterval = setInterval(gameFlowTick, 100);
 
     return () => {
-      // clearInterval(gameSaveInterval);
+      clearInterval(gameSaveInterval);
       clearInterval(gameFlowInterval);
     };        
   }, [region]);
