@@ -8,12 +8,13 @@ import Region from './region';
 
 interface RegionsProps {
   artwork: string,
+  isFirstTime: boolean,
   unlockedRegions: string[],
   discoveredPokemon: string[]
 }
 
 const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
-  const { artwork, unlockedRegions, discoveredPokemon } = props;
+  const { artwork, isFirstTime, unlockedRegions, discoveredPokemon } = props;
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedPokedex, setSelectedPokedex] = useState({});
 
@@ -33,7 +34,7 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
   }, [selectedRegion]);
 
   return (
-    <div className={styles.container}>
+    <div className={isFirstTime ? styles.containerHidden : styles.container}>
       {selectedRegion !== "" && 
         <RegionPreview 
           artwork={artwork}

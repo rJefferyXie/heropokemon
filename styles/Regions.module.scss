@@ -4,6 +4,13 @@
   margin: auto;
 }
 
+.containerHidden {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+}
+
 @media screen and (max-width: 1200px) {
   .container {
     flex-wrap: wrap;

@@ -90,7 +90,7 @@ const Hero = (props: React.PropsWithChildren<HeroProps>) => {
           >
           </img>
           <p className={styles.heroTip}>
-            Click on {pokemon.name.toUpperCase()} {clicks} more times to continue. Have fun!
+            Click on {pokemon.name.toUpperCase()} {clicks} more time{clicks > 1 && "s"} to continue. Have fun!
           </p>
         </div>
       </div>

@@ -107,13 +107,13 @@ const Home: NextPage = () => {
         >
         </Hero>}
 
-      {!isFirstTime && 
-        <Regions 
-          artwork={artwork}
-          unlockedRegions={unlockedRegions} 
-          discoveredPokemon={discoveredPokemon} 
-        >
-        </Regions>}
+      <Regions 
+        artwork={artwork}
+        isFirstTime={isFirstTime}
+        unlockedRegions={unlockedRegions} 
+        discoveredPokemon={discoveredPokemon} 
+      >
+      </Regions>
     </div>
   )
 }
