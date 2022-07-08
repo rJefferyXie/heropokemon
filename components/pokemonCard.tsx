@@ -19,11 +19,12 @@ interface PokemonCardProps {
   team?: PokemonMap[],
   setTeam: Function,
   setDragging: Function,
+  handleEnter: Function,
   handleDrop: Function
 }
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
-  const { pokemon, team, setTeam, setDragging, handleDrop, index, artwork } = props;
+  const { pokemon, team, setTeam, setDragging, handleDrop, handleEnter, index, artwork } = props;
 
   const heal = () => {
     const newTeam = JSON.parse(JSON.stringify(team));
@@ -39,11 +40,11 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       animate="visible" 
       variants={PokemonJoin}
       transition={{duration: 0.2, type: "spring"}} 
-      draggable
       onDragStart={() => setDragging(index)}
-      onDragEnter={(e) => e.preventDefault()}
+      onDragEnter={(e) => handleEnter(e, index)}
       onDragOver={(e) => e.preventDefault()}
-      onDrop={() => handleDrop(index)}
+      onDrop={() => handleDrop()}
+      draggable
       >
       <div className={styles.topRow}>
         <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>

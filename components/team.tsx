@@ -18,11 +18,16 @@ const Team = (props: React.PropsWithChildren<TeamProps>) => {
   const { team, setTeam, artwork } = props;
   const [draggingIdx, setDraggingIdx] = useState(-1);
 
-  const handleDrop = (dropIdx: number) => {
+  const handleDrop = () => {
+    setDraggingIdx(-1);
+  }
+
+  const handleEnter = (e: Event, dropIdx: number) => {
+    e.preventDefault();
     const teamCopy = JSON.parse(JSON.stringify(team));
     [teamCopy[dropIdx], teamCopy[draggingIdx]] = [teamCopy[draggingIdx], teamCopy[dropIdx]];
     setTeam(teamCopy);
-    setDraggingIdx(-1);
+    setDraggingIdx(dropIdx);
   }
 
   return (
@@ -35,6 +40,7 @@ const Team = (props: React.PropsWithChildren<TeamProps>) => {
           artwork={artwork} 
           setDragging={setDraggingIdx}
           handleDrop={handleDrop}
+          handleEnter={handleEnter}
           index={idx} 
           key={idx}
         >
