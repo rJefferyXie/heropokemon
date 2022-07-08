@@ -1,5 +1,5 @@
 // React and Styling
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Team.module.scss';
 
 // Components
@@ -16,11 +16,28 @@ interface TeamProps {
 
 const Team = (props: React.PropsWithChildren<TeamProps>) => {
   const { team, setTeam, artwork } = props;
+  const [draggingIdx, setDraggingIdx] = useState(0);
+
+  const handleDrop = (dropIdx: number) => {
+    const teamCopy = JSON.parse(JSON.stringify(team));
+    [teamCopy[dropIdx], teamCopy[draggingIdx]] = [teamCopy[draggingIdx], teamCopy[dropIdx]];
+    setTeam(teamCopy);
+  }
 
   return (
     <div className={styles.container}>
       {team.map((pokemon, idx) => {
-        return <PokemonCard pokemon={pokemon} team={team} index={idx} setTeam={setTeam} artwork={artwork} key={idx}></PokemonCard>
+        return <PokemonCard 
+          team={team} 
+          setTeam={setTeam} 
+          pokemon={pokemon} 
+          artwork={artwork} 
+          setDragging={setDraggingIdx}
+          handleDrop={handleDrop}
+          index={idx} 
+          key={idx}
+        >
+        </PokemonCard>
       })}
     </div>
   )
