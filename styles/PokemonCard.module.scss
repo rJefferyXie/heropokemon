@@ -9,6 +9,10 @@
   background-color: rgba($sky-500, 0.2);
 }
 
+.container:first-child {
+  background-color: rgba($sky-500, 0.4);
+}
+
 .topRow {
   display: flex;
   margin: auto;
