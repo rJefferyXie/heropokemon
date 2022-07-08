@@ -16,12 +16,13 @@ interface TeamProps {
 
 const Team = (props: React.PropsWithChildren<TeamProps>) => {
   const { team, setTeam, artwork } = props;
-  const [draggingIdx, setDraggingIdx] = useState(0);
+  const [draggingIdx, setDraggingIdx] = useState(-1);
 
   const handleDrop = (dropIdx: number) => {
     const teamCopy = JSON.parse(JSON.stringify(team));
     [teamCopy[dropIdx], teamCopy[draggingIdx]] = [teamCopy[draggingIdx], teamCopy[dropIdx]];
     setTeam(teamCopy);
+    setDraggingIdx(-1);
   }
 
   return (
