@@ -14,11 +14,11 @@ import { Button, ClickAwayListener, Snackbar } from '@mui/material';
 
 // Interfaces 
 import PokedexMap from '../interfaces/PokedexMap';
-import PokemonMap from '../interfaces/PokemonMap';
 import GameSave from '../interfaces/GameSave';
 
 // Constants
 import StatMap from '../constants/StatMap';
+
 // import RegionImages from '../constants/RegionImages';
 import StarterPokemon from '../constants/StarterPokemon';
 import TypeColorSchemes from '../constants/TypeColorSchemes';
@@ -168,12 +168,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                     <h2 className={styles.regionTitle}>{region}</h2>
                     <p>{"Currency: $" + gameSave.currency}</p>
                     <p>{"Floor: " + gameSave.floor}</p>
-                    
-                    {/* <div className={styles.badges}>
-                      {[...Array(8)].map((_, idx) => {
-                        return <img src={RegionImages[region + "Badge" + (idx + 1)]} alt={"Badge #" + idx} key={idx}></img>
-                      })}
-                    </div> */}
 
                     <div className={styles.buttonContainer}>
                         <Button 
