@@ -10,15 +10,27 @@ interface EnemyProps {
   setEnemy: Function,
   player: PokemonMap,
   clickDamage: number,
+  alerts: string[],
+  setAlerts: Function,
   artwork: string
 }
 
 const Enemy = (props: React.PropsWithChildren<EnemyProps>) => {
-  const { enemy, setEnemy, player, clickDamage, artwork } = props;
+  const { enemy, setEnemy, player, clickDamage, alerts, setAlerts, artwork } = props;
 
   // damage dealt to enemy upon clicking image
   const clickHit = () => {
-    if (Math.floor(player.stats[0]) <= 0) return;
+    if (Math.floor(player.stats[0]) <= 0) {
+      if (!alerts.includes("You can't deal click damage while the first pokemon on your team has 0 HP.")) {
+        // @ts-expect-error
+        setAlerts(alerts => 
+          [...alerts, 
+            "You can't deal click damage while the first pokemon on your team has 0 HP."]
+        );
+      }
+      
+      return;
+    }
 
     const newEnemy = JSON.parse(JSON.stringify(enemy));
     newEnemy.stats[0] -= clickDamage;

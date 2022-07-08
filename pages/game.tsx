@@ -171,7 +171,7 @@ const Game: NextPage = () => {
   useEffect(() => {
     if (alerts.length === 0) setShowAlert(false);
     if (alerts.length >= 1) setShowAlert(true);
-  }, [alerts.length])
+  }, [alerts])
 
   const nextEnemy = () => {
     if (enemy === undefined) return;
@@ -218,7 +218,7 @@ const Game: NextPage = () => {
       <Snackbar 
         open={showAlert}
         message={alerts[0]}
-        autoHideDuration={2000}
+        autoHideDuration={3000}
         onClose={closeSnackbar}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       ></Snackbar>
@@ -235,6 +235,8 @@ const Game: NextPage = () => {
           <Enemy 
             enemy={enemy} 
             setEnemy={setEnemy}
+            alerts={alerts}
+            setAlerts={setAlerts}
             player={team[0]}
             clickDamage={clickDamage} 
             artwork={artwork}
