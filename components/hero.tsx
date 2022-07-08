@@ -49,20 +49,20 @@ const Hero = (props: React.PropsWithChildren<HeroProps>) => {
         <p className={styles.heroText}>Welcome to HeroPokémon, a pokémon-themed clicker / idle game!</p>
 
         <HeroTip 
-          content={"Features 7 different regions to play from."}
+          content={"Features 7 different regions to explore."}
           order={1}
         >
         </HeroTip>
 
         <HeroTip 
-          content={"Includes over 600 pokémon that you can meet on your adventure."}
+          content={"Includes over 700 unique pokémon to discover."}
           order={2}
         >
         </HeroTip>
 
         <HeroTip 
-          content={"This game features 7 different regions to play from."}
-          order={1}
+          content={"3 artwork styles for pokémon sprites to choose from."}
+          order={3}
         >
         </HeroTip>
 
