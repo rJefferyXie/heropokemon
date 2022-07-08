@@ -4,7 +4,7 @@ import styles from '../styles/PokemonCard.module.scss';
 
 // Animations
 import { motion } from 'framer-motion';
-import DropInRight from '../animations/dropInRight';
+import PokemonJoin from '../animations/pokemonJoin';
 
 // MUI
 import { Button } from '@mui/material';
@@ -30,7 +30,14 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   }
 
   return (
-    <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInRight}>
+    <motion.div 
+      className={styles.container} 
+      key="modal" 
+      initial="hidden" 
+      animate="visible" 
+      transition={{duration: 0.2, type: "spring"}} 
+      variants={PokemonJoin}
+      >
       <div className={styles.topRow}>
         <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
         <div className={styles.pokemonInfo}>
