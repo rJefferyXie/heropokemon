@@ -1,1 +1,15 @@
 @import './constants.scss';
+
+.container {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  padding: 1rem;
+  background-color: rgba($cyan-700, 0.6);
+  box-shadow: 0px 0px 4px rgba($slate-50, 0.8);
+  z-index: 1;
+}
+
+.container:hover {
+  filter: brightness(110%);
+}
