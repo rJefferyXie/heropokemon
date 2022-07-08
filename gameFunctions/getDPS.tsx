@@ -47,7 +47,7 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap) => {
 
   // make sure that both sides are doing more than 0 damage per interval
   playerDPS = Math.max(playerDPS, enemyHP) / 5;
-  enemyDPS = Math.max(enemyDPS, playerHP) / 15;
+  enemyDPS = Math.max(enemyDPS, playerHP) / 20;
 
   return { playerDPS, enemyDPS }
 }
