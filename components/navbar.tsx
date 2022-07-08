@@ -13,8 +13,8 @@ import Placeholder from './placeholder';
 import PokemonMap from '../interfaces/PokemonMap';
 
 interface NavbarProps {
-  currency: number,
   items: {},
+  currency: number,
   storage: PokemonMap[],
   team: PokemonMap[],
   setTeam: Function,

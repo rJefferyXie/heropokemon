@@ -67,6 +67,9 @@ const Home: NextPage = () => {
         setUnlockedRegions(JSON.parse(regionsUnlocked));
       }
 
+      const firstTime = localStorage.getItem("isFirstTime");
+      if (firstTime) setIsFirstTime(false);
+
       const pokemonDiscovered = localStorage.getItem("discoveredPokemon");
       if (!pokemonDiscovered) {
         localStorage.setItem("pokemonDiscovered", JSON.stringify([
@@ -88,6 +91,7 @@ const Home: NextPage = () => {
 
   const proceed = () => {
     setIsFirstTime(false);
+    localStorage.setItem("isFirstTime", "false");
   }
 
   return (
