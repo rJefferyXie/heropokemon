@@ -13,3 +13,10 @@
 .container:hover {
   filter: brightness(110%);
 }
+
+@media screen and (max-width: 960px) {
+  .container {
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+  }
+}

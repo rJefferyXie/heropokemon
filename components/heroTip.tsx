@@ -21,8 +21,7 @@ const HeroTip = (props: React.PropsWithChildren<HeroTipProps>) => {
       key="modal" 
       initial="hidden" 
       animate="visible" 
-      exit="exit"
-      transition={{delay: order, duration: 1, type: "spring"}}
+      transition={{delay: order - 1, duration: 1, type: "spring"}}
       variants={order % 2 === 0 ? HeroTipLeft : HeroTipRight}
     >
     {content}

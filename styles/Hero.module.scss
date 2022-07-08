@@ -4,6 +4,7 @@
   display: flex;
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
 .heroWallpaper {
@@ -55,9 +56,13 @@
 }
 
 .heroImage:hover {
-  padding: 0px;
+  padding: 2px;
   animation: none;
   filter: brightness(110%);
+}
+
+.heroImage:active {
+  padding: 0px;
 }
 
 .heroHeader {
@@ -71,8 +76,30 @@
 
 .heroTip {
   margin: 4px auto auto;
+  padding: 0.5rem;
 }
 
 .heroFooter {
-  margin: auto 1rem 1rem;
+  margin: auto 0.5rem 0.5rem;
+  padding: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .leftColumn {
+    width: 95%;
+    margin: 0.5rem auto;
+  }
+
+  .rightColumn {
+    width: 95%;
+    margin: 0.5rem auto;
+  }
+
+  .heroFooter {
+    margin: 0 auto 0.5rem;
+  }
 }
