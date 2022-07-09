@@ -43,7 +43,7 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
       // level up raises pokemon stats by up to 2 points each
       for (let i = 0; i < 6; i++) {
         const statBoost = Math.floor(Math.random() * 2);
-        if (i === 0 && newTeam[idx].stats[i] > 0) newTeam[idx].stats[i] += statBoost;
+        if (i === 0 && Math.floor(newTeam[idx].stats[i]) > 0) newTeam[idx].stats[i] += statBoost;
         newTeam[idx].statBoosts[i] += statBoost;
         newTeam[idx].stats[i + 1] += statBoost;
       }
@@ -58,7 +58,7 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
           evolvedPokemon.level = newTeam[idx].level;
           evolvedPokemon.statBoosts = newTeam[idx].statBoosts;
 
-          if (evolvedPokemon.stats[0] > 0) evolvedPokemon.stats[0] += evolvedPokemon.statBoosts[0];
+          if (Math.floor(evolvedPokemon.stats[0]) > 0) evolvedPokemon.stats[0] += evolvedPokemon.statBoosts[0];
           evolvedPokemon.stats[0] -= newTeam[idx].stats[1] - newTeam[idx].stats[0];
           
           for (let i = 0; i < 6; i++) {

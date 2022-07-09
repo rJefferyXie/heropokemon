@@ -55,8 +55,8 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       </div>
       <div className={styles.bottomRow}>
         <div className={styles.healthBarWrapper}>
-          <div className={styles.healthBar} style={{width: Math.ceil(pokemon.stats[0] / pokemon.stats[1] * 100) + "%"}}>
-            <p className={styles.healthValue}>{Math.ceil(pokemon.stats[0])}/{pokemon.stats[1]}</p>
+          <div className={styles.healthBar} style={{width: Math.floor(pokemon.stats[0] / pokemon.stats[1] * 100) + "%"}}>
+            <p className={styles.healthValue}>{Math.floor(pokemon.stats[0])}/{pokemon.stats[1]}</p>
           </div>
         </div>
         <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
