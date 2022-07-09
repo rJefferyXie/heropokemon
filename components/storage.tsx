@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../styles/Storage.module.scss';
 
 // Components
-import PokemonCard from './pokemonCard';
+import StorageCard from './storageCard';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
@@ -19,7 +19,7 @@ const Storage = (props: React.PropsWithChildren<StorageProps>) => {
   return (
     <div className={styles.container}>
       {storage.map((pokemon, idx) => {
-        return <PokemonCard pokemon={pokemon} index={idx} setTeam={() => null} artwork={artwork} key={idx}></PokemonCard>
+        return <StorageCard pokemon={pokemon} index={idx} setTeam={() => null} artwork={artwork} key={idx}></StorageCard>
       })}
     </div>
   )

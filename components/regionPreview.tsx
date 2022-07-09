@@ -25,6 +25,7 @@ import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 // Components
 import StarterCard from './starterCard';
+import PokemonPreview from './pokemonPreview';
 
 interface RegionPreviewProps {
   exit: Function,
@@ -165,9 +166,24 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
                   <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
-                    <h2 className={styles.regionTitle}>{region}</h2>
-                    <p>{"Currency: $" + gameSave.currency}</p>
-                    <p>{"Floor: " + gameSave.floor}</p>
+                    <h1 className={styles.regionTitle}>{region}</h1>
+
+                    <div className={styles.topRow}>
+                      <p className={styles.currency}>{"Currency: $" + gameSave.currency}</p>
+                      <p className={styles.highestFloor}>{"Highest Floor: " + gameSave.floor}</p>
+                    </div>
+                    
+                    <h3 className={styles.teamHeader}>YOUR TEAM</h3>
+                    <div className={styles.teamWrapper}>
+                      {gameSave.team.map((pokemon, idx) => {
+                        return <PokemonPreview 
+                        pokemon={pokemon} 
+                        artwork={artwork} 
+                        key={idx}
+                        >
+                        </PokemonPreview>
+                      })}
+                    </div>
 
                     <div className={styles.buttonContainer}>
                         <Button 
@@ -185,19 +201,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                         Continue Game
                         </Button>
                       </div>
-                    <div className={styles.pokedex}>
-                      <strong className={styles.pokedexHeader}>Pokedex Entries</strong>
-                      {Object.keys(pokedex).sort().map((pokemon, idx) => {
-                        return discoveredPokemon.includes(pokedex[pokemon].name) ? 
-                        <div className={styles.pokedexEntry} key={idx}>
-                          <img className={styles.pokedexImage} src={pokedex[pokemon].sprites[artwork]} alt={"An image of " + pokedex[pokemon].name}></img>
-                          <p>{pokedex[pokemon].name}</p> 
-                        </div> :
-                        <div className={styles.pokedexEntry} key={idx}>
-                          <p>???</p> 
-                        </div>
-                      })}
-                    </div>
                   </motion.div>
                 }
               </AnimatePresence> :

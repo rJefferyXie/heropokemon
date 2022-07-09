@@ -4,11 +4,11 @@
   display: flex;
   position: fixed;
   z-index: 99;
+  height: 100vh;
+  width: 100vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100vh;
-  width: 100vw;
   background-color: rgba($zinc-900, 0.9);
 }
 
@@ -25,6 +25,7 @@
   height: 100%;
   min-height: 100%;
   width: 100%;
+  min-width: 100%;
   z-index: 100;
   background-color: $zinc-800;
   border-radius: 8px;
@@ -33,9 +34,41 @@
   overflow: auto;
 }
 
+.teamHeader {
+  margin: 0 auto 0.25rem 4px;
+}
+
+.teamWrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0 auto 1rem;
+}
+
 .regionTitle {
   text-transform: uppercase;
   margin: 0 auto;
+}
+
+.topRow {
+  display: flex;
+  margin: 1rem auto;
+}
+
+.currency {
+  margin: auto 1rem;
+  background-color: rgba($sky-500, 0.3);
+  box-shadow: 0px 0px 8px rgba($slate-900, 0.8);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.highestFloor {
+  margin: auto 1rem;
+  background-color: rgba($sky-500, 0.3);
+  box-shadow: 0px 0px 8px rgba($slate-900, 0.8);
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .starters {
@@ -130,30 +163,6 @@
   margin: 0 auto;
 }
 
-.pokedex {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  overflow: auto;
-}
-
-.pokedexHeader {
-  width: 100%;
-}
-
-.pokedexEntry {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: 2px auto;
-  text-transform: uppercase;
-}
-
-.pokedexImage {
-  width: 27px;
-  margin: auto 4px auto 0px;
-}
-
 .buttonContainer {
   display: flex;
   width: 100%;
@@ -163,14 +172,14 @@
 .exitButton {
   width: fit-content;
   margin: auto 2px auto auto !important;
-  background-color: $rose-700 !important;
+  background-color: $red-700 !important;
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
 .playButton {
   width: fit-content;
   margin: auto auto auto 2px !important;
-  background-color: $emerald-700 !important;
+  background-color: $emerald-600 !important;
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
@@ -182,17 +191,6 @@
   .container {
     flex-direction: column;
     overflow: auto;
-  }
-
-  .pokedex {
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    overflow: initial;
-  }
-
-  .pokedexEntry {
-    width: 33.33333%;
   }
 }
 
@@ -208,10 +206,6 @@
 
   .wrapper {
     height: 100%;
-  }
-
-  .pokedex {
-    display: none;
   }
 
   .buttonContainer {

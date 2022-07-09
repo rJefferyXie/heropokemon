@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from '../styles/Team.module.scss';
 
 // Components
-import PokemonCard from './pokemonCard';
+import TeamCard from './teamCard';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
@@ -28,7 +28,7 @@ const Team = (props: React.PropsWithChildren<TeamProps>) => {
   return (
     <div className={styles.container}>
       {team.map((pokemon, idx) => {
-        return <PokemonCard 
+        return <TeamCard 
           team={team} 
           setTeam={setTeam} 
           pokemon={pokemon} 
@@ -38,7 +38,7 @@ const Team = (props: React.PropsWithChildren<TeamProps>) => {
           index={idx} 
           key={idx}
         >
-        </PokemonCard>
+        </TeamCard>
       })}
     </div>
   )
