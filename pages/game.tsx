@@ -47,7 +47,6 @@ const Game: NextPage = () => {
   const [alerts, setAlerts] = useState<string[]>([]);
 
   const [enemy, setEnemy] = useState<PokemonMap>();
-  const [enemyDPS, setEnemyDPS] = useState(1);
   const [enemiesLeft, setEnemiesLeft] = useState(10);
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
 
@@ -78,7 +77,6 @@ const Game: NextPage = () => {
 
   useEffect(() => {
     if (pokedex === {} || floor === 0) return;
-
     const enemyInfo = getEnemy(pokedex, floor);
     setEnemy(enemyInfo);
 
@@ -93,7 +91,7 @@ const Game: NextPage = () => {
 
   useEffect(() => {
     setEnemiesLeft(10);
-    setHighestFloor(highestFloor => Math.max(floor, highestFloor));
+    setHighestFloor(highestFloor => Math.max(floor, highestFloor));     
   }, [floor]);
 
   const saveGame = () => {
@@ -138,9 +136,8 @@ const Game: NextPage = () => {
     }
 
     setEnemy(newEnemy);
-  
+    
     setPlayerDPS(playerDPS);
-    setEnemyDPS(enemyDPS);
   }
 
   useEffect(() => {
