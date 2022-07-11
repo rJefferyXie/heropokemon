@@ -51,7 +51,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
           <strong className={styles.pokemonName}>{pokemon.name}</strong>
           <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>
         </div>
-        {/* <Button className={styles.swapButton} variant="contained" onClick={heal}>SWAP</Button> */}
+        <Button className={styles.swapButton} variant="contained" onClick={heal}>SWAP</Button>
       </div>
       <div className={styles.bottomRow}>
         <div className={styles.healthBarWrapper}>
