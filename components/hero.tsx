@@ -55,43 +55,45 @@ const Hero = (props: React.PropsWithChildren<HeroProps>) => {
         >
         </ExportedImage>
 
-        <div className={styles.leftColumn}>
-          <h1 className={styles.heroHeader}>HeroPokémon</h1>
-          <p className={styles.heroText}>Welcome to HeroPokémon, a pokémon-themed clicker / idle game!</p>
+        <div className={styles.mainRow}>
+          <div className={styles.leftColumn}>
+            <h1 className={styles.heroHeader}>HeroPokémon</h1>
+            <p className={styles.heroText}>Welcome to HeroPokémon, a pokémon-themed clicker / idle game!</p>
 
-          <HeroTip 
-            content={"Features 7 different regions to explore."}
-            order={1}
-          >
-          </HeroTip>
+            <HeroTip 
+              content={"Features 7 different regions to explore."}
+              order={1}
+            >
+            </HeroTip>
 
-          <HeroTip 
-            content={"Includes over 700 unique pokémon to discover."}
-            order={2}
-          >
-          </HeroTip>
+            <HeroTip 
+              content={"Includes over 700 unique pokémon to discover."}
+              order={2}
+            >
+            </HeroTip>
 
-          <HeroTip 
-            content={"3 artwork styles for pokémon sprites to choose from."}
-            order={3}
-          >
-          </HeroTip>
+            <HeroTip 
+              content={"3 artwork styles for pokémon sprites to choose from."}
+              order={3}
+            >
+            </HeroTip>
 
-          <p className={styles.heroFooter}>Made by Jeffery Xie</p>
-        </div>
+            <p className={styles.heroFooter}>Made by Jeffery Xie</p>
+          </div>
 
-        <div className={styles.rightColumn}>
-          <h1 className={styles.heroHeader}>Ready To Play?</h1>
-          <img 
-            className={styles.heroImage} 
-            src={pokemon.sprites[artwork]} 
-            alt={pokemon.name} 
-            onClick={clickImage}
-          >
-          </img>
-          <p className={styles.heroTip}>
-            Click on {pokemon.name.toUpperCase()} {clicks} more time{clicks > 1 && "s"} to continue. Have fun!
-          </p>
+          <div className={styles.rightColumn}>
+            <h1 className={styles.heroHeader}>Ready To Play?</h1>
+            <img 
+              className={styles.heroImage} 
+              src={pokemon.sprites[artwork]} 
+              alt={pokemon.name} 
+              onClick={clickImage}
+            >
+            </img>
+            <p className={styles.heroTip}>
+              Click on {pokemon.name.toUpperCase()} {clicks} more time{clicks > 1 && "s"} to continue. Have fun!
+            </p>
+          </div>
         </div>
       </div>
     : null
