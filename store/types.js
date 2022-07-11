@@ -1,0 +1,1 @@
+export const CHANGE_ARTWORK = "CHANGE_ARTWORK";
