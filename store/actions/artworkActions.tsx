@@ -1,10 +1,10 @@
-const changeTheme = (theme: string) => {
+import { CHANGE_ARTWORK } from '../types';
+
+const changeArtwork = (artwork: string) => {
   return {
-    type: 'change',
-    payload: {
-      theme
-    }
+    type: CHANGE_ARTWORK,
+    payload: artwork
   }
 }
 
-export default changeTheme;
+export default { changeArtwork }
