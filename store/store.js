@@ -1,6 +1,6 @@
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from 'redux-persist';
-import { applyMiddleware } from "redux";
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
 import storage from './storage';
 import thunk from "redux-thunk";
 import { createWrapper } from "next-redux-wrapper";
@@ -17,8 +17,8 @@ const middleware = [thunk];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // creating store
-export const store = createStore(
-  persistedReducer,
+export const store = configureStore(
+  {reducer: persistedReducer},
   composeWithDevTools(applyMiddleware(...middleware))
 );
 

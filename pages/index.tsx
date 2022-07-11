@@ -18,11 +18,29 @@ import RegionList from '../constants/RegionList';
 import { db } from '../server'
 import { doc, getDoc } from 'firebase/firestore'; 
 
+import { useSelector, useDispatch } from 'react-redux'
+import allActions from '../store/actions/allActions'
+
 const Home: NextPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFirstTime, setIsFirstTime] = useState(true);
-  const [artwork, setArtwork] = useState("official");
-  const [unlockedRegions, setUnlockedRegions] = useState<string[]>(["kanto"]);
+  const dispatch = useDispatch();
+  const artwork = useSelector((state: any) => {return state.artworkReducer.artwork});
+  const pokedex = useSelector((state: any) => {return state.pokedexReducer.pokedex});
+  const visited = useSelector((state: any) => {return state.visitedReducer.visited});
+  const loading = useSelector((state: any) => {return state.loadingReducer.loading});
+  const regions = useSelector((state: any) => {return state.regionsReducer.regions});
+
+  const changeArtwork = (theme: string) => {
+    dispatch(allActions.artworkActions.changeArtwork(theme));
+  }
+
+  const setVisited = () => {
+    dispatch(allActions.visitedActions.setVisited());
+  }
+
+  const setLoading = (loading: boolean) => {
+    dispatch(allActions.loadingActions.setLoading(loading));
+  }
+
   const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([
     "bulbasaur", "charmander", "squirtle",
     "chikorita", "cyndaquil", "totodile",
@@ -49,27 +67,10 @@ const Home: NextPage = () => {
         }
       }
 
-      setIsLoading(false);
+      setLoading(false);
     }
 
     const setDefaults = () => {
-      const artwork = localStorage.getItem("artwork");
-      if (!artwork) {
-        localStorage.setItem("artwork", "official");
-      } else {
-        setArtwork(artwork);
-      }
-
-      const regionsUnlocked = localStorage.getItem("unlockedRegions");
-      if (!regionsUnlocked) {
-        localStorage.setItem("regionsUnlocked", JSON.stringify(["kanto"]));
-      } else {
-        setUnlockedRegions(JSON.parse(regionsUnlocked));
-      }
-
-      const firstTime = localStorage.getItem("isFirstTime");
-      if (firstTime) setIsFirstTime(false);
-
       const pokemonDiscovered = localStorage.getItem("discoveredPokemon");
       if (!pokemonDiscovered) {
         localStorage.setItem("pokemonDiscovered", JSON.stringify([
@@ -89,11 +90,6 @@ const Home: NextPage = () => {
     downloadPokedexes();
   }, []);
 
-  const proceed = () => {
-    setIsFirstTime(false);
-    localStorage.setItem("isFirstTime", "false");
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -102,19 +98,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {isLoading && <Loading></Loading>}
+      {loading && <Loading></Loading>}
 
-      {(isFirstTime && !isLoading) && 
+      {(!visited && !loading) && 
         <Hero 
           artwork={artwork} 
-          proceed={proceed}
+          proceed={setVisited}
         >
-        </Hero>}
+        </Hero>
+      }
 
       <Regions 
         artwork={artwork}
-        isFirstTime={isFirstTime}
-        unlockedRegions={unlockedRegions} 
+        isFirstTime={!visited}
+        unlockedRegions={regions} 
         discoveredPokemon={discoveredPokemon} 
       >
       </Regions>
