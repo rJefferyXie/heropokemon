@@ -24,6 +24,7 @@ specifiers:
   react-dom: 18.2.0
   react-redux: ^8.0.2
   redux: ^4.2.0
+  redux-devtools-extension: ^2.13.9
   redux-persist: ^6.0.0
   redux-thunk: ^2.4.1
   sass: ^1.52.3
@@ -45,6 +46,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.2_rdh5huxgyxuxag234wi54lc6a4
   redux: 4.2.0
+  redux-devtools-extension: 2.13.9_redux@4.2.0
   redux-persist: 6.0.0_react@18.2.0+redux@4.2.0
   redux-thunk: 2.4.1_redux@4.2.0
   sass: 1.52.3
@@ -4078,6 +4080,15 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+    dev: false
+
+  /redux-devtools-extension/2.13.9_redux@4.2.0:
+    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
+    deprecated: Package moved to @redux-devtools/extension.
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+    dependencies:
+      redux: 4.2.0
     dev: false
 
   /redux-persist/6.0.0_react@18.2.0+redux@4.2.0:
