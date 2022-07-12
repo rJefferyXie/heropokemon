@@ -24,7 +24,8 @@ import allActions from '../store/actions/allActions';
 
 const Home: NextPage = () => {
   const dispatch = useDispatch();
-  const visited = useSelector((state: any) => {return state.visitedReducer.visited});
+
+  const visited = useSelector((state: any) => {return state.settingReducer.visited});
   const loading = useSelector((state: any) => {return state.loadingReducer.loading});
 
   const setLoading = (loading: boolean) => {
