@@ -10,7 +10,7 @@ import Region from './region';
 import { useSelector } from 'react-redux';
 
 const Regions = () => {
-  const visited = useSelector((state: any) => {return state.visitedReducer.visited});
+  const visited = useSelector((state: any) => {return state.settingReducer.visited});
   const regions = useSelector((state: any) => {return state.regionsReducer.regions});
   
   const [selectedRegion, setSelectedRegion] = useState("");

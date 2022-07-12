@@ -5,13 +5,16 @@ import styles from '../styles/PokemonPreview.module.scss';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 interface PokemonPreviewProps {
-  pokemon: PokemonMap,
-  artwork: string
+  pokemon: PokemonMap
 }
 
 const PokemonPreview = (props: React.PropsWithChildren<PokemonPreviewProps>) => {
-  const { pokemon, artwork } = props;
+  const { pokemon } = props;
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   return (
     <div className={styles.container}>

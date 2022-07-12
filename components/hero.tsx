@@ -20,7 +20,7 @@ import allActions from '../store/actions/allActions';
 
 const Hero = () => {
   const dispatch = useDispatch();
-  const artwork = useSelector((state: any) => {return state.artworkReducer.artwork});
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   const [pokemon, setPokemon] = useState<PokemonMap>();
   const [clicks, setClicks] = useState(3);
@@ -39,7 +39,7 @@ const Hero = () => {
 
   const clickImage = () => {
     if (clicks <= 1) {
-      dispatch(allActions.visitedActions.setVisited());
+      dispatch(allActions.settingActions.setVisited());
       return;
     }
 

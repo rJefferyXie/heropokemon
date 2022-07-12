@@ -8,17 +8,21 @@ import PokemonMap from '../interfaces/PokemonMap';
 // Constants
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 interface StarterCardProps {
   pokemon: PokemonMap,
   select: Function,
-  selected: boolean,
-  artwork: string
+  selected: boolean
 }
 
 const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
-  const { pokemon, select, selected, artwork } = props;
+  const { pokemon, select, selected } = props;
   const [theme, setTheme] = useState('');
   const [image, setImage] = useState('');
+
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   useEffect(() => {
     if (!pokemon || !artwork) return;

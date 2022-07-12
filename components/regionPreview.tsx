@@ -40,7 +40,7 @@ interface RegionPreviewProps {
 const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
   const { region, unlocked, pokedex, exit } = props;
   const router = useRouter();
-  const artwork = useSelector((state: any) => {return state.artworkReducer.artwork});
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   
   const [theme, setTheme] = useState("");
   const [starter, setStarter] = useState("");
@@ -180,7 +180,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                       {gameSave.team.map((pokemon, idx) => {
                         return <PokemonPreview 
                         pokemon={pokemon} 
-                        artwork={artwork} 
                         key={idx}
                         >
                         </PokemonPreview>
@@ -214,7 +213,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                     <div className={styles.starters}>
                       {starterPokemon.map((pokemon, idx) => {
                         return <StarterCard 
-                          artwork={artwork}
                           select={selectStarter} 
                           selected={starter === pokemon} 
                           pokemon={pokedex[pokemon]}
