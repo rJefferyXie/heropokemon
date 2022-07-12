@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 // React and Styling
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/Home.module.scss';
 
 // Components
@@ -18,38 +18,18 @@ import RegionList from '../constants/RegionList';
 import { db } from '../server'
 import { doc, getDoc } from 'firebase/firestore'; 
 
-import { useSelector, useDispatch } from 'react-redux'
-import allActions from '../store/actions/allActions'
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
 
 const Home: NextPage = () => {
   const dispatch = useDispatch();
-  const artwork = useSelector((state: any) => {return state.artworkReducer.artwork});
-  const pokedex = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   const visited = useSelector((state: any) => {return state.visitedReducer.visited});
   const loading = useSelector((state: any) => {return state.loadingReducer.loading});
-  const regions = useSelector((state: any) => {return state.regionsReducer.regions});
-
-  const changeArtwork = (theme: string) => {
-    dispatch(allActions.artworkActions.changeArtwork(theme));
-  }
-
-  const setVisited = () => {
-    dispatch(allActions.visitedActions.setVisited());
-  }
 
   const setLoading = (loading: boolean) => {
     dispatch(allActions.loadingActions.setLoading(loading));
   }
-
-  const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([
-    "bulbasaur", "charmander", "squirtle",
-    "chikorita", "cyndaquil", "totodile",
-    "treecko", "torchic", "mudkip",
-    "turtwig", "chimchar", "piplup",
-    "snivy", "tepig", "oshawott",
-    "chespin", "fennekin", "froakie",
-    "rowlet", "litten", "popplio"
-  ]);
 
   useEffect(() => {
     const downloadPokedexes = async () => {
@@ -70,23 +50,6 @@ const Home: NextPage = () => {
       setLoading(false);
     }
 
-    const setDefaults = () => {
-      const pokemonDiscovered = localStorage.getItem("discoveredPokemon");
-      if (!pokemonDiscovered) {
-        localStorage.setItem("pokemonDiscovered", JSON.stringify([
-            "bulbasaur", "charmander", "squirtle",
-            "chikorita", "cyndaquil", "totodile",
-            "treecko", "torchic", "mudkip",
-            "turtwig", "chimchar", "piplup",
-            "snivy", "tepig", "oshawott",
-            "chespin", "fennekin", "froakie",
-            "rowlet", "litten", "popplio"
-          ])
-        );
-      }
-    }
-    
-    setDefaults();
     downloadPokedexes();
   }, []);
 
@@ -100,21 +63,9 @@ const Home: NextPage = () => {
 
       {loading && <Loading></Loading>}
 
-      {(!visited && !loading) && 
-        <Hero 
-          artwork={artwork} 
-          proceed={setVisited}
-        >
-        </Hero>
-      }
+      {(!visited && !loading) && <Hero></Hero>}
 
-      <Regions 
-        artwork={artwork}
-        isFirstTime={!visited}
-        unlockedRegions={regions} 
-        discoveredPokemon={discoveredPokemon} 
-      >
-      </Regions>
+      <Regions></Regions>
     </div>
   )
 }
