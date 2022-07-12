@@ -1,25 +1,36 @@
-import { composeWithDevTools } from "redux-devtools-extension";
-import { persistStore, persistReducer } from 'redux-persist';
-import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+
 import storage from './storage';
-import thunk from "redux-thunk";
+import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from "next-redux-wrapper";
 import rootReducer from "./reducers/rootReducer";
 
 const persistConfig = {
   key: 'root', 
-  storage
+  version: 1,
+  storage: storage
 };
-
-// middleware
-const middleware = [thunk];
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // creating store
-export const store = configureStore(
-  {reducer: persistedReducer},
-  composeWithDevTools(applyMiddleware(...middleware))
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+  })}
 );
 
 export const persistor = persistStore(store);
