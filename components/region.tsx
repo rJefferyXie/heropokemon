@@ -14,6 +14,7 @@ interface RegionProps {
 
 const Region = (props: React.PropsWithChildren<RegionProps>) => {
   const { name, unlocked, images, select } = props;
+
   return (
     <div className={unlocked ? styles.regionContainer : styles.regionContainerLocked} onClick={() => select(name)}>
       <h1 className={styles.regionName}>{name}</h1>
@@ -27,7 +28,6 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         src={"images/" + name + ".png"}
       >
       </ExportedImage>
-      
       
       {unlocked && images.map((image, idx) => {
         return <div className={styles.regionImage} key={idx}>
