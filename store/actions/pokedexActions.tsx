@@ -1,5 +1,5 @@
 // Types
-import { SET_POKEDEX } from '../types';
+import { SET_POKEDEX, ADD_ENTRY } from '../types';
 
 // Interfaces
 import PokedexMap from '../../interfaces/PokedexMap';
@@ -11,4 +11,11 @@ const setPokedex = (pokedex: PokedexMap) => {
   }
 }
 
-export default { setPokedex }
+const addEntry = (pokemon: string) => {
+  return {
+    type: ADD_ENTRY,
+    payload: pokemon
+  }
+}
+
+export default { setPokedex, addEntry }

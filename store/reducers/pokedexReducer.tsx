@@ -1,9 +1,18 @@
 // Types
 import { PayloadAction } from '@reduxjs/toolkit';
-import { SET_POKEDEX } from '../types';
+import { SET_POKEDEX, ADD_ENTRY } from '../types';
 
 const initialState = {
-  pokedex: {}
+  pokedex: {},
+  entries: [
+    "bulbasaur", "charmander", "squirtle",
+    "chikorita", "cyndaquil", "totodile",
+    "treecko", "torchic", "mudkip",
+    "turtwig", "chimchar", "piplup",
+    "snivy", "tepig", "oshawott",
+    "chespin", "fennekin", "froakie",
+    "rowlet", "litten", "popplio"
+  ]
 }
 
 const pokedexReducer = (state = initialState, action: PayloadAction) => {
@@ -12,6 +21,13 @@ const pokedexReducer = (state = initialState, action: PayloadAction) => {
       return {
         ...state,
         pokedex: action.payload
+      }
+    }
+
+    case ADD_ENTRY: {
+      return {
+        ...state,
+        entries: [...state.entries, action.payload]
       }
     }
 

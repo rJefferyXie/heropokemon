@@ -1,17 +1,13 @@
-import artworkActions from './artworkActions';
+import settingActions from './settingActions';
 import pokedexActions from './pokedexActions';
-import visitedActions from './visitedActions';
 import loadingActions from './loadingActions';
 import regionsActions from './regionsActions';
-import entriesActions from './entriesActions';
 
 const allActions = {
-  artworkActions, 
+  settingActions, 
   pokedexActions, 
-  visitedActions, 
   loadingActions, 
-  regionsActions,
-  entriesActions
+  regionsActions
 }
 
 export default allActions;

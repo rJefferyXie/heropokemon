@@ -1,19 +1,15 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import artworkReducer from './artworkReducer';
+import settingReducer from './settingReducer';
 import pokedexReducer from './pokedexReducer';
-import visitedReducer from './visitedReducer';
 import loadingReducer from './loadingReducer';
 import regionsReducer from './regionsReducer';
-import entriesReducer from './entriesReducer';
 
 const rootReducer = combineReducers({
-    artworkReducer, 
+    settingReducer, 
     pokedexReducer, 
-    visitedReducer, 
     loadingReducer,
-    regionsReducer,
-    entriesReducer
+    regionsReducer
 });
 
 export default rootReducer;
