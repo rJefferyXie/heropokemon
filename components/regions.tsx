@@ -6,15 +6,13 @@ import styles from '../styles/Regions.module.scss';
 import RegionPreview from './regionPreview';
 import Region from './region';
 
-interface RegionsProps {
-  artwork: string,
-  isFirstTime: boolean,
-  unlockedRegions: string[],
-  discoveredPokemon: string[]
-}
+// Redux
+import { useSelector } from 'react-redux';
 
-const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
-  const { artwork, isFirstTime, unlockedRegions, discoveredPokemon } = props;
+const Regions = () => {
+  const visited = useSelector((state: any) => {return state.visitedReducer.visited});
+  const regions = useSelector((state: any) => {return state.regionsReducer.regions});
+  
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedPokedex, setSelectedPokedex] = useState({});
 
@@ -25,7 +23,7 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
   useEffect(() => {
     if (selectedRegion === "") return;
 
-    const retrievePokedex = async () => {
+    const retrievePokedex = () => {
       const regionPokedex = localStorage.getItem(selectedRegion);
       if (regionPokedex) setSelectedPokedex(JSON.parse(regionPokedex));
     }
@@ -34,63 +32,61 @@ const Regions = (props: React.PropsWithChildren<RegionsProps>) => {
   }, [selectedRegion]);
 
   return (
-    <div className={isFirstTime ? styles.containerHidden : styles.container}>
+    <div className={!visited ? styles.containerHidden : styles.container}>
       {selectedRegion !== "" && 
         <RegionPreview 
-          artwork={artwork}
           region={selectedRegion} 
           pokedex={selectedPokedex}
           exit={() => setSelectedRegion('')}
-          discoveredPokemon={discoveredPokemon}
-          unlocked={unlockedRegions.includes(selectedRegion)}>
+          unlocked={regions.includes(selectedRegion)}>
         </RegionPreview>
       }
 
       <Region 
         name="kanto"
-        unlocked={unlockedRegions.includes("kanto")} 
+        unlocked={regions.includes("kanto")} 
         images={["venusaur", "charizard", "blastoise", "articuno", "zapdos", "moltres"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
 
       <Region 
         name="johto" 
-        unlocked={unlockedRegions.includes("johto")} 
+        unlocked={regions.includes("johto")} 
         images={["meganium", "typhlosion", "feraligatr", "ho-oh", "lugia", "celibi"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
 
       <Region 
         name="hoenn"
-        unlocked={unlockedRegions.includes("hoenn")} 
+        unlocked={regions.includes("hoenn")} 
         images={["sceptile", "blaziken", "swampert", "groudon", "kyogre", "rayquaza"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
 
       <Region 
         name="sinnoh" 
-        unlocked={unlockedRegions.includes("sinnoh")} 
+        unlocked={regions.includes("sinnoh")} 
         images={["torterra", "infernape", "empoleon", "dialga", "palkia", "giratina"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
 
       <Region 
         name="unova"
-        unlocked={unlockedRegions.includes("unova")} 
+        unlocked={regions.includes("unova")} 
         images={["serperior", "emboar", "samurott", "reshiram", "zekrom", "kyurem"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
 
       <Region 
         name="kalos"
-        unlocked={unlockedRegions.includes("kalos")} 
+        unlocked={regions.includes("kalos")} 
         images={["chesnaught", "delphox", "greninja", "xerneas", "yveltal", "zygarde"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
 
       <Region 
         name="alola"
-        unlocked={unlockedRegions.includes("alola")} 
+        unlocked={regions.includes("alola")} 
         images={["decidueye", "incineroar", "primarina", "lunala", "solgaleo", "necrozma"]}
         select={(region: string) => changeRegion(region)}>
       </Region>
