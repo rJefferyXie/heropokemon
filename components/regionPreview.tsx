@@ -27,19 +27,21 @@ import TypeColorSchemes from '../constants/TypeColorSchemes';
 import StarterCard from './starterCard';
 import PokemonPreview from './pokemonPreview';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+
 interface RegionPreviewProps {
   exit: Function,
   region: string,
-  artwork: string,
   unlocked: boolean,
   pokedex: PokedexMap,
-  discoveredPokemon: string[]
 }
 
 const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
-  const { region, artwork, unlocked, pokedex, discoveredPokemon, exit } = props;
+  const { region, unlocked, pokedex, exit } = props;
   const router = useRouter();
-
+  const artwork = useSelector((state: any) => {return state.artworkReducer.artwork});
+  
   const [theme, setTheme] = useState("");
   const [starter, setStarter] = useState("");
   const [showError, setShowError] = useState(false);
