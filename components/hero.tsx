@@ -14,13 +14,14 @@ import HeroTip from './heroTip';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
-interface HeroProps {
-  artwork: string,
-  proceed: Function
-}
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
 
-const Hero = (props: React.PropsWithChildren<HeroProps>) => {
-  const { artwork, proceed } = props;
+const Hero = () => {
+  const dispatch = useDispatch();
+  const artwork = useSelector((state: any) => {return state.artworkReducer.artwork});
+
   const [pokemon, setPokemon] = useState<PokemonMap>();
   const [clicks, setClicks] = useState(3);
 
@@ -38,7 +39,7 @@ const Hero = (props: React.PropsWithChildren<HeroProps>) => {
 
   const clickImage = () => {
     if (clicks <= 1) {
-      proceed();
+      dispatch(allActions.visitedActions.setVisited());
       return;
     }
 
