@@ -1,1 +1,66 @@
 @import './constants.scss';
+
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($zinc-900, 0.9);
+}
+
+.wrapper {
+  display: flex;
+  height: min(100%, 420px);
+  width: min(100%, 800px);
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  z-index: 100;
+  background-color: $zinc-800;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px $zinc-900;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.teamRow {
+  display: flex;
+}
+
+.swapTitle1 {
+  margin: 4px auto;
+}
+
+.swapTitle2 {
+  margin: auto auto 4px;
+}
+
+.exitButton {
+  width: fit-content !important;
+  height: fit-content !important;
+  margin: 8px auto 0 !important;
+  background-color: $red-700 !important;
+  text-shadow: 1px 1px 1px $zinc-900;
+}
+
+.exitButton:hover {
+  filter: brightness(110%);
+}

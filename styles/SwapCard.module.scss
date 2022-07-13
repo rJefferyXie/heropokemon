@@ -1,0 +1,42 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  width: calc(100% / 6 - 8px);
+  margin: auto 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: rgba($sky-500, 0.2);
+  box-shadow: 0px 0px 8px rgba($slate-900, 0.8);
+  transition: filter 0.3s ease;
+}
+
+.container:hover {
+  filter: brightness(125%);
+}
+
+.image {
+  width: 75%;
+  margin: auto;
+}
+
+.text {
+  text-transform: uppercase;
+  margin: auto;
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    width: calc(100% / 3 - 8px);
+    margin: 4px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    width: calc(100% / 2 - 8px);
+    margin: 4px;
+  }
+}
