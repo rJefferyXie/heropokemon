@@ -3,13 +3,13 @@ import PokedexMap from './PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 
 interface GameSave {
-  "team": PokemonMap[],
-  "items": {},
   "storage": PokemonMap[],
-  "floor": number,
-  "badges": string[],
+  "pokedex": PokedexMap,
+  "team": PokemonMap[],
   "currency": number,
-  "pokedex": PokedexMap
+  "badges": string[],
+  "floor": number,
+  "items": {}
 }
 
 export default GameSave;

@@ -1,7 +1,4 @@
-const getGameSave = () => {
-  const region = localStorage.getItem('selectedRegion');
-  if (!region) return false;
-
+const getGameSave = (region: string) => {
   const gameData = localStorage.getItem(region + 'Save');
   if (!gameData) return false;
 
