@@ -16,8 +16,11 @@ export const SET_PLAYER_DPS = "SET_PLAYER_DPS";
 export const SET_CURRENCY = "SET_CURRENCY";
 export const SET_STORAGE = "SET_STORAGE";
 export const SET_BADGES = "SET_BADGES";
-export const SET_ALERTS = "SET_ALERTS";
 export const SET_ITEMS = "SET_ITEMS";
+
+export const ADD_ALERT = "ADD_ALERT";
+export const NEXT_ALERT = "NEXT_ALERT";
+
 export const SET_ENEMY = "SET_ENEMY";
 export const HIT_ENEMY = "HIT_ENEMY";
 export const SET_TEAM = "SET_TEAM";
