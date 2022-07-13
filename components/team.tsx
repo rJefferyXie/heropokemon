@@ -21,8 +21,6 @@ const Team = () => {
   const [swapping, setSwapping] = useState(false);
 
   const handleSwap = (dropIdx: number) => {
-    console.log(swappingIdx, dropIdx);
-
     const teamCopy = JSON.parse(JSON.stringify(team));
     [teamCopy[dropIdx], teamCopy[swappingIdx]] = [teamCopy[swappingIdx], teamCopy[dropIdx]];
     dispatch(allActions.teamActions.setTeam(teamCopy));
