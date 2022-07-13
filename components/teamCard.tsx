@@ -19,12 +19,13 @@ import allActions from '../store/actions/allActions';
 interface PokemonCardProps {
   index: number,
   pokemon: PokemonMap,
-  setDragging: Function,
-  handleDrop: Function
+  setSwapping: Function,
+  setSwappingIdx: Function,
+  handleSwap: Function
 }
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
-  const { pokemon, setDragging, handleDrop, index } = props;
+  const { pokemon, setSwapping, setSwappingIdx, handleSwap, index } = props;
 
   const dispatch = useDispatch();
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
@@ -36,6 +37,11 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
     dispatch(allActions.teamActions.setTeam(newTeam));
   }
 
+  const swap = () => {
+    setSwapping(true);
+    setSwappingIdx(index);
+  }
+
   return (
     <motion.div 
       className={styles.container} 
@@ -44,10 +50,10 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       animate="visible" 
       variants={PokemonJoin}
       transition={{duration: 0.2, type: "spring"}} 
-      onDragStart={() => setDragging(index)}
+      onDragStart={() => setSwappingIdx(index)}
       onDragEnter={(e) => e.preventDefault()}
       onDragOver={(e) => e.preventDefault()}
-      onDrop={() => handleDrop(index)}
+      onDrop={() => handleSwap(index)}
       draggable
       >
       <div className={styles.topRow}>
@@ -56,7 +62,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
           <strong className={styles.pokemonName}>{pokemon.name}</strong>
           <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>
         </div>
-        <Button className={styles.swapButton} variant="contained" onClick={heal}>SWAP</Button>
+        {index === 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
       </div>
       <div className={styles.bottomRow}>
         <div className={styles.healthBarWrapper}>

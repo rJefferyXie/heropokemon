@@ -17,6 +17,8 @@ const Storage = () => {
 
   return (
     <div className={styles.container}>
+      {storage.length === 0 && <p className={styles.emptyStorage}>Your storage is empty.</p>}
+
       {storage.map((pokemon, idx) => {
         return <StorageCard pokemon={pokemon} index={idx} setTeam={() => null} artwork={artwork} key={idx}></StorageCard>
       })}

@@ -4,6 +4,7 @@ import styles from '../styles/Team.module.scss';
 
 // Components
 import TeamCard from './teamCard';
+import SwapScreen from './swapScreen';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
@@ -16,22 +17,37 @@ const Team = () => {
   const dispatch = useDispatch();
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
-  const [draggingIdx, setDraggingIdx] = useState(-1);
+  const [swappingIdx, setSwappingIdx] = useState(-1);
+  const [swapping, setSwapping] = useState(false);
 
-  const handleDrop = (dropIdx: number) => {
+  const handleSwap = (dropIdx: number) => {
+    console.log(swappingIdx, dropIdx);
+
     const teamCopy = JSON.parse(JSON.stringify(team));
-    [teamCopy[dropIdx], teamCopy[draggingIdx]] = [teamCopy[draggingIdx], teamCopy[dropIdx]];
+    [teamCopy[dropIdx], teamCopy[swappingIdx]] = [teamCopy[swappingIdx], teamCopy[dropIdx]];
     dispatch(allActions.teamActions.setTeam(teamCopy));
-    setDraggingIdx(-1);
+    setSwappingIdx(-1);
+    setSwapping(false);
   }
 
   return (
     <div className={styles.container}>
+      {swapping && 
+        <SwapScreen 
+          handleSwap={handleSwap}
+          setSwapping={setSwapping} 
+          swappingIdx={swappingIdx} 
+          setSwappingIdx={setSwappingIdx}
+        >
+        </SwapScreen>
+      }
+
       {team.map((pokemon, idx) => {
         return <TeamCard 
           pokemon={pokemon} 
-          setDragging={setDraggingIdx}
-          handleDrop={handleDrop}
+          setSwapping={setSwapping}
+          setSwappingIdx={setSwappingIdx}
+          handleSwap={handleSwap}
           index={idx} 
           key={idx}
         >

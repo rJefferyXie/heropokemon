@@ -1,8 +1,10 @@
+// React and Styling
 import React from 'react';
+import styles from '../styles/Placeholder.module.scss';
 
 const Placeholder = () => {
   return (
-    <div style={{margin: "auto", padding: "0.5rem", textAlign: "center"}}>
+    <div className={styles.container}>
       This feature is still under development. Check back soon!
     </div>
   )
