@@ -27,13 +27,13 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const { pokemon, setDragging, handleDrop, index } = props;
 
   const dispatch = useDispatch();
-  const team: PokemonMap[] = useSelector((state: any) => {return state.gameReducer.team});
+  const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   const heal = () => {
     const newTeam = JSON.parse(JSON.stringify(team));
     newTeam[index].stats[0] = newTeam[index].stats[1];
-    dispatch(allActions.gameActions.setTeam(newTeam));
+    dispatch(allActions.teamActions.setTeam(newTeam));
   }
 
   return (

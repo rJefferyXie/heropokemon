@@ -6,11 +6,11 @@ import styles from '../styles/DPS.module.scss';
 import { useSelector } from 'react-redux';
 
 const DPS = () => {
-  const dps = useSelector((state: any) => {return state.gameReducer.playerDPS});
+  const dps = useSelector((state: any) => {return state.damageReducer.playerDPS});
 
   return (
     <div className={styles.container}>
-      <p>DPS: {Math.round(dps * 5 * 100) / 100}</p>
+      <p>DPS: {Math.round(dps * 1000) / 100}</p>
     </div>
   )
 }
