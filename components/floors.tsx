@@ -16,8 +16,9 @@ const Floors = () => {
   const floor = useSelector((state: any) => {return state.gameReducer.currentFloor});
   const highestFloor = useSelector((state: any) => {return state.gameReducer.highestFloor});
 
-  const setFloor = (floor: number) => {
-    dispatch(allActions.gameActions.setCurrentFloor(floor));
+  const setFloor = (newFloor: number) => {
+    if (newFloor === floor) return;
+    dispatch(allActions.gameActions.setCurrentFloor(newFloor));
   }
 
   return (
