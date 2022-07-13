@@ -29,6 +29,17 @@
   text-transform: uppercase;
 }
 
+.exitButton {
+  width: fit-content;
+  margin: auto 2px auto auto !important;
+  background-color: $red-700 !important;
+  text-shadow: 1px 1px 1px $zinc-900;
+}
+
+.exitButton:hover {
+  filter: brightness(110%);
+}
+
 @media screen and (max-width: 960px) {
   .container {
     flex-direction: column;

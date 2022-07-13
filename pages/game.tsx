@@ -8,7 +8,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from '../styles/Game.module.scss';
 
 // MUI
-import { Snackbar } from '@mui/material';
+import { Snackbar, Button } from '@mui/material';
 
 // Interfaces
 import GameSave from '../interfaces/GameSave';
@@ -46,6 +46,40 @@ const Game: NextPage = () => {
   const gameSaveCallback = useRef<any>();
   const gameFlowCallback = useRef<any>();
 
+  const saveGame = () => {
+    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
+      "pokedex": pokedex.pokedex,
+      "floor": game.highestFloor,
+      "currency": game.currency,
+      "storage": game.storage,
+      "badges": game.badges,
+      "items": game.items,
+      "team": team
+    }));
+  
+    localStorage.setItem("discoveredPokemon", JSON.stringify(regions.entries));
+  }
+
+  const nextEnemy = () => {
+    if (enemy.enemy === undefined) return;
+
+    if (enemy.enemiesLeft === 1) {
+      dispatch(allActions.gameActions.setCurrentFloor(game.currentFloor + 1));
+    } else {
+
+      // level ups, enemy joining team, and evolutions
+      const { newTeam, newStorage } = enemyFainted(team, game.storage, game.pokedex, enemy.enemy);
+      dispatch(allActions.teamActions.setTeam(newTeam));
+      dispatch(allActions.gameActions.setStorage(newStorage));
+
+      // calculate currency and get the next enemy
+      const newCurrency = game.currency + Math.floor(enemy.enemy.level * (enemy.enemy.stats[1] / 50 + game.currentFloor));
+
+      dispatch(allActions.gameActions.setCurrency(newCurrency));
+      dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
+    }
+  }
+
   useEffect(() => {
     if (!router) return;
 
@@ -62,6 +96,7 @@ const Game: NextPage = () => {
     dispatch(allActions.gameActions.setBadges(gameSave.badges));
     dispatch(allActions.gameActions.setItems(gameSave.items));
     dispatch(allActions.teamActions.setTeam(gameSave.team));
+    dispatch(allActions.alertActions.nextAlert());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
@@ -72,13 +107,15 @@ const Game: NextPage = () => {
     dispatch(allActions.enemyActions.setEnemy(enemyInfo));
 
     const enemyName = enemyInfo.name;
-    // if (!pokedex.entries.includes(enemyName)) {
-    //   dispatch(allActions.pokedexActions.addEntry(enemyName));
-    //   dispatch(allActions.gameActions.setAlerts(enemyName.toUpperCase() + " added to the pokedex."));
-    // }
+    const inPokedex = pokedex.entries.includes(enemyName);
+    const inAlerts = alerts.includes(enemyName.toUpperCase() + " added to the pokedex.");
+    if (!inPokedex && !inAlerts) {
+      dispatch(allActions.pokedexActions.addEntry(enemyName));
+      dispatch(allActions.alertActions.addAlert(enemyName.toUpperCase() + " added to the pokedex."));
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokedex.pokedex, enemy.enemiesLeft]);
+  }, [pokedex.pokedex, enemy.enemiesLeft, game.currentFloor]);
 
   useEffect(() => {
     dispatch(allActions.enemyActions.setEnemiesLeft(10));
@@ -87,22 +124,12 @@ const Game: NextPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game.currentFloor, game.highestFloor]);
 
-  const saveGame = () => {
-    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
-      "pokedex": pokedex.pokedex,
-      "floor": game.highestFloor,
-      "currency": game.currency,
-      "storage": game.storage,
-      "badges": game.badges,
-      "items": game.items,
-      "team": team
-    }));
-  
-    localStorage.setItem("discoveredPokemon", JSON.stringify(regions.entries));
-  }
-
   useEffect(() => {
     gameSaveCallback.current = saveGame;
+  });
+
+  useEffect(() => {
+    gameFlowCallback.current = gameFlow;
   });
 
   const gameFlow = () => {
@@ -133,22 +160,12 @@ const Game: NextPage = () => {
   }
 
   useEffect(() => {
-    gameFlowCallback.current = gameFlow;
-  });
-
-  useEffect(() => {
     if (!regions.selected) return;
-
-    const gameSaveTick = () => {
-      gameSaveCallback.current();
-    }
-
+    
+    const gameSaveTick = () => gameSaveCallback.current();
     const gameSaveInterval = setInterval(gameSaveTick, 300000);
 
-    const gameFlowTick = () => {
-      gameFlowCallback.current();
-    }
-
+    const gameFlowTick = () => gameFlowCallback.current();
     const gameFlowInterval = setInterval(gameFlowTick, 100);
 
     return () => {
@@ -158,31 +175,10 @@ const Game: NextPage = () => {
   }, [regions.selected]);
 
   useEffect(() => {
-    if (alerts.length >= 1) {
-      setShowAlert(true);
-      setAlertMessage(alerts[0]);
-    }
-  }, [alerts])
-
-  const nextEnemy = () => {
-    if (enemy.enemy === undefined) return;
-
-    if (enemy.enemiesLeft === 1) {
-      dispatch(allActions.gameActions.setCurrentFloor(game.currentFloor + 1));
-    } else {
-
-      // level ups, enemy joining team, and evolutions
-      const { newTeam, newStorage } = enemyFainted(team, game.storage, game.pokedex, enemy.enemy);
-      dispatch(allActions.teamActions.setTeam(newTeam));
-      dispatch(allActions.gameActions.setStorage(newStorage));
-
-      // calculate currency and get the next enemy
-      const newCurrency = game.currency + Math.floor(enemy.enemy.level * (enemy.enemy.stats[1] / 50 + game.currentFloor));
-
-      dispatch(allActions.gameActions.setCurrency(newCurrency));
-      dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
-    }
-  }
+    if (alerts.length <= 0) return;
+    setShowAlert(true);
+    setAlertMessage(alerts[0]);
+  }, [alerts]);
 
   const closeSnackbar = (_: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") return;
@@ -206,6 +202,15 @@ const Game: NextPage = () => {
         autoHideDuration={3000}
         onClose={closeSnackbar}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+        action={
+          <Button 
+            className={styles.exitButton} 
+            variant="contained" 
+            onClick={closeSnackbar}
+          >
+          DISMISS
+          </Button>
+        }
       ></Snackbar>
 
       <div className={styles.column}>
