@@ -2,32 +2,14 @@
 import { 
   SET_CURRENT_FLOOR,
   SET_HIGHEST_FLOOR,
-  SET_CLICK_DAMAGE, 
-  SET_PLAYER_DPS,
   SET_CURRENCY,
   SET_STORAGE,
   SET_BADGES,
-  SET_ALERTS,
-  SET_ITEMS,
-  SET_TEAM
+  SET_ITEMS
 } from '../types';
 
 // Interfaces
 import PokemonMap from '../../interfaces/PokemonMap';
-
-const setClickDamage = (damage: number) => {
-  return {
-    type: SET_CLICK_DAMAGE,
-    payload: damage
-  }
-}
-
-const setPlayerDPS = (dps: number) => {
-  return {
-    type: SET_PLAYER_DPS,
-    payload: dps
-  }
-}
 
 const setCurrency = (currency: number) => {
   return {
@@ -43,13 +25,6 @@ const setStorage = (storage: PokemonMap[]) => {
   }
 }
 
-const setTeam = (team: PokemonMap[]) => {
-  return {
-    type: SET_TEAM,
-    payload: team
-  }
-}
-
 const setItems = (items: {}) => {
   return {
     type: SET_ITEMS,
@@ -61,13 +36,6 @@ const setBadges = (badges: string[]) => {
   return {
     type: SET_BADGES,
     payload: badges
-  }
-}
-
-const setAlerts = (alert: string) => {
-  return {
-    type: SET_ALERTS,
-    payload: alert
   }
 }
 
@@ -88,12 +56,8 @@ const setHighestFloor = (floor: number) => {
 export default { 
   setCurrentFloor,
   setHighestFloor,
-  setClickDamage, 
-  setPlayerDPS,
   setCurrency,
   setStorage,
   setBadges,
-  setAlerts,
-  setItems,
-  setTeam
+  setItems
 }

@@ -2,16 +2,22 @@ import settingActions from './settingActions';
 import pokedexActions from './pokedexActions';
 import loadingActions from './loadingActions';
 import regionsActions from './regionsActions';
-import gameActions from './gameActions';
+import damageActions from './damageActions';
 import enemyActions from './enemyActions';
+import alertActions from './alertActions';
+import gameActions from './gameActions';
+import teamActions from './teamActions';
 
 const allActions = {
   settingActions, 
   pokedexActions, 
   loadingActions, 
   regionsActions,
+  damageActions,
+  enemyActions,
+  alertActions,
   gameActions,
-  enemyActions
+  teamActions
 }
 
 export default allActions;
