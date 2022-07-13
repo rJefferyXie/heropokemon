@@ -1,17 +1,25 @@
 // Types
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ADD_REGION } from '../types';
+import { UNLOCK_REGION, SET_REGION } from '../types';
 
 const initialState = {
-  regions: ["kanto"]
+  regions: ["kanto"], 
+  selected: ''
 }
 
 const pokedexReducer = (state = initialState, action: PayloadAction) => {
   switch (action.type) {
-    case ADD_REGION: {
+    case UNLOCK_REGION: {
       return {
         ...state,
         regions: [...state.regions, action.payload]
+      }
+    }
+
+    case SET_REGION: {
+      return {
+        ...state, 
+        selected: action.payload
       }
     }
 
