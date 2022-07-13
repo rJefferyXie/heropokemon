@@ -1,7 +1,7 @@
 // Next
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 // React and Styling
 import React, { useEffect, useState, useRef } from 'react';
@@ -11,8 +11,6 @@ import styles from '../styles/Game.module.scss';
 import { Snackbar } from '@mui/material';
 
 // Interfaces
-import PokedexMap from '../interfaces/PokedexMap';
-import PokemonMap from '../interfaces/PokemonMap';
 import GameSave from '../interfaces/GameSave';
 
 // Game Functions
@@ -27,28 +25,21 @@ import Floors from '../components/floors';
 import Enemy from '../components/enemy';
 import DPS from '../components/dps';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
+
 const Game: NextPage = () => {
   const router = useRouter();
 
-  const [clickDamage, setClickDamage] = useState(1);
-  const [playerDPS, setPlayerDPS] = useState(1);
-  const [floor, setFloor] = useState(0);
-  const [highestFloor, setHighestFloor] = useState(1);
-  const [items, setItems] = useState({});
-  const [region, setRegion] = useState('');
-  const [artwork, setArtwork] = useState('');
-  const [currency, setCurrency] = useState(0);
-  const [team, setTeam] = useState<PokemonMap[]>([]);
-  const [badges, setBadges] = useState<string[]>([]);
-  const [pokedex, setPokedex] = useState<PokedexMap>({});
-  const [storage, setStorage] = useState<PokemonMap[]>([]);
+  const dispatch = useDispatch();
+  const pokedex = useSelector((state: any) => {return state.pokedexReducer});
+  const regions = useSelector((state: any) => {return state.regionsReducer});
+  const game = useSelector((state: any) => {return state.gameReducer});
+  const enemy = useSelector((state: any) => {return state.enemyReducer});
 
   const [showAlert, setShowAlert] = useState(false);
-  const [alerts, setAlerts] = useState<string[]>([]);
-
-  const [enemy, setEnemy] = useState<PokemonMap>();
-  const [enemiesLeft, setEnemiesLeft] = useState(10);
-  const [discoveredPokemon, setDiscoveredPokemon] = useState<string[]>([]);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const gameSaveCallback = useRef<any>();
   const gameFlowCallback = useRef<any>();
@@ -56,56 +47,56 @@ const Game: NextPage = () => {
   useEffect(() => {
     if (!router) return;
 
-    const game: GameSave | false = getGameSave();
+    const game: GameSave | false = getGameSave(regions.selected);
     if (game === false) {
       router.push("/");
       return;
     } 
-    
-    setTeam(game.team);
-    setItems(game.items);
-    setFloor(game.floor);
-    setBadges(game.badges);
-    setPokedex(game.pokedex);
-    setStorage(game.storage);
-    setCurrency(game.currency);
-    setHighestFloor(game.floor);
-    setDiscoveredPokemon(JSON.parse(localStorage.getItem("discoveredPokemon") || '[]'));
-    setRegion(localStorage.getItem("selectedRegion") || "kanto");
-    setArtwork(localStorage.getItem('artwork') || 'official');
+
+    dispatch(allActions.gameActions.setCurrentFloor(game.floor));
+    dispatch(allActions.gameActions.setHighestFloor(game.floor));
+    dispatch(allActions.gameActions.setCurrency(game.currency));
+    dispatch(allActions.gameActions.setStorage(game.storage));
+    dispatch(allActions.gameActions.setBadges(game.badges));
+    dispatch(allActions.gameActions.setItems(game.items));
+    dispatch(allActions.gameActions.setTeam(game.team));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   useEffect(() => {
-    if (pokedex === {} || floor === 0) return;
-    const enemyInfo = getEnemy(pokedex, floor);
-    setEnemy(enemyInfo);
+    if (pokedex.pokedex === {}) return;
+    const enemyInfo = getEnemy(pokedex.pokedex, game.currentFloor);
+    dispatch(allActions.enemyActions.setEnemy(enemyInfo));
 
     const enemyName = enemyInfo.name;
-    if (!discoveredPokemon.includes(enemyName)) {
-      setDiscoveredPokemon(discovered => [...discovered, enemyName]);
-      setAlerts(alerts => [...alerts, enemyName.toUpperCase() + " added to the pokedex."]);
-    }
+    // if (!pokedex.entries.includes(enemyName)) {
+    //   dispatch(allActions.pokedexActions.addEntry(enemyName));
+    //   dispatch(allActions.gameActions.setAlerts(enemyName.toUpperCase() + " added to the pokedex."));
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokedex, enemiesLeft]);
+  }, [pokedex.pokedex, game.enemiesLeft]);
 
   useEffect(() => {
-    setEnemiesLeft(10);
-    setHighestFloor(highestFloor => Math.max(floor, highestFloor));     
-  }, [floor]);
+    dispatch(allActions.enemyActions.setEnemiesLeft(10));
+    dispatch(allActions.gameActions.setHighestFloor(Math.max(game.currentFloor, game.highestFloor)));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [game.currentFloor, game.highestFloor]);
 
   const saveGame = () => {
-    localStorage.setItem(region + 'Save', JSON.stringify({
-      "floor": highestFloor,
-      "currency": currency,
-      "storage": storage,
-      "team": team,
-      "items": items,
-      "badges": badges,
-      "pokedex": pokedex
+    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
+      "floor": game.highestFloor,
+      "currency": game.currency,
+      "storage": game.storage,
+      "team": game.team,
+      "items": game.items,
+      "badges": game.badges,
+      "pokedex": pokedex.pokedex
     }));
   
-    localStorage.setItem("discoveredPokemon", JSON.stringify(discoveredPokemon));
+    localStorage.setItem("discoveredPokemon", JSON.stringify(regions.entries));
   }
 
   useEffect(() => {
@@ -113,31 +104,30 @@ const Game: NextPage = () => {
   });
 
   const gameFlow = () => {
-    if (enemy === undefined || team.length === 0) return;
+    if (enemy.enemy === {} || game.team.length === 0) return;
 
-    const { playerDPS, enemyDPS } = getDPS(enemy, team[0]);
+    const { playerDPS, enemyDPS } = getDPS(enemy.enemy, game.team[0]);
 
-    const newTeam = JSON.parse(JSON.stringify(team));
+    const newTeam = JSON.parse(JSON.stringify(game.team));
     newTeam[0].stats[0] -= enemyDPS;
     if (newTeam[0].stats[0] <= 0) {
-      const newEnemy = JSON.parse(JSON.stringify(enemy));
+      const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
       newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.05, newEnemy.stats[1]);
-      setEnemy(newEnemy);
+      dispatch(allActions.enemyActions.setEnemy(newEnemy));
       return;
     }
 
-    setTeam(newTeam);
+    dispatch(allActions.gameActions.setTeam(newTeam));
 
-    const newEnemy = JSON.parse(JSON.stringify(enemy));
+    const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
     newEnemy.stats[0] -= playerDPS;
     if (newEnemy.stats[0] <= 0) {
       nextEnemy();
       return;
     }
 
-    setEnemy(newEnemy);
-    
-    setPlayerDPS(playerDPS);
+    dispatch(allActions.enemyActions.setEnemy(newEnemy));
+    dispatch(allActions.gameActions.setPlayerDPS(playerDPS));
   }
 
   useEffect(() => {
@@ -145,7 +135,7 @@ const Game: NextPage = () => {
   });
 
   useEffect(() => {
-    if (!region) return;
+    if (!regions.selected) return;
 
     const gameSaveTick = () => {
       gameSaveCallback.current();
@@ -163,34 +153,39 @@ const Game: NextPage = () => {
       clearInterval(gameSaveInterval);
       clearInterval(gameFlowInterval);
     };        
-  }, [region]);
+  }, [regions.selected]);
 
   useEffect(() => {
-    if (alerts.length === 0) setShowAlert(false);
-    if (alerts.length >= 1) setShowAlert(true);
-  }, [alerts])
+    if (game.alerts.length === 0) setShowAlert(false);
+    if (game.alerts.length >= 1) {
+      setShowAlert(true);
+      setAlertMessage(game.alerts[0]);
+    }
+  }, [game.alerts])
 
   const nextEnemy = () => {
-    if (enemy === undefined) return;
+    if (enemy.enemy === undefined) return;
 
-    if (enemiesLeft === 1) {
-      setFloor(floor + 1);
+    if (game.enemiesLeft === 1) {
+      dispatch(allActions.gameActions.setCurrentFloor(game.currentFloor + 1));
     } else {
       // level ups, enemy joining team, and evolutions
-      const { newTeam, newStorage } = enemyFainted(team, storage, pokedex, enemy);
-      setTeam(newTeam);
-      setStorage(newStorage);
+      const { newTeam, newStorage } = enemyFainted(game.team, game.storage, game.pokedex, enemy.enemy);
+      dispatch(allActions.gameActions.setTeam(newTeam));
+      dispatch(allActions.gameActions.setStorage(newStorage));
 
       // calculate currency and get the next enemy
-      setCurrency(currency => currency + Math.floor(enemy.level * ((enemy.stats[1] + enemy.statBoosts[0]) / 50) + floor));
-      setEnemiesLeft(enemiesLeft => enemiesLeft - 1);
+      const newCurrency = game.currency + Math.floor(enemy.enemy.level * (enemy.enemy.stats[1] + game.currentFloor) / 50);
+
+      dispatch(allActions.gameActions.setCurrency(newCurrency));
+      dispatch(allActions.enemyActions.setEnemiesLeft(game.enemiesLeft - 1));
     }
   }
 
   const closeSnackbar = (_: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") return;
     setShowAlert(false);
-    setAlerts(alerts => alerts.slice(1));
+    dispatch(allActions.gameActions.setAlerts(game.alerts.slice(1)));
   }
 
   return (
@@ -201,20 +196,11 @@ const Game: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar 
-        currency={currency} 
-        items={items} 
-        storage={storage} 
-        team={team} 
-        setTeam={setTeam}
-        badges={badges} 
-        artwork={artwork}
-      >
-      </Navbar>
+      <Navbar></Navbar>
 
       <Snackbar 
         open={showAlert}
-        message={alerts[0]}
+        message={alertMessage}
         autoHideDuration={3000}
         onClose={closeSnackbar}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
@@ -222,24 +208,13 @@ const Game: NextPage = () => {
 
       <div className={styles.column}>
         <div className={styles.row}>
-          <DPS dps={playerDPS}></DPS>
-          <Floors floor={floor} setFloor={setFloor} highestFloor={highestFloor}></Floors>
+          <DPS></DPS>
+          <Floors></Floors>
           <div className={styles.spacer}></div>
         </div>
-        <strong className={styles.enemiesLeft}>{enemiesLeft + " wild pokemon left."}</strong>  
+        <strong className={styles.enemiesLeft}>{game.enemiesLeft + " wild pokemon left."}</strong>  
 
-        {enemy !== undefined && 
-          <Enemy 
-            enemy={enemy} 
-            setEnemy={setEnemy}
-            alerts={alerts}
-            setAlerts={setAlerts}
-            player={team[0]}
-            clickDamage={clickDamage} 
-            artwork={artwork}
-          >
-          </Enemy>
-        }
+        {Object.keys(enemy.enemy).length > 0 && <Enemy></Enemy>}
       </div>
 
     </div>
