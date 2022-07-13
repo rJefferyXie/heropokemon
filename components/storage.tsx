@@ -8,13 +8,12 @@ import StorageCard from './storageCard';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
-interface StorageProps {
-  storage: PokemonMap[],
-  artwork: string
-}
+// Redux
+import { useSelector } from 'react-redux';
 
-const Storage = (props: React.PropsWithChildren<StorageProps>) => {
-  const { storage, artwork } = props;
+const Storage = () => {
+  const storage: PokemonMap[] = useSelector((state: any) => {return state.gameReducer.storage});
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   return (
     <div className={styles.container}>

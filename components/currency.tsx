@@ -1,12 +1,12 @@
+// React and Styling
 import React from 'react';
 import styles from '../styles/Currency.module.scss';
 
-interface CurrencyProps {
-  currency: number
-}
+// Redux
+import { useSelector } from 'react-redux';
 
-const Currency = (props: React.PropsWithChildren<CurrencyProps>) => {
-  const { currency } = props;
+const Currency = () => {
+  const currency = useSelector((state: any) => {return state.gameReducer.currency});
 
   return (
     <div className={styles.container}>

@@ -18,8 +18,6 @@ import GameSave from '../interfaces/GameSave';
 
 // Constants
 import StatMap from '../constants/StatMap';
-
-// import RegionImages from '../constants/RegionImages';
 import StarterPokemon from '../constants/StarterPokemon';
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
@@ -29,18 +27,15 @@ import PokemonPreview from './pokemonPreview';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
 
-interface RegionPreviewProps {
-  exit: Function,
-  region: string,
-  unlocked: boolean,
-  pokedex: PokedexMap,
-}
-
-const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
-  const { region, unlocked, pokedex, exit } = props;
+const RegionPreview = () => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
+  const regions = useSelector((state: any) => {return state.regionsReducer});
+  const pokedex: PokedexMap = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   
   const [theme, setTheme] = useState("");
   const [starter, setStarter] = useState("");
@@ -52,12 +47,12 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
   const [gameSave, setGameSave] = useState<GameSave>({});
 
   useEffect(() => {
-    setStarterPokemon(StarterPokemon[region]);
-    setStarter(StarterPokemon[region][Math.floor(Math.random() * 3)]);
+    setStarterPokemon(StarterPokemon[regions.selected]);
+    setStarter(StarterPokemon[regions.selected][Math.floor(Math.random() * 3)]);
 
-    const game = localStorage.getItem(region + 'Save');
+    const game = localStorage.getItem(regions.selected + 'Save');
     if (game) setGameSave(JSON.parse(game))
-  }, [region]);
+  }, [regions.selected]);
 
   useEffect(() => {
     if (starter === "") return;
@@ -68,15 +63,18 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
     setStarterPokemon([]);
   }
 
+  const exit = () => {
+    dispatch(allActions.regionsActions.setRegion(''));
+  }
+
   const play = () => {    
     if (Object.keys(gameSave).length > 0) {
-      localStorage.setItem('selectedRegion', region);
       router.push('/game');
       return;
     }
 
     const starterLevel = 5;
-    const starterInfo = pokedex[starter];
+    const starterInfo = JSON.parse(JSON.stringify(pokedex[starter]));
     starterInfo.level = starterLevel;
 
     // adjust pokemon stats according to pokemon level
@@ -88,7 +86,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
 
     starterInfo.stats[0] += starterInfo.statBoosts[0];
     
-    localStorage.setItem(region + 'Save', JSON.stringify({
+    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
       "floor": 1,
       "currency": 0,
       "team": [starterInfo],
@@ -98,7 +96,6 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
       "pokedex": pokedex
     }));
 
-    localStorage.setItem('selectedRegion', region);
     router.push('/game');
   }
 
@@ -168,7 +165,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
                   <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
-                    <h1 className={styles.regionTitle}>{region}</h1>
+                    <h1 className={styles.regionTitle}>{regions.selected}</h1>
 
                     <div className={styles.topRow}>
                       <p className={styles.currency}>{"Currency: $" + gameSave.currency}</p>
@@ -196,7 +193,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                         </Button>
                         <Button 
                           variant="contained" 
-                          onClick={unlocked ? play : unlock} 
+                          onClick={regions.regions.includes(regions.selected) ? play : unlock} 
                           className={styles.playButton}
                         >
                         Continue Game
@@ -209,7 +206,7 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
                   <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
-                    <h2 className={styles.regionTitle}>{region}</h2>
+                    <h2 className={styles.regionTitle}>{regions.selected}</h2>
                     <div className={styles.starters}>
                       {starterPokemon.map((pokemon, idx) => {
                         return <StarterCard 
@@ -231,10 +228,10 @@ const RegionPreview = (props: React.PropsWithChildren<RegionPreviewProps>) => {
                         </Button>
                         <Button 
                           variant="contained" 
-                          onClick={unlocked ? play : unlock} 
+                          onClick={regions.regions.includes(regions.selected) ? play : unlock} 
                           className={styles.playButton}
                         >
-                        {unlocked ? "PLAY" : "UNLOCK"}
+                        {regions.regions.includes(regions.selected) ? "PLAY" : "UNLOCK"}
                         </Button>
                       </div>
                       <div className={styles.typesAndSelected}>

@@ -7,14 +7,18 @@ import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
 import TokenIcon from '@mui/icons-material/Token';
 
-interface FloorsProps {
-  floor: number,
-  setFloor: Function,
-  highestFloor: number
-}
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
 
-const Floors = (props: React.PropsWithChildren<FloorsProps>) => {
-  const { floor, setFloor, highestFloor } = props;
+const Floors = () => {
+  const dispatch = useDispatch();
+  const floor = useSelector((state: any) => {return state.gameReducer.currentFloor});
+  const highestFloor = useSelector((state: any) => {return state.gameReducer.highestFloor});
+
+  const setFloor = (floor: number) => {
+    dispatch(allActions.gameActions.setCurrentFloor(floor));
+  }
 
   return (
     <div className={styles.container}>

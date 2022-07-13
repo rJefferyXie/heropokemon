@@ -12,23 +12,28 @@ import { Button } from '@mui/material';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
+
 interface PokemonCardProps {
-  artwork: string,
   index: number,
   pokemon: PokemonMap,
-  team: PokemonMap[],
-  setTeam: Function,
   setDragging: Function,
   handleDrop: Function
 }
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
-  const { pokemon, team, setTeam, setDragging, handleDrop, index, artwork } = props;
+  const { pokemon, setDragging, handleDrop, index } = props;
+
+  const dispatch = useDispatch();
+  const team: PokemonMap[] = useSelector((state: any) => {return state.gameReducer.team});
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   const heal = () => {
     const newTeam = JSON.parse(JSON.stringify(team));
     newTeam[index].stats[0] = newTeam[index].stats[1];
-    setTeam(newTeam);
+    dispatch(allActions.gameActions.setTeam(newTeam));
   }
 
   return (

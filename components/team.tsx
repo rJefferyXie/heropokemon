@@ -8,20 +8,20 @@ import TeamCard from './teamCard';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
-interface TeamProps {
-  team: PokemonMap[],
-  setTeam: Function,
-  artwork: string,
-}
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../store/actions/allActions';
 
-const Team = (props: React.PropsWithChildren<TeamProps>) => {
-  const { team, setTeam, artwork } = props;
+const Team = () => {
+  const dispatch = useDispatch();
+  const team: PokemonMap[] = useSelector((state: any) => {return state.gameReducer.team});
+
   const [draggingIdx, setDraggingIdx] = useState(-1);
 
   const handleDrop = (dropIdx: number) => {
     const teamCopy = JSON.parse(JSON.stringify(team));
     [teamCopy[dropIdx], teamCopy[draggingIdx]] = [teamCopy[draggingIdx], teamCopy[dropIdx]];
-    setTeam(teamCopy);
+    dispatch(allActions.gameActions.setTeam(teamCopy));
     setDraggingIdx(-1);
   }
 
@@ -29,10 +29,7 @@ const Team = (props: React.PropsWithChildren<TeamProps>) => {
     <div className={styles.container}>
       {team.map((pokemon, idx) => {
         return <TeamCard 
-          team={team} 
-          setTeam={setTeam} 
           pokemon={pokemon} 
-          artwork={artwork} 
           setDragging={setDraggingIdx}
           handleDrop={handleDrop}
           index={idx} 
