@@ -8,7 +8,6 @@ import allActions from '../store/actions/allActions';
 
 const Enemy = () => {
   const dispatch = useDispatch();
-  const game = useSelector((state: any) => {return state.gameReducer});
   const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
   const enemy = useSelector((state: any) => {return state.enemyReducer});
   const team = useSelector((state: any) => {return state.teamReducer.team})
@@ -18,10 +17,9 @@ const Enemy = () => {
   // damage dealt to enemy upon clicking image
   const clickHit = () => {
     if (Math.floor(team[0].stats[0]) <= 0) {
-      if (!alerts.includes("You can't deal click damage while the first pokemon on your team has 0 HP.")) {
-        dispatch(allActions.alertActions.addAlert(
-          "You can't deal click damage while the first pokemon on your team has 0 HP."
-        ));
+      const alertMessage = "You can't deal click damage while the first pokemon on your team has 0 HP.";
+      if (!alerts.includes(alertMessage)) {
+        dispatch(allActions.alertActions.addAlert(alertMessage));
       }
       
       return;
