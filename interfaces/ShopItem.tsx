@@ -3,6 +3,7 @@ interface ShopItem {
   cost: number,
   name: string,
   image: string,
+  quantity?: number,
   description: string
 }
 
