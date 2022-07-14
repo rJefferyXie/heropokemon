@@ -1,1 +1,195 @@
 @import './constants.scss';
+
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($zinc-900, 0.95);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0.25rem;
+}
+
+.previewRow {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.itemCol {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.itemPreview {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: min(100%, 300px);
+  width: min(100%, 640px);
+  padding: 1rem;
+  background-color: rgba($sky-500, 0.2);
+  box-shadow: 2px 2px 4px $zinc-900;
+  border-radius: 4px;
+}
+
+.currency {
+  margin: 4px auto;
+}
+
+.itemCalculation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  height: 30%;
+}
+
+.imagePreview {
+  width: 50%;
+  margin: auto auto 0;
+}
+
+.costPreview {
+  margin: 4px auto 0;
+}
+
+.namePreview {
+  margin: 4px auto 0;
+}
+
+.infoHeader {
+  margin: auto auto 0;
+  text-align: center;
+  width: 100%;
+}
+
+.itemDescription {
+  margin: 8px auto auto;
+  background-color: rgba($zinc-900, 0.7);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.shopItem {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 0.5rem);
+  padding: 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+  background-color: rgba($sky-500, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.shopItem:hover {
+  background-color: rgba($sky-500, 0.5);
+}
+
+.itemImage {
+  width: 50%;
+  margin: auto;
+}
+
+.itemName {
+  margin: auto;
+}
+
+.itemCost {
+  margin: auto;
+}
+
+.buttonContainer {
+  display: flex;
+  margin: 8px auto auto;
+}
+
+.exitButton {
+  margin: auto 4px auto auto !important;
+  background-color: rgba($red-700, 0.9) !important;
+}
+
+.confirmButton {
+  margin: auto auto auto 4px !important;
+  background-color: $emerald-700 !important;
+}
+
+.incButton {
+  margin: auto auto auto 4px !important;
+  font-weight: 1000 !important;
+  font-size: 1.1rem !important;
+  background-color: $cyan-700 !important;
+}
+
+.decButton {
+  margin: auto 4px auto auto !important;
+  font-weight: 1000 !important;
+  font-size: 1.1rem !important;
+  background-color: $cyan-700 !important;
+}
+
+.exitButton, .confirmButton, .incButton, .decButton {
+  width: fit-content !important;
+  min-width: 0px !important;
+  height: fit-content !important;
+  min-height: 0px !important;
+  padding: 4px 16px !important;
+  text-shadow: 1px 1px 1px $zinc-900;
+}
+
+.exitButton:hover, .confirmButton:hover, .incButton:hover, .decButton:hover {
+  filter: brightness(110%);
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    height: 100px;
+    overflow: auto;
+  }
+
+  .shopItem {
+    width: calc(25% - 0.5rem);
+  }
+
+  .itemName {
+    display: none;
+  }
+
+  .itemPreview {
+    height: 100%;
+    width: 100%;
+  }
+
+  .previewRow {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .imagePreview {
+    width: 25%;
+  }
+
+  .infoCol, .itemCol {
+    width: 100%;
+    margin: 1rem auto;
+  }
+}
