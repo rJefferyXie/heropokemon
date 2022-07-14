@@ -1,6 +1,6 @@
 @import './constants.scss';
 
-.container {
+.container, .containerItem {
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
@@ -11,9 +11,56 @@
   box-shadow: 0px 0px 8px rgba($slate-900, 0.8);
 }
 
+.containerItem {
+  width: calc(100% / 2 - 8px);
+  height: calc(100% / 3 - 8px);
+  margin: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.containerItem:hover {
+  background-color: rgba($sky-500, 0.5);
+}
+
 .image {
   width: 75%;
   margin: auto;
+}
+
+.containerItem img {
+  width: 25%;
+}
+
+.healthBarWrapper {
+  width: 90%;
+  margin: 4px;
+  height: 1rem;
+  background-color: rgba($slate-400, 0.7);
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
+  border-radius: 16px;
+  margin: auto 8px auto auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.healthBar {
+  display: flex;
+  height: 1rem;
+  border-radius: 16px;
+  background-color: $red-500;
+  box-shadow: 1px 1px 2px rgb(0, 0, 0, 27%);
+  transition: width 200ms ease-in-out;
+}
+
+.healthValue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 0.9rem;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 1px 1px 1px $zinc-900;
 }
 
 .text {
