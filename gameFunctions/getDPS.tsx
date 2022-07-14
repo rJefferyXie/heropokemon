@@ -22,12 +22,12 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap) => {
   for (let i = 0; i < pokemon.types.length; i++) {
     const playerTypeAdvantages = TypeAdvantages[pokemon.types[i]];
     for (let j = 0; j < enemy.types.length; j++) {
-      const enemyTypeAdvantages = TypeAdvantages[enemy.types[i]];
+      const enemyTypeAdvantages = TypeAdvantages[enemy.types[j]];
 
       // calculate enemy multipliers from type advantages or disadvantages
-      if (enemyTypeAdvantages.strong.includes(pokemon.types[j])) enemyDPS *= 2;
-      if (enemyTypeAdvantages.weak.includes(pokemon.types[j])) enemyDPS *= 0.5;
-      if (enemyTypeAdvantages.resist.includes(pokemon.types[j])) enemyDPS *= 0;  
+      if (enemyTypeAdvantages.strong.includes(pokemon.types[i])) enemyDPS *= 2;
+      if (enemyTypeAdvantages.weak.includes(pokemon.types[i])) enemyDPS *= 0.5;
+      if (enemyTypeAdvantages.resist.includes(pokemon.types[i])) enemyDPS *= 0;  
 
       // calculate player multipliers from type advantages or disadvantages
       if (playerTypeAdvantages.strong.includes(enemy.types[j])) playerDPS *= 2;
