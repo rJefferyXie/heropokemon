@@ -37,7 +37,7 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
   // all pokemon that are lower level than the enemy have a chance to level up
   newTeam.map((_: PokemonMap, idx: number) => {
     const levelUpChance =  Math.floor(Math.random() * 100 + 1);
-    if (newTeam[idx].level < enemy.level && levelUpChance > 80) {          
+    if (newTeam[idx].level < enemy.level && levelUpChance > 20) {          
       newTeam[idx].level += 1;
 
       // level up raises pokemon stats by up to 2 points each
