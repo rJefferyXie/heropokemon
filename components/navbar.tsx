@@ -4,6 +4,8 @@ import styles from '../styles/Navbar.module.scss';
 
 // Components
 import Team from './team';
+import Shop from './shop';
+import Items from './items';
 import Options from './options';
 import Storage from './storage';
 import Currency from './currency';
@@ -19,8 +21,8 @@ const Navbar = () => {
 
       {option === 0 && <Team></Team>}
       {option === 1 && <Storage></Storage>}
-      {option === 2 && <Placeholder></Placeholder>}
-      {option === 3 && <Placeholder></Placeholder>}
+      {option === 2 && <Items></Items>}
+      {option === 3 && <Shop></Shop>}
       {option === 4 && <Placeholder></Placeholder>}
     </nav>
   )
