@@ -12,21 +12,21 @@ const ShopItems: ShopItem[] = [
   {
     id: "potion2",
     name: "Super Potion",
-    cost: 250,
+    cost: 500,
     image: "images/potion2.png",
     description: "Heal a pokemon by 50 hitpoints."
   },
   {
     id: "potion3",
     name: "Hyper Potion",
-    cost: 500,
+    cost: 2500,
     image: "images/potion3.png",
     description: "Heal a pokemon by 120 hitpoints."
   },
   {
     id: "potion4",
     name: "Max Potion",
-    cost: 1000,
+    cost: 5000,
     image: "images/potion4.png",
     description: "Fully heal a pokemon's hitpoints."
   }
