@@ -9,6 +9,7 @@ import enemyReducer from './enemyReducer';
 import alertReducer from './alertReducer';
 import gameReducer from './gameReducer';
 import teamReducer from './teamReducer';
+import itemReducer from './itemReducer';
 
 const rootReducer = combineReducers({
     settingReducer, 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     enemyReducer,
     alertReducer,
     gameReducer,
-    teamReducer
+    teamReducer,
+    itemReducer
 });
 
 export default rootReducer;

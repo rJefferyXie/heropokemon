@@ -7,6 +7,7 @@ import enemyActions from './enemyActions';
 import alertActions from './alertActions';
 import gameActions from './gameActions';
 import teamActions from './teamActions';
+import itemActions from './itemActions';
 
 const allActions = {
   settingActions, 
@@ -17,7 +18,8 @@ const allActions = {
   enemyActions,
   alertActions,
   gameActions,
-  teamActions
+  teamActions,
+  itemActions
 }
 
 export default allActions;

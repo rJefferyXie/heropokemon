@@ -4,8 +4,7 @@ import {
   SET_HIGHEST_FLOOR,
   SET_CURRENCY,
   SET_STORAGE,
-  SET_BADGES,
-  SET_ITEMS
+  SET_BADGES
 } from '../types';
 
 // Interfaces
@@ -22,13 +21,6 @@ const setStorage = (storage: PokemonMap[]) => {
   return {
     type: SET_STORAGE,
     payload: storage
-  }
-}
-
-const setItems = (items: {}) => {
-  return {
-    type: SET_ITEMS,
-    payload: items
   }
 }
 
@@ -58,6 +50,5 @@ export default {
   setHighestFloor,
   setCurrency,
   setStorage,
-  setBadges,
-  setItems
+  setBadges
 }
