@@ -22,6 +22,75 @@
   background-color: rgba($sky-500, 0.5);
 }
 
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($zinc-900, 0.95);
+}
+
+.previewRow {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.itemPreview {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: min(100%, 300px);
+  width: min(100%, 640px);
+  padding: 0.25rem;
+  background-color: rgba($sky-500, 0.2);
+  box-shadow: 2px 2px 4px $zinc-900;
+  border-radius: 4px;
+}
+
+.itemColPreview {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.infoColPreview {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.teamRow {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+}
+
+.imagePreview {
+  width: 40%;
+  margin: auto auto 0;
+}
+
+.quantityPreview {
+  margin: 4px auto 0;
+}
+
+.namePreview {
+  margin: 4px auto 0;
+}
+
+.descriptionPreview {
+  margin: 8px auto 0;
+  background-color: rgba($zinc-900, 0.7);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
 .itemImage {
   width: 25%;
   margin: auto;
@@ -46,4 +115,19 @@
 
 .itemDescription {
   margin: 8px auto auto 0;
+}
+
+.exitButton {
+  width: fit-content !important;
+  min-width: 0px !important;
+  height: fit-content !important;
+  min-height: 0px !important;
+  padding: 4px 16px !important;
+  text-shadow: 1px 1px 1px $zinc-900;
+  margin: auto auto 0.25rem auto !important;
+  background-color: rgba($red-700, 0.9) !important;
+}
+
+.exitButton:hover {
+  filter: brightness(110%);
 }
