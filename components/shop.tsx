@@ -113,7 +113,7 @@ const Shop = () => {
                       <Button className={styles.incButton} variant="contained" onClick={increment}>+</Button>
                     </div>
                     <div className={styles.buttonContainer}>
-                      <Button className={styles.exitButton} variant="contained" onClick={purchase}>CANCEL</Button>
+                      <Button className={styles.exitButton} variant="contained" onClick={exit}>CANCEL</Button>
                       <Button className={styles.confirmButton} variant="contained" onClick={purchase}>PURCHASE</Button>
                     </div>
                   </div>
