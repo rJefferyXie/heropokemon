@@ -39,6 +39,7 @@ const Game: NextPage = () => {
   const game = useSelector((state: any) => {return state.gameReducer});
   const team = useSelector((state: any) => {return state.teamReducer.team});
   const enemy = useSelector((state: any) => {return state.enemyReducer});
+  const items = useSelector((state: any) => {return state.itemReducer.items})
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -53,7 +54,7 @@ const Game: NextPage = () => {
       "currency": game.currency,
       "storage": game.storage,
       "badges": game.badges,
-      "items": game.items,
+      "items": items,
       "team": team
     }));
   
@@ -94,7 +95,7 @@ const Game: NextPage = () => {
     dispatch(allActions.gameActions.setCurrency(gameSave.currency));
     dispatch(allActions.gameActions.setStorage(gameSave.storage));
     dispatch(allActions.gameActions.setBadges(gameSave.badges));
-    dispatch(allActions.gameActions.setItems(gameSave.items));
+    dispatch(allActions.itemActions.setItems(gameSave.items));
     dispatch(allActions.teamActions.setTeam(gameSave.team));
     dispatch(allActions.alertActions.nextAlert());
 
