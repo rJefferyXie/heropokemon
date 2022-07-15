@@ -49,7 +49,6 @@ const Game: NextPage = () => {
 
   const saveGame = () => {
     localStorage.setItem(regions.selected + 'Save', JSON.stringify({
-      "pokedex": pokedex.pokedex,
       "floor": game.highestFloor,
       "currency": game.currency,
       "storage": game.storage,
