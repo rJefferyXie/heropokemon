@@ -21,6 +21,9 @@ import StatMap from '../constants/StatMap';
 import StarterPokemon from '../constants/StarterPokemon';
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
+// Game Functions
+import CreateGameSave from '../gameFunctions/CreateGameSave';
+
 // Components
 import StarterCard from './starterCard';
 import PokemonPreview from './pokemonPreview';
@@ -73,29 +76,8 @@ const RegionPreview = () => {
       return;
     }
 
-    const starterLevel = 5;
-    const starterInfo = JSON.parse(JSON.stringify(pokedex[starter]));
-    starterInfo.level = starterLevel;
-
-    // adjust pokemon stats according to pokemon level
-    for (let i = 0; i < 6; i++) {
-      const statBoost = Math.floor(Math.random() * starterLevel * 2);
-      starterInfo.statBoosts[i] = statBoost;
-      starterInfo.stats[i + 1] += statBoost;
-    }
-
-    starterInfo.stats[0] += starterInfo.statBoosts[0];
-    
-    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
-      "floor": 1,
-      "currency": 0,
-      "team": [starterInfo],
-      "storage": [],
-      "items": {},
-      "badges": [],
-      "pokedex": pokedex
-    }));
-
+    const newGame = CreateGameSave(pokedex[starter]);
+    localStorage.setItem(regions.selected + 'Save', JSON.stringify(newGame));
     router.push('/game');
   }
 
