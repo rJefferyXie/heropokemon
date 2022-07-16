@@ -13,9 +13,11 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
   if (joinTeamChance >= 75) {
     if (newTeam.length < 6) {
       newTeam.push(JSON.parse(JSON.stringify(enemy)));
+      newTeam[newTeam.length - 1].stats[1] /= newTeam[newTeam.length - 1].level; 
       newTeam[newTeam.length - 1].stats[0] = newTeam[newTeam.length - 1].stats[1];
     } else {
       newStorage.push(JSON.parse(JSON.stringify(enemy)));
+      newStorage[newStorage.length - 1].stats[1] /= newStorage[newStorage.length - 1].level; 
       newStorage[newStorage.length - 1].stats[0] = newStorage[newStorage.length - 1].stats[1];
     }
   } 

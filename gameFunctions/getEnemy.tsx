@@ -35,8 +35,13 @@ const getEnemy = (pokedex: PokedexMap, floor: number) => {
     // make a deep copy of the pokemon to avoid mutating state
     enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyName]));
 
+    // Use the floor as a guide for the pokemon's level, ( min: 2, max: 100 )
+    const minLevel = floor - 2;
+    const maxLevel = floor + 2;
+    const level = Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel);
+
     // all pokemon after and during floor 36 will be fully evolved
-    if (floor >= 36) {
+    if (level >= 36) {
 
       // get next evolution if it exists
       if (enemyInfo.evolutions.length > 0) {
@@ -46,7 +51,7 @@ const getEnemy = (pokedex: PokedexMap, floor: number) => {
     } 
 
     // all pokemon after and during floor 18 will have evolved once if they are able
-    if (floor >= 18) {
+    if (level >= 18) {
 
       // get next evolution if it exists
       if (enemyInfo.evolutions.length > 0) {
@@ -55,8 +60,7 @@ const getEnemy = (pokedex: PokedexMap, floor: number) => {
       }
     }
 
-    // Use the floor as the pokemon's level, ( min: 2, max: 100 )
-    enemyInfo.level = Math.max(Math.min(floor, 100), 2);
+    enemyInfo.level = Math.max(Math.min(level, 100), 2);
 
     // adjust enemy stats according to level
     for (let i = 0; i < 6; i++) {
@@ -66,6 +70,9 @@ const getEnemy = (pokedex: PokedexMap, floor: number) => {
       enemyInfo.statBoosts[i] = statBoost;
       enemyInfo.stats[i + 1] += statBoost;
     }
+
+    enemyInfo.stats[0] *= enemyInfo.level;
+    enemyInfo.stats[1] *= enemyInfo.level;
   }
 
   return enemyInfo;
