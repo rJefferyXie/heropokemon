@@ -34,7 +34,7 @@ const Enemy = () => {
   return (
     <div className={styles.container}>
       <img className={styles.enemyImage} src={enemy.sprites[artwork]} alt={"An image of " + enemy.name} onClick={clickHit}></img>
-      <strong className={styles.enemyName}>{enemy.name + ", LVL. " + enemy.level}</strong>
+      <strong className={styles.enemyName}>{enemy.name + ", LEVEL " + enemy.level}</strong>
       <div className={styles.types}>
         {enemy.types.map((type: string, idx: number) => {
           return <p className={styles.type} key={idx} style={{backgroundColor: TypeColorSchemes[type]}}>
