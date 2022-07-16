@@ -2,6 +2,9 @@
 import React from 'react';
 import styles from '../styles/Enemy.module.scss';
 
+// Constants
+import TypeColorSchemes from '../constants/TypeColorSchemes';
+
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import allActions from '../store/actions/allActions';
@@ -9,7 +12,7 @@ import allActions from '../store/actions/allActions';
 const Enemy = () => {
   const dispatch = useDispatch();
   const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
-  const enemy = useSelector((state: any) => {return state.enemyReducer});
+  const enemy = useSelector((state: any) => {return state.enemyReducer.enemy});
   const team = useSelector((state: any) => {return state.teamReducer.team})
   const clickDamage = useSelector((state: any) => {return state.damageReducer.clickDamage});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
@@ -30,12 +33,18 @@ const Enemy = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.enemyImage} src={enemy.enemy.sprites[artwork]} alt={"An image of " + enemy.enemy.name} onClick={clickHit}></img>
-      <strong className={styles.enemyName}>{enemy.enemy.name}</strong>
-      <p className={styles.enemyLevel}>{"LEVEL: " + enemy.enemy.level}</p>
+      <img className={styles.enemyImage} src={enemy.sprites[artwork]} alt={"An image of " + enemy.name} onClick={clickHit}></img>
+      <strong className={styles.enemyName}>{enemy.name + ", LVL. " + enemy.level}</strong>
+      <div className={styles.types}>
+        {enemy.types.map((type: string, idx: number) => {
+          return <p className={styles.type} key={idx} style={{backgroundColor: TypeColorSchemes[type]}}>
+            {type}
+          </p>
+        })}
+      </div>
       <div className={styles.healthBarWrapper}>
-        <div className={styles.healthBar} style={{width: Math.floor(enemy.enemy.stats[0] / enemy.enemy.stats[1] * 100) + "%"}}>
-          <p className={styles.healthValue}>{Math.floor(enemy.enemy.stats[0])}/{enemy.enemy.stats[1]}</p>
+        <div className={styles.healthBar} style={{width: Math.floor(enemy.stats[0] / enemy.stats[1] * 100) + "%"}}>
+          <p className={styles.healthValue}>{Math.floor(enemy.stats[0])}/{enemy.stats[1]}</p>
         </div>
       </div>
     </div>
