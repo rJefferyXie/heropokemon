@@ -8,36 +8,22 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
   const newTeam = JSON.parse(JSON.stringify(team));
   const newStorage = JSON.parse(JSON.stringify(storage));
 
-  // need to create a list to make sure duplicate pokemon aren't added
-  const capturedPokemon: string[] = [];
-  newTeam.map((pokemon: PokemonMap) => {
-    capturedPokemon.push(pokemon.name);
-  });
-
-  newStorage.map((pokemon: PokemonMap) => {
-    capturedPokemon.push(pokemon.name);
-  })
-
-  // 10% chance for the defeated pokemon to join our newTeam
+  // 25% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-  if (joinTeamChance >= 90) {
+  if (joinTeamChance >= 75) {
     if (newTeam.length < 6) {
-      if (!capturedPokemon.includes(enemy.name)) {
-        newTeam.push(JSON.parse(JSON.stringify(enemy)));
-        newTeam[newTeam.length - 1].stats[0] = newTeam[newTeam.length - 1].stats[1];
-      }
+      newTeam.push(JSON.parse(JSON.stringify(enemy)));
+      newTeam[newTeam.length - 1].stats[0] = newTeam[newTeam.length - 1].stats[1];
     } else {
-      if (!capturedPokemon.includes(enemy.name)) {
-        newStorage.push(JSON.parse(JSON.stringify(enemy)));
-        newStorage[newStorage.length - 1].stats[0] = newStorage[newStorage.length - 1].stats[1];
-      }
+      newStorage.push(JSON.parse(JSON.stringify(enemy)));
+      newStorage[newStorage.length - 1].stats[0] = newStorage[newStorage.length - 1].stats[1];
     }
   } 
 
   // all pokemon that are lower level than the enemy have a chance to level up
   newTeam.map((_: PokemonMap, idx: number) => {
     const levelUpChance =  Math.floor(Math.random() * 100 + 1);
-    if (newTeam[idx].level < enemy.level && levelUpChance > 20) {          
+    if (newTeam[idx].level < enemy.level && levelUpChance >= 20) {          
       newTeam[idx].level += 1;
 
       // level up raises pokemon stats by up to 2 points each
@@ -71,7 +57,7 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
     }
   });
 
-  return { newTeam, newStorage };
+  return { newTeam, newStorage }
 }
 
 export default enemyFainted;
