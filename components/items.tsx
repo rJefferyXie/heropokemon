@@ -95,6 +95,10 @@ const Items = () => {
         }
       </AnimatePresence>
 
+      {Object.keys(items).filter(item => items[item].quantity > 0).length <= 0 &&
+        <p className={styles.emptyItems}>You have no items.</p>
+      }
+
       {Object.keys(items).map((item, idx) => {
         return items[item].quantity > 0 && <div className={styles.item} onClick={() => selectItem(items[item])} key={idx}>
           <img className={styles.itemImage} src={items[item].image} alt={items[item].name}></img>
