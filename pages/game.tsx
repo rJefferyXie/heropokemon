@@ -68,7 +68,7 @@ const Game: NextPage = () => {
     } else {
 
       // level ups, enemy joining team, and evolutions
-      const { newTeam, newStorage } = enemyFainted(team, game.storage, game.pokedex, enemy.enemy);
+      const { newTeam, newStorage } = enemyFainted(team, game.storage, pokedex.pokedex, enemy.enemy);
       dispatch(allActions.teamActions.setTeam(newTeam));
       dispatch(allActions.gameActions.setStorage(newStorage));
 
