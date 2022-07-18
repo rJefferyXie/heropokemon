@@ -8,37 +8,37 @@ const addPokemon = (destination: PokemonMap[], enemy: PokemonMap) => {
   destination[destination.length - 1].stats[0] = destination[destination.length - 1].stats[1];
 }
 
-const levelUp = (pokemon: PokemonMap, pokedex: PokedexMap) => {
-  pokemon.level += 1;
+const levelUp = (team: PokemonMap[], idx: number, pokedex: PokedexMap) => {
+  team[idx].level += 1;
 
   // level up raises pokemon stats by up to 2 points each
   for (let i = 0; i < 6; i++) {
     const statBoost = Math.floor(Math.random() * 2);
-    if (i === 0 && Math.floor(pokemon.stats[i]) > 0) pokemon.stats[i] += statBoost;
-    pokemon.statBoosts[i] += statBoost;
-    pokemon.stats[i + 1] += statBoost;
+    if (i === 0 && Math.floor(team[idx].stats[i]) > 0) team[idx].stats[i] += statBoost;
+    team[idx].statBoosts[i] += statBoost;
+    team[idx].stats[i + 1] += statBoost;
   }
 
-  // pokemon evolutions are possible at level 18 and level 36
-  const firstEvolutionExists = pokemon.evolves_from === '' && pokemon.level === 18;
-  const secondEvolutionExists = pokemon.evolves_from !== '' && pokemon.level === 36;
-  if (pokemon.evolutions.length > 0) {
+  // evolutions are possible at level 18 and level 36
+  const firstEvolutionExists = team[idx].evolves_from === '' && team[idx].level === 18;
+  const secondEvolutionExists = team[idx].evolves_from !== '' && team[idx].level === 36;
+  if (team[idx].evolutions.length > 0) {
     if (firstEvolutionExists || secondEvolutionExists) {
-      const evolutions = pokemon.evolutions;
+      const evolutions = team[idx].evolutions;
       const evolution = Math.floor(Math.random() * evolutions.length);   
 
       const evolvedPokemon = JSON.parse(JSON.stringify(pokedex[evolutions[evolution]]));    
-      evolvedPokemon.level = pokemon.level;
-      evolvedPokemon.statBoosts = pokemon.statBoosts;
+      evolvedPokemon.level = team[idx].level;
+      evolvedPokemon.statBoosts = team[idx].statBoosts;
 
       if (Math.floor(evolvedPokemon.stats[0]) > 0) evolvedPokemon.stats[0] += evolvedPokemon.statBoosts[0];
-      evolvedPokemon.stats[0] -= pokemon.stats[1] - pokemon.stats[0];
+      evolvedPokemon.stats[0] -= team[idx].stats[1] - team[idx].stats[0];
       
       for (let i = 0; i < 6; i++) {
         evolvedPokemon.stats[i + 1] += evolvedPokemon.statBoosts[i];
       }
 
-      pokemon = evolvedPokemon;
+      team[idx] = evolvedPokemon;
     }
   }
 }
@@ -58,16 +58,16 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
     const levelUpChance =  Math.floor(Math.random() * 100 + 1);
 
     if (newTeam[idx].level < enemy.level - 3) {
-      levelUp(newTeam[idx], pokedex);
+      levelUp(newTeam, idx, pokedex);
 
     } else if (newTeam[idx].level < enemy.level - 2 && levelUpChance >= 25) {
-      levelUp(newTeam[idx], pokedex);
+      levelUp(newTeam, idx, pokedex);
 
     } else if (newTeam[idx].level < enemy.level - 1 && levelUpChance >= 50) {
-      levelUp(newTeam[idx], pokedex);
+      levelUp(newTeam, idx, pokedex);
 
     } else if (newTeam[idx].level === enemy.level && levelUpChance >= 75) {
-      levelUp(newTeam[idx], pokedex);
+      levelUp(newTeam, idx, pokedex);
 
     }
   });
