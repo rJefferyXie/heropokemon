@@ -47,7 +47,7 @@ const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
             <h2 className={styles.swapTitle2}>CLICK TO SWAP IN</h2>
             <div className={styles.teamRow}>
               {team.map((pokemon, idx) => {
-                return (swappingIdx !== idx) && 
+                return (swappingIdx !== idx || storagePokemon) && 
                   <SwapCard 
                     index={idx}
                     pokemon={pokemon} 
