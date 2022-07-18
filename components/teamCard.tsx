@@ -19,13 +19,12 @@ import allActions from '../store/actions/allActions';
 interface PokemonCardProps {
   index: number,
   pokemon: PokemonMap,
-  setSwapping: Function,
   setSwappingIdx: Function,
   handleSwap: Function
 }
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
-  const { pokemon, setSwapping, setSwappingIdx, handleSwap, index } = props;
+  const { pokemon, setSwappingIdx, handleSwap, index } = props;
 
   const dispatch = useDispatch();
   const items = useSelector((state: any) => {return state.itemReducer.items});
@@ -93,8 +92,8 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   }
 
   const swap = () => {
-    setSwapping(true);
-    setSwappingIdx(index);
+    setSwappingIdx(0);
+    handleSwap(index);
   }
 
   return (
@@ -117,7 +116,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
           <strong className={styles.pokemonName}>{pokemon.name}</strong>
           <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>
         </div>
-        {index === 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
+        {index !== 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
       </div>
       <div className={styles.bottomRow}>
         <div className={styles.healthBarWrapper}>
