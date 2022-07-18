@@ -1,3 +1,6 @@
+// Next
+import ExportedImage from 'next-image-export-optimizer';
+
 // React and Styling
 import React, { useState } from 'react';
 import styles from '../styles/Shop.module.scss';
@@ -99,7 +102,16 @@ const Shop = () => {
                 >
                 <div className={styles.previewRow}>
                   <div className={styles.itemCol}>
-                    <img className={styles.imagePreview} src={item.image} alt={item.name}></img>
+                    <div className={styles.imagePreview}>
+                      <ExportedImage 
+                        layout="fixed" 
+                        width="128px" 
+                        height="128px" 
+                        alt={item.name} 
+                        src={item.image}
+                      >
+                      </ExportedImage>
+                    </div>
                     <p className={styles.costPreview}>{"$" + item.cost}</p>
                     <p className={styles.namePreview}>{item.name}</p>
                     <p className={styles.itemDescription}>{item.description}</p>
@@ -107,7 +119,7 @@ const Shop = () => {
                   <div className={styles.infoCol}>
                     <h3 className={styles.infoHeader}>How many would you like?</h3>
                     <p className={styles.currency}>{"You have: $" + currency}</p>
-                    <p className={styles.itemCalculation}>{"It will cost $" + itemAmount * item.cost + " to purchase " + itemAmount + " " + item.name + "s."}</p>
+                    <p className={styles.itemCalculation}>{"It will cost $" + itemAmount * item.cost + " to purchase " + itemAmount + " " + item.name + "(s)."}</p>
                     <div className={styles.buttonContainer}>
                       <Button className={styles.decButton} variant="contained" onClick={decrement}>-</Button>
                       <Button className={styles.incButton} variant="contained" onClick={increment}>+</Button>
@@ -126,7 +138,16 @@ const Shop = () => {
 
       {ShopItems.map((item: ShopItem, idx) => {
         return <div onClick={() => selectItem(item)} className={styles.shopItem} key={idx}>
-          <img className={styles.itemImage} src={item.image} alt={item.name}></img>
+          <div className={styles.itemImage}>
+            <ExportedImage 
+              layout="fixed" 
+              width="64px" 
+              height="64px" 
+              alt={item.name} 
+              src={item.image}
+            >
+            </ExportedImage>
+          </div>
           <p className={styles.itemCost}>{"$" + item.cost}</p>
           <p className={styles.itemName}>{item.name}</p>
         </div>

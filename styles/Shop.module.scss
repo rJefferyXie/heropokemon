@@ -17,6 +17,7 @@
   flex-wrap: wrap;
   width: 100%;
   padding: 0.25rem;
+  overflow-y: auto;
 }
 
 .previewRow {
@@ -64,8 +65,7 @@
 }
 
 .imagePreview {
-  width: 50%;
-  margin: auto auto 0;
+  margin: auto;
 }
 
 .costPreview {
