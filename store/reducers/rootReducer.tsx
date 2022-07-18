@@ -4,6 +4,7 @@ import settingReducer from './settingReducer';
 import pokedexReducer from './pokedexReducer';
 import loadingReducer from './loadingReducer';
 import regionsReducer from './regionsReducer';
+import storageReducer from './storageReducer';
 import damageReducer from './damageReducer';
 import enemyReducer from './enemyReducer';
 import alertReducer from './alertReducer';
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     pokedexReducer, 
     loadingReducer,
     regionsReducer,
+    storageReducer,
     damageReducer,
     enemyReducer,
     alertReducer,

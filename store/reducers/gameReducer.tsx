@@ -4,7 +4,6 @@ import {
   SET_CURRENT_FLOOR,
   SET_HIGHEST_FLOOR,
   SET_CURRENCY,
-  SET_STORAGE,
   SET_BADGES
 } from '../types';
 
@@ -12,7 +11,6 @@ const initialState = {
   currentFloor: 1,
   highestFloor: 1,
   currency: 0,
-  storage: [],
   badges: []
 }
 
@@ -22,13 +20,6 @@ const gameReducer = (state = initialState, action: PayloadAction) => {
       return {
         ...state,
         currency: action.payload
-      }
-    }
-
-    case SET_STORAGE: {
-      return {
-        ...state,
-        storage: action.payload
       }
     }
 

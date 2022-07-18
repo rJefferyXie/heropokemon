@@ -3,24 +3,13 @@ import {
   SET_CURRENT_FLOOR,
   SET_HIGHEST_FLOOR,
   SET_CURRENCY,
-  SET_STORAGE,
   SET_BADGES
 } from '../types';
-
-// Interfaces
-import PokemonMap from '../../interfaces/PokemonMap';
 
 const setCurrency = (currency: number) => {
   return {
     type: SET_CURRENCY,
     payload: currency
-  }
-}
-
-const setStorage = (storage: PokemonMap[]) => {
-  return {
-    type: SET_STORAGE,
-    payload: storage
   }
 }
 
@@ -49,6 +38,5 @@ export default {
   setCurrentFloor,
   setHighestFloor,
   setCurrency,
-  setStorage,
   setBadges
 }
