@@ -61,6 +61,10 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
       pokemonOwned.push(pokemon.name);
     });
 
+    if (pokemonOwned.includes(enemy.name)) {
+      containsDuplicate = true;
+    }
+
     if (pokemonOwned.includes(enemy.evolves_from)) {
       containsDuplicate = true;
     }
