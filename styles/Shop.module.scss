@@ -65,7 +65,10 @@
 }
 
 .imagePreview {
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .costPreview {
@@ -105,8 +108,9 @@
 }
 
 .itemImage {
-  width: 50%;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .itemName {

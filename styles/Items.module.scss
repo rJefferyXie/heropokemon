@@ -76,8 +76,10 @@
 }
 
 .imagePreview {
-  width: 40%;
-  margin: auto auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .quantityPreview {
@@ -96,8 +98,9 @@
 }
 
 .itemImage {
-  width: 25%;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .infoCol {
