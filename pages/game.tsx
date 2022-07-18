@@ -55,9 +55,7 @@ const Game: NextPage = () => {
       "badges": game.badges,
       "items": items,
       "team": team
-    }));
-  
-    localStorage.setItem("discoveredPokemon", JSON.stringify(regions.entries));
+    }));  
   }
 
   const nextEnemy = () => {
@@ -73,7 +71,7 @@ const Game: NextPage = () => {
       dispatch(allActions.gameActions.setStorage(newStorage));
 
       // calculate currency and get the next enemy
-      const newCurrency = game.currency + game.currentFloor + enemy.enemy.stats[1];
+      const newCurrency = game.currency + enemy.enemy.stats[1] / enemy.enemy.level;
       dispatch(allActions.gameActions.setCurrency(newCurrency));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
     }
@@ -140,7 +138,7 @@ const Game: NextPage = () => {
     newTeam[0].stats[0] -= enemyDPS;
     if (newTeam[0].stats[0] <= 0) {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
-      newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.05, newEnemy.stats[1]);
+      newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, newEnemy.stats[1]);
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
       return;
     }
