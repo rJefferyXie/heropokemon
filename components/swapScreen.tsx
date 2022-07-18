@@ -13,21 +13,20 @@ import PokemonPreview from './pokemonPreview';
 import { Button, ClickAwayListener } from '@mui/material';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../store/actions/allActions';
+import { useSelector } from 'react-redux';
 
 interface SwapScreenProps {
   swappingIdx: number,
   handleSwap: Function,
   setSwapping: Function,
-  setSwappingIdx: Function
+  setSwappingIdx: Function,
+  storagePokemon?: boolean
 }
 
 const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
-  const { swappingIdx, handleSwap, setSwapping, setSwappingIdx } = props;
-
-  const dispatch = useDispatch();
+  const { swappingIdx, handleSwap, setSwapping, setSwappingIdx, storagePokemon } = props;
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
+  const storage: PokemonMap[] = useSelector((state: any) => {return state.storageReducer.storage});
 
   const exit = () => {
     setSwapping(false);
@@ -41,14 +40,14 @@ const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
           <div className={styles.container}>
             <h2 className={styles.swapTitle1}>BEING SWAPPED</h2>
             <div className={styles.topRow}>
-              <PokemonPreview pokemon={team[swappingIdx]}></PokemonPreview>
+              <PokemonPreview pokemon={storagePokemon ? storage[swappingIdx] : team[swappingIdx]}></PokemonPreview>
               <Button className={styles.exitButton} variant="contained" onClick={exit}>CANCEL</Button>
             </div>
 
             <h2 className={styles.swapTitle2}>CLICK TO SWAP IN</h2>
             <div className={styles.teamRow}>
               {team.map((pokemon, idx) => {
-                return swappingIdx !== idx && 
+                return (swappingIdx !== idx) && 
                   <SwapCard 
                     index={idx}
                     pokemon={pokemon} 

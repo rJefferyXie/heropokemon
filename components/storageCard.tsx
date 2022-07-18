@@ -8,22 +8,33 @@ import { Button } from '@mui/material';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 interface StorageCardProps {
-  artwork: string,
   index: number,
   pokemon: PokemonMap,
-  team?: PokemonMap[],
-  setTeam: Function
+  setSwapping: Function,
+  setSwappingIdx: Function,
 }
 
 const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
-  const { pokemon, artwork, index, team, setTeam } = props;
+  const { pokemon, index, setSwapping, setSwappingIdx } = props;
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
+
+  const swap = () => {
+    setSwapping(true);
+    setSwappingIdx(index);
+  }
 
   return (
     <div className={styles.container}>
       <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
-      <p className={styles.text}>{pokemon.name}</p>
-      <p className={styles.text}>{"LEVEL " + pokemon.level}</p>
+      <div className={styles.pokemonInfo}>
+        <strong className={styles.pokemonName}>{pokemon.name}</strong>
+        <p className={styles.pokemonLevel}>{"LEVEL " + pokemon.level}</p>
+      </div>
+      <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>
     </div>
   )
 }
