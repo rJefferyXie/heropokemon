@@ -4,7 +4,6 @@ import styles from '../styles/Team.module.scss';
 
 // Components
 import TeamCard from './teamCard';
-import SwapScreen from './swapScreen';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
