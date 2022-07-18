@@ -12,6 +12,9 @@ import PokemonMap from '../interfaces/PokemonMap';
 // Components
 import PokemonPreview from './pokemonPreview';
 
+// Game Functions
+import LevelUp from '../gameFunctions/levelUp';
+
 // MUI
 import { ClickAwayListener, Button } from '@mui/material';
 
@@ -26,6 +29,7 @@ import allActions from '../store/actions/allActions';
 const Items = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: any) => {return state.itemReducer.items});
+  const pokedex = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
   const [item, setItem] = useState<ShopItem>();
@@ -36,23 +40,55 @@ const Items = () => {
       return;
     }
     
+    const newTeam = JSON.parse(JSON.stringify(team));
+    const newItems = JSON.parse(JSON.stringify(items));
+
     if (item.name === "Potion") {
       if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
-
-      const newTeam = JSON.parse(JSON.stringify(team));
-      const newItems = JSON.parse(JSON.stringify(items));
-      newItems["potion1"].quantity -= 1;
-      item.quantity -= 1;
 
       if (newTeam[pokemonIdx].stats[0] + 20 >= newTeam[pokemonIdx].stats[1]) {
         newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
       } else {
         newTeam[pokemonIdx].stats[0] += 20;
       }
-
-      dispatch(allActions.itemActions.setItems(newItems));
-      dispatch(allActions.teamActions.setTeam(newTeam));
     }
+
+    if (item.name === "Super Potion") {
+      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
+
+      if (newTeam[pokemonIdx].stats[0] + 50 >= newTeam[pokemonIdx].stats[1]) {
+        newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
+      } else {
+        newTeam[pokemonIdx].stats[0] += 50;
+      }
+    }
+
+    if (item.name === "Hyper Potion") {
+      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
+
+      if (newTeam[pokemonIdx].stats[0] + 120 >= newTeam[pokemonIdx].stats[1]) {
+        newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
+      } else {
+        newTeam[pokemonIdx].stats[0] += 120;
+      }
+    }
+
+    if (item.name === "Max Potion") {
+      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
+
+      newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
+    }
+
+    if (item.name === "Rare Candy") {
+      if (team[pokemonIdx].level === 100) return;
+      LevelUp(newTeam, pokemonIdx, pokedex);
+    }
+
+    item.quantity -= 1;
+    newItems[item.id].quantity -= 1;
+    
+    dispatch(allActions.itemActions.setItems(newItems));
+    dispatch(allActions.teamActions.setTeam(newTeam));
   }
 
   const selectItem = (selectedItem: ShopItem) => {

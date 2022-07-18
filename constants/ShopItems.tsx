@@ -75,7 +75,7 @@ const ShopItems: ShopItem[] = [
   {
     id: "rareCandy",
     name: "Rare Candy",
-    cost: 25000,
+    cost: 1,
     image: "images/rareCandy.webp",
     description: "Raise a pokemon's level by 1."
   }
