@@ -72,7 +72,7 @@ const Game: NextPage = () => {
       dispatch(allActions.storageActions.setStorage(newStorage));
 
       // calculate currency and get the next enemy
-      const newCurrency = game.currency + enemy.enemy.stats[1] / enemy.enemy.level;
+      const newCurrency = game.currency + Math.floor((enemy.enemy.stats[1] / enemy.enemy.level) * (1 + enemy.enemy.level / 100));
       dispatch(allActions.gameActions.setCurrency(newCurrency));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
     }
