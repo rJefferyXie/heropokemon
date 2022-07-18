@@ -33,13 +33,14 @@ const Game: NextPage = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
+  const storage = useSelector((state: any) => {return state.storageReducer.storage});
   const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
+  const items = useSelector((state: any) => {return state.itemReducer.items});
   const pokedex = useSelector((state: any) => {return state.pokedexReducer});
   const regions = useSelector((state: any) => {return state.regionsReducer});
-  const game = useSelector((state: any) => {return state.gameReducer});
   const team = useSelector((state: any) => {return state.teamReducer.team});
   const enemy = useSelector((state: any) => {return state.enemyReducer});
-  const items = useSelector((state: any) => {return state.itemReducer.items})
+  const game = useSelector((state: any) => {return state.gameReducer});
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -51,7 +52,7 @@ const Game: NextPage = () => {
     localStorage.setItem(regions.selected + 'Save', JSON.stringify({
       "floor": game.highestFloor,
       "currency": game.currency,
-      "storage": game.storage,
+      "storage": storage,
       "badges": game.badges,
       "items": items,
       "team": team
@@ -66,9 +67,9 @@ const Game: NextPage = () => {
     } else {
 
       // level ups, enemy joining team, and evolutions
-      const { newTeam, newStorage } = enemyFainted(team, game.storage, pokedex.pokedex, enemy.enemy);
+      const { newTeam, newStorage } = enemyFainted(team, storage, pokedex.pokedex, enemy.enemy);
       dispatch(allActions.teamActions.setTeam(newTeam));
-      dispatch(allActions.gameActions.setStorage(newStorage));
+      dispatch(allActions.storageActions.setStorage(newStorage));
 
       // calculate currency and get the next enemy
       const newCurrency = game.currency + enemy.enemy.stats[1] / enemy.enemy.level;
@@ -88,8 +89,8 @@ const Game: NextPage = () => {
 
     dispatch(allActions.gameActions.setCurrentFloor(gameSave.floor));
     dispatch(allActions.gameActions.setHighestFloor(gameSave.floor));
+    dispatch(allActions.storageActions.setStorage(gameSave.storage));
     dispatch(allActions.gameActions.setCurrency(gameSave.currency));
-    dispatch(allActions.gameActions.setStorage(gameSave.storage));
     dispatch(allActions.gameActions.setBadges(gameSave.badges));
     dispatch(allActions.itemActions.setItems(gameSave.items));
     dispatch(allActions.teamActions.setTeam(gameSave.team));
