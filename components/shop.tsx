@@ -51,6 +51,7 @@ const Shop = () => {
       newItems[item.id] = {
         name: item.name,
         image: item.image,
+        id: item.id,
         quantity: itemAmount,
         description: item.description,
       };

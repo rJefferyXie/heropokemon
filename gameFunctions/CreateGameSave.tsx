@@ -23,6 +23,7 @@ const CreateGameSave = (starter: PokemonMap) => {
     "items": {
       "potion1": {
         "name": "Potion",
+        "id": "potion1",
         "image": "images/potion1.webp",
         "quantity": 10,
         "description": "Heal a pokemon by 20 hitpoints."
