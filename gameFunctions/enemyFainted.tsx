@@ -50,7 +50,30 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
   // 25% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
   if (joinTeamChance >= 75) {
-    newTeam.length < 6 ? addPokemon(newTeam, enemy) : addPokemon(newStorage, enemy);
+    const pokemonOwned: string[] = [];
+    let containsDuplicate = false;
+
+    team.map((pokemon) => {
+      pokemonOwned.push(pokemon.name);
+    });
+  
+    storage.map((pokemon) => {
+      pokemonOwned.push(pokemon.name);
+    });
+
+    if (pokemonOwned.includes(enemy.evolves_from)) {
+      containsDuplicate = true;
+    }
+
+    enemy.evolutions.map((name) => {
+      if (pokemonOwned.includes(name)) {
+        containsDuplicate = true;
+      }
+    });
+
+    if (!containsDuplicate) {
+      newTeam.length < 6 ? addPokemon(newTeam, enemy) : addPokemon(newStorage, enemy);
+    }
   } 
 
   // all pokemon that are lower level than the enemy have a chance to level up
