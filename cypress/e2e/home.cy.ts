@@ -5,6 +5,13 @@ describe('Loads all seven regions.', () => {
     cy.visit('http://localhost:3000');
   });
 
+  it('Should load the first time visit screen.', () => {
+    const pokemon = cy.get('.Hero_heroImage__WMtdF');
+    pokemon.click();
+    pokemon.click();
+    pokemon.click();
+  });
+
   it('Should load the Kanto region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
     container.contains('kanto').and('be.visible');
@@ -38,6 +45,11 @@ describe('Loads all seven regions.', () => {
   it('Should load the Alola region.', () => {
     const container = cy.get('.Regions_container__bAZOy');
     container.contains('alola').and('be.visible');
+  });
+
+  it('Should open the Kanto region.', () => {
+    const container = cy.get('.Region_regionContainer__hMScl').first();
+    container.click();
   });
 });
 

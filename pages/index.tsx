@@ -45,6 +45,8 @@ const Home: NextPage = () => {
         if (snapshot.exists()) {
           const snapData = snapshot.data().pokedex;
           localStorage.setItem(region, JSON.stringify(snapData));
+        } else {
+          console.log("Could not find pokedex.");
         }
       }
 
