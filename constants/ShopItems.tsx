@@ -33,49 +33,49 @@ const ShopItems: ShopItem[] = [
   {
     id: "hp",
     name: "HP Up",
-    cost: 10000,
+    cost: 6000,
     image: "images/hpUp.webp",
     description: "Raise a pokemon's HP stat by 1."
   },
   {
     id: "protein",
     name: "Protein",
-    cost: 10000,
+    cost: 6000,
     image: "images/protein.webp",
     description: "Raise a pokemon's attack stat by 1."
   },
   {
     id: "iron",
     name: "Iron",
-    cost: 10000,
+    cost: 6000,
     image: "images/iron.webp",
     description: "Raise a pokemon's defense stat by 1."
   },
   {
     id: "calcium",
     name: "Calcium",
-    cost: 10000,
+    cost: 6000,
     image: "images/calcium.webp",
     description: "Raise a pokemon's special attack stat by 1."
   },
   {
     id: "zinc",
     name: "Zinc",
-    cost: 10000,
+    cost: 6000,
     image: "images/zinc.webp",
     description: "Raise a pokemon's special defense stat by 1."
   },
   {
     id: "carbos",
     name: "Carbos",
-    cost: 10000,
+    cost: 6000,
     image: "images/carbos.webp",
     description: "Raise a pokemon's speed stat by 1."
   },
   {
     id: "rareCandy",
     name: "Rare Candy",
-    cost: 1,
+    cost: 9999,
     image: "images/rareCandy.webp",
     description: "Raise a pokemon's level by 1."
   }
