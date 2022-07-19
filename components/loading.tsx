@@ -9,7 +9,6 @@ const Loading = () => {
   const [fact, setFact] = useState("");
 
   useEffect(() => {
-      window.scrollTo(0, 0);
       const facts = require("../public/pokemonFacts");
       setFact(facts[Math.floor(Math.random() * Object.keys(facts).length)]);
   }, []);

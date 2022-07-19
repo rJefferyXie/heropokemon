@@ -35,7 +35,6 @@ const PokemonPreview = (props: React.PropsWithChildren<PokemonPreviewProps>) => 
           <p className={styles.healthValue}>{Math.floor(pokemon.stats[0])}/{pokemon.stats[1]}</p>
         </div>
       </div>}
-
     </div>
   )
 }

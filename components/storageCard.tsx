@@ -36,7 +36,7 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
       </div>
       <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>
     </div>
-  )
+  );
 }
 
 export default StorageCard;

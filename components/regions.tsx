@@ -52,7 +52,7 @@ const Regions = () => {
         images={["decidueye", "incineroar", "primarina", "lunala", "solgaleo", "necrozma"]}>
       </Region>
     </div>
-  )
+  );
 }
 
 export default Regions;

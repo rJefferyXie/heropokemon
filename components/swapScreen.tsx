@@ -60,7 +60,7 @@ const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
         </div>
       </ClickAwayListener>
     </div>
-  )
+  );
 }
 
 export default SwapScreen;

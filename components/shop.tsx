@@ -69,8 +69,6 @@ const Shop = () => {
     }
 
     if ((itemAmount + 1) * item.cost > currency) return;
-    
-
     setItemAmount(itemAmount => itemAmount + 1);
   }
 

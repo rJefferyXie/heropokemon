@@ -41,8 +41,7 @@ const Storage = () => {
           setSwapping={setSwapping} 
           swappingIdx={swappingIdx} 
           setSwappingIdx={setSwappingIdx}
-          storagePokemon={true}
-        >
+          storagePokemon={true}>
         </SwapScreen>
       }
 
@@ -52,12 +51,11 @@ const Storage = () => {
           index={idx} 
           setSwapping={setSwapping} 
           setSwappingIdx={setSwappingIdx} 
-          key={idx}
-          >
+          key={idx}>
           </StorageCard>
       })}
     </div>
-  )
+  );
 }
 
 export default Storage;

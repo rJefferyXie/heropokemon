@@ -24,7 +24,7 @@ const SwapCard = (props: React.PropsWithChildren<SwapCardProps>) => {
       <p className={styles.text}>{pokemon.name}</p>
       <p className={styles.text}>{"LEVEL " + pokemon.level}</p>
     </div>
-  )
+  );
 }
 
 export default SwapCard;

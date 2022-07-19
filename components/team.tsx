@@ -33,12 +33,11 @@ const Team = () => {
           setSwappingIdx={setSwappingIdx}
           handleSwap={handleSwap}
           index={idx} 
-          key={idx}
-        >
+          key={idx}>
         </TeamCard>
       })}
     </div>
-  )
+  );
 }
 
 export default Team;
