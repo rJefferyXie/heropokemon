@@ -84,9 +84,35 @@ const Items = () => {
       LevelUp(newTeam, pokemonIdx, pokedex);
     }
 
+    if (item.name === "HP Up") {
+      if (newTeam[pokemonIdx].stats[0] > 0) newTeam[pokemonIdx].stats[0] += 1;
+
+      newTeam[pokemonIdx].stats[1] += 1;
+    }
+
+    if (item.name === "Protein") {
+      newTeam[pokemonIdx].stats[2] += 1;
+    }
+
+    if (item.name === "Iron") {
+      newTeam[pokemonIdx].stats[3] += 1;
+    }
+
+    if (item.name === "Calcium") {
+      newTeam[pokemonIdx].stats[4] += 1;
+    }
+
+    if (item.name === "Zinc") {
+      newTeam[pokemonIdx].stats[5] += 1;
+    }
+
+    if (item.name === "Carbos") {
+      newTeam[pokemonIdx].stats[6] += 1;
+    }
+
     item.quantity -= 1;
     newItems[item.id].quantity -= 1;
-    
+
     dispatch(allActions.itemActions.setItems(newItems));
     dispatch(allActions.teamActions.setTeam(newTeam));
   }
