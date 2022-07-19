@@ -8,6 +8,7 @@ import storageReducer from './storageReducer';
 import damageReducer from './damageReducer';
 import enemyReducer from './enemyReducer';
 import alertReducer from './alertReducer';
+import bonusReducer from './bonusReducer';
 import gameReducer from './gameReducer';
 import teamReducer from './teamReducer';
 import itemReducer from './itemReducer';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     damageReducer,
     enemyReducer,
     alertReducer,
+    bonusReducer,
     gameReducer,
     teamReducer,
     itemReducer

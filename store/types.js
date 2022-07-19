@@ -36,3 +36,7 @@ export const HIT_ENEMY = "HIT_ENEMY";
 
 // Team Types
 export const SET_TEAM = "SET_TEAM";
+
+// Bonus Types
+export const SET_BONUSES = "SET_BONUSES";
+export const ADD_BONUS_POINTS = "ADD_BONUS_POINTS";
