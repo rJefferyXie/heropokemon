@@ -13,7 +13,7 @@ import PokemonMap from '../interfaces/PokemonMap';
 import PokemonPreview from './pokemonPreview';
 
 // Game Functions
-import LevelUp from '../gameFunctions/levelUp';
+import UseItem from '../gameFunctions/useItem';
 
 // MUI
 import { ClickAwayListener, Button } from '@mui/material';
@@ -39,77 +39,8 @@ const Items = () => {
       exit();
       return;
     }
-    
-    const newTeam = JSON.parse(JSON.stringify(team));
-    const newItems = JSON.parse(JSON.stringify(items));
-
-    if (item.name === "Potion") {
-      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
-
-      if (newTeam[pokemonIdx].stats[0] + 20 >= newTeam[pokemonIdx].stats[1]) {
-        newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
-      } else {
-        newTeam[pokemonIdx].stats[0] += 20;
-      }
-    }
-
-    if (item.name === "Super Potion") {
-      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
-
-      if (newTeam[pokemonIdx].stats[0] + 50 >= newTeam[pokemonIdx].stats[1]) {
-        newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
-      } else {
-        newTeam[pokemonIdx].stats[0] += 50;
-      }
-    }
-
-    if (item.name === "Hyper Potion") {
-      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
-
-      if (newTeam[pokemonIdx].stats[0] + 120 >= newTeam[pokemonIdx].stats[1]) {
-        newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
-      } else {
-        newTeam[pokemonIdx].stats[0] += 120;
-      }
-    }
-
-    if (item.name === "Max Potion") {
-      if (team[pokemonIdx].stats[0] >= team[pokemonIdx].stats[1]) return;
-
-      newTeam[pokemonIdx].stats[0] = newTeam[pokemonIdx].stats[1];
-    }
-
-    if (item.name === "Rare Candy") {
-      if (team[pokemonIdx].level === 100) return;
-      LevelUp(newTeam, pokemonIdx, pokedex);
-    }
-
-    if (item.name === "HP Up") {
-      if (newTeam[pokemonIdx].stats[0] > 0) newTeam[pokemonIdx].stats[0] += 1;
-
-      newTeam[pokemonIdx].stats[1] += 1;
-    }
-
-    if (item.name === "Protein") {
-      newTeam[pokemonIdx].stats[2] += 1;
-    }
-
-    if (item.name === "Iron") {
-      newTeam[pokemonIdx].stats[3] += 1;
-    }
-
-    if (item.name === "Calcium") {
-      newTeam[pokemonIdx].stats[4] += 1;
-    }
-
-    if (item.name === "Zinc") {
-      newTeam[pokemonIdx].stats[5] += 1;
-    }
-
-    if (item.name === "Carbos") {
-      newTeam[pokemonIdx].stats[6] += 1;
-    }
-
+  
+    const { newItems, newTeam } = UseItem(item, items, team, pokemonIdx, pokedex);
     item.quantity -= 1;
     newItems[item.id].quantity -= 1;
 
