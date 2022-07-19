@@ -15,7 +15,7 @@ const nextConfig = {
     storePicturesInWEBP: true,
     generateAndUseBlurImages: true
   },
-  exportTrailingSlash: true
+  trailingSlash: true
 }
 
 module.exports = nextConfig;
