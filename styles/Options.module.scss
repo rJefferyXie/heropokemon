@@ -3,13 +3,13 @@
 .optionSelected {
   background-color: $cyan-500 !important;
   border-radius: 0px !important;
-  width: calc(100% / 5);
+  width: calc(100% / 5) !important;
 }
 
 .option {
   background-color: $cyan-700 !important;
   border-radius: 0px !important;
-  width: calc(100% / 5);
+  width: calc(100% / 5) !important;
 }
 
 .option:hover {
