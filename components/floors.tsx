@@ -2,10 +2,8 @@
 import React from 'react';
 import styles from '../styles/Floors.module.scss';
 
-// MUI
-import DoneIcon from '@mui/icons-material/Done';
-import ClearIcon from '@mui/icons-material/Clear';
-import TokenIcon from '@mui/icons-material/Token';
+// Components
+import Floor from './floor';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,54 +24,24 @@ const Floors = () => {
         [...Array(5)].map((_, idx) => {
           {
             return idx === 0 && floor.currentFloor > 2 ? 
-            <div className={styles.floor} key={idx} onClick={() => (setFloor(floor.currentFloor - 2))}>
-              <p>{floor.currentFloor - 2}</p>
-              <div className={styles.iconContainer}>
-                <DoneIcon></DoneIcon>
-                {(floor.currentFloor - 2) % 10 === 0 && <TokenIcon></TokenIcon>}
-              </div>
-            </div> :
+            <Floor setFloor={setFloor} floor={floor.currentFloor - 2} highestFloor={floor.highestFloor}></Floor> :
 
             idx === 1 && floor.currentFloor > 1 ? 
-            <div className={styles.floor} key={idx} onClick={() => (setFloor(floor.currentFloor - 1))}>
-              <p>{floor.currentFloor - 1}</p>
-              <div className={styles.iconContainer}>
-                <DoneIcon></DoneIcon>
-                {(floor.currentFloor - 1) % 10 === 0 && <TokenIcon></TokenIcon>}
-              </div>
-            </div> :
+            <Floor setFloor={setFloor} floor={floor.currentFloor - 1} highestFloor={floor.highestFloor}></Floor> : 
 
             idx === 2 ? 
-            <div className={styles.currentFloor} key={idx}>
-              <p>{floor.currentFloor}</p>
-              <div className={styles.iconContainer}>
-                <DoneIcon></DoneIcon>
-                {floor.currentFloor % 10 === 0 && <TokenIcon></TokenIcon>}
-              </div>
-            </div> :
+            <Floor setFloor={setFloor} floor={floor.currentFloor} highestFloor={floor.highestFloor} current={true}></Floor> :
 
             idx === 3 && floor.currentFloor < 100 ? 
-            <div className={styles.floor} key={idx} onClick={floor.currentFloor + 1 <= floor.highestFloor ? () => (setFloor(floor.currentFloor + 1)) : () => null}>
-              <p>{floor.currentFloor + 1}</p>
-              <div className={styles.iconContainer}>
-                {floor.highestFloor >= floor.currentFloor + 1 ? <DoneIcon></DoneIcon> : <ClearIcon></ClearIcon>}
-                {(floor.currentFloor + 1) % 10 === 0 && <TokenIcon></TokenIcon>}
-              </div>
-            </div> :
+            <Floor setFloor={setFloor} floor={floor.currentFloor + 1} highestFloor={floor.highestFloor}></Floor> :
             
             idx === 4 && floor.currentFloor < 99 ? 
-            <div className={styles.floor} key={idx} onClick={floor.currentFloor + 2 <= floor.highestFloor ? () => (setFloor(floor.currentFloor + 2)) : () => null}>
-              <p>{floor.currentFloor + 2}</p>
-              <div className={styles.iconContainer}>
-                {floor.highestFloor >= floor.currentFloor + 2 ? <DoneIcon></DoneIcon> : <ClearIcon></ClearIcon>}
-                {(floor.currentFloor + 2) % 10 === 0 && <TokenIcon></TokenIcon>}
-              </div>
-            </div> : null
+            <Floor setFloor={setFloor} floor={floor.currentFloor + 2} highestFloor={floor.highestFloor}></Floor> : null
           }
         })
       }
     </div>
-  )
+  );
 }
 
 export default Floors;
