@@ -69,9 +69,10 @@ const Game: NextPage = () => {
     } else {
 
       // level ups, enemy joining team, and evolutions
-      const { newTeam, newStorage } = enemyFainted(team, storage, pokedex.pokedex, enemy.enemy);
+      const { newTeam, newStorage, joinMessage } = enemyFainted(team, storage, pokedex.pokedex, enemy.enemy);
       dispatch(allActions.teamActions.setTeam(newTeam));
       dispatch(allActions.storageActions.setStorage(newStorage));
+      joinMessage !== undefined && dispatch(allActions.alertActions.addAlert(joinMessage));
 
       // calculate currency and get the next enemy
       const enemyHealthPortion = Math.floor((enemy.enemy.stats[1] / enemy.enemy.level) * (1 + enemy.enemy.level / 100))
@@ -86,6 +87,7 @@ const Game: NextPage = () => {
         levelUps += 1;
         dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints + 1));
         dispatch(allActions.bonusActions.setLevel(bonus.level + 1));
+        dispatch(allActions.alertActions.addAlert("You have leveled up! You now have " + (bonus.bonusPoints + 1) + " BP."));
       }
     }
   }
@@ -115,14 +117,6 @@ const Game: NextPage = () => {
     if (pokedex.pokedex === {}) return;
     const enemyInfo = getEnemy(pokedex.pokedex, game.currentFloor);
     dispatch(allActions.enemyActions.setEnemy(enemyInfo));
-
-    const enemyName = enemyInfo.name;
-    const inPokedex = pokedex.entries.includes(enemyName);
-    const inAlerts = alerts.includes(enemyName.toUpperCase() + " added to the pokedex.");
-    if (!inPokedex && !inAlerts) {
-      dispatch(allActions.pokedexActions.addEntry(enemyName));
-      dispatch(allActions.alertActions.addAlert(enemyName.toUpperCase() + " added to the pokedex."));
-    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokedex.pokedex, enemy.enemiesLeft, game.currentFloor]);
