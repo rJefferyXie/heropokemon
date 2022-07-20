@@ -57,7 +57,11 @@ const Game: NextPage = () => {
       "storage": storage,
       "badges": game.badges,
       "items": items,
-      "team": team
+      "team": team,
+      "experience": bonus.experience,
+      "level": bonus.level,
+      "bonusPoints": bonus.bonusPoints,
+      "bonuses": bonus.bonuses
     }));  
   }
 
@@ -101,11 +105,15 @@ const Game: NextPage = () => {
       return;
     } 
 
+    dispatch(allActions.bonusActions.setBonusPoints(gameSave.bonusPoints));
+    dispatch(allActions.bonusActions.setExperience(gameSave.experience));
     dispatch(allActions.gameActions.setCurrentFloor(gameSave.floor));
     dispatch(allActions.gameActions.setHighestFloor(gameSave.floor));
     dispatch(allActions.storageActions.setStorage(gameSave.storage));
     dispatch(allActions.gameActions.setCurrency(gameSave.currency));
+    dispatch(allActions.bonusActions.setBonuses(gameSave.bonuses));
     dispatch(allActions.gameActions.setBadges(gameSave.badges));
+    dispatch(allActions.bonusActions.setLevel(gameSave.level));
     dispatch(allActions.itemActions.setItems(gameSave.items));
     dispatch(allActions.teamActions.setTeam(gameSave.team));
     dispatch(allActions.alertActions.nextAlert());
@@ -179,7 +187,11 @@ const Game: NextPage = () => {
   }, [regions.selected]);
 
   useEffect(() => {
-    if (alerts.length <= 0) return;
+    if (alerts.length <= 0) {
+      setShowAlert(false);
+      return;
+    }
+    
     setShowAlert(true);
     setAlertMessage(alerts[0]);
   }, [alerts]);

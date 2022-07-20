@@ -29,7 +29,11 @@ const CreateGameSave = (starter: PokemonMap) => {
         "description": "Heal a pokemon by 20 hitpoints."
       }
     },
-    "badges": []
+    "badges": [],
+    "experience": 0,
+    "level": 1,
+    "bonusPoints": 0,
+    "bonuses": {}
   }
 }
 

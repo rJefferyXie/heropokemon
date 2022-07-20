@@ -7,7 +7,11 @@ interface GameSave {
   "currency": number,
   "badges": string[],
   "floor": number,
-  "items": {}
+  "items": {},
+  "experience": number
+  "level": number
+  "bonusPoints": number
+  "bonuses": {}
 }
 
 export default GameSave;
