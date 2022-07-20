@@ -9,7 +9,7 @@ import Items from './items';
 import Options from './options';
 import Storage from './storage';
 import Currency from './currency';
-import Placeholder from './placeholder';
+import Bonuses from './bonuses';
 
 const Navbar = () => {
   const [option, setOption] = useState(0);
@@ -23,7 +23,7 @@ const Navbar = () => {
       {option === 1 && <Storage></Storage>}
       {option === 2 && <Items></Items>}
       {option === 3 && <Shop></Shop>}
-      {option === 4 && <Placeholder></Placeholder>}
+      {option === 4 && <Bonuses></Bonuses>}
     </nav>
   )
 }
