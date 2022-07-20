@@ -1,10 +1,12 @@
 // Types
 import { PayloadAction } from '@reduxjs/toolkit';
-import { SET_BONUSES, ADD_BONUS_POINTS } from '../types';
+import { SET_BONUSES, SET_BONUS_POINTS, SET_EXPERIENCE, SET_LEVEL } from '../types';
 
 const initialState = {
   bonuses: {},
-  bonusPoints: 0
+  bonusPoints: 0,
+  experience: 0,
+  level: 1
 }
 
 const bonusReducer = (state = initialState, action: PayloadAction<any>) => {
@@ -16,10 +18,24 @@ const bonusReducer = (state = initialState, action: PayloadAction<any>) => {
       }
     }
 
-    case ADD_BONUS_POINTS: {
+    case SET_BONUS_POINTS: {
       return {
         ...state,
-        bonusPoints: state.bonusPoints + action.payload
+        bonusPoints: action.payload
+      }
+    }
+
+    case SET_EXPERIENCE: {
+      return {
+        ...state,
+        experience: action.payload
+      }
+    }
+
+    case SET_LEVEL: {
+      return {
+        ...state,
+        level: action.payload
       }
     }
 

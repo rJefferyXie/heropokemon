@@ -1,4 +1,4 @@
-import { SET_BONUSES, ADD_BONUS_POINTS } from '../types';
+import { SET_BONUSES, SET_BONUS_POINTS, SET_EXPERIENCE, SET_LEVEL } from '../types';
 
 const setBonuses = (bonuses: {}) => {
   return {
@@ -7,11 +7,25 @@ const setBonuses = (bonuses: {}) => {
   }
 }
 
-const addBonusPoints = (points: number) => {
+const setBonusPoints = (points: number) => {
   return {
-    type: ADD_BONUS_POINTS,
+    type: SET_BONUS_POINTS,
     payload: points
   }
 }
 
-export default { setBonuses, addBonusPoints }
+const setExperience = (experience: number) => {
+  return {
+    type: SET_EXPERIENCE,
+    payload: experience
+  }
+}
+
+const setLevel = (level: number) => {
+  return {
+    type: SET_LEVEL,
+    payload: level
+  }
+}
+
+export default { setBonuses, setBonusPoints, setExperience, setLevel }

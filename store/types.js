@@ -39,4 +39,6 @@ export const SET_TEAM = "SET_TEAM";
 
 // Bonus Types
 export const SET_BONUSES = "SET_BONUSES";
-export const ADD_BONUS_POINTS = "ADD_BONUS_POINTS";
+export const SET_BONUS_POINTS = "SET_BONUS_POINTS";
+export const SET_LEVEL = "SET_LEVEL";
+export const SET_EXPERIENCE = "SET_EXPERIENCE";

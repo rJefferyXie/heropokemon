@@ -18,6 +18,7 @@ import getDPS from '../gameFunctions/getDPS';
 import getEnemy from '../gameFunctions/getEnemy';
 import getGameSave from '../gameFunctions/getGameSave';
 import enemyFainted from '../gameFunctions/enemyFainted';
+import experienceForLevel from '../gameFunctions/experienceForLevel';
 
 // Components
 import Navbar from '../components/navbar';
@@ -39,6 +40,7 @@ const Game: NextPage = () => {
   const pokedex = useSelector((state: any) => {return state.pokedexReducer});
   const regions = useSelector((state: any) => {return state.regionsReducer});
   const team = useSelector((state: any) => {return state.teamReducer.team});
+  const bonus = useSelector((state: any) => {return state.bonusReducer});
   const enemy = useSelector((state: any) => {return state.enemyReducer});
   const game = useSelector((state: any) => {return state.gameReducer});
 
@@ -72,9 +74,19 @@ const Game: NextPage = () => {
       dispatch(allActions.storageActions.setStorage(newStorage));
 
       // calculate currency and get the next enemy
-      const newCurrency = game.currency + Math.floor((enemy.enemy.stats[1] / enemy.enemy.level) * (1 + enemy.enemy.level / 100));
+      const enemyHealthPortion = Math.floor((enemy.enemy.stats[1] / enemy.enemy.level) * (1 + enemy.enemy.level / 100))
+      const newCurrency = game.currency + enemyHealthPortion;
       dispatch(allActions.gameActions.setCurrency(newCurrency));
+      dispatch(allActions.bonusActions.setExperience(bonus.experience + enemyHealthPortion));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
+
+      // calculate if player has leveled up
+      let levelUps = 1;
+      while ((bonus.experience + enemyHealthPortion) >= experienceForLevel(bonus.level + levelUps)) {
+        levelUps += 1;
+        dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints + 1));
+        dispatch(allActions.bonusActions.setLevel(bonus.level + 1));
+      }
     }
   }
 
