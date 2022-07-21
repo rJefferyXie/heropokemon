@@ -1,1 +1,188 @@
 @import './constants.scss';
+
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($zinc-900, 0.95);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+  overflow-y: auto;
+}
+
+.previewRow {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.abilityCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.abilityPreview {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: min(100%, 300px);
+  width: min(100%, 640px);
+  padding: 1rem;
+  background-color: rgba($sky-500, 0.2);
+  box-shadow: 2px 2px 4px $zinc-900;
+  border-radius: 4px;
+}
+
+.currency {
+  margin: 1rem auto 0;
+}
+
+.infoHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto auto;
+}
+
+.rightArrow {
+  margin: 0 0.5rem !important;
+}
+
+.imagePreview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.costPreview {
+  margin: 4px auto 0;
+}
+
+.namePreview {
+  margin: 4px auto 0;
+}
+
+.abilityDescription {
+  margin: 4px auto;
+  background-color: rgba($zinc-900, 0.7);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.pointText {
+  margin: 0.25rem;
+  text-align: center;
+  padding: 0.5rem;
+  box-shadow: 0px 0px 8px $slate-900;
+  background-color: rgba($sky-500, 0.5);
+}
+
+.text {
+  margin: 2px 0.25rem;
+  text-align: center;
+}
+
+.abilityContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.ability {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 0.5rem);
+  padding: 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+  background-color: rgba($sky-500, 0.2);
+  box-shadow: 0px 0px 8px $slate-900;
+  transition: background-color 0.3s ease;
+}
+
+.ability:hover {
+  background-color: rgba($sky-500, 0.5);
+}
+
+.abilityImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.abilityName {
+  margin: auto;
+}
+
+.abilityCost {
+  margin: auto;
+}
+
+.buttonContainer {
+  display: flex;
+  margin: auto auto 0px;
+}
+
+.exitButton {
+  margin: auto 4px auto auto !important;
+  background-color: rgba($red-700, 0.9) !important;
+}
+
+.confirmButton {
+  margin: auto auto auto 4px !important;
+  background-color: $emerald-700 !important;
+}
+
+.exitButton, .confirmButton {
+  width: fit-content !important;
+  min-width: 0px !important;
+  height: fit-content !important;
+  min-height: 0px !important;
+  padding: 4px 16px !important;
+  text-shadow: 1px 1px 1px $zinc-900;
+}
+
+.exitButton:hover, .confirmButton:hover {
+  filter: brightness(110%);
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    height: 100px;
+    overflow: auto;
+  }
+
+  .ability {
+    width: calc(25% - 0.5rem);
+  }
+
+  .abilityName {
+    display: none;
+  }
+
+  .abilityPreview {
+    height: 100%;
+    width: 100%;
+  }
+}
