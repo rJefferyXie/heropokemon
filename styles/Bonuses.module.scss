@@ -30,7 +30,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 40%;
 }
 
 .infoCol {
@@ -38,7 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 60%;
 }
 
 .abilityPreview {
@@ -57,11 +57,8 @@
   margin: 1rem auto 0;
 }
 
-.infoHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto auto;
+.abilityHeader {
+  margin: auto auto 0;
 }
 
 .rightArrow {

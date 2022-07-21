@@ -118,7 +118,14 @@ const Shop = () => {
                   <div className={styles.infoCol}>
                     <h3 className={styles.infoHeader}>How many would you like?</h3>
                     <p className={styles.currency}>{"You have: $" + currency}</p>
-                    <p className={styles.itemCalculation}>{"It will cost $" + itemAmount * item.cost + " to purchase " + itemAmount + " " + item.name + "(s)."}</p>
+                    <p className={styles.itemCalculation}>
+                      {"It will cost $" + itemAmount * item.cost + 
+                      " to purchase " + itemAmount + " " + 
+                      ((item.name === "Rare Candy" && (itemAmount > 1 || itemAmount === 0)) ? "Rare Candie" : item.name) + 
+                      (((item.name.includes("Potion") || (item.name === "Rare Candy")) 
+                      && (itemAmount > 1 || itemAmount === 0)) ? "s" : '') + "."
+                      }
+                    </p>
                     <div className={styles.buttonContainer}>
                       <Button className={styles.decButton} variant="contained" onClick={decrement}>-</Button>
                       <Button className={styles.incButton} variant="contained" onClick={increment}>+</Button>

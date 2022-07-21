@@ -33,7 +33,32 @@ const CreateGameSave = (starter: PokemonMap) => {
     "experience": 0,
     "level": 1,
     "bonusPoints": 0,
-    "bonuses": {}
+    "bonuses": {
+      "regeneration": {
+        level: 0
+      },
+      "kindSoul": {
+        level: 0
+      },
+      "vigor": {
+        level: 0
+      },
+      "strongStyle": {
+        level: 0
+      },
+      "fortune": {
+        level: 0
+      },
+      "mysteryBall": {
+        level: -1
+      },
+      "swapper": {
+        level: -1
+      },
+      "healer": {
+        level: -1
+      }
+    }
   }
 }
 

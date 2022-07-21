@@ -17,7 +17,6 @@ import Ability from '../interfaces/Ability';
 // MUI
 import { ClickAwayListener, Button } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import EastIcon from '@mui/icons-material/East';
 
 // Animations
 import { motion, AnimatePresence } from 'framer-motion';
@@ -39,8 +38,20 @@ const Bonuses = () => {
 
   const purchase = () => {
     if (ability === undefined) return;
+    if ((bonus.bonuses[ability.id].level + 1) === 7 ||
+      bonus.bonusPoints < ability.cost(bonus.bonuses[ability.id].level + 1)) return;
 
+    const newAbility = JSON.parse(JSON.stringify(ability));
+    const newBonuses = JSON.parse(JSON.stringify(bonus.bonuses));
+    if (newBonuses[newAbility.id].level !== -1) {
+      newBonuses[newAbility.id].level += 1;
+      newAbility.level += 1;
+      setAbility(newAbility);
+    }
 
+    dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints - ability.cost(bonus.bonuses[ability.id].level + 1)));
+    dispatch(allActions.bonusActions.setBonuses(newBonuses));
+    exit();
   }
 
   const exit = () => {
@@ -67,24 +78,21 @@ const Bonuses = () => {
                         layout="fixed" 
                         width="128px" 
                         height="128px" 
-                        alt={ability.name(ability.level + 1)} 
+                        alt={ability.name(bonus.bonuses[ability.id].level + 1)} 
                         src={ability.image}
                       >
                       </ExportedImage>
                     </div>
-                    <p className={styles.namePreview}>{ability.name(ability.level + 1)}</p>
-                    <p className={styles.costPreview}>{"Cost: " + ability.cost(ability.level + 1) + " BP"}</p>
+                    <p className={styles.namePreview}>{ability.name(bonus.bonuses[ability.id].level + 1)}</p>
+                    <p className={styles.costPreview}>{"Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}</p>
                     <p className={styles.currency}>{"You have " + bonus.bonusPoints + " BP."}</p>
                   </div>
                   <div className={styles.infoCol}>
-                    <div className={styles.infoHeader}>
-                      <p>{ability.name(ability.level)}</p>
-                      {ability.level !== -1 && <EastIcon className={styles.rightArrow}></EastIcon>}
-                      {ability.level !== -1 && <p>{ability.name(ability.level + 1)}</p>}
-                    </div>
-                    <p className={styles.abilityDescription}>{ability.description(ability.level)}</p>
-                    {ability.level !== -1 && <ArrowDownwardIcon></ArrowDownwardIcon>}
-                    {ability.level !== -1 && <p className={styles.abilityDescription}>{ability.description(ability.level + 1)}</p>}
+                    <p className={styles.abilityHeader}>{ability.name(bonus.bonuses[ability.id].level)}</p>
+                    <p className={styles.abilityDescription}>{ability.description(bonus.bonuses[ability.id].level)}</p>
+                    {bonus.bonuses[ability.id].level !== -1 && <ArrowDownwardIcon></ArrowDownwardIcon>}
+                    {bonus.bonuses[ability.id].level !== -1 && <p>{ability.name(bonus.bonuses[ability.id].level + 1)}</p>}
+                    {bonus.bonuses[ability.id].level !== -1 && <p className={styles.abilityDescription}>{ability.description(bonus.bonuses[ability.id].level + 1)}</p>}
                     <div className={styles.buttonContainer}>
                       <Button className={styles.exitButton} variant="contained" onClick={exit}>CANCEL</Button>
                       <Button className={styles.confirmButton} variant="contained" onClick={purchase}>PURCHASE</Button>
@@ -109,13 +117,17 @@ const Bonuses = () => {
                 layout="fixed" 
                 width="64px" 
                 height="64px" 
-                alt={ability.name(ability.level + 1)} 
+                alt={ability.name(bonus.bonuses[ability.id].level + 1)} 
                 src={ability.image}
               >
               </ExportedImage>
             </div>
-            <p className={styles.abilityName}>{ability.name(ability.level + 1)}</p>
-            <p className={styles.abilityCost}>{"Cost: " + ability.cost(ability.level + 1) + " BP"}</p>
+            <p className={styles.abilityName}>
+              {ability.name(bonus.bonuses[ability.id].level + 1)}
+            </p>
+            <p className={styles.abilityCost}>
+              {"Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}
+            </p>
           </div>
         })}
       </div>
