@@ -40,6 +40,7 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap) => {
   playerDPS = Math.max(playerDPS, 1);
   enemyDPS = Math.max(enemyDPS, 1) / 100;
 
+  if (Math.floor(pokemon.stats[0]) <= 0) playerDPS = 0;
   return { playerDPS, enemyDPS }
 }
 

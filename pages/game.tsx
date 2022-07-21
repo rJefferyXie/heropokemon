@@ -155,6 +155,7 @@ const Game: NextPage = () => {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
       newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, newEnemy.stats[1]);
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
+      dispatch(allActions.damageActions.setPlayerDPS(playerDPS));
       return;
     }
 
