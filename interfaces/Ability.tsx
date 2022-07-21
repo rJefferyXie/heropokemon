@@ -1,10 +1,10 @@
 interface Ability {
   id: string,
-  cost: number,
-  name: string,
+  cost: Function,
+  name: Function,
   image: string,
-  level?: number,
-  description: string
+  level: number,
+  description: Function
 }
 
 export default Ability;
