@@ -77,7 +77,7 @@ const Items = () => {
                         width="128px" 
                         height="128px" 
                         alt={item.name} 
-                        src={"/" + item.image}
+                        src={item.image}
                       >
                       </ExportedImage>
                     </div>                    
@@ -112,7 +112,7 @@ const Items = () => {
               width="64px" 
               height="64px" 
               alt={items[item].name} 
-              src={"/" + items[item].image}
+              src={items[item].image}
             >
             </ExportedImage>
           </div>          
