@@ -73,7 +73,7 @@ const Game: NextPage = () => {
 
       // calculate currency and get the next enemy
       const enemyHealthPortion = Math.floor((enemy.enemy.stats[1] / enemy.enemy.level) * (1 + enemy.enemy.level / 100))
-      const newCurrency = (game.currency + enemyHealthPortion) * (1 + bonus.bonuses["fortune"].level * 0.1);
+      const newCurrency = Math.floor((game.currency + enemyHealthPortion) * (1 + bonus.bonuses["fortune"].level * 0.1));
       dispatch(allActions.gameActions.setCurrency(newCurrency));
       dispatch(allActions.bonusActions.setExperience(bonus.experience + enemyHealthPortion));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
@@ -194,7 +194,66 @@ const Game: NextPage = () => {
   }
 
   const bonusCalculations = () => {
-    
+    if (!bonus.bonuses["swapper"].activated && !bonus.bonuses["healer"].activated) return;
+
+    const newTeam = JSON.parse(JSON.stringify(team));
+    if (bonus.bonuses["swapper"].activated) {
+      let bestPokemon = {
+        index: 0, 
+        dps: 0 
+      }
+
+      team.map((_: any, idx: number) => {
+        if (Math.floor(team[idx].stats[0]) <= 0) return;
+
+        const { playerDPS } = getDPS(enemy.enemy, team[idx], bonus.bonuses["vigor"]);
+        if (playerDPS > bestPokemon.dps) {
+          bestPokemon.index = idx;
+          bestPokemon.dps = playerDPS;
+        }
+      });
+
+      if (bestPokemon.index > 0) {
+        [newTeam[0], newTeam[bestPokemon.index]] = [newTeam[bestPokemon.index], newTeam[0]];
+      }
+    }
+
+    if (bonus.bonuses["healer"].activated) {
+      const newItems = JSON.parse(JSON.stringify(items));
+      team.map((pokemon: PokemonMap, idx: number) => {
+        if (pokemon.stats[1] - pokemon.stats[0] >= 120) {
+          if (items["potion3"] && items["potion3"].quantity > 0) {
+            newTeam[idx].stats[0] += 120;
+            newItems["potion3"].quantity -= 1;
+            return;
+          } else if (items["potion4"] && items["potion4"].quantity > 0) {
+            newTeam[idx].stats[0] = newTeam[idx].stats[1];
+            newItems["potion4"].quantity -= 1;
+            return;
+          }
+        }
+
+        if (pokemon.stats[1] - pokemon.stats[0] >= 50) {
+          if (items["potion2"] && items["potion2"].quantity > 0) {
+            newTeam[idx].stats[0] += 50;
+            newItems["potion2"].quantity -= 1;
+            return;
+          }
+        }
+
+        if (pokemon.stats[1] - pokemon.stats[0] >= 20) {
+          if (items["potion1"] && items["potion1"].quantity > 0) {
+            newTeam[idx].stats[0] += 20;
+            newItems["potion1"].quantity -= 1;
+            return;
+          }
+        } 
+      });
+
+      dispatch(allActions.itemActions.setItems(newItems));
+    }
+
+    dispatch(allActions.teamActions.setTeam(newTeam));
   }
 
   useEffect(() => {
@@ -206,9 +265,13 @@ const Game: NextPage = () => {
     const gameFlowTick = () => gameFlowCallback.current();
     const gameFlowInterval = setInterval(gameFlowTick, 100);
 
+    const gameBonusTick = () => gameBonusCallback.current();
+    const gameBonusInterval = setInterval(gameBonusTick, 2000);
+
     return () => {
       clearInterval(gameSaveInterval);
       clearInterval(gameFlowInterval);
+      clearInterval(gameBonusInterval);
     };        
   }, [regions.selected]);
 
