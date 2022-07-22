@@ -74,7 +74,7 @@ const Game: NextPage = () => {
     } else {
 
       // level ups, enemy joining team, and evolutions
-      const { newTeam, newStorage, joinMessage } = enemyFainted(team, storage, pokedex.pokedex, enemy.enemy);
+      const { newTeam, newStorage, joinMessage } = enemyFainted(team, storage, pokedex.pokedex, enemy.enemy, bonus.bonuses["kindSoul"]);
       dispatch(allActions.teamActions.setTeam(newTeam));
       dispatch(allActions.storageActions.setStorage(newStorage));
       joinMessage !== undefined && dispatch(allActions.alertActions.addAlert(joinMessage));
@@ -148,7 +148,7 @@ const Game: NextPage = () => {
   const gameFlow = () => {
     if (enemy.enemy === {} || team.length === 0) return;
 
-    const { playerDPS, enemyDPS } = getDPS(enemy.enemy, team[0]);
+    const { playerDPS, enemyDPS } = getDPS(enemy.enemy, team[0], bonus.bonuses["vigor"]);
     const newTeam = JSON.parse(JSON.stringify(team));
 
     if (bonus.bonuses["regeneration"].level >= 1) {
