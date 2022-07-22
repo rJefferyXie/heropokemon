@@ -18,7 +18,6 @@ export const SET_BADGES = "SET_BADGES";
 export const SET_ITEMS = "SET_ITEMS";
 
 // Damage Types
-export const SET_CLICK_DAMAGE = "SET_CLICK_DAMAGE";
 export const SET_PLAYER_DPS = "SET_PLAYER_DPS";
 
 // Floor Types

@@ -13,8 +13,8 @@ const Enemy = () => {
   const dispatch = useDispatch();
   const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
   const enemy = useSelector((state: any) => {return state.enemyReducer.enemy});
-  const team = useSelector((state: any) => {return state.teamReducer.team})
-  const clickDamage = useSelector((state: any) => {return state.damageReducer.clickDamage});
+  const team = useSelector((state: any) => {return state.teamReducer.team});
+  const bonus = useSelector((state: any) => {return state.bonusReducer});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   // damage dealt to enemy upon clicking image
@@ -28,7 +28,7 @@ const Enemy = () => {
       return;
     }
 
-    dispatch(allActions.enemyActions.hitEnemy(clickDamage));
+    dispatch(allActions.enemyActions.hitEnemy((bonus.bonuses["strongStyle"].level ** 2) + 1));
   }
 
   return (

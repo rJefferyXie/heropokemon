@@ -1,11 +1,4 @@
-import { SET_CLICK_DAMAGE, SET_PLAYER_DPS } from '../types';
-
-const setClickDamage = (damage: number) => {
-  return {
-    type: SET_CLICK_DAMAGE,
-    payload: damage
-  }
-}
+import { SET_PLAYER_DPS } from '../types';
 
 const setPlayerDPS = (dps: number) => {
   return {
@@ -14,4 +7,4 @@ const setPlayerDPS = (dps: number) => {
   }
 }
 
-export default { setClickDamage, setPlayerDPS }
+export default { setPlayerDPS }

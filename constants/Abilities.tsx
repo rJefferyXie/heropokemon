@@ -58,7 +58,7 @@ const Abilities: Ability[] = [
       return Math.max(2, level ** 2)
     },
     description: (level: number) => {
-      return `Your clicks deal ${Math.max(2, level ** 2) + 1} damage to wild pokemon.`;
+      return `Your clicks deal ${(level ** 2) + 1} damage to wild pokemon.`;
     }
   },
   {
