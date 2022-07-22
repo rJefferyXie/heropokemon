@@ -11,14 +11,14 @@ const addPokemon = (destination: PokemonMap[], enemy: PokemonMap) => {
   destination[destination.length - 1].stats[0] = destination[destination.length - 1].stats[1];
 }
 
-const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: PokedexMap, enemy: PokemonMap) => {  
+const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: PokedexMap, enemy: PokemonMap, kindSoul: {level: number}) => {  
   const newTeam = JSON.parse(JSON.stringify(team));
   const newStorage = JSON.parse(JSON.stringify(storage));
   let joinMessage;
 
   // 25% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-  if (joinTeamChance >= 75) {
+  if (joinTeamChance >= (75 * (1 - kindSoul.level * 0.1))) {
     const pokemonOwned: string[] = [];
     let containsDuplicate = false;
 
