@@ -7,8 +7,8 @@ import { Button } from '@mui/material';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import CategoryIcon from '@mui/icons-material/Category';
+import InsightsIcon from '@mui/icons-material/Insights';
+import ScienceIcon from '@mui/icons-material/Science';
 
 interface OptionsProps {
   select: Function,
@@ -38,7 +38,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
         className={selected === 2 ? styles.optionSelected : styles.option} 
         variant="contained" 
         onClick={() => select(2)}>
-        <CategoryIcon></CategoryIcon>
+        <ScienceIcon></ScienceIcon>
       </Button>
 
       <Button 
@@ -52,7 +52,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
         className={selected === 4 ? styles.optionSelected : styles.option} 
         variant="contained" 
         onClick={() => select(4)}>
-        <LeaderboardIcon></LeaderboardIcon>
+        <InsightsIcon></InsightsIcon>
       </Button>
     </div>
   )
