@@ -53,10 +53,14 @@ const CreateGameSave = (starter: PokemonMap) => {
         level: -1
       },
       "swapper": {
-        level: -1
+        level: -1,
+        unlocked: true,
+        activated: true
       },
       "healer": {
-        level: -1
+        level: -1,
+        unlocked: true,
+        activated: true
       }
     }
   }
