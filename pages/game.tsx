@@ -50,20 +50,12 @@ const Game: NextPage = () => {
 
   const gameSaveCallback = useRef<any>();
   const gameFlowCallback = useRef<any>();
+  const gameBonusCallback = useRef<any>();
 
-  const saveGame = () => {
-    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
-      "floor": game.highestFloor,
-      "currency": game.currency,
-      "storage": storage,
-      "badges": game.badges,
-      "items": items,
-      "team": team,
-      "experience": bonus.experience,
-      "level": bonus.level,
-      "bonusPoints": bonus.bonusPoints,
-      "bonuses": bonus.bonuses
-    }));  
+  const closeSnackbar = (_: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") return;
+    setShowAlert(false);
+    dispatch(allActions.alertActions.nextAlert());
   }
 
   const nextEnemy = () => {
@@ -145,6 +137,25 @@ const Game: NextPage = () => {
     gameFlowCallback.current = gameFlow;
   });
 
+  useEffect(() => {
+    gameBonusCallback.current = bonusCalculations;
+  })
+
+  const saveGame = () => {
+    localStorage.setItem(regions.selected + 'Save', JSON.stringify({
+      "floor": game.highestFloor,
+      "currency": game.currency,
+      "storage": storage,
+      "badges": game.badges,
+      "items": items,
+      "team": team,
+      "experience": bonus.experience,
+      "level": bonus.level,
+      "bonusPoints": bonus.bonusPoints,
+      "bonuses": bonus.bonuses
+    }));  
+  }
+
   const gameFlow = () => {
     if (enemy.enemy === {} || team.length === 0) return;
 
@@ -182,6 +193,10 @@ const Game: NextPage = () => {
     dispatch(allActions.damageActions.setPlayerDPS(playerDPS));
   }
 
+  const bonusCalculations = () => {
+    
+  }
+
   useEffect(() => {
     if (!regions.selected) return;
     
@@ -206,12 +221,6 @@ const Game: NextPage = () => {
     setShowAlert(true);
     setAlertMessage(alerts[0]);
   }, [alerts]);
-
-  const closeSnackbar = (_: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === "clickaway") return;
-    setShowAlert(false);
-    dispatch(allActions.alertActions.nextAlert());
-  }
 
   return (
     <div className={styles.container}>
