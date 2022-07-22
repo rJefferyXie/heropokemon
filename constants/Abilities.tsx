@@ -8,7 +8,6 @@ const Abilities: Ability[] = [
   {
     id: "regeneration",
     image: "/images/lightBall.webp",
-    level: 0,
     name: (level: number) => {
       return "Regeneration " + AbilityLevels[level];
     },
@@ -22,7 +21,6 @@ const Abilities: Ability[] = [
   {
     id: "kindSoul",
     image: "/images/heartScale.webp",
-    level: 0,
     name: (level: number) => {
       return "Kind Soul " + AbilityLevels[level];
     },
@@ -36,7 +34,6 @@ const Abilities: Ability[] = [
   {
     id: "vigor",
     image: "/images/deepSeaTooth.webp",
-    level: 0,
     name: (level: number) => {
       return "Vigor " + AbilityLevels[level];
     },
@@ -50,7 +47,6 @@ const Abilities: Ability[] = [
   {
     id: "strongStyle",
     image: "/images/blackBelt.webp",
-    level: 0,
     name: (level: number) => {
       return "Strong Style " + AbilityLevels[level];
     },
@@ -64,7 +60,6 @@ const Abilities: Ability[] = [
   {
     id: "fortune",
     image: "/images/amuletCoin.webp",
-    level: 0,
     name: (level: number) => {
       return "Fortune " + AbilityLevels[level];
     },
@@ -78,7 +73,6 @@ const Abilities: Ability[] = [
   {
     id: "mysteryBall",
     image: "/images/pokeball.webp",
-    level: -1,
     name: (_: any) => {
       return "Mystery Ball"
     },
@@ -92,7 +86,6 @@ const Abilities: Ability[] = [
   {
     id: "swapper",
     image: "/images/lustrousOrb.webp",
-    level: -1,
     name: (_: any) => {
       return "Auto Swapper"
     },
@@ -106,7 +99,6 @@ const Abilities: Ability[] = [
   {
     id: "healer",
     image: "/images/soulDew.png",
-    level: -1,
     name: (_: any) => {
       return "Auto Healer";
     },

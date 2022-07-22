@@ -3,7 +3,7 @@ interface Ability {
   cost: Function,
   name: Function,
   image: string,
-  level: number,
+  unlocked?: boolean,
   description: Function
 }
 
