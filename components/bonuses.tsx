@@ -117,13 +117,13 @@ const Bonuses = () => {
                 layout="fixed" 
                 width="64px" 
                 height="64px" 
-                alt={ability.name(bonus.bonuses[ability.id].level + 1)} 
+                alt={ability.name(bonus.bonuses[ability.id].level)} 
                 src={ability.image}
               >
               </ExportedImage>
             </div>
             <p className={styles.abilityName}>
-              {ability.name(bonus.bonuses[ability.id].level + 1)}
+              {ability.name(bonus.bonuses[ability.id].level)}
             </p>
             <p className={styles.abilityCost}>
               {"Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}
