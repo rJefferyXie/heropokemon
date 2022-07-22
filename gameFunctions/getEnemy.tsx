@@ -57,8 +57,8 @@ const getEnemy = (pokedex: PokedexMap, floor: number): PokemonMap => {
       enemyInfo.stats[i + 1] += statBoost;
     }
 
-    enemyInfo.stats[0] *= enemyInfo.level;
-    enemyInfo.stats[1] *= enemyInfo.level;
+    enemyInfo.stats[0] *= (1 + (enemyInfo.level * 0.1));
+    enemyInfo.stats[1] *= (1 + (enemyInfo.level * 0.1));
   }
 
   return enemyInfo;

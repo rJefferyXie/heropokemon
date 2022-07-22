@@ -44,7 +44,7 @@ const Enemy = () => {
       </div>
       <div className={styles.healthBarWrapper}>
         <div className={styles.healthBar} style={{width: Math.floor(enemy.stats[0] / enemy.stats[1] * 100) + "%"}}>
-          <p className={styles.healthValue}>{Math.floor(enemy.stats[0])}/{enemy.stats[1]}</p>
+          <p className={styles.healthValue}>{Math.floor(enemy.stats[0])}/{Math.floor(enemy.stats[1])}</p>
         </div>
       </div>
     </div>

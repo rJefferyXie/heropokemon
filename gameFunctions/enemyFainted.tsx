@@ -7,7 +7,7 @@ import LevelUp from './levelUp';
 
 const addPokemon = (destination: PokemonMap[], enemy: PokemonMap) => {
   destination.push(JSON.parse(JSON.stringify(enemy)));
-  destination[destination.length - 1].stats[1] /= destination[destination.length - 1].level;
+  destination[destination.length - 1].stats[1] /= (1 + (destination[destination.length - 1].level * 0.1));
   destination[destination.length - 1].stats[0] = destination[destination.length - 1].stats[1];
 }
 
