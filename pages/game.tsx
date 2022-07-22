@@ -12,6 +12,7 @@ import { Snackbar, Button } from '@mui/material';
 
 // Interfaces
 import GameSave from '../interfaces/GameSave';
+import PokemonMap from '../interfaces/PokemonMap';
 
 // Game Functions
 import getDPS from '../gameFunctions/getDPS';
@@ -148,18 +149,27 @@ const Game: NextPage = () => {
     if (enemy.enemy === {} || team.length === 0) return;
 
     const { playerDPS, enemyDPS } = getDPS(enemy.enemy, team[0]);
-
     const newTeam = JSON.parse(JSON.stringify(team));
-    newTeam[0].stats[0] -= enemyDPS;
+
+    if (bonus.bonuses["regeneration"].level >= 1) {
+      const regenerationAmount = ((bonus.bonuses["regeneration"].level * 2) / 100);
+      newTeam.map((pokemon: PokemonMap) => {
+        if (Math.floor(pokemon.stats[0]) > 0) {
+          pokemon.stats[0] = Math.min(pokemon.stats[0] + regenerationAmount, pokemon.stats[1]);
+        }
+      });
+    }
+
+    newTeam[0].stats[0] = Math.max(newTeam[0].stats[0] - enemyDPS, 0);
+    dispatch(allActions.teamActions.setTeam(newTeam));
+
     if (newTeam[0].stats[0] <= 0) {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
       newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, newEnemy.stats[1]);
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
       dispatch(allActions.damageActions.setPlayerDPS(playerDPS));
       return;
-    }
-
-    dispatch(allActions.teamActions.setTeam(newTeam));
+    } 
 
     const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
     newEnemy.stats[0] -= playerDPS;
