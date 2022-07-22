@@ -81,7 +81,7 @@ const Game: NextPage = () => {
 
       // calculate currency and get the next enemy
       const enemyHealthPortion = Math.floor((enemy.enemy.stats[1] / enemy.enemy.level) * (1 + enemy.enemy.level / 100))
-      const newCurrency = game.currency + enemyHealthPortion;
+      const newCurrency = (game.currency + enemyHealthPortion) * (1 + bonus.bonuses["fortune"].level * 0.1);
       dispatch(allActions.gameActions.setCurrency(newCurrency));
       dispatch(allActions.bonusActions.setExperience(bonus.experience + enemyHealthPortion));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
