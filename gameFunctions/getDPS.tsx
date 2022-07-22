@@ -4,7 +4,7 @@ import TypeAdvantages from '../constants/TypeAdvantages';
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
-const getDPS = (enemy: PokemonMap, pokemon: PokemonMap) => {
+const getDPS = (enemy: PokemonMap, pokemon: PokemonMap, vigor: {level: number}) => {
   /* 
     Damage calculation taken from official pokemon games from Gen IV.
     link: https://bulbapedia.bulbagarden.net/wiki/Damage
@@ -37,7 +37,7 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap) => {
   }
 
   // make sure that both sides are doing more than 0 damage per interval
-  playerDPS = Math.max(playerDPS, 1);
+  playerDPS = Math.max(playerDPS * (1 + (vigor.level * 0.1)), 1);
   enemyDPS /= 25;
 
   if (Math.floor(pokemon.stats[0]) <= 0) playerDPS = 0;
