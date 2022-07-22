@@ -13,10 +13,10 @@ const Abilities: Ability[] = [
       return "Regeneration " + AbilityLevels[level];
     },
     cost: (level: number) => {
-      return level ** 2 + 2
+      return Math.max(2, level ** 2)
     },
     description: (level: number) => {
-      return `Pokemon on your team with more than 0 HP will regenerate ${level ** 2} HP per second.`;
+      return `Pokemon on your team with more than 0 HP will regenerate ${(level * 2) / 10} HP per second.`;
     }
   },
   {
@@ -27,7 +27,7 @@ const Abilities: Ability[] = [
       return "Kind Soul " + AbilityLevels[level];
     },
     cost: (level: number) => {
-      return level ** 2 + 2
+      return Math.max(2, level ** 2)
     },
     description: (level: number) => {
       return `All wild pokemon are ${level * 10}% more likely to join your team.`;
@@ -41,7 +41,7 @@ const Abilities: Ability[] = [
       return "Vigor " + AbilityLevels[level];
     },
     cost: (level: number) => {
-      return level ** 2 + 2
+      return Math.max(2, level ** 2)
     },
     description: (level: number) => {
       return `Your pokemon deal ${level * 10}% more damage.`;
@@ -55,10 +55,10 @@ const Abilities: Ability[] = [
       return "Strong Style " + AbilityLevels[level];
     },
     cost: (level: number) => {
-      return level ** 2 + 2
+      return Math.max(2, level ** 2)
     },
     description: (level: number) => {
-      return `Your clicks deal ${level ** 2 + 1} damage to wild pokemon.`;
+      return `Your clicks deal ${Math.max(2, level ** 2) + 1} damage to wild pokemon.`;
     }
   },
   {
@@ -69,7 +69,7 @@ const Abilities: Ability[] = [
       return "Fortune " + AbilityLevels[level];
     },
     cost: (level: number) => {
-      return level ** 2 + 2
+      return Math.max(2, level ** 2)
     },
     description: (level: number) => {
       return `Wild pokemon drop ${level * 10}% more currency.`;
@@ -97,7 +97,7 @@ const Abilities: Ability[] = [
       return "Auto Swapper"
     },
     cost: (_: any) => {
-      return 20;
+      return 10;
     },
     description: (_: any) => {
       return "Pokemon on your team will be swapped to the first slot automatically.";
@@ -111,7 +111,7 @@ const Abilities: Ability[] = [
       return "Auto Healer";
     },
     cost: (_: any) => {
-      return 20;
+      return 10;
     },
     description: (_: any) => {
       return "Automatically uses your potions on your pokemon when their health gets low.";
