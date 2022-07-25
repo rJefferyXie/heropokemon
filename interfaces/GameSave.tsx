@@ -8,10 +8,11 @@ interface GameSave {
   "badges": string[],
   "floor": number,
   "items": {},
-  "experience": number
-  "level": number
-  "bonusPoints": number
-  "bonuses": {}
+  "experience": number,
+  "level": number,
+  "bonusPoints": number,
+  "bonuses": {},
+  "gameBeaten": boolean
 }
 
 export default GameSave;
