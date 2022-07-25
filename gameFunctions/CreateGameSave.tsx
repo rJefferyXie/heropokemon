@@ -1,7 +1,7 @@
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
-const CreateGameSave = (starter: PokemonMap) => {
+const createGameSave = (starter: PokemonMap) => {
   const starterLevel = 5;
   const starterInfo = JSON.parse(JSON.stringify(starter));
   starterInfo.level = starterLevel;
@@ -68,4 +68,4 @@ const CreateGameSave = (starter: PokemonMap) => {
   }
 }
 
-export default CreateGameSave;
+export default createGameSave;

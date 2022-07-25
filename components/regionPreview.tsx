@@ -22,7 +22,7 @@ import StarterPokemon from '../constants/StarterPokemon';
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 // Game Functions
-import CreateGameSave from '../gameFunctions/createGameSave';
+import createGameSave from '../gameFunctions/createGameSave';
 
 // Components
 import StarterCard from './starterCard';
@@ -79,7 +79,7 @@ const RegionPreview = () => {
       return;
     }
 
-    const newGame = CreateGameSave(pokedex[starter]);
+    const newGame = createGameSave(pokedex[starter]);
     localStorage.setItem(regions.selected + 'Save', JSON.stringify(newGame));
     router.push('/game');
   }
