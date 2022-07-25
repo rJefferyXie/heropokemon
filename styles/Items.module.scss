@@ -50,8 +50,8 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  height: min(100%, 300px);
-  width: min(100%, 640px);
+  height: min(100%, 350px);
+  width: min(100%, 700px);
   padding: 0.25rem;
   background-color: rgba($sky-500, 0.2);
   box-shadow: 2px 2px 4px $zinc-900;
@@ -82,6 +82,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: auto auto 8px;
 }
 
 .quantityPreview {
@@ -133,7 +134,7 @@
   min-height: 0px !important;
   padding: 4px 16px !important;
   text-shadow: 1px 1px 1px $zinc-900;
-  margin: auto auto 0.25rem auto !important;
+  margin: 8px auto auto !important;
   background-color: rgba($red-700, 0.9) !important;
 }
 
