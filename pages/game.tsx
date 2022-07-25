@@ -194,6 +194,14 @@ const Game: NextPage = () => {
   }
 
   const bonusCalculations = () => {
+    if (showAlert) setShowAlert(false);
+
+    if (alerts.length > 0) {
+      setShowAlert(true);
+      setAlertMessage(alerts[0]);
+      dispatch(allActions.alertActions.nextAlert());
+    }
+
     if (!bonus.bonuses["swapper"].activated && !bonus.bonuses["healer"].activated) return;
 
     const newTeam = JSON.parse(JSON.stringify(team));
@@ -275,16 +283,6 @@ const Game: NextPage = () => {
     };        
   }, [regions.selected]);
 
-  useEffect(() => {
-    if (alerts.length <= 0) {
-      setShowAlert(false);
-      return;
-    }
-    
-    setShowAlert(true);
-    setAlertMessage(alerts[0]);
-  }, [alerts]);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -298,8 +296,6 @@ const Game: NextPage = () => {
       <Snackbar 
         open={showAlert}
         message={alertMessage}
-        autoHideDuration={3000}
-        onClose={closeSnackbar}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
         action={
           <Button 

@@ -36,13 +36,28 @@ const Bonuses = () => {
     setAbility(selectedAbility);
   }
 
+  const toggle = () => {
+    if (ability === undefined) return;
+
+    const newBonuses = JSON.parse(JSON.stringify(bonus.bonuses));
+    newBonuses[ability.id].activated = !newBonuses[ability.id].activated;
+    dispatch(allActions.bonusActions.setBonuses(newBonuses));
+  }
+
   const purchase = () => {
     if (ability === undefined) return;
+
     if ((bonus.bonuses[ability.id].level + 1) === 7 ||
       bonus.bonusPoints < ability.cost(bonus.bonuses[ability.id].level + 1)) return;
 
     const newAbility = JSON.parse(JSON.stringify(ability));
     const newBonuses = JSON.parse(JSON.stringify(bonus.bonuses));
+
+    if (newBonuses[newAbility.id].unlocked === false) {
+      newBonuses[newAbility.id].unlocked = true;
+      newBonuses[newAbility.id].activated = true;
+    }
+
     if (newBonuses[newAbility.id].level !== -1) {
       newBonuses[newAbility.id].level += 1;
       newAbility.level += 1;
@@ -93,9 +108,17 @@ const Bonuses = () => {
                     {bonus.bonuses[ability.id].level !== -1 && <ArrowDownwardIcon></ArrowDownwardIcon>}
                     {bonus.bonuses[ability.id].level !== -1 && <p>{ability.name(bonus.bonuses[ability.id].level + 1)}</p>}
                     {bonus.bonuses[ability.id].level !== -1 && <p className={styles.abilityDescription}>{ability.description(bonus.bonuses[ability.id].level + 1)}</p>}
+                    {(bonus.bonuses[ability.id].unlocked && bonus.bonuses[ability.id].unlocked === true) 
+                      && <p className={styles.toggleText}>{"This ability is " + (bonus.bonuses[ability.id].activated ? "activated." : "deactivated.")}</p>
+                    }
                     <div className={styles.buttonContainer}>
                       <Button className={styles.exitButton} variant="contained" onClick={exit}>CANCEL</Button>
-                      <Button className={styles.confirmButton} variant="contained" onClick={purchase}>PURCHASE</Button>
+                      {!(bonus.bonuses[ability.id].unlocked && bonus.bonuses[ability.id].unlocked === true) ?
+                        <Button className={styles.confirmButton} variant="contained" onClick={purchase}>PURCHASE</Button> :
+                        <Button className={styles.confirmButton} variant="contained" onClick={toggle}>
+                          {bonus.bonuses[ability.id].activated ? "Turn off" : "Turn on"}
+                        </Button>
+                      }
                     </div>
                   </div>
                 </div>

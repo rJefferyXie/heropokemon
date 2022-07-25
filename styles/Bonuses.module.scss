@@ -41,6 +41,10 @@
   width: 60%;
 }
 
+.toggleText {
+  margin: auto auto 8px;
+}
+
 .abilityPreview {
   display: flex;
   flex-direction: column;
@@ -81,7 +85,7 @@
 }
 
 .abilityDescription {
-  margin: 4px auto;
+  margin: 4px auto auto;
   background-color: rgba($zinc-900, 0.7);
   padding: 0.5rem;
   border-radius: 4px;
@@ -138,7 +142,7 @@
 
 .buttonContainer {
   display: flex;
-  margin: auto auto 0px;
+  margin: 0 auto;
 }
 
 .exitButton {
