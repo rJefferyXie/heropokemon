@@ -12,6 +12,8 @@ export const UNLOCK_REGION = "UNLOCK_REGION";
 export const SET_REGION = "SET_REGION";
 
 // Game Types
+export const SET_UNLOCK_POINTS = "SET_UNLOCK_POINTS";
+export const SET_GAME_BEATEN = "SET_GAME_BEATEN";
 export const SET_CURRENCY = "SET_CURRENCY";
 export const SET_STORAGE = "SET_STORAGE";
 export const SET_BADGES = "SET_BADGES";
