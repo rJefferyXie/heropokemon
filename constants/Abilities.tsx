@@ -70,19 +70,19 @@ const Abilities: Ability[] = [
       return `Wild pokemon drop ${level * 10}% more currency.`;
     }
   },
-  {
-    id: "mysteryBall",
-    image: "/images/pokeball.webp",
-    name: (_: any) => {
-      return "Mystery Ball"
-    },
-    cost: (_: any) => {
-      return 7;
-    },
-    description: (_: any) => {
-      return "Adds a random and unique pokemon to your team or storage.";
-    }
-  },
+  // {
+  //   id: "mysteryBall",
+  //   image: "/images/pokeball.webp",
+  //   name: (_: any) => {
+  //     return "Mystery Ball"
+  //   },
+  //   cost: (_: any) => {
+  //     return 7;
+  //   },
+  //   description: (_: any) => {
+  //     return "Adds a random and unique pokemon to your team or storage.";
+  //   }
+  // },
   {
     id: "swapper",
     image: "/images/lustrousOrb.webp",
