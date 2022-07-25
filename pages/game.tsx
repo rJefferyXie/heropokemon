@@ -98,10 +98,11 @@ const Game: NextPage = () => {
       return;
     } 
 
+    dispatch(allActions.gameActions.setHighestFloor(gameSave.highestFloor));
     dispatch(allActions.bonusActions.setBonusPoints(gameSave.bonusPoints));
     dispatch(allActions.bonusActions.setExperience(gameSave.experience));
+    dispatch(allActions.gameActions.setGameBeaten(gameSave.gameBeaten));
     dispatch(allActions.gameActions.setCurrentFloor(gameSave.floor));
-    dispatch(allActions.gameActions.setHighestFloor(gameSave.floor));
     dispatch(allActions.storageActions.setStorage(gameSave.storage));
     dispatch(allActions.gameActions.setCurrency(gameSave.currency));
     dispatch(allActions.bonusActions.setBonuses(gameSave.bonuses));
@@ -126,6 +127,13 @@ const Game: NextPage = () => {
     dispatch(allActions.enemyActions.setEnemiesLeft(10));
     dispatch(allActions.gameActions.setHighestFloor(Math.max(game.currentFloor, game.highestFloor)));
 
+    if (game.highestFloor === 101 && game.currentFloor === 101 && game.gameBeaten === false) {
+      dispatch(allActions.gameActions.setGameBeaten(true));
+      dispatch(allActions.gameActions.setUnlockPoints(game.unlockPoints + 1));
+      dispatch(allActions.alertActions.addAlert(`You have beaten the ${regions.selected} region! You may now unlock another region.`));
+      saveGame();
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game.currentFloor, game.highestFloor]);
 
@@ -144,6 +152,7 @@ const Game: NextPage = () => {
   const saveGame = () => {
     localStorage.setItem(regions.selected + 'Save', JSON.stringify({
       "floor": game.highestFloor,
+      "highestFloor": game.highestFloor,
       "currency": game.currency,
       "storage": storage,
       "badges": game.badges,
@@ -152,7 +161,8 @@ const Game: NextPage = () => {
       "experience": bonus.experience,
       "level": bonus.level,
       "bonusPoints": bonus.bonusPoints,
-      "bonuses": bonus.bonuses
+      "bonuses": bonus.bonuses,
+      "gameBeaten": game.gameBeaten
     }));  
   }
 
@@ -267,19 +277,19 @@ const Game: NextPage = () => {
   useEffect(() => {
     if (!regions.selected) return;
     
-    const gameSaveTick = () => gameSaveCallback.current();
-    const gameSaveInterval = setInterval(gameSaveTick, 300000);
-
     const gameFlowTick = () => gameFlowCallback.current();
     const gameFlowInterval = setInterval(gameFlowTick, 100);
 
     const gameBonusTick = () => gameBonusCallback.current();
     const gameBonusInterval = setInterval(gameBonusTick, 2000);
 
+    const gameSaveTick = () => gameSaveCallback.current();
+    const gameSaveInterval = setInterval(gameSaveTick, 300000);
+
     return () => {
-      clearInterval(gameSaveInterval);
       clearInterval(gameFlowInterval);
       clearInterval(gameBonusInterval);
+      clearInterval(gameSaveInterval);
     };        
   }, [regions.selected]);
 

@@ -36,8 +36,9 @@ const RegionPreview = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
-  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   const regions = useSelector((state: any) => {return state.regionsReducer});
+  const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
+  const unlockPoints = useSelector((state: any) => {return state.gameReducer.unlockPoints});
   const pokedex: PokedexMap = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   
   const [theme, setTheme] = useState("");
@@ -71,6 +72,8 @@ const RegionPreview = () => {
   }
 
   const play = () => {    
+    dispatch(allActions.gameActions.setHighestFloor(1));
+
     if (Object.keys(gameSave).length > 0) {
       router.push('/game');
       return;
@@ -82,7 +85,13 @@ const RegionPreview = () => {
   }
 
   const unlock = () => {
-    setShowError(true);
+    if (unlockPoints === 0) {
+      setShowError(true);
+      return;
+    }
+
+    dispatch(allActions.regionsActions.unlockRegion(regions.selected));
+    dispatch(allActions.gameActions.setUnlockPoints(unlockPoints - 1));
   }
 
   const errorClose = (_: React.SyntheticEvent | Event, reason?: string) => {
@@ -119,6 +128,7 @@ const RegionPreview = () => {
                 <Button 
                   className={styles.playButton} 
                   variant="contained"
+                  onClick={unlock}
                 >
                 UNLOCK
                 </Button>

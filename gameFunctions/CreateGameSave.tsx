@@ -17,6 +17,7 @@ const CreateGameSave = (starter: PokemonMap) => {
 
   return {
     "floor": 1,
+    "highestFloor": 1,
     "currency": 0,
     "gameBeaten": false,
     "team": [starterInfo],

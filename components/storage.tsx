@@ -45,7 +45,7 @@ const Storage = () => {
         </SwapScreen>
       }
 
-      {storage.map((pokemon, idx) => {
+      {storage.slice(0, 6).map((pokemon, idx) => {
         return <StorageCard 
           pokemon={pokemon} 
           index={idx} 

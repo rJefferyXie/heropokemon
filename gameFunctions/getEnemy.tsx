@@ -32,9 +32,9 @@ const getEnemy = (pokedex: PokedexMap, floor: number): PokemonMap => {
     // make a deep copy of the pokemon to avoid mutating state
     enemyInfo = JSON.parse(JSON.stringify(pokedex[enemyName]));
 
-    // Use the floor as a guide for the pokemon's level, ( min: 2, max: 100 )
+    // Use the floor as a guide for the pokemon's level, ( min: 2, max: none )
     const minLevel = Math.max(floor - 2, 2);
-    const maxLevel = Math.min(floor + 2, 100);
+    const maxLevel = floor + 2;
     const level = Math.floor(Math.random() * (maxLevel - minLevel + 1) + minLevel);
 
     // all pokemon after and during floor 36 will be fully evolved

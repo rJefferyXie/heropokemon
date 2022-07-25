@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const Regions = () => {
   const selected = useSelector((state: any) => {return state.regionsReducer.selected});
   const visited = useSelector((state: any) => {return state.settingReducer.visited});
-
+  
   return (
     <div className={!visited ? styles.containerHidden : styles.container}>
       {selected && <RegionPreview></RegionPreview>}
