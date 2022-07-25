@@ -157,8 +157,8 @@ const RegionPreview = () => {
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
                   <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
+                    
                     <h1 className={styles.regionTitle}>{regions.selected}</h1>
-
                     <div className={styles.topRow}>
                       <p className={styles.currency}>{"Currency: $" + gameSave.currency}</p>
                       <p className={styles.highestFloor}>{"Highest Floor: " + gameSave.floor}</p>
