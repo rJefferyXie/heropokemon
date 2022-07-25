@@ -39,7 +39,9 @@ const Items = () => {
       exit();
       return;
     }
-  
+
+    if (item.name === "Rare Candy" && team[pokemonIdx].level === 100) return;
+    
     const { newItems, newTeam } = UseItem(item, items, team, pokemonIdx, pokedex);
     item.quantity -= 1;
     newItems[item.id].quantity -= 1;
