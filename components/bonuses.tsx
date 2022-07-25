@@ -149,7 +149,9 @@ const Bonuses = () => {
               {ability.name(bonus.bonuses[ability.id].level)}
             </p>
             <p className={styles.abilityCost}>
-              {"Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}
+              {bonus.bonuses[ability.id].unlocked && bonus.bonuses[ability.id].unlocked === true ?
+              bonus.bonuses[ability.id].activated ? "Activated" : "Disabled" :
+              "Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}
             </p>
           </div>
         })}
