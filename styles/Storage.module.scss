@@ -6,11 +6,22 @@
   width: 100%;
   flex-grow: 1;
   overflow-y: auto;
+  position: relative;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.27);
 }
 
 .emptyStorage {
   margin: auto;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  height: 10% !important;
+  width: 100% !important;
 }
 
 @media screen and (max-width: 960px) {
