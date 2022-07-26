@@ -52,7 +52,7 @@ const Hero = () => {
         <ExportedImage 
           className={styles.heroWallpaper} 
           layout="fill" 
-          src={"images/hero.png"}
+          src={"images/wallpapers/hero.png"}
         >
         </ExportedImage>
 

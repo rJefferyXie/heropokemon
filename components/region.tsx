@@ -39,7 +39,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         className={styles.regionWallpaper}
         layout="fill" 
         alt={name} 
-        src={"images/" + name + ".png"}
+        src={"images/wallpapers/" + name + ".png"}
       >
       </ExportedImage>
       
@@ -50,7 +50,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
             width="64px" 
             height="64px" 
             alt={image} 
-            src={"images/" + image + ".png"}
+            src={"images/pokemon/" + image + ".png"}
           >
           </ExportedImage>
         </div>
