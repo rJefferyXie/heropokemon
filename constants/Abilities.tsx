@@ -7,7 +7,7 @@ import AbilityLevels from './AbilityLevels';
 const Abilities: Ability[] = [
   {
     id: "regeneration",
-    image: "/images/lightBall.webp",
+    image: "/images/abilities/lightBall.webp",
     name: (level: number) => {
       return "Regeneration " + AbilityLevels[level];
     },
@@ -20,7 +20,7 @@ const Abilities: Ability[] = [
   },
   {
     id: "kindSoul",
-    image: "/images/heartScale.webp",
+    image: "/images/abilities/heartScale.webp",
     name: (level: number) => {
       return "Kind Soul " + AbilityLevels[level];
     },
@@ -33,7 +33,7 @@ const Abilities: Ability[] = [
   },
   {
     id: "vigor",
-    image: "/images/deepSeaTooth.webp",
+    image: "/images/abilities/deepSeaTooth.webp",
     name: (level: number) => {
       return "Vigor " + AbilityLevels[level];
     },
@@ -46,7 +46,7 @@ const Abilities: Ability[] = [
   },
   {
     id: "strongStyle",
-    image: "/images/blackBelt.webp",
+    image: "/images/abilities/blackBelt.webp",
     name: (level: number) => {
       return "Strong Style " + AbilityLevels[level];
     },
@@ -59,7 +59,7 @@ const Abilities: Ability[] = [
   },
   {
     id: "fortune",
-    image: "/images/amuletCoin.webp",
+    image: "/images/abilities/amuletCoin.webp",
     name: (level: number) => {
       return "Fortune " + AbilityLevels[level];
     },
@@ -72,7 +72,7 @@ const Abilities: Ability[] = [
   },
   // {
   //   id: "mysteryBall",
-  //   image: "/images/pokeball.webp",
+  //   image: "/images/abilities/pokeball.webp",
   //   name: (_: any) => {
   //     return "Mystery Ball"
   //   },
@@ -85,7 +85,7 @@ const Abilities: Ability[] = [
   // },
   {
     id: "swapper",
-    image: "/images/lustrousOrb.webp",
+    image: "/images/abilities/lustrousOrb.webp",
     name: (_: any) => {
       return "Auto Swapper"
     },
@@ -98,7 +98,7 @@ const Abilities: Ability[] = [
   },
   {
     id: "healer",
-    image: "/images/soulDew.png",
+    image: "/images/abilities/soulDew.png",
     name: (_: any) => {
       return "Auto Healer";
     },

@@ -6,77 +6,77 @@ const ShopItems: ShopItem[] = [
     id: "potion1",
     name: "Potion",
     cost: 100,
-    image: "/images/potion1.webp",
+    image: "/images/items/potion1.webp",
     description: "Heal a pokemon by 20 hitpoints."
   },
   {
     id: "potion2",
     name: "Super Potion",
     cost: 500,
-    image: "/images/potion2.png",
+    image: "/images/items/potion2.png",
     description: "Heal a pokemon by 50 hitpoints."
   },
   {
     id: "potion3",
     name: "Hyper Potion",
     cost: 2500,
-    image: "/images/potion3.png",
+    image: "/images/items/potion3.png",
     description: "Heal a pokemon by 120 hitpoints."
   },
   {
     id: "potion4",
     name: "Max Potion",
     cost: 5000,
-    image: "/images/potion4.png",
+    image: "/images/items/potion4.png",
     description: "Fully heal a pokemon's hitpoints."
   },
   {
     id: "hp",
     name: "HP Up",
     cost: 3000,
-    image: "/images/hpUp.webp",
+    image: "/images/items/hpUp.webp",
     description: "Raise a pokemon's HP stat by 1."
   },
   {
     id: "protein",
     name: "Protein",
     cost: 3000,
-    image: "/images/protein.webp",
+    image: "/images/items/protein.webp",
     description: "Raise a pokemon's attack stat by 1."
   },
   {
     id: "iron",
     name: "Iron",
     cost: 3000,
-    image: "/images/iron.webp",
+    image: "/images/items/iron.webp",
     description: "Raise a pokemon's defense stat by 1."
   },
   {
     id: "calcium",
     name: "Calcium",
     cost: 3000,
-    image: "/images/calcium.webp",
+    image: "/images/items/calcium.webp",
     description: "Raise a pokemon's special attack stat by 1."
   },
   {
     id: "zinc",
     name: "Zinc",
     cost: 3000,
-    image: "/images/zinc.webp",
+    image: "/images/items/zinc.webp",
     description: "Raise a pokemon's special defense stat by 1."
   },
   {
     id: "carbos",
     name: "Carbos",
     cost: 3000,
-    image: "/images/carbos.webp",
+    image: "/images/items/carbos.webp",
     description: "Raise a pokemon's speed stat by 1."
   },
   {
     id: "rareCandy",
     name: "Rare Candy",
     cost: 7777,
-    image: "/images/rareCandy.webp",
+    image: "/images/items/rareCandy.webp",
     description: "Raise a pokemon's level by 1."
   }
 ]
