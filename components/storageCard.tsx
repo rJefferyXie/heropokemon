@@ -11,6 +11,7 @@ import PokemonMap from '../interfaces/PokemonMap';
 // Animations
 import { motion, AnimatePresence } from 'framer-motion';
 import DropInTop from '../animations/dropInTop';
+import PokemonJoin from '../animations/pokemonJoin';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -53,7 +54,14 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
   }
 
   return (
-    <div className={styles.container}>
+    <motion.div 
+      className={styles.container}
+      key="modal" 
+      initial="hidden" 
+      animate="visible" 
+      variants={PokemonJoin}
+      transition={{duration: 0.2, type: "spring"}} 
+      >
       <AnimatePresence>
         {releasing !== undefined &&
           <div className={styles.overlay}>
@@ -91,7 +99,7 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
         <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>
         <Button className={styles.releaseButton} variant="contained" onClick={select}>FREE</Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
