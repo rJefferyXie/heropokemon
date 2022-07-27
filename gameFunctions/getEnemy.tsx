@@ -2,6 +2,9 @@
 import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 
+// Constants
+import BiomeTypes from '../constants/BiomeTypes';
+
 const evolvePokemon = (enemy: PokemonMap, pokedex: PokedexMap): PokemonMap => {
   if (enemy.evolutions.length > 0) {
     const evolution = Math.floor(Math.random() * enemy.evolutions.length);   
@@ -11,7 +14,7 @@ const evolvePokemon = (enemy: PokemonMap, pokedex: PokedexMap): PokemonMap => {
   return enemy;
 }
 
-const getEnemy = (pokedex: PokedexMap, floor: number): PokemonMap => {
+const getEnemy = (pokedex: PokedexMap, floor: number, biome: string): PokemonMap => {
   const pokemonList = Object.keys(pokedex);
   let enemyInfo: PokemonMap;
 
@@ -19,6 +22,21 @@ const getEnemy = (pokedex: PokedexMap, floor: number): PokemonMap => {
   while (enemyInfo === undefined) {
     const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)]; 
     const pokemonEntry = pokedex[enemyName];
+
+    if (biome !== "gym") {
+      let flag = false;
+      if (BiomeTypes[biome].includes(pokemonEntry.types[0]) || pokemonEntry.types[0] === "normal") {
+        flag = true;
+      }
+
+      if (pokemonEntry.types[1]) {
+        if (BiomeTypes[biome].includes(pokemonEntry.types[1]) || pokemonEntry.types[1] === "normal") {
+          flag = true;
+        }
+      }
+
+      if (!flag) continue;
+    }
 
     // no mythical or legendary pokemon until after floor 40
     if (floor < 40 && (pokemonEntry.is_legendary || pokemonEntry.is_mythical)) continue;

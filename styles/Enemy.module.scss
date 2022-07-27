@@ -21,18 +21,24 @@
 
 .enemyName {
   text-transform: uppercase;
-  margin: 0 auto 0 auto;
+  margin: 4px auto;
+  padding: 0.5rem;
+  color: $zinc-50;
+  border-radius: 4px;
+  text-shadow: 1px 1px 1px $zinc-900;
+  box-shadow: 1px 1px 4px $zinc-900;
+  background-color: rgba($zinc-800, 0.8);
 }
 
 .enemyLevel {
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
 }
 
 .healthBarWrapper {
   width: 100%;
   max-width: 320px;
   height: 2rem;
-  background-color: rgba($zinc-900, 0.5);
+  background-color: rgba($zinc-900, 0.6);
   box-shadow: 1px 1px 4px $zinc-800;
   border-radius: 16px;
   margin: 4px auto auto;

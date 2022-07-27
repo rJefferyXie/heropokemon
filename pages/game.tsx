@@ -120,7 +120,7 @@ const Game: NextPage = () => {
 
   useEffect(() => {
     if (pokedex.pokedex === {}) return;
-    const enemyInfo = getEnemy(pokedex.pokedex, game.currentFloor);
+    const enemyInfo = getEnemy(pokedex.pokedex, game.currentFloor, biomes.activeBiome);
     dispatch(allActions.enemyActions.setEnemy(enemyInfo));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -288,7 +288,7 @@ const Game: NextPage = () => {
     const gameBonusInterval = setInterval(gameBonusTick, 2000);
 
     const gameSaveTick = () => gameSaveCallback.current();
-    const gameSaveInterval = setInterval(gameSaveTick, 300000);
+    const gameSaveInterval = setInterval(gameSaveTick, 60000);
 
     return () => {
       clearInterval(gameFlowInterval);

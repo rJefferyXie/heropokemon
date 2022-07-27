@@ -33,8 +33,13 @@ const Enemy = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.enemyImage} src={enemy.sprites[artwork]} alt={"An image of " + enemy.name} onClick={clickHit}></img>
-      <strong className={styles.enemyName}>{enemy.name + ", LEVEL " + enemy.level}</strong>
+      <img 
+        className={styles.enemyImage} 
+        src={enemy.sprites[artwork]} 
+        alt={"An image of " + enemy.name} 
+        onClick={clickHit}
+      >
+      </img>
       <div className={styles.types}>
         {enemy.types.map((type: string, idx: number) => {
           return <p className={styles.type} key={idx} style={{backgroundColor: TypeColorSchemes[type]}}>
@@ -42,6 +47,7 @@ const Enemy = () => {
           </p>
         })}
       </div>
+      <strong className={styles.enemyName}>{enemy.name + ", LEVEL " + enemy.level}</strong>
       <div className={styles.healthBarWrapper}>
         <div className={styles.healthBar} style={{width: Math.floor(enemy.stats[0] / enemy.stats[1] * 100) + "%"}}>
           <p className={styles.healthValue}>{Math.floor(enemy.stats[0])}/{Math.floor(enemy.stats[1])}</p>
