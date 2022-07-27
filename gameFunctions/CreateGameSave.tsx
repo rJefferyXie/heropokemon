@@ -21,6 +21,7 @@ const createGameSave = (starter: PokemonMap) => {
     "currency": 0,
     "gameBeaten": false,
     "team": [starterInfo],
+    "biomes": [],
     "storage": [],
     "items": {
       "potion1": {

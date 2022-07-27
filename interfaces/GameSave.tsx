@@ -6,6 +6,7 @@ interface GameSave {
   "team": PokemonMap[],
   "currency": number,
   "badges": string[],
+  "biomes": string[],
   "floor": number,
   "highestFloor": number,
   "items": {},
