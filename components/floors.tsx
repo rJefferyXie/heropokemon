@@ -1,9 +1,10 @@
 // React and Styling
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/Floors.module.scss';
 
 // Components
 import Floor from './floor';
+import biomeList from '../constants/Biomes';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,11 +13,32 @@ import allActions from '../store/actions/allActions';
 const Floors = () => {
   const dispatch = useDispatch();
   const floor = useSelector((state: any) => {return state.gameReducer});
+  const biomes = useSelector((state: any) => {return state.biomeReducer.biomes});
 
   const setFloor = (newFloor: number) => {
     if (newFloor === floor.currentFloor) return;
     dispatch(allActions.gameActions.setCurrentFloor(newFloor));
   }
+
+  useEffect(() => {
+    if (floor.currentFloor <= floor.highestFloor) {
+      dispatch(allActions.biomeActions.setActiveBiome(biomes[Math.floor(floor.currentFloor / 5)]));
+    } else {
+      if (Math.floor(floor.currentFloor / 5) >= biomes.length) {
+        let newBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
+
+        // re-roll once if we have already seen this biome for more variety
+        if (biomes.includes(newBiome)) {
+          newBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
+        }
+
+        dispatch(allActions.biomeActions.setBiomes([...biomes, newBiome]));
+        dispatch(allActions.biomeActions.setActiveBiome(newBiome));
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [floor.currentFloor, floor.highestFloor]);
 
   return (
     <div className={styles.container}>

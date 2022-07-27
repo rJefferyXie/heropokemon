@@ -100,6 +100,7 @@ const Game: NextPage = () => {
       return;
     } 
 
+    dispatch(allActions.biomeActions.setActiveBiome(gameSave.biomes[gameSave.biomes.length - 1]));
     dispatch(allActions.gameActions.setHighestFloor(gameSave.highestFloor));
     dispatch(allActions.bonusActions.setBonusPoints(gameSave.bonusPoints));
     dispatch(allActions.bonusActions.setExperience(gameSave.experience));
@@ -113,7 +114,6 @@ const Game: NextPage = () => {
     dispatch(allActions.bonusActions.setLevel(gameSave.level));
     dispatch(allActions.itemActions.setItems(gameSave.items));
     dispatch(allActions.teamActions.setTeam(gameSave.team));
-    dispatch(allActions.alertActions.nextAlert());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
@@ -159,7 +159,7 @@ const Game: NextPage = () => {
       "currency": game.currency,
       "storage": storage,
       "badges": game.badges,
-      "biomes": biomes,
+      "biomes": biomes.biomes,
       "items": items,
       "team": team,
       "experience": bonus.experience,

@@ -73,6 +73,7 @@ const RegionPreview = () => {
 
   const play = () => {    
     dispatch(allActions.gameActions.setHighestFloor(1));
+    dispatch(allActions.gameActions.setCurrentFloor(1));
 
     if (Object.keys(gameSave).length > 0) {
       router.push('/game');

@@ -1,6 +1,9 @@
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
+// Constants
+import biomeList from '../constants/Biomes';
+
 const createGameSave = (starter: PokemonMap) => {
   const starterLevel = 5;
   const starterInfo = JSON.parse(JSON.stringify(starter));
@@ -15,13 +18,15 @@ const createGameSave = (starter: PokemonMap) => {
 
   starterInfo.stats[0] += starterInfo.statBoosts[0];
 
+  const firstBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
+
   return {
     "floor": 1,
     "highestFloor": 1,
     "currency": 0,
     "gameBeaten": false,
     "team": [starterInfo],
-    "biomes": [],
+    "biomes": [firstBiome],
     "storage": [],
     "items": {
       "potion1": {
