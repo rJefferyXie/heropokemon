@@ -24,6 +24,7 @@ import experienceForLevel from '../gameFunctions/experienceForLevel';
 // Components
 import Navbar from '../components/navbar';
 import Floors from '../components/floors';
+import Biomes from '../components/biomes';
 import Enemy from '../components/enemy';
 import DPS from '../components/dps';
 
@@ -41,6 +42,7 @@ const Game: NextPage = () => {
   const pokedex = useSelector((state: any) => {return state.pokedexReducer});
   const regions = useSelector((state: any) => {return state.regionsReducer});
   const team = useSelector((state: any) => {return state.teamReducer.team});
+  const biomes = useSelector((state: any) => {return state.biomeReducer});
   const bonus = useSelector((state: any) => {return state.bonusReducer});
   const enemy = useSelector((state: any) => {return state.enemyReducer});
   const game = useSelector((state: any) => {return state.gameReducer});
@@ -106,6 +108,7 @@ const Game: NextPage = () => {
     dispatch(allActions.storageActions.setStorage(gameSave.storage));
     dispatch(allActions.gameActions.setCurrency(gameSave.currency));
     dispatch(allActions.bonusActions.setBonuses(gameSave.bonuses));
+    dispatch(allActions.biomeActions.setBiomes(gameSave.biomes));
     dispatch(allActions.gameActions.setBadges(gameSave.badges));
     dispatch(allActions.bonusActions.setLevel(gameSave.level));
     dispatch(allActions.itemActions.setItems(gameSave.items));
@@ -156,6 +159,7 @@ const Game: NextPage = () => {
       "currency": game.currency,
       "storage": storage,
       "badges": game.badges,
+      "biomes": biomes,
       "items": items,
       "team": team,
       "experience": bonus.experience,
@@ -324,7 +328,9 @@ const Game: NextPage = () => {
           <Floors></Floors>
           <div className={styles.spacer}></div>
         </div>
+
         <strong className={styles.enemiesLeft}>{enemy.enemiesLeft + " wild pokemon left."}</strong>  
+        <Biomes></Biomes>
 
         {Object.keys(enemy.enemy).length > 0 && <Enemy></Enemy>}
       </div>
