@@ -4,7 +4,7 @@ import styles from '../styles/Floors.module.scss';
 
 // Components
 import Floor from './floor';
-import biomeList from '../constants/Biomes';
+import biomeList from '../constants/BiomeList';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,6 +21,11 @@ const Floors = () => {
   }
 
   useEffect(() => {
+    if (Math.floor(floor.currentFloor % 10) === 0) {
+      dispatch(allActions.biomeActions.setActiveBiome("gym"));
+      return;
+    }
+
     if (floor.currentFloor <= floor.highestFloor) {
       dispatch(allActions.biomeActions.setActiveBiome(biomes[Math.floor(floor.currentFloor / 5)]));
     } else {

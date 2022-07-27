@@ -2,7 +2,7 @@
 import PokemonMap from '../interfaces/PokemonMap';
 
 // Constants
-import biomeList from '../constants/Biomes';
+import biomeList from '../constants/BiomeList';
 
 const createGameSave = (starter: PokemonMap) => {
   const starterLevel = 5;
@@ -32,7 +32,7 @@ const createGameSave = (starter: PokemonMap) => {
       "potion1": {
         "name": "Potion",
         "id": "potion1",
-        "image": "/images/potion1.webp",
+        "image": "/images/items/potion1.webp",
         "quantity": 10,
         "description": "Heal a pokemon by 20 hitpoints."
       }
