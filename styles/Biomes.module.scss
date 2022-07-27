@@ -1,0 +1,10 @@
+@import './constants.scss';
+
+.wallpaper {
+  position: absolute;
+  width: 110%;
+  height: 130%;
+  top: -25%;
+  left: -5%;
+  z-index: -1;
+}
