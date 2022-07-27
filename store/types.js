@@ -11,6 +11,10 @@ export const ADD_ENTRY = "ADD_ENTRY";
 export const UNLOCK_REGION = "UNLOCK_REGION";
 export const SET_REGION = "SET_REGION";
 
+// Biome Types
+export const SET_BIOMES = "SET_BIOMES";
+export const SET_ACTIVE_BIOME = "SET_ACTIVE_BIOME";
+
 // Game Types
 export const SET_UNLOCK_POINTS = "SET_UNLOCK_POINTS";
 export const SET_GAME_BEATEN = "SET_GAME_BEATEN";

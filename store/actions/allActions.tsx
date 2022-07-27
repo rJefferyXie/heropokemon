@@ -7,6 +7,7 @@ import damageActions from './damageActions';
 import enemyActions from './enemyActions';
 import alertActions from './alertActions';
 import bonusActions from './bonusActions';
+import biomeActions from './biomeActions';
 import gameActions from './gameActions';
 import teamActions from './teamActions';
 import itemActions from './itemActions';
@@ -21,6 +22,7 @@ const allActions = {
   enemyActions,
   alertActions,
   bonusActions,
+  biomeActions,
   gameActions,
   teamActions,
   itemActions
