@@ -4,8 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem;
-  padding: 1rem;
   width: 164px;
   height: 64px;
   color: $zinc-50;
@@ -13,6 +11,10 @@
   text-shadow: 1px 1px 1px $zinc-900;
   box-shadow: 1px 1px 4px $zinc-900;
   background-color: $zinc-800;
+
+  position: absolute;
+  top: 2%; 
+  left: 2%;
 }
 
 @media screen and (max-width: 960px) {

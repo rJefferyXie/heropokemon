@@ -8,3 +8,28 @@
   left: -5%;
   z-index: -1;
 }
+
+.biomeText {
+  display: flex;
+  position: absolute;
+  color: white;
+  background-color: rgba($slate-800, 0.7);
+  text-shadow: 1px 1px 1px rgba(24, 24, 27, 0.5);
+  box-shadow: 0px 0px 4px rgb(0, 0, 0);
+  text-transform: uppercase;
+  width: 164px;
+  height: 48px;
+  bottom: 2%;
+  left: 2%;
+}
+
+.biomeIcon {
+  width: 36px;
+  height: 36px;
+  margin: auto 4px;
+  border-radius: 4px;
+}
+
+.biomeName {
+  margin: auto;
+}

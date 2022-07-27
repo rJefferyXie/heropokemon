@@ -326,7 +326,6 @@ const Game: NextPage = () => {
         <div className={styles.row}>
           <DPS></DPS>
           <Floors></Floors>
-          <div className={styles.spacer}></div>
         </div>
 
         <strong className={styles.enemiesLeft}>{enemy.enemiesLeft + " wild pokemon left."}</strong>  

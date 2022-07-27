@@ -1,4 +1,8 @@
-const BiomeTypes = {
+interface BiomeMap {
+  [key: string]: string[]
+}
+
+const BiomeTypes: BiomeMap = {
   "beach": ["water", "flying", "rock", "steel", "fighting"],
   "cave": ["fairy", "fighting", "ghost", "dragon", "dark"],
   "city": ["fighting", "ghost", "electric", "psychic", "steel"],
