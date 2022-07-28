@@ -9,18 +9,6 @@
   border-bottom: 1px solid $zinc-900;
 }
 
-.overlay {
-  display: flex;
-  position: fixed;
-  z-index: 99;
-  height: 100vh;
-  width: 100vw;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba($zinc-900, 0.95);
-}
-
 .image {
   width: 25%;
   margin: auto 0 auto 0;
@@ -68,14 +56,25 @@
 
 @media screen and (max-width: 960px) {
   .container {
-    width: calc(100% / 3 - 8px);
+    width: calc(100vw - 4px);
+    height: 65%;
     margin: 4px;
   }
-}
 
-@media screen and (max-width: 640px) {
-  .container {
-    width: calc(100% / 2 - 8px);
-    margin: 4px;
+  .buttonContainerRow {
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .swapButton {
+    margin: auto auto 2px auto !important;
+  }
+
+  .releaseButton {
+    margin: 2px auto auto auto !important;
+  }
+
+  .image {
+    display: none;
   }
 }

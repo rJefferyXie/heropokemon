@@ -173,13 +173,14 @@
   .container {
     height: 100px;
     overflow: auto;
+    text-align: center;
   }
 
   .shopItem {
     width: calc(25% - 0.5rem);
   }
 
-  .itemName {
+  .itemCost {
     display: none;
   }
 
