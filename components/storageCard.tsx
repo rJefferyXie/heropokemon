@@ -1,56 +1,42 @@
 // React and Styling
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../styles/StorageCard.module.scss';
 
 // MUI
-import { ClickAwayListener, Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
 // Animations
-import { motion, AnimatePresence } from 'framer-motion';
-import DropInTop from '../animations/dropInTop';
+import { motion } from 'framer-motion';
 import PokemonJoin from '../animations/pokemonJoin';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import allActions from '../store/actions/allActions';
+import { useSelector } from 'react-redux';
 
 interface StorageCardProps {
   index: number,
   pokemon: PokemonMap,
   setSwapping: Function,
   setSwappingIdx: Function,
+  setReleasing: Function,
+  setReleasingIdx: Function
 }
 
 const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
-  const { pokemon, index, setSwapping, setSwappingIdx } = props;
-  const [releasing, setReleasing] = useState<PokemonMap>();
+  const { pokemon, index, setSwapping, setSwappingIdx, setReleasing, setReleasingIdx } = props;
 
-  const dispatch = useDispatch();
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
-  const storage: PokemonMap[] = useSelector((state: any) => {return state.storageReducer.storage});
 
   const swap = () => {
     setSwapping(true);
     setSwappingIdx(index);
   }
 
-  const release = () => {
-    const newStorage = JSON.parse(JSON.stringify(storage));
-    newStorage.splice(index, 1);
-
-    dispatch(allActions.storageActions.setStorage(newStorage));
-    exit();
-  }
-
   const select = () => {
     setReleasing(pokemon);
-  }
-
-  const exit = () => {
-    setReleasing(undefined);
+    setReleasingIdx(index);
   }
 
   return (
@@ -62,34 +48,6 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
       variants={PokemonJoin}
       transition={{duration: 0.2, type: "spring"}} 
       >
-      <AnimatePresence>
-        {releasing !== undefined &&
-          <div className={styles.overlay}>
-            <ClickAwayListener onClickAway={exit}>
-              <motion.div className={styles.releasePreview} 
-                key="modal" 
-                initial="hidden" 
-                animate="visible" 
-                exit="exit" 
-                variants={DropInTop}
-                >
-                <div className={styles.infoCol}>
-                  <div className={styles.releaseContainer}>
-                    <h3 className={styles.releaseHeader}>Are you sure you want to release this pokemon?</h3>
-                    <img className={styles.releaseImage} src={releasing.sprites[artwork]} alt={releasing.name}></img>
-                    <p className={styles.releaseText}>{releasing.name + ", LEVEL: " + releasing.level}</p>
-                    <div className={styles.buttonContainerRow}>
-                      <Button className={styles.swapButtonRow} variant="contained" onClick={exit}>CANCEL</Button>
-                      <Button className={styles.releaseButtonRow} variant="contained" onClick={release}>RELEASE</Button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </ClickAwayListener>
-          </div>
-        }
-      </AnimatePresence>
-
       <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
       <div className={styles.pokemonInfo}>
         <strong className={styles.pokemonName}>{pokemon.name}</strong>

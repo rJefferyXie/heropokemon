@@ -12,6 +12,10 @@ import PokemonPreview from './pokemonPreview';
 // MUI
 import { Button, ClickAwayListener } from '@mui/material';
 
+// Animations
+import { motion, AnimatePresence } from 'framer-motion';
+import DropInTop from '../animations/dropInTop';
+
 // Redux
 import { useSelector } from 'react-redux';
 
@@ -36,7 +40,14 @@ const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
   return (
     <div className={styles.overlay}>
       <ClickAwayListener onClickAway={exit}>
-        <div className={styles.wrapper}>
+        <motion.div 
+          className={styles.wrapper}
+          key="modal" 
+          initial="hidden" 
+          animate="visible" 
+          exit="exit" 
+          variants={DropInTop}  
+        >
           <div className={styles.container}>
             <h2 className={styles.swapTitle1}>BEING SWAPPED</h2>
             <div className={styles.topRow}>
@@ -57,7 +68,7 @@ const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
               })}
             </div>
           </div>
-        </div>
+        </motion.div>
       </ClickAwayListener>
     </div>
   );
