@@ -2,6 +2,9 @@
 
 Welcome to my take on a Pokemon-based clicker game. This game was inspired by games such as Cookie Clicker, Clicker Heroes, and Pokemon.
 
+Check it out here!
+* https://heropokemon.web.app/
+
 # Table of Contents
 * [Regions](#regions)
 * [Sources](#sources)
