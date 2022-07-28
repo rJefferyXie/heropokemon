@@ -186,6 +186,26 @@ const Game: NextPage = () => {
     }
 
     newTeam[0].stats[0] = Math.max(newTeam[0].stats[0] - enemyDPS, 0);
+
+    let fainted = 0;
+    newTeam.map((pokemon: PokemonMap) => {
+      if (Math.floor(pokemon.stats[0]) === 0) fainted++;
+    });
+
+    if (fainted === 6) {
+      newTeam.map((pokemon: PokemonMap) => {
+        pokemon.stats[0] = pokemon.stats[1]
+      });
+
+      if (game.currentFloor > 1) {
+        dispatch(allActions.gameActions.setCurrentFloor(game.currentFloor - 1));
+      }
+
+      dispatch(allActions.teamActions.setTeam(newTeam));
+      dispatch(allActions.enemyActions.setEnemiesLeft(10));
+      return;
+    }
+
     dispatch(allActions.teamActions.setTeam(newTeam));
 
     if (newTeam[0].stats[0] <= 0) {

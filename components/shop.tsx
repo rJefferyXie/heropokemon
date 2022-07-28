@@ -114,6 +114,7 @@ const Shop = () => {
                     <p className={styles.costPreview}>{"$" + item.cost}</p>
                     <p className={styles.namePreview}>{item.name}</p>
                     <p className={styles.itemDescription}>{item.description}</p>
+                    <p className={styles.itemQuantity}>{"You have " + (items[item.id] ? items[item.id].quantity : 0) + " of this item."}</p>
                   </div>
                   <div className={styles.infoCol}>
                     <h3 className={styles.infoHeader}>How many would you like?</h3>

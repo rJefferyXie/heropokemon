@@ -1,4 +1,4 @@
-const fadeIn = {
+const growRight = {
   hidden: {
     width: "0px"
   },
@@ -7,4 +7,4 @@ const fadeIn = {
   }
 }
 
-export default fadeIn;
+export default growRight;

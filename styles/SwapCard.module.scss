@@ -25,6 +25,10 @@
 .text {
   text-transform: uppercase;
   margin: auto;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: clip;
+  height: 1.4rem;
 }
 
 @media screen and (max-width: 960px) {

@@ -87,10 +87,14 @@
 }
 
 .itemDescription {
-  margin: 8px auto auto;
+  margin: 8px auto 0;
   background-color: rgba($zinc-900, 0.7);
   padding: 0.5rem;
   border-radius: 4px;
+}
+
+.itemQuantity {
+  margin: 8px auto auto;
 }
 
 .shopItem {
