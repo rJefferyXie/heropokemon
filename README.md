@@ -15,10 +15,10 @@ Check it out here! https://heropokemon.web.app/
 * This is an incremental / clicker game created by me that is built using modern web techologies, drawing inspiration from other games such as Runescape, Cookie Clicker, Clicker Heroes, and Pokemon.
 
 # Images <a name="images"></a>
-![First Time Visit](https://prnt.sc/GUAstxCiWDXg)
-![Regions Screen](https://prnt.sc/GWCty7KHAhNd)
-![Region Selection](https://prnt.sc/9ySqidK5bOXi)
-![Game Page](https://prnt.sc/vUtlP2VkrsUO)
+![Home Page](https://user-images.githubusercontent.com/73203729/181860151-81201c7b-9a80-4371-93f4-9b3d49b24737.png)
+![Regions Page](https://user-images.githubusercontent.com/73203729/181860187-1e86cbd2-c523-4fca-bb0d-12d4b4ce492a.png)
+![Region Selection](https://user-images.githubusercontent.com/73203729/181860218-6aadd4b2-8d25-4c92-ac06-4bc3ef8cecb5.png)
+![Game Screen](https://user-images.githubusercontent.com/73203729/181860236-cb76510d-d09a-44c1-9c50-fa28a08277ba.png)
 
 # Technologies <a name="technologies"></a>
 * NextJS - Used to create a static site for website hosting, along with several useful features such as [image optimization](https://nextjs.org/docs/basic-features/image-optimization), which greatly reduced loading times for large images.
