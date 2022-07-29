@@ -23,7 +23,7 @@ const getEnemy = (pokedex: PokedexMap, floor: number, biome: string): PokemonMap
     const enemyName = pokemonList[Math.floor(Math.random() * pokemonList.length)]; 
     const pokemonEntry = pokedex[enemyName];
 
-    if (biome !== "gym") {
+    if (biome !== "gym" && biome !== '') {
       let flag = false;
       if (BiomeTypes[biome].includes(pokemonEntry.types[0]) || pokemonEntry.types[0] === "normal") {
         flag = true;
