@@ -46,11 +46,6 @@ describe('Loads all seven regions.', () => {
     const container = cy.get('.Regions_container__bAZOy');
     container.contains('alola').and('be.visible');
   });
-
-  it('Should open the Kanto region.', () => {
-    const container = cy.get('.Region_regionContainer__hMScl').first();
-    container.click();
-  });
 });
 
 export {}
