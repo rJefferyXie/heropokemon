@@ -21,13 +21,13 @@ Check it out here! https://heropokemon.web.app/
 ![Game Screen](https://user-images.githubusercontent.com/73203729/181860236-cb76510d-d09a-44c1-9c50-fa28a08277ba.png)
 
 # Technologies <a name="technologies"></a>
-* NextJS - Used to create a static site for website hosting, along with several useful features such as [image optimization](https://nextjs.org/docs/basic-features/image-optimization), which greatly reduced loading times for large images.
-* Google Firebase - Used to host the website and store the pokedex information using [Cloud Firestore](https://firebase.google.com/docs/firestore).
+* NextJS - Used to create [static HTML files](https://nextjs.org/docs/advanced-features/static-html-export) for website hosting, along with several useful features such as [image optimization](https://nextjs.org/docs/basic-features/image-optimization), which greatly reduced loading times for large images.
+* Google Firebase - Used to [host the website](https://firebase.google.com/docs/hosting) and store the pokedex information using [Cloud Firestore](https://firebase.google.com/docs/firestore).
 * TypeScript - Used to add [type support](https://www.typescriptlang.org/) to components for better readability and usability.
-* Redux - Used to centralize and share state between components, removing the need for prop drilling.
-* Framer Motion - Used to seamlessly create and add animations to React components.
+* Redux - Used to [centralize and share state](https://redux.js.org/) between components, removing the need for prop drilling.
+* Framer Motion - Used to seamlessly create and add [animations](https://www.framer.com/motion/) to React components.
 * Github Actions - Created a [CI/CD](https://www.redhat.com/en/topics/devops/what-is-ci-cd) pipeline to automate the deployment of my project and code.
-* Cypress - Created several integration tests and an end-to-end test for all the game functionalities to simulate a real user.
+* Cypress - Created several integration and end-to-end tests to simulate a real user using the website.
 * MaterialUI - A library of pre-built production-ready React components.
 * SASS - Used for styling the website.
 
