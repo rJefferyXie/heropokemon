@@ -3,6 +3,7 @@
 describe('Loads all seven regions.', () => {
   before(() => {
     cy.visit('http://localhost:3000');
+    cy.wait(10000);
 
     // Go past the first time visit screen
     const pokemon = cy.get('.Hero_heroImage__WMtdF');
