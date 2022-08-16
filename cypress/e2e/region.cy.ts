@@ -11,10 +11,7 @@ describe('Loads all seven regions.', () => {
     pokemon.click();
   });
 
-  it('Should allow the user to select all three starters on all seven regions. \
-  Clicking EXIT should close the region preview. \
-  Clicking UNLOCK should show an error message if user has no unlock points.', () => {
-
+  it('Should allow the user to select all three starters on all seven regions.', () => {
     // Open the first region preview (KANTO)
     cy.get('.Region_regionContainer__hMScl').eq(0).click();
     cy.get('.StarterCard_cardImage__KjOsL').eq(0).click();
