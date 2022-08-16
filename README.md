@@ -56,14 +56,15 @@ Check it out here! https://heropokemon.web.app/
 
 # Sources <a name="sources"></a>
 * Database: https://pokeapi.co/api/
-* Calculating Damage: https://bulbapedia.bulbagarden.net/wiki/Damage
-* Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
-* Type Advantages: https://www.theloadout.com/pokemon-type-chart
-* Badge Images: https://bulbapedia.bulbagarden.net/wiki/Badge#Indigo_League
 * Setting up CI/CD: https://github.com/pnpm/action-setup
-* Github Actions for Cypress: https://github.com/cypress-io/github-action
-* Using SetInterval with React https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+* Type Advantages: https://www.theloadout.com/pokemon-type-chart
 * CSS Color Schemes: https://tailwindcss.com/docs/customizing-colors
+* Calculating Damage: https://bulbapedia.bulbagarden.net/wiki/Damage
+* Github Actions for Cypress: https://github.com/cypress-io/github-action
+* Badge Images: https://bulbapedia.bulbagarden.net/wiki/Badge#Indigo_League
+* Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
+* EXP Calculation for Player: https://www.reddit.com/r/2007scape/comments/3idn2b/comment/cufhle9/
+* Setting up Cypress E2E tests with Redux: https://www.cypress.io/blog/2018/11/14/testing-redux-store/
+* Using SetInterval with React https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 * Setting up Redux in NextJS: https://medium.com/how-to-react/how-to-setup-redux-in-nextjs-5bce0d82b8de
 * Rerouting Error in NextJS: https://stackoverflow.com/questions/54815348/nextjs-page-goes-to-404-on-refresh
-* EXP Calculation for Player: https://www.reddit.com/r/2007scape/comments/3idn2b/comment/cufhle9/
