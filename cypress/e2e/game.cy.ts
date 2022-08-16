@@ -3,7 +3,6 @@
 describe('Testing the whole game including all items, buttons, and abilities.', () => {
   before(() => {
     cy.visit('http://localhost:3000');
-    cy.wait(10000);
 
     // Go past the first time visit screen
     const pokemon = cy.get('.Hero_heroImage__WMtdF');
