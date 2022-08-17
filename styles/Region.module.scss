@@ -1,3 +1,5 @@
+@import './constants.scss';
+
 .regionContainer {
   display: flex;
   flex-direction: column;
@@ -8,7 +10,7 @@
   position: relative;
   overflow: hidden;
   margin: 0px 3px;
-  box-shadow: 0px 0px 4px rgb(0, 0, 0, 27%);
+  box-shadow: 0px 0px 4px rgba($slate-50, 0.8);
 }
 
 .regionContainerLocked {
@@ -21,7 +23,7 @@
   position: relative;
   overflow: hidden;
   margin: 0px 3px;
-  box-shadow: 0px 0px 4px rgb(0, 0, 0, 27%);
+  box-shadow: 0px 0px 4px rgba($slate-50, 0.8);
   filter: brightness(25%);
 }
 

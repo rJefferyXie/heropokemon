@@ -55,15 +55,7 @@
   margin: 1rem auto;
 }
 
-.currency {
-  margin: auto 1rem;
-  background-color: rgba($sky-500, 0.3);
-  box-shadow: 0px 0px 8px rgba($slate-900, 0.8);
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.highestFloor {
+.currency, .highestFloor {
   margin: auto 1rem;
   background-color: rgba($sky-500, 0.3);
   box-shadow: 0px 0px 8px rgba($slate-900, 0.8);
@@ -169,18 +161,19 @@
   padding: 0 1rem 0 0;
 }
 
-.exitButton {
+.exitButton, .playButton {
   width: fit-content;
-  margin: auto 2px auto auto !important;
-  background-color: $red-700 !important;
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
+.exitButton {
+  margin: auto 2px auto auto !important;
+  background-color: $red-700 !important;
+}
+
 .playButton {
-  width: fit-content;
   margin: auto auto auto 2px !important;
   background-color: $emerald-600 !important;
-  text-shadow: 1px 1px 1px $zinc-900;
 }
 
 .exitButton:hover, .playButton:hover {

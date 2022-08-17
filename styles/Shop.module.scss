@@ -26,13 +26,7 @@
   width: 100%;
 }
 
-.itemCol {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.infoCol {
+.itemCol, .infoCol {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -72,11 +66,7 @@
   width: 100%;
 }
 
-.costPreview {
-  margin: 4px auto 0;
-}
-
-.namePreview {
+.costPreview, .namePreview {
   margin: 4px auto 0;
 }
 
@@ -119,11 +109,7 @@
   align-items: center;
 }
 
-.itemName {
-  margin: auto;
-}
-
-.itemCost {
+.itemName, .itemCost {
   margin: auto;
 }
 
@@ -142,18 +128,18 @@
   background-color: $emerald-700 !important;
 }
 
-.incButton {
-  margin: auto auto auto 4px !important;
+.incButton, .decButton {
   font-weight: 1000 !important;
   font-size: 1.1rem !important;
   background-color: $cyan-700 !important;
 }
 
+.incButton {
+  margin: auto auto auto 4px !important;
+}
+
 .decButton {
   margin: auto 4px auto auto !important;
-  font-weight: 1000 !important;
-  font-size: 1.1rem !important;
-  background-color: $cyan-700 !important;
 }
 
 .exitButton, .confirmButton, .incButton, .decButton {

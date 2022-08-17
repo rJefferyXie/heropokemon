@@ -1,11 +1,10 @@
 @import './constants.scss';
 
-.container {
+.container, .column, .row {
   display: flex;
 }
 
 .column {
-  display: flex;
   flex-direction: column;
   text-shadow: none;
   color: $zinc-900;
@@ -13,10 +12,6 @@
   width: 75%;
   overflow: hidden;
   position: relative;
-}
-
-.row {
-  display: flex;
 }
 
 .enemiesLeft {
@@ -48,10 +43,6 @@
 
   .column {
     width: 100%;
-  }
-
-  .spacer {
-    display: none;
   }
 
   .enemiesLeft {

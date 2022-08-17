@@ -40,7 +40,7 @@
   background-color: rgba($zinc-900, 0.95);
 }
 
-.previewRow {
+.previewRow, .teamRow {
   display: flex;
   height: 100%;
   width: 100%;
@@ -58,23 +58,14 @@
   border-radius: 4px;
 }
 
-.itemColPreview {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.infoColPreview {
+.itemColPreview, .infoColPreview {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
 
 .teamRow {
-  display: flex;
   flex-wrap: wrap;
-  height: 100%;
-  width: 100%;
 }
 
 .imagePreview {
@@ -85,11 +76,7 @@
   margin: auto auto 8px;
 }
 
-.quantityPreview {
-  margin: 4px auto 0;
-}
-
-.namePreview {
+.quantityPreview, .namePreview {
   margin: 4px auto 0;
 }
 

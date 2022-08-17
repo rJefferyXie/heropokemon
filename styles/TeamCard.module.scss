@@ -67,21 +67,20 @@
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
-.healButton {
+.healButton, .swapButton {
   width: fit-content;
   height: fit-content;
   padding: 0 !important;
-  background-color: $emerald-600 !important;
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
+.healButton {
+  background-color: $emerald-600 !important;
+}
+
 .swapButton {
-  width: fit-content;
-  height: fit-content;
-  padding: 0 !important;
   margin: auto 0px auto auto !important;
   background-color: $teal-600 !important;
-  text-shadow: 1px 1px 1px $zinc-900;
 }
 
 .healButton:hover, .swapButton:hover {

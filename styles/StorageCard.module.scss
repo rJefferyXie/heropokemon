@@ -36,22 +36,20 @@
   margin: auto auto 0;
 }
 
-.swapButton {
+.swapButton, .releaseButton {
   width: fit-content;
   height: fit-content;
   padding: 0 !important;
   margin: auto !important;
-  background-color: $teal-600 !important;
   text-shadow: 1px 1px 1px $zinc-900;
 }
 
+.swapButton {
+  background-color: $teal-600 !important;
+}
+
 .releaseButton {
-  width: fit-content;
-  height: fit-content;
-  padding: 0 !important;
-  margin: auto !important;
   background-color: rgba($red-700, 0.9) !important;
-  text-shadow: 1px 1px 1px $zinc-900;
 }
 
 @media screen and (max-width: 960px) {

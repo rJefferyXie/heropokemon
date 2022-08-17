@@ -22,26 +22,22 @@
   padding: 0rem 2rem;
 }
 
-.leftColumn {
+.leftColumn, .rightColumn {
   display: flex;
   flex-direction: column;
   width: 50%;
   border-radius: 8px;
   background-color: rgba($slate-900, 0.6);
   box-shadow: 0px 0px 8px rgba($slate-50, 0.5);
-  margin: 0 1rem 0 0;
   z-index: 2;
 }
 
+.leftColumn {
+  margin: 0 1rem 0 0;
+}
+
 .rightColumn {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  border-radius: 8px;
-  background-color: rgba($slate-900, 0.6);
-  box-shadow: 0px 0px 8px rgba($slate-50, 0.5);
   margin: 0 0 0 1rem;
-  z-index: 2;
 }
 
 .heroImage {
@@ -98,23 +94,16 @@
 }
 
 @media screen and (max-width: 1140px) {
-  .container {
+  .container, .mainRow {
     flex-direction: column;
   }
 
   .mainRow {
-    flex-direction: column;
     height: 100%;
     padding: 0;
   }
 
-  .leftColumn {
-    height: 100%;
-    width: 95%;
-    margin: 0.5rem auto;
-  }
-
-  .rightColumn {
+  .leftColumn, .rightColumn {
     height: 100%;
     width: 95%;
     margin: 0.5rem auto;

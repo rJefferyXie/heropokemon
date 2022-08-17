@@ -25,19 +25,18 @@
   width: 100%;
 }
 
-.abilityCol {
+.abilityCol, .infoCol {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.abilityCol {
   width: 40%;
 }
 
 .infoCol {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 60%;
 }
 
@@ -76,11 +75,7 @@
   width: 100%;
 }
 
-.costPreview {
-  margin: 4px auto 0;
-}
-
-.namePreview {
+.costPreview, .namePreview {
   margin: 4px auto 0;
 }
 
@@ -132,11 +127,7 @@
   align-items: center;
 }
 
-.abilityName {
-  margin: auto;
-}
-
-.abilityCost {
+.abilityName, .abilityCost {
   margin: auto;
 }
 

@@ -1,15 +1,16 @@
 @import './constants.scss';
 
-.optionSelected {
-  background-color: $cyan-500 !important;
+.optionSelected, .option {
   border-radius: 0px !important;
   width: calc(100% / 5) !important;
 }
 
+.optionSelected {
+  background-color: $cyan-500 !important;
+}
+
 .option {
   background-color: $cyan-700 !important;
-  border-radius: 0px !important;
-  width: calc(100% / 5) !important;
 }
 
 .option:hover {
