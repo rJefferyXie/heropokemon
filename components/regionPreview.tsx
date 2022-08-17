@@ -22,7 +22,7 @@ import StarterPokemon from '../constants/StarterPokemon';
 import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 // Game Functions
-import createGameSave from '../gameFunctions/createGameSave';
+import createGameSave from '../gameFunctions/CreateGameSave';
 
 // Components
 import StarterCard from './starterCard';
