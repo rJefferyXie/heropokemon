@@ -1,6 +1,10 @@
+@import './constants.scss';
+
 .container {
   display: flex;
+  flex-direction: column;
   width: min(95%, 1200px);
+  min-height: 100vh;
   margin: auto;
 }
 
@@ -11,8 +15,28 @@
   position: absolute;
 }
 
+.regionContainer {
+  display: flex;
+  margin: 0.75rem auto auto;
+  width: 100%;
+}
+
+.regionTitle {
+  margin: auto auto 0.25rem;
+  color: #000033;
+  text-shadow: none;
+}
+
+.playButton {
+  width: fit-content;
+  height: fit-content;
+  text-shadow: 1px 1px 1px $zinc-900;
+  background-color: $emerald-600 !important;
+  margin: 0.25rem auto !important;
+}
+
 @media screen and (max-width: 1200px) {
-  .container {
+  .regionContainer {
     flex-wrap: wrap;
   }
 }
