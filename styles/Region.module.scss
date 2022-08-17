@@ -1,6 +1,6 @@
 @import './constants.scss';
 
-.regionContainer {
+.regionContainer, .regionContainerLocked {
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -14,16 +14,6 @@
 }
 
 .regionContainerLocked {
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  border-radius: 8px;
-  width: calc(100% / 7);
-  height: 500px;
-  position: relative;
-  overflow: hidden;
-  margin: 0px 3px;
-  box-shadow: 0px 0px 4px rgba($slate-50, 0.8);
   filter: brightness(25%);
 }
 
@@ -76,25 +66,7 @@
   right: 0px;
 }
 
-.regionName {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2.7rem;
-  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  text-align: center;
-  text-transform: uppercase;
-  text-shadow: 
-      0 0 2px rgba(255,255,255,0.8), 
-      2px 2px 2px rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
-}
-
-.regionUnlocked, .regionLocked {
+.regionUnlocked, .regionLocked, .regionName {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -111,6 +83,12 @@
   opacity: 0;
   z-index: 1;
   transition: all 0.2s ease-in-out;
+}
+
+.regionName {
+  background-color: rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  opacity: 1;
 }
 
 .regionContainer:hover .regionName, .regionContainerLocked:hover .regionName {
