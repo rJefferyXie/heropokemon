@@ -51,7 +51,7 @@ const ReleaseScreen = (props: React.PropsWithChildren<ReleaseScreenProps>) => {
               <div className={styles.infoCol}>
                 <div className={styles.releaseContainer}>
                   <h3 className={styles.releaseHeader}>Are you sure you want to release this pokemon?</h3>
-                  <img className={styles.releaseImage} src={releasing.sprites[artwork]} alt={releasing.name}></img>
+                  <img className={styles.releaseImage} src={releasing.sprites[artwork]} alt={releasing.name} draggable={false}></img>
                   <p className={styles.releaseText}>{releasing.name + ", LEVEL: " + releasing.level}</p>
                   <div className={styles.buttonContainerRow}>
                     <Button className={styles.swapButtonRow} variant="contained" onClick={exit}>CANCEL</Button>

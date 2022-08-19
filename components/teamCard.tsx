@@ -111,7 +111,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       draggable
       >
       <div className={styles.topRow}>
-        <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
+        <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
         <div className={styles.pokemonInfo}>
           <strong className={styles.pokemonName}>{pokemon.name}</strong>
           <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>

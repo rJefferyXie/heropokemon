@@ -43,7 +43,7 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
       className={selected ? styles.containerSelected : styles.container}
       style={{backgroundColor: theme}} 
       onClick={selectStarter}>
-      <img className={styles.cardImage} src={image} alt={`An image of " + ${pokemon.name}`}></img>
+      <img className={styles.cardImage} src={image} alt={`An image of " + ${pokemon.name}`} draggable={false}></img>
       <p className={styles.cardName}>{pokemon.name}</p>
     </div>
   )

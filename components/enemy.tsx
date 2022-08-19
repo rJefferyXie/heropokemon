@@ -38,6 +38,7 @@ const Enemy = () => {
         src={enemy.sprites[artwork]} 
         alt={"An image of " + enemy.name} 
         onClick={clickHit}
+        draggable={false}
       >
       </img>
       <div className={styles.types}>

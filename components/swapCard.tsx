@@ -20,7 +20,7 @@ const SwapCard = (props: React.PropsWithChildren<SwapCardProps>) => {
 
   return (
     <div className={styles.container} onClick={() => handleSwap(index)}>
-      <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
+      <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
       <p className={styles.text}>{pokemon.name}</p>
       <p className={styles.text}>{"LEVEL " + pokemon.level}</p>
     </div>

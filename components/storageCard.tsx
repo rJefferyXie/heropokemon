@@ -48,7 +48,7 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
       variants={PokemonJoin}
       transition={{duration: 0.2, type: "spring"}} 
       >
-      <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name}></img>
+      <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
       <div className={styles.pokemonInfo}>
         <strong className={styles.pokemonName}>{pokemon.name}</strong>
         <p className={styles.pokemonLevel}>{"LEVEL " + pokemon.level}</p>
