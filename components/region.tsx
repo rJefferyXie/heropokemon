@@ -40,7 +40,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         layout="fill" 
         alt={name} 
         src={"images/wallpapers/" + name + ".png"}
-        sizes={'13vw, 50vw, 80vw'}
+        sizes={'90vw'}
       >
       </ExportedImage>
       
