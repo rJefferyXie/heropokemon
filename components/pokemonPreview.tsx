@@ -36,7 +36,7 @@ const PokemonPreview = (props: React.PropsWithChildren<PokemonPreviewProps>) => 
   }
 
   return (
-    showInfo ? <PokemonInfo pokemon={pokemon} theme={TypeColorSchemes[pokemon.types[0]]}></PokemonInfo> : 
+    showInfo ? <PokemonInfo pokemon={pokemon} theme={TypeColorSchemes[pokemon.types[0]]} exit={() => setShowInfo(false)}></PokemonInfo> : 
     <div className={teamIdx !== undefined && teamIdx >= 0 ? styles.containerItem : styles.container} onClick={handleClick}>
 
       <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
