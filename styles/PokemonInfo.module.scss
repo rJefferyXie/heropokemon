@@ -1,0 +1,149 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  z-index: 1000;
+  cursor: initial;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $zinc-800;
+  box-shadow: 2px 2px 4px $zinc-900;
+  border-radius: 4px;
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  perspective: 400px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  transform: rotateY(15deg);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.info:active, .info:hover {
+  transform: rotateY(0deg);
+}
+
+.name {
+  text-transform: uppercase;
+}
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.type {
+  margin: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.special {
+  display: flex;
+}
+
+.image {
+  width: 30%;
+  cursor: pointer;
+  margin: auto 0;
+  -webkit-touch-callout: none;
+}
+
+.image:active {
+  filter: brightness(110%);
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  transform: rotateY(-15deg);
+  transition: transform 0.3s ease;
+}
+
+.stats:hover, .stats:active {
+  transform: rotateY(0deg);
+}
+
+.stat {
+  display: flex;
+}
+
+.statBarWrapper {
+  width: 100%;
+  max-width: 200px;
+  margin: 4px;
+  height: 1.7rem;
+  background-color: rgba($zinc-100, 0.3);
+  border-radius: 16px;
+  box-shadow: 1px 1px 4px $zinc-900;
+  overflow: hidden;
+}
+
+.statBar {
+  display: flex;
+  max-width: 200px;
+  height: 1.7rem;
+  border-radius: 16px;
+  transition: width 600ms ease-in-out;
+}
+
+.statName {
+  margin: 4px;
+  padding: 4px;
+  width: 200px;
+  height: 1.7rem;
+  text-align: right;
+}
+
+.statValue {
+  width: 100%;
+  padding: 4px;
+  margin: auto 4px;
+  line-height: 1rem;
+  text-align: right;
+  color: $zinc-100;
+}
+
+.bottomRow {
+  display: flex;
+}
+
+.evoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  align-items: center;
+  justify-content: center;
+}
+
+.evoImage {
+  width: 64px;
+  margin: auto;
+}
+
+.exitButton {
+  margin: auto !important;
+}
