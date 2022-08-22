@@ -238,14 +238,16 @@ const RegionPreview = () => {
                       </div>
                       <div className={styles.stats}>
                         {pokedex[starter].stats.slice(1).map((stat, idx) => {
-                          return <div className={styles.stat} key={idx}>
-                            <p className={styles.statName}>{StatMap[idx]}</p>
-                            <div className={styles.statBarWrapper}>
-                              <div className={styles.statBar} style={{width: stat / 1.5 + "%", backgroundColor: theme}}>
-                                <p className={styles.statValue}>{stat}</p>
+                          return (
+                            <div className={styles.stat} key={idx}>
+                              <p className={styles.statName}>{StatMap[idx]}</p>
+                              <div className={styles.statBarWrapper}>
+                                <div className={styles.statBar} style={{width: stat / 1.5 + "%", backgroundColor: theme}}>
+                                  <p className={styles.statValue}>{stat}</p>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          );
                         })}
                       </div>
                     </div>
