@@ -64,6 +64,7 @@ Check it out here! https://heropokemon.web.app/
 * Badge Images: https://bulbapedia.bulbagarden.net/wiki/Badge#Indigo_League
 * Type Color Templates: https://bulbapedia.bulbagarden.net/wiki/Category:Type_color_templates
 * EXP Calculation for Player: https://www.reddit.com/r/2007scape/comments/3idn2b/comment/cufhle9/
+* Game Formulas: https://clickerheroes.fandom.com/wiki/Formulas
 * Setting up Cypress E2E tests with Redux: https://www.cypress.io/blog/2018/11/14/testing-redux-store/
 * Using SetInterval with React https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 * Setting up Redux in NextJS: https://medium.com/how-to-react/how-to-setup-redux-in-nextjs-5bce0d82b8de
