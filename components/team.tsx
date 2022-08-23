@@ -1,5 +1,5 @@
 // React and Styling
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/Team.module.scss';
 
 // Components

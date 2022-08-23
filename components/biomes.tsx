@@ -1,9 +1,5 @@
 // React and Styling
-import React from 'react';
 import styles from '../styles/Biomes.module.scss';
-
-// Constants
-import BiomeTypes from '../constants/BiomeTypes';
 
 // Animations
 import { motion } from 'framer-motion';

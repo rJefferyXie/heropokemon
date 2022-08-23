@@ -1,5 +1,4 @@
 // React and Styling
-import React from 'react';
 import styles from '../styles/Enemy.module.scss';
 
 // Constants

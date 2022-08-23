@@ -1,5 +1,5 @@
 // React and Styling
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/StarterCard.module.scss';
 
 // Interfaces 

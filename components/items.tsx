@@ -2,7 +2,7 @@
 import ExportedImage from 'next-image-export-optimizer';
 
 // React and Styling
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/Items.module.scss';
 
 // Interfaces

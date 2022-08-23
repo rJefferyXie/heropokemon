@@ -2,7 +2,7 @@
 import ExportedImage from 'next-image-export-optimizer';
 
 // React and Styling
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/Hero.module.scss';
 
 // Constants

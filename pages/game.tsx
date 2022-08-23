@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 // React and Styling
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from '../styles/Game.module.scss';
 
 // MUI

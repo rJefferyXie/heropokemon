@@ -1,5 +1,4 @@
 // React and Styling
-import React from 'react';
 import styles from '../styles/Currency.module.scss';
 
 // Redux

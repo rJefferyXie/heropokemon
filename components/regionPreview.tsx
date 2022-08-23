@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 
 // React and Styling
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/RegionPreview.module.scss';
 
 // Animations

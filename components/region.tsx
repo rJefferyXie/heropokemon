@@ -2,7 +2,6 @@
 import ExportedImage from 'next-image-export-optimizer';
 
 // React and Styling
-import React from 'react';
 import styles from '../styles/Region.module.scss';
 
 // Redux
@@ -40,7 +39,9 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         layout="fill" 
         alt={name} 
         src={"images/wallpapers/" + name + ".png"}
-        sizes={'90vw'}
+        sizes="(min-width: 75em) 10vw,
+               (min-width: 48em) 45vw,
+               90vw"
       >
       </ExportedImage>
       
