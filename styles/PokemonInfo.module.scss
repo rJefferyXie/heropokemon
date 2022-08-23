@@ -1,17 +1,5 @@
 @import './constants.scss';
 
-.overlay {
-  display: flex;
-  position: fixed;
-  z-index: 99;
-  height: 100vh;
-  width: 100vw;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba($zinc-900, 0.9);
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -20,7 +8,10 @@
   padding: 1rem;
   z-index: 1000;
   cursor: initial;
-  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: $zinc-800;
   box-shadow: 2px 2px 4px $zinc-900;
   border-radius: 4px;
