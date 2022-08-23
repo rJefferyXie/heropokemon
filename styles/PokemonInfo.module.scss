@@ -1,17 +1,26 @@
 @import './constants.scss';
 
-.container {
+.overlay {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
-  z-index: 1000;
-  cursor: initial;
   position: fixed;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: rgba($zinc-900, 0.9);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: min(100%, 600px);
+  width: min(100%, 1000px);
+  padding: 1rem;
+  z-index: 1000;
+  cursor: initial;
+  margin: auto;
   background-color: $zinc-800;
   box-shadow: 2px 2px 4px $zinc-900;
   border-radius: 4px;
@@ -70,10 +79,33 @@
   cursor: pointer;
   margin: auto 0;
   -webkit-touch-callout: none;
+  animation-name: jump;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-iteration-count: 3;
+}
+
+.image:hover {
+  animation: none;
 }
 
 .image:active {
   filter: brightness(110%);
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(-15px)
+  }
+  25% {
+    transform: translateY(0px)
+  }
+  50% {
+    transform: translateY(-7px)
+  }
+  75% {
+    transform: translateY(0px)
+  }
 }
 
 .stats {

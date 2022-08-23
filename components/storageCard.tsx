@@ -1,5 +1,5 @@
 // React and Styling
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/StorageCard.module.scss';
 
 // MUI
@@ -7,6 +7,12 @@ import { Button } from '@mui/material';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
+
+// Components
+import PokemonInfo from './pokemonInfo';
+
+// Constants
+import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 // Animations
 import { motion } from 'framer-motion';
@@ -29,23 +35,29 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
 
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
-  const swap = () => {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const swap = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setSwapping(true);
     setSwappingIdx(index);
   }
 
-  const select = () => {
+  const select = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setReleasing(pokemon);
     setReleasingIdx(index);
   }
 
   return (
+    showInfo ? <PokemonInfo pokemon={pokemon} theme={TypeColorSchemes[pokemon.types[0]]} exit={() => setShowInfo(false)}></PokemonInfo> :
     <motion.div 
       className={styles.container}
       key="modal" 
       initial="hidden" 
       animate="visible" 
       variants={PokemonJoin}
+      onClick={() => setShowInfo(true)}
       transition={{duration: 0.2, type: "spring"}} 
       >
       <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>

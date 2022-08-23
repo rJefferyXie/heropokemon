@@ -7,6 +7,11 @@
   padding: 0.5rem;
   background-color: rgba($sky-500, 0.2);
   border-bottom: 1px solid $zinc-900;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: rgba($sky-500, 0.4);
 }
 
 .image {

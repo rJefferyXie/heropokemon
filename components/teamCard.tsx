@@ -1,5 +1,5 @@
 // React and Styling
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/TeamCard.module.scss';
 
 // Animations
@@ -11,6 +11,12 @@ import { Button } from '@mui/material';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
+
+// Components
+import PokemonInfo from './pokemonInfo';
+
+// Constants
+import TypeColorSchemes from '../constants/TypeColorSchemes';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -31,7 +37,11 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
-  const heal = () => {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const heal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
     if (team[index].stats[0] >= team[index].stats[1]) return;
     
     const newTeam = JSON.parse(JSON.stringify(team));
@@ -91,12 +101,14 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
     dispatch(allActions.itemActions.setItems(newItems));
   }
 
-  const swap = () => {
+  const swap = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setSwappingIdx(0);
     handleSwap(index);
   }
 
   return (
+    showInfo ? <PokemonInfo pokemon={pokemon} theme={TypeColorSchemes[pokemon.types[0]]} exit={() => setShowInfo(false)}></PokemonInfo> :
     <motion.div 
       className={styles.container} 
       key="modal" 
@@ -108,6 +120,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       onDragEnter={(e) => e.preventDefault()}
       onDragOver={(e) => e.preventDefault()}
       onDrop={() => handleSwap(index)}
+      onClick={() => setShowInfo(true)}
       draggable
       >
       <div className={styles.topRow}>
