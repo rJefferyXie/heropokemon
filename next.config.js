@@ -10,6 +10,7 @@ const nextConfig = {
       exportFolderPath: "out",
       quality: 75,
     },
+    minimumCacheTTL: 60
   },
   env: {
     storePicturesInWEBP: true,
