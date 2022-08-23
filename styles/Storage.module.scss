@@ -14,6 +14,11 @@
   margin: auto;
 }
 
+.teamWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -26,10 +31,19 @@
 
 @media screen and (max-width: 960px) {
   .container {
-    flex-direction: row;
-    overflow-y: hidden;
     flex-grow: 0;
     height: 100px;
     width: 100%;
+  }
+
+  .teamWrapper {
+    margin-bottom: 0.5rem;
+    padding: 4px;
+  }
+
+  .pagination {
+    position: initial;
+    height: initial !important;
+    margin-bottom: 0.5rem !important;
   }
 }

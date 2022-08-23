@@ -74,17 +74,19 @@ const Storage = () => {
         </ReleaseScreen>
       }
 
-      {storage.slice((page - 1) * 6, page * 6).map((pokemon, idx) => {
-        return <StorageCard 
-          pokemon={pokemon} 
-          index={idx + (page - 1) * 6} 
-          setSwapping={setSwapping} 
-          setSwappingIdx={setSwappingIdx} 
-          setReleasing={setReleasing}
-          setReleasingIdx={setReleasingIdx}
-          key={idx}>
-          </StorageCard>
-      })}
+      <div className={styles.teamWrapper}>
+        {storage.slice((page - 1) * 6, page * 6).map((pokemon, idx) => {
+          return <StorageCard 
+            pokemon={pokemon} 
+            index={idx + (page - 1) * 6} 
+            setSwapping={setSwapping} 
+            setSwappingIdx={setSwappingIdx} 
+            setReleasing={setReleasing}
+            setReleasingIdx={setReleasingIdx}
+            key={idx}>
+            </StorageCard>
+        })}
+      </div>
 
       <Pagination 
         className={styles.pagination} 
