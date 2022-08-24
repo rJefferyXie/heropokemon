@@ -9,6 +9,9 @@ import PokemonJoin from '../animations/pokemonJoin';
 // MUI
 import { Button } from '@mui/material';
 
+// Game Functions
+import healPokemon from '../gameFunctions/healPokemon';
+
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
 
@@ -31,72 +34,21 @@ interface PokemonCardProps {
 
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const { pokemon, setSwappingIdx, handleSwap, index } = props;
+  const [showInfo, setShowInfo] = useState(false);
 
   const dispatch = useDispatch();
   const items = useSelector((state: any) => {return state.itemReducer.items});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
-  const [showInfo, setShowInfo] = useState(false);
-
   const heal = (e: React.MouseEvent) => {
     e.stopPropagation();
 
+    // Prevent healing if pokemon is already at full health.
     if (team[index].stats[0] >= team[index].stats[1]) return;
-    
-    const newTeam = JSON.parse(JSON.stringify(team));
-    const newItems = JSON.parse(JSON.stringify(items));
 
-    const potion1 = items["potion1"] && items["potion1"].quantity > 0;
-    const potion2 = items["potion2"] && items["potion2"].quantity > 0;
-    const potion3 = items["potion3"] && items["potion3"].quantity > 0;
-    const potion4 = items["potion4"] && items["potion4"].quantity > 0;
-
-    if (!(potion1 || potion2 || potion3 || potion4)) return;
-
-    let potionUsed = false;
-    if (potion1) {
-      if (team[index].stats[0] + 20 >= team[index].stats[1]) {
-        newTeam[index].stats[0] = newTeam[index].stats[1];
-        newItems["potion1"].quantity -= 1;
-        potionUsed = true;
-      } else if (!(potion2 || potion3 || potion4)) {
-        newTeam[index].stats[0] += 20;
-        newItems["potion1"].quantity -= 1;
-        potionUsed = true;
-      }
-    }
-
-    if (potion2 && !potionUsed) {
-      if (team[index].stats[0] + 50 >= team[index].stats[1]) {
-        newTeam[index].stats[0] = newTeam[index].stats[1];
-        newItems["potion2"].quantity -= 1;
-        potionUsed = true;
-      } else if (!(potion3 || potion4)) {
-        newTeam[index].stats[0] += 50;
-        newItems["potion2"].quantity -= 1;
-        potionUsed = true;
-      }      
-    }
-
-    if (potion3 && !potionUsed) {
-      if (team[index].stats[0] + 120 >= team[index].stats[1]) {
-        newTeam[index].stats[0] = newTeam[index].stats[1];
-        newItems["potion3"].quantity -= 1;
-        potionUsed = true;
-      } else if (!potion4) {
-        newTeam[index].stats[0] += 120;
-        newItems["potion3"].quantity -= 1;
-        potionUsed = true;
-      }  
-    }
-
-    if (potion4 && !potionUsed) {
-      newTeam[index].stats[0] = newTeam[index].stats[1];
-      newItems["potion4"].quantity -= 1;
-      potionUsed = true;
-    }
-
+    // Use potion to heal pokemon if applicable and update team and item data accordingly.
+    const { newTeam, newItems } = healPokemon(team, items, index)
     dispatch(allActions.teamActions.setTeam(newTeam));
     dispatch(allActions.itemActions.setItems(newItems));
   }
@@ -140,7 +92,7 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
         <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export default PokemonCard;
