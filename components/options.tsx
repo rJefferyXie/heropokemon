@@ -1,13 +1,13 @@
-// React and Styling
+// Styling
 import styles from '../styles/Options.module.scss';
 
 // MUI and MUI Icons
 import { Button } from '@mui/material';
+import ScienceIcon from '@mui/icons-material/Science';
+import InsightsIcon from '@mui/icons-material/Insights';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import InsightsIcon from '@mui/icons-material/Insights';
-import ScienceIcon from '@mui/icons-material/Science';
 
 interface OptionsProps {
   select: Function,
@@ -54,7 +54,7 @@ const Options = (props: React.PropsWithChildren<OptionsProps>) => {
         <InsightsIcon></InsightsIcon>
       </Button>
     </div>
-  )
+  );
 }
 
 export default Options;
