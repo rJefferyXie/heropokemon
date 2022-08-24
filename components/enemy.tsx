@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/Enemy.module.scss';
 
 // Constants
@@ -10,14 +10,19 @@ import allActions from '../store/actions/allActions';
 
 const Enemy = () => {
   const dispatch = useDispatch();
-  const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
-  const enemy = useSelector((state: any) => {return state.enemyReducer.enemy});
-  const team = useSelector((state: any) => {return state.teamReducer.team});
   const bonus = useSelector((state: any) => {return state.bonusReducer});
+  const team = useSelector((state: any) => {return state.teamReducer.team});
+  const enemy = useSelector((state: any) => {return state.enemyReducer.enemy});
+  const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
-  // damage dealt to enemy upon clicking image
   const clickHit = () => {
+    /*
+      Deal damage to enemy upon clicking image.
+      If player's first Pokemon has 0 HP, display an error message.
+      Else deal damage to enemy equal to player's click damage.
+    */
+
     if (Math.floor(team[0].stats[0]) <= 0) {
       const alertMessage = "You can't deal click damage while the first pokemon on your team has 0 HP.";
       if (!alerts.includes(alertMessage)) {
@@ -54,7 +59,7 @@ const Enemy = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Enemy;
