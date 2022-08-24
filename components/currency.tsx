@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/Currency.module.scss';
 
 // Redux
@@ -13,7 +13,7 @@ const Currency = () => {
         $<span>{currency}</span>
       </p>
     </div>
-  )
+  );
 }
 
 export default Currency;
