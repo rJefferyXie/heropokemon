@@ -14,11 +14,11 @@ import allActions from '../store/actions/allActions';
 
 const Team = () => {
   const dispatch = useDispatch();
+  const [swappingIdx, setSwappingIdx] = useState(0);
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
-  const [swappingIdx, setSwappingIdx] = useState(0);
-
   const handleSwap = (dropIdx: number) => {
+    // Swap two pokemon's spots on the team.
     const teamCopy = JSON.parse(JSON.stringify(team));
     [teamCopy[dropIdx], teamCopy[swappingIdx]] = [teamCopy[swappingIdx], teamCopy[dropIdx]];
     dispatch(allActions.teamActions.setTeam(teamCopy));
