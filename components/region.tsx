@@ -15,17 +15,15 @@ interface RegionProps {
 
 const Region = (props: React.PropsWithChildren<RegionProps>) => {
   const { name, images } = props;
-
   const dispatch = useDispatch();
   const regions = useSelector((state: any) => {return state.regionsReducer});
   
   const select = ( newRegion: string ) => {
+    // Change region and update the pokedex accordingly.
     dispatch(allActions.regionsActions.setRegion(newRegion));
 
     const pokedex = localStorage.getItem(newRegion);
-    if (pokedex) {
-      dispatch(allActions.pokedexActions.setPokedex(JSON.parse(pokedex)));
-    }
+    if (pokedex) dispatch(allActions.pokedexActions.setPokedex(JSON.parse(pokedex)));
   }
 
   return (
@@ -55,7 +53,7 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         </div>
       })}
     </div>
-  )
+  );
 }
 
 export default Region;
