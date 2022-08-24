@@ -34,8 +34,8 @@ import allActions from '../store/actions/allActions';
 
 const RegionPreview = () => {
   const router = useRouter();
-
   const dispatch = useDispatch();
+
   const regions = useSelector((state: any) => {return state.regionsReducer});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   const unlockPoints = useSelector((state: any) => {return state.gameReducer.unlockPoints});
@@ -51,6 +51,7 @@ const RegionPreview = () => {
   const [gameSave, setGameSave] = useState<GameSave>({});
 
   useEffect(() => {
+    // Set the starter pokemon to the selected region.
     setStarterPokemon(StarterPokemon[regions.selected]);
     setStarter(StarterPokemon[regions.selected][Math.floor(Math.random() * 3)]);
 
@@ -75,11 +76,13 @@ const RegionPreview = () => {
     dispatch(allActions.gameActions.setHighestFloor(1));
     dispatch(allActions.gameActions.setCurrentFloor(1));
 
+    // If a game save exists, just play.
     if (Object.keys(gameSave).length > 0) {
       router.push('/game');
       return;
     }
 
+    // If no game save, create a new game save.
     const newGame = createGameSave(pokedex[starter]);
     localStorage.setItem(regions.selected + 'Save', JSON.stringify(newGame));
     router.push('/game');
@@ -258,7 +261,7 @@ const RegionPreview = () => {
         </div>
       </ClickAwayListener>
     </div>
-  )
+  );
 }
 
 export default RegionPreview;
