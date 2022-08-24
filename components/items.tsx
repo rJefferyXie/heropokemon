@@ -35,11 +35,13 @@ const Items = () => {
   const [item, setItem] = useState<ShopItem>();
 
   const itemUse = (pokemonIdx: number) => {
+    // Return if no item is selected, or if item quantity is 0
     if (!item || !item.quantity || item.quantity === 0) {
       exit();
       return;
     }
     
+    // Use the item and adjust the new team and item quantities
     const { newItems, newTeam } = UseItem(item, items, team, pokemonIdx, pokedex);
     newItems[item.id].quantity -= 1;
     item.quantity -= 1;
@@ -126,7 +128,7 @@ const Items = () => {
         </div>
       })}
     </div>
-  )
+  );
 }
 
 export default Items;

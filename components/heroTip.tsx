@@ -25,7 +25,7 @@ const HeroTip = (props: React.PropsWithChildren<HeroTipProps>) => {
     >
     {content}
     </motion.div>
-  )
+  );
 }
 
 export default HeroTip;
