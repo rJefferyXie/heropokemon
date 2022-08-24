@@ -32,9 +32,7 @@ interface StorageCardProps {
 
 const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
   const { pokemon, index, setSwapping, setSwappingIdx, setReleasing, setReleasingIdx } = props;
-
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
-
   const [showInfo, setShowInfo] = useState(false);
 
   const swap = (e: React.MouseEvent) => {
