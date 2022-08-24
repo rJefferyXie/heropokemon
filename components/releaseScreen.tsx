@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/ReleaseScreen.module.scss';
 
 // MUI
@@ -23,7 +23,6 @@ interface ReleaseScreenProps {
 
 const ReleaseScreen = (props: React.PropsWithChildren<ReleaseScreenProps>) => {
   const { releasing, handleRelease, setReleasing, setReleasingIdx } = props;
-
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   const exit = () => {
@@ -63,7 +62,7 @@ const ReleaseScreen = (props: React.PropsWithChildren<ReleaseScreenProps>) => {
         </div>
       }
     </AnimatePresence>
-  )
+  );
 }
 
 export default ReleaseScreen
