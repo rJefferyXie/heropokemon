@@ -1,9 +1,11 @@
-// React and Styling
+// Styling
 import { useEffect } from 'react';
 import styles from '../styles/Floors.module.scss';
 
 // Components
 import Floor from './floor';
+
+// Constants
 import biomeList from '../constants/BiomeList';
 
 // Redux
@@ -21,25 +23,29 @@ const Floors = () => {
   }
 
   useEffect(() => {
+    // Every 10th floor is the gym biome
     if (Math.floor(floor.currentFloor % 10) === 0) {
       dispatch(allActions.biomeActions.setActiveBiome("gym"));
       return;
     }
 
+    // Every 5th floor the biome changes
     if (floor.currentFloor <= floor.highestFloor) {
       dispatch(allActions.biomeActions.setActiveBiome(biomes[Math.floor(floor.currentFloor / 5)]));
-    } else {
-      if (Math.floor(floor.currentFloor / 5) >= biomes.length) {
-        let newBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
+      return;
+    } 
+    
+    // Create a new biome every 5th floor
+    if (Math.floor(floor.currentFloor / 5) >= biomes.length) {
+      let newBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
 
-        // re-roll once if we have already seen this biome for more variety
-        if (biomes.includes(newBiome)) {
-          newBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
-        }
-
-        dispatch(allActions.biomeActions.setBiomes([...biomes, newBiome]));
-        dispatch(allActions.biomeActions.setActiveBiome(newBiome));
+      // Re-roll once if we have already seen this biome for more variety
+      if (biomes.includes(newBiome)) {
+        newBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
       }
+
+      dispatch(allActions.biomeActions.setBiomes([...biomes, newBiome]));
+      dispatch(allActions.biomeActions.setActiveBiome(newBiome));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
