@@ -26,10 +26,12 @@ const PokemonPreview = (props: React.PropsWithChildren<PokemonPreviewProps>) => 
   const [showInfo, setShowInfo] = useState(false);
 
   const handleClick = () => {
+    // This is for the use item screen, clicking the pokemon will use an item.
     if (teamIdx !== undefined && teamIdx >= 0 && itemUse) {
       itemUse(teamIdx);
     }
 
+    // This is for any other screen with a Pokemon card, show the Pokemon info.
     if (teamIdx === undefined) {
       setShowInfo(true);
     }
