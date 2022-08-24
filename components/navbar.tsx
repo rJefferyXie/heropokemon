@@ -8,8 +8,8 @@ import Shop from './shop';
 import Items from './items';
 import Options from './options';
 import Storage from './storage';
-import Currency from './currency';
 import Bonuses from './bonuses';
+import Currency from './currency';
 
 const Navbar = () => {
   const [option, setOption] = useState(0);
@@ -25,7 +25,7 @@ const Navbar = () => {
       {option === 3 && <Shop></Shop>}
       {option === 4 && <Bonuses></Bonuses>}
     </nav>
-  )
+  );
 }
 
 export default Navbar;
