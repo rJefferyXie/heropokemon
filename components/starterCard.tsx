@@ -21,12 +21,12 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
   const { pokemon, select, selected } = props;
   const [theme, setTheme] = useState('');
   const [image, setImage] = useState('');
-
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
   useEffect(() => {
     if (!pokemon || !artwork) return;
 
+    // Set background theme and pokemon image.
     const pokemonType = pokemon.types[0];
     setTheme(TypeColorSchemes[pokemonType]);
 
@@ -46,7 +46,7 @@ const StarterCard = (props: React.PropsWithChildren<StarterCardProps>) => {
       <img className={styles.cardImage} src={image} alt={`An image of " + ${pokemon.name}`} draggable={false}></img>
       <p className={styles.cardName}>{pokemon.name}</p>
     </div>
-  )
+  );
 }
 
 export default StarterCard;
