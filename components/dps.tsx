@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/DPS.module.scss';
 
 // Redux
@@ -11,7 +11,7 @@ const DPS = () => {
     <div className={styles.container}>
       <p>DPS: {Math.round(dps * 1000) / 100}</p>
     </div>
-  )
+  );
 }
 
 export default DPS;
