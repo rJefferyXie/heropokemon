@@ -23,7 +23,6 @@ interface PokemonInfoProps {
 
 const PokemonInfo = (props: React.PropsWithChildren<PokemonInfoProps>) => {
   const { pokemon, theme, exit } = props;
-
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   const pokedex: PokedexMap = useSelector((state: any) => {return state.pokedexReducer.pokedex});
 
