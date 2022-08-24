@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/Regions.module.scss';
 
 // Components
@@ -14,9 +14,9 @@ import allActions from '../store/actions/allActions';
 
 const Regions = () => {
   const dispatch = useDispatch();
-  const selected = useSelector((state: any) => {return state.regionsReducer.selected});
   const visited = useSelector((state: any) => {return state.settingReducer.visited});
   const regions = useSelector((state: any) => {return state.regionsReducer.regions});
+  const selected = useSelector((state: any) => {return state.regionsReducer.selected});
   
   const selectRegion = () => {
     const region = regions[Math.floor(Math.random() * (regions.length - 1))];
