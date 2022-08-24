@@ -22,14 +22,16 @@ const Hero = () => {
   const dispatch = useDispatch();
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
 
-  const [pokemon, setPokemon] = useState<PokemonMap>();
   const [clicks, setClicks] = useState(3);
+  const [pokemon, setPokemon] = useState<PokemonMap>();
 
   useEffect(() => {
+    // Randomly select any region's pokedex
     const regionIndex = Math.floor(Math.random() * RegionList.length);
     const regionString = localStorage.getItem(RegionList[regionIndex]);
     if (!regionString) return;
 
+    // Parse through the string and randomly select a Pokemon to be displayed
     const regionJSON = JSON.parse(regionString);
     const pokemonNames = Object.keys(regionJSON);
     const pokemonIndex = Math.floor(Math.random() * pokemonNames.length);
@@ -38,6 +40,7 @@ const Hero = () => {
   }, []);
 
   const clickImage = () => {
+    // Make player click the Pokemon three times to teach them the game
     if (clicks <= 1) {
       dispatch(allActions.settingActions.setVisited());
       return;
