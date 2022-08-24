@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/SwapScreen.module.scss';
 
 // Interfaces
@@ -12,7 +12,7 @@ import PokemonPreview from './pokemonPreview';
 import { Button, ClickAwayListener } from '@mui/material';
 
 // Animations
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import DropInTop from '../animations/dropInTop';
 
 // Redux
