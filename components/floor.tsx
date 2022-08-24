@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/Floor.module.scss';
 
 // MUI
@@ -10,14 +10,17 @@ interface FloorProps {
   setFloor: Function,
   floor: number,
   highestFloor: number,
-  current?: boolean
+  currentFloor?: boolean
 }
 
 const Floor = (props: React.PropsWithChildren<FloorProps>) => {
-  const { setFloor, floor, highestFloor, current } = props;
+  const { setFloor, floor, highestFloor, currentFloor } = props;
 
   return (
-    <div className={current ? styles.currentFloor : styles.floor} onClick={floor <= highestFloor ? () => setFloor(floor) : () => null}>
+    <div 
+      className={currentFloor ? styles.currentFloor : styles.floor} 
+      onClick={floor <= highestFloor ? () => setFloor(floor) : () => null}
+      >
       <p>{floor}</p>
       <div className={styles.iconContainer}>
         {floor <= highestFloor ? <DoneIcon></DoneIcon> : <ClearIcon></ClearIcon>}

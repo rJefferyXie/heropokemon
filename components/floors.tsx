@@ -71,7 +71,7 @@ const Floors = () => {
               setFloor={setFloor} 
               floor={floor.currentFloor} 
               highestFloor={floor.highestFloor} 
-              current={true} 
+              currentFloor={true} 
               key={idx}>
             </Floor> :
 
