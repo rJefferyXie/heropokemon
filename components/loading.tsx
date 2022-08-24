@@ -21,12 +21,12 @@ const Loading = () => {
                   <p className={styles.factText}>{fact}</p>
               </Card>
               <div className={styles.loadingAnimation}>
-                  <LinearProgress></LinearProgress>
+                  <LinearProgress id="LinearProgress" aria-describedby="LinearProgress" aria-busy="true"></LinearProgress>
                   <p className={styles.loadingText}>Loading Pokédex...</p>
               </div>
           </div>
       </section>
-  )
+  );
 };
 
 export default Loading;
