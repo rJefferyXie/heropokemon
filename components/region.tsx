@@ -39,9 +39,6 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
         layout="fill" 
         alt={name} 
         src={"images/wallpapers/" + name + ".png"}
-        sizes="(min-width: 75em) 10vw,
-               (min-width: 48em) 45vw,
-               90vw"
       >
       </ExportedImage>
       
