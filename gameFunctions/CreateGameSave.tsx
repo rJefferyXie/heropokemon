@@ -5,19 +5,22 @@ import PokemonMap from '../interfaces/PokemonMap';
 import biomeList from '../constants/BiomeList';
 
 const createGameSave = (starter: PokemonMap) => {
+  // set starter level to 5
   const starterLevel = 5;
   const starterInfo = JSON.parse(JSON.stringify(starter));
   starterInfo.level = starterLevel;
 
-  // adjust pokemon stats according to pokemon level
+  // adjust starter pokemon stats according to pokemon level
   for (let i = 0; i < 6; i++) {
     const statBoost = Math.floor(Math.random() * starterLevel * 2);
     starterInfo.statBoosts[i] = statBoost;
     starterInfo.stats[i + 1] += statBoost;
   }
 
+  // adjust starter pokemon's health
   starterInfo.stats[0] += starterInfo.statBoosts[0];
 
+  // set the first biome
   const firstBiome = Object.keys(biomeList)[Math.floor(Math.random() * (Object.keys(biomeList).length - 1))];
 
   return {
