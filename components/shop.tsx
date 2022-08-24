@@ -42,9 +42,14 @@ const Shop = () => {
   const purchase = () => {
     if (!item) return;
 
+    // Adjust items and currency accordingly.
     const newCurrency = currency - item.cost * itemAmount;
     const newItems = JSON.parse(JSON.stringify(items));
 
+    /* 
+      If item exists in item dictionary, increment quantity. 
+      Else, create new item entry. 
+    */
     if (Object.keys(newItems).includes(item.id)) {
       newItems[item.id].quantity += itemAmount;
     } else {
@@ -68,6 +73,7 @@ const Shop = () => {
       return;
     }
 
+    // Ensure we cannot select more than we can afford.
     if ((itemAmount + 1) * item.cost > currency) return;
     setItemAmount(itemAmount => itemAmount + 1);
   }
@@ -78,6 +84,7 @@ const Shop = () => {
       return;
     }
 
+    // Go to max amount the player can afford.
     if (itemAmount === 0) {
       setItemAmount(Math.floor(currency / item.cost));
       return;
@@ -160,7 +167,7 @@ const Shop = () => {
         </div>
       })}
     </div>
-  )
+  );
 }
 
 export default Shop;
