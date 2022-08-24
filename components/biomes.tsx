@@ -1,4 +1,4 @@
-// React and Styling
+// Styling
 import styles from '../styles/Biomes.module.scss';
 
 // Animations

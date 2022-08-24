@@ -39,6 +39,7 @@ const Bonuses = () => {
   const toggle = () => {
     if (ability === undefined) return;
 
+    // Turn off or turn on the auto healer or auto swapper abilities
     const newBonuses = JSON.parse(JSON.stringify(bonus.bonuses));
     newBonuses[ability.id].activated = !newBonuses[ability.id].activated;
     dispatch(allActions.bonusActions.setBonuses(newBonuses));
@@ -47,23 +48,27 @@ const Bonuses = () => {
   const purchase = () => {
     if (ability === undefined) return;
 
-    if ((bonus.bonuses[ability.id].level + 1) === 7 ||
-      bonus.bonusPoints < ability.cost(bonus.bonuses[ability.id].level + 1)) return;
+    const maxLevel = bonus.bonuses[ability.id].level + 1 === 7;
+    const cantAfford = bonus.bonusPoints < ability.cost(bonus.bonuses[ability.id].level + 1);
+    if (maxLevel || cantAfford) return;
 
     const newAbility = JSON.parse(JSON.stringify(ability));
     const newBonuses = JSON.parse(JSON.stringify(bonus.bonuses));
 
+    // Unlock and activate the auto swapper or auto healer
     if (newBonuses[newAbility.id].unlocked === false) {
       newBonuses[newAbility.id].unlocked = true;
       newBonuses[newAbility.id].activated = true;
     }
 
+    // Buying any of the first five abilities
     if (newBonuses[newAbility.id].level !== -1) {
       newBonuses[newAbility.id].level += 1;
       newAbility.level += 1;
       setAbility(newAbility);
     }
 
+    // Update player bonus points and new bonuses
     dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints - ability.cost(bonus.bonuses[ability.id].level + 1)));
     dispatch(allActions.bonusActions.setBonuses(newBonuses));
     exit();
@@ -102,6 +107,7 @@ const Bonuses = () => {
                     <p className={styles.costPreview}>{"Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}</p>
                     <p className={styles.currency}>{"You have " + bonus.bonusPoints + " BP."}</p>
                   </div>
+
                   <div className={styles.infoCol}>
                     <p className={styles.abilityHeader}>{ability.name(bonus.bonuses[ability.id].level)}</p>
                     <p className={styles.abilityDescription}>{ability.description(bonus.bonuses[ability.id].level)}</p>
