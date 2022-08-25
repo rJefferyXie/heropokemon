@@ -16,7 +16,8 @@
 
 .teamWrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  height: 90%;
 }
 
 .pagination {
@@ -39,6 +40,8 @@
   .teamWrapper {
     margin-bottom: 0.5rem;
     padding: 4px;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .pagination {
