@@ -1,30 +1,33 @@
 # name: Node Continuous Integration
 
-# on:
-#   push:
-#     branches: [ main ] 
+on:
+  push:
+    branches: [ main ] 
 
-# jobs:
-#   test_pull_request:
-#     runs-on: ubuntu-latest
-#     steps: 
-#       - name: Checkout
-#         uses: actions/checkout@v3      
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3      
       
-#       - name: Install Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 16
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
     
-#       - name: Install pnpm
-#         uses: pnpm/action-setup@v2.0.1
-#         id: pnpm-install
-#         with:
-#           version: 7
-#           run_install: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
 
-#       - name: Install dependencies
-#         run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build and export
+        run: pnpm build
 
       # - name: Run all automated tests
       #   uses: cypress-io/github-action@v4
