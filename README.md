@@ -8,6 +8,7 @@ Check it out here! https://heropokemon.web.app/
 * [About](#about)
 * [Images](#images)
 * [Technologies](#technologies)
+* [File Structure](#file_structure)
 * [Regions](#regions)
 * [Sources](#sources)
 
@@ -30,6 +31,30 @@ Check it out here! https://heropokemon.web.app/
 * Cypress - Created several integration and end-to-end tests to simulate a real user using the website.
 * MaterialUI - A library of pre-built production-ready React components.
 * SASS - Used for styling the website.
+
+# File Structure <a name="file_structure"></a>
+* .github Directory
+   * Contains the continuous integration (currently disabled) and continous deployment workflows for Github Actions.
+* Animations Directory
+   * Contains animations built for certain components using Framer Motion.
+* Components Directory
+   * Contains reusable React components.
+* Constants Directory
+   * Contains data objects that do not change such as shop items, abilities, type advantages, and more.
+* Cypress Directory
+   * Contains the E2E tests used for testing the most important components of the application.
+* Game Functions Directory
+   * Contains commonly used game functions to reduce file size in React components or NextJS pages.
+* Interfaces Directory
+   * Contains the TypeScript interfaces that are used throughout the application.
+* Pages Directory
+   * Contains the NextJS pages (routes) for the application such as /index and /game.
+* Public Directory
+   * Contains image assets used in the application, pokemon facts, and the favicon.
+* Store Directory
+   * Contains the redux store along with its actions and reducers.
+* Styles Directory
+   * Contains all the SCSS files for the entire application.
 
 # Regions <a name="regions"></a>
 * Kanto
