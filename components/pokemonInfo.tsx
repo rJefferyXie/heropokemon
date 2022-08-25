@@ -62,7 +62,7 @@ const PokemonInfo = (props: React.PropsWithChildren<PokemonInfoProps>) => {
                         style={
                           idx === 0 ? 
                           {width: pokemon.stats[0] / stat * 100 + "%", backgroundColor: theme } : 
-                          {width: stat / 2 + "%", backgroundColor: theme}
+                          {width: stat / 3 + "%", backgroundColor: theme}
                         }>
                         <p className={styles.statValue}>{idx === 0 ? Math.floor(pokemon.stats[0]) + "/" + stat : stat}</p>
                       </div>
