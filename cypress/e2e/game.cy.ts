@@ -25,6 +25,8 @@ describe('Testing the whole game including all items, buttons, and abilities.', 
       cy.window().its('store').invoke('dispatch', { type: 'SET_BONUS_POINTS', payload: 99999 });
       cy.window().its('store').invoke('dispatch', { type: 'SET_HIGHEST_FLOOR', payload: 4 });    
       cy.window().its('store').invoke('dispatch', { type: 'SET_CURRENT_FLOOR', payload: 5 });
+      cy.wait(100);
+      cy.window().its('store').invoke('dispatch', { type: 'SET_CURRENT_FLOOR', payload: 1 });    
     });
 
     it('Healing the first pokemon.', () => {
