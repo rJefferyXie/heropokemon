@@ -73,32 +73,22 @@ const Game: NextPage = () => {
       dispatch(allActions.storageActions.setStorage(newStorage));
       joinMessage !== undefined && dispatch(allActions.alertActions.addAlert(joinMessage));
 
+      // calculate enemy hp
+      let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.55, (enemy.enemy.level - 1)));
+      if (game.currentFloor % 10 === 0) enemyHP *= 10;
+      if (enemy.enemy.is_legendary) enemyHP *= 25;
+      if (enemy.enemy.is_mythical) enemyHP *= 20;
+
       // calculate currency and get the next enemy
-      let enemyHP = 10 * (enemy.level - 1 + Math.pow(1.55, (enemy.level - 1)));
-
-      if (game.currentFloor % 10 === 0) {
-        enemyHP *= 10;
-      }
-  
-      if (enemy.is_legendary) {
-        enemyHP *= 25;
-      }
-  
-      if (enemy.is_mythical) {
-        enemyHP *= 20;
-      }
-
-      console.log(enemyHP);
       const goldDropped = 1 + (enemyHP / 15) * (1 + bonus.bonuses["fortune"].level * 0.1);
-      console.log(goldDropped)
       const newCurrency = Math.floor(game.currency + goldDropped);
       dispatch(allActions.gameActions.setCurrency(newCurrency));
-      dispatch(allActions.bonusActions.setExperience(bonus.experience + enemy.level));
+      dispatch(allActions.bonusActions.setExperience(bonus.experience + enemy.enemy.level));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
 
       // calculate if player has leveled up
       let levelUps = 1;
-      while ((bonus.experience + enemy.level) >= experienceForLevel(bonus.level + levelUps)) {
+      while ((bonus.experience + enemy.enemy.level) >= experienceForLevel(bonus.level + levelUps)) {
         levelUps += 1;
         dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints + 1));
         dispatch(allActions.bonusActions.setLevel(bonus.level + 1));
