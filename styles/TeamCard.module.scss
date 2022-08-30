@@ -25,7 +25,6 @@
 .leftCol, .rightCol {
   display: flex;
   flex-direction: column;
-  padding: 3px;
 }
 
 .textCol {
@@ -33,7 +32,7 @@
   flex-direction: column;
 }
 
-.rightCol {
+.leftCol {
   width: 100%;
 }
 
@@ -43,7 +42,7 @@
 }
 
 .pokemonImage {
-  width: 21%;
+  width: 25%;
   margin: auto 0;
   -webkit-touch-callout: none;
 }
@@ -63,13 +62,13 @@
 }
 
 .healthBarWrapper {
-  width: 90%;
+  width: 95%;
   margin: 4px;
   height: 1.5rem;
   background-color: rgba($slate-400, 0.7);
   box-shadow: 2px 2px 4px rgb(0, 0, 0, 27%);
   border-radius: 16px;
-  margin: auto 8px auto auto;
+  margin: auto 4px auto auto;
   position: relative;
   overflow: hidden;
 }
@@ -101,16 +100,31 @@
 
 .healButton {
   background-color: $emerald-600 !important;
+  margin: auto auto 0px !important;
 }
 
 .swapButton {
-  margin: auto 0px auto auto !important;
   background-color: $teal-600 !important;
+  margin: auto 4px auto 0px !important;
 }
 
 .levelButton {
-  height: 100%;
   background-color: $cyan-600 !important;
+  margin: auto !important;
+}
+
+.levelCost {
+  display: none;
+}
+
+.levelButton:hover {
+  .levelCost {
+    display: flex;
+  }
+
+  .levelText {
+    display: none;
+  }
 }
 
 .healButton:hover, .swapButton:hover, .levelButton:hover {

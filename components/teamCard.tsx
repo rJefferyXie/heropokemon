@@ -94,30 +94,30 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       draggable
       >
       <div className={styles.leftCol}>
-        <Button className={styles.levelButton} variant="contained" onClick={upgrade}>
-          <div className={styles.textCol}>
-            <p>LV. UP</p>
-            <p>{"$" + upgradeCost}</p>
-          </div>
-        </Button>
-      </div>
-      <div className={styles.rightCol}>
         <div className={styles.topRow}>
           <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
           <div className={styles.pokemonInfo}>
             <strong className={styles.pokemonName}>{pokemon.name}</strong>
             <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>
           </div>
-          {index !== 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
         </div>
         <div className={styles.bottomRow}>
+          {index !== 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
           <div className={styles.healthBarWrapper}>
             <div className={styles.healthBar} style={{width: Math.floor(pokemon.stats[0] / pokemon.stats[1] * 100) + "%"}}>
               <p className={styles.healthValue}>{Math.floor(pokemon.stats[0])}/{Math.floor(pokemon.stats[1])}</p>
             </div>
           </div>
-          <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
         </div>
+      </div>
+      <div className={styles.rightCol}>
+        <Button className={styles.levelButton} variant="contained" onClick={upgrade}>
+          <div className={styles.textCol}>
+            <p className={styles.levelText}>LV. UP</p>
+            <p className={styles.levelCost}>{"$" + upgradeCost}</p>
+          </div>
+        </Button>
+        <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
       </div>
     </motion.div>
   );
