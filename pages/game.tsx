@@ -318,13 +318,13 @@ const Game: NextPage = () => {
     const gameBonusTick = () => gameBonusCallback.current();
     const gameBonusInterval = setInterval(gameBonusTick, 2000);
 
-    // const gameSaveTick = () => gameSaveCallback.current();
-    // const gameSaveInterval = setInterval(gameSaveTick, 60000);
+    const gameSaveTick = () => gameSaveCallback.current();
+    const gameSaveInterval = setInterval(gameSaveTick, 60000);
 
     return () => {
       clearInterval(gameFlowInterval);
       clearInterval(gameBonusInterval);
-      // clearInterval(gameSaveInterval);
+      clearInterval(gameSaveInterval);
     };        
   }, [regions.selected]);
 
