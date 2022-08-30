@@ -40,16 +40,20 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
 
   const dispatch = useDispatch();
   const items = useSelector((state: any) => {return state.itemReducer.items});
+  const currency = useSelector((state: any) => {return state.gameReducer.currency});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
   const pokedex = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
   const upgrade = (e: React.MouseEvent) => {
+    if (upgradeCost > currency) return;
+
     e.stopPropagation();
     const newTeam = JSON.parse(JSON.stringify(team));
     levelUp(newTeam, index, pokedex);
     setUpgradeCost(Math.floor(10 * (1.07 ** newTeam[index].level)));
     dispatch(allActions.teamActions.setTeam(newTeam));
+    dispatch(allActions.gameActions.setCurrency(currency - upgradeCost))
   }
 
   const heal = (e: React.MouseEvent) => {
