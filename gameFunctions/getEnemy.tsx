@@ -68,7 +68,7 @@ const getEnemy = (pokedex: PokedexMap, floor: number, biome: string): PokemonMap
     // adjust enemy stats according to level
     enemyInfo.level = level;
     for (let i = 0; i < 6; i++) {
-      const statBoost = Math.floor(Math.random() * floor * 2);
+      const statBoost = Math.floor(2 + Math.random() * level * 4);
       if (i === 0) enemyInfo.stats[i] += statBoost;
 
       enemyInfo.statBoosts[i] = statBoost;
