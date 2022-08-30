@@ -2,9 +2,6 @@
 import PokedexMap from '../interfaces/PokedexMap';
 import PokemonMap from '../interfaces/PokemonMap';
 
-// Game Functions
-import LevelUp from './levelUp';
-
 const addPokemon = (destination: PokemonMap[], enemy: PokemonMap) => {
   destination.push(JSON.parse(JSON.stringify(enemy)));
   destination[destination.length - 1].stats[0] = destination[destination.length - 1].stats[1];
@@ -52,20 +49,6 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
       joinMessage = enemy.name.toUpperCase() + " has joined your party!";
     }
   } 
-
-  // all pokemon that are lower level than the enemy have a chance to level up
-  newTeam.map((_: PokemonMap, idx: number) => {
-    const levelUpChance =  Math.floor(Math.random() * 100 + 1);
-    if (newTeam[idx].level < enemy.level - 3) {
-      LevelUp(newTeam, idx, pokedex);
-    } else if (newTeam[idx].level < enemy.level - 2 && levelUpChance >= 25) {
-      LevelUp(newTeam, idx, pokedex);
-    } else if (newTeam[idx].level < enemy.level - 1 && levelUpChance >= 50) {
-      LevelUp(newTeam, idx, pokedex);
-    } else if (newTeam[idx].level === enemy.level && levelUpChance >= 75) {
-      LevelUp(newTeam, idx, pokedex);
-    }
-  });
 
   return { newTeam, newStorage, joinMessage }
 }
