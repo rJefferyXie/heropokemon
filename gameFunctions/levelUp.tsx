@@ -5,9 +5,9 @@ import PokemonMap from '../interfaces/PokemonMap';
 const levelUp = (team: PokemonMap[], idx: number, pokedex: PokedexMap) => {
   team[idx].level += 1;
 
-  // level up raises pokemon stats by up to 2 points each
+  // level up raises pokemon stats by up to (2 - 4) points each
   for (let i = 0; i < 6; i++) {
-    const statBoost = Math.floor(1 + Math.random() * 2);
+    const statBoost = Math.floor(2 + Math.random() * 4);
     if (i === 0 && Math.floor(team[idx].stats[i]) > 0) team[idx].stats[i] += statBoost;
     team[idx].statBoosts[i] += statBoost;
     team[idx].stats[i + 1] += statBoost;
