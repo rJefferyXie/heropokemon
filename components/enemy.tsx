@@ -1,4 +1,5 @@
 // Styling
+import { useEffect, useState } from 'react';
 import styles from '../styles/Enemy.module.scss';
 
 // Constants
@@ -15,6 +16,10 @@ const Enemy = () => {
   const enemy = useSelector((state: any) => {return state.enemyReducer.enemy});
   const alerts = useSelector((state: any) => {return state.alertReducer.alerts});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
+  const currentFloor = useSelector((state: any) => {return state.gameReducer.currentFloor});
+
+  const [enemyName, setEnemyName] = useState('');
+  const [enemyMaxHP, setEnemyMaxHP] = useState(0);
 
   const clickHit = () => {
     /*
@@ -35,6 +40,18 @@ const Enemy = () => {
     dispatch(allActions.enemyActions.hitEnemy((bonus.bonuses["strongStyle"].level ** 2) + 1));
   }
 
+  useEffect(() => {
+    if (enemyName === enemy.name) return;
+
+    let enemyHP = 10 * (enemy.level - 1 + Math.pow(1.55, (enemy.level - 1)));
+    if (currentFloor % 10 === 0) enemyHP *= 10;
+    if (enemy.is_legendary) enemyHP *= 25;
+    if (enemy.is_mythical) enemyHP *= 20;
+    
+    setEnemyName(enemy.name);
+    setEnemyMaxHP(enemyHP);
+  }, [enemy, enemyName, currentFloor]);
+
   return (
     <div className={styles.container}>
       <img 
@@ -54,8 +71,8 @@ const Enemy = () => {
       </div>
       <strong className={styles.enemyName}>{enemy.name + ", LEVEL " + enemy.level}</strong>
       <div className={styles.healthBarWrapper}>
-        <div className={styles.healthBar} style={{width: Math.floor(enemy.stats[0] / enemy.stats[1] * 100) + "%"}}>
-          <p className={styles.healthValue}>{Math.floor(enemy.stats[0])}/{Math.floor(enemy.stats[1])}</p>
+        <div className={styles.healthBar} style={{width: Math.floor(enemy.stats[0] / enemyMaxHP * 100) + "%"}}>
+          <p className={styles.healthValue}>{Math.floor(enemy.stats[0])}/{Math.floor(enemyMaxHP)}</p>
         </div>
       </div>
     </div>
