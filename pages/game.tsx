@@ -80,15 +80,15 @@ const Game: NextPage = () => {
       if (enemy.enemy.is_mythical) enemyHP *= 20;
 
       // calculate currency and get the next enemy
-      const goldDropped = 1 + (enemyHP / 15) * (1 + bonus.bonuses["fortune"].level * 0.1);
-      const newCurrency = Math.floor(game.currency + goldDropped);
+      const goldDropped = Math.floor(1 + (enemyHP / 15) * (1 + bonus.bonuses["fortune"].level * 0.1));
+      const newCurrency = game.currency + goldDropped;
       dispatch(allActions.gameActions.setCurrency(newCurrency));
-      dispatch(allActions.bonusActions.setExperience(bonus.experience + enemy.enemy.level));
+      dispatch(allActions.bonusActions.setExperience(bonus.experience + goldDropped));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
 
       // calculate if player has leveled up
       let levelUps = 1;
-      while ((bonus.experience + enemy.enemy.level) >= experienceForLevel(bonus.level + levelUps)) {
+      while ((bonus.experience + goldDropped) >= experienceForLevel(bonus.level + levelUps)) {
         levelUps += 1;
         dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints + 1));
         dispatch(allActions.bonusActions.setLevel(bonus.level + 1));
