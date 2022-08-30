@@ -37,9 +37,7 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap, vigor: {level: number}) 
   }
 
   // scale the damage down depending on level of pokemon
-  if (pokemon.level < 20) {
-    playerDPS /= (20 - pokemon.level);
-  }
+  playerDPS = scaleDMG(pokemon.level, playerDPS);
 
   if (!enemy.is_legendary && !enemy.is_mythical) {
     enemyDPS /= 50;
@@ -48,6 +46,22 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap, vigor: {level: number}) 
   playerDPS *= (1 + (vigor.level * 0.1));
   if (Math.floor(pokemon.stats[0]) <= 0) playerDPS = 0;
   return { playerDPS, enemyDPS }
+}
+
+const scaleDMG = (pokemonLevel: number, DPS: number) => {
+  if (pokemonLevel < 10) {
+    return DPS /= 10;
+  }
+
+  if (pokemonLevel < 20) {
+    return DPS /= 7;
+  }
+
+  if (pokemonLevel < 30) {
+    return DPS /= 3;
+  }
+
+  return DPS;
 }
 
 export default getDPS;
