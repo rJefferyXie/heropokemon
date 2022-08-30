@@ -1,5 +1,5 @@
 // React and Styling
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/TeamCard.module.scss';
 
 // Animations
@@ -36,7 +36,7 @@ interface PokemonCardProps {
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const { pokemon, setSwappingIdx, handleSwap, index } = props;
   const [showInfo, setShowInfo] = useState(false);
-  const [upgradeCost, setUpgradeCost] = useState(Math.floor(5 * (1.07 ** pokemon.level)));
+  const [upgradeCost, setUpgradeCost] = useState(0);
 
   const dispatch = useDispatch();
   const items = useSelector((state: any) => {return state.itemReducer.items});
@@ -45,13 +45,16 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const pokedex = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
+  useEffect(() => {
+    setUpgradeCost(Math.floor(10 * (1.07 ** pokemon.level)));
+  }, [pokemon.level]);
+
   const upgrade = (e: React.MouseEvent) => {
     if (upgradeCost > currency) return;
 
     e.stopPropagation();
     const newTeam = JSON.parse(JSON.stringify(team));
     levelUp(newTeam, index, pokedex);
-    setUpgradeCost(Math.floor(10 * (1.07 ** newTeam[index].level)));
     dispatch(allActions.teamActions.setTeam(newTeam));
     dispatch(allActions.gameActions.setCurrency(currency - upgradeCost))
   }
