@@ -74,7 +74,7 @@ const Game: NextPage = () => {
       joinMessage !== undefined && dispatch(allActions.alertActions.addAlert(joinMessage));
 
       // calculate currency and get the next enemy
-      let enemyHP = 10 * (enemy.level - 1 + 1.55 ** (enemy.level - 1));
+      let enemyHP = 10 * (enemy.level - 1 + Math.pow(1.55, (enemy.level - 1)));
 
       if (game.currentFloor % 10 === 0) {
         enemyHP *= 10;
@@ -88,7 +88,9 @@ const Game: NextPage = () => {
         enemyHP *= 20;
       }
 
+      console.log(enemyHP);
       const goldDropped = 1 + (enemyHP / 15) * (1 + bonus.bonuses["fortune"].level * 0.1);
+      console.log(goldDropped)
       const newCurrency = Math.floor(game.currency + goldDropped);
       dispatch(allActions.gameActions.setCurrency(newCurrency));
       dispatch(allActions.bonusActions.setExperience(bonus.experience + enemy.level));
