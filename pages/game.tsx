@@ -216,7 +216,12 @@ const Game: NextPage = () => {
 
     if (newTeam[0].stats[0] <= 0) {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
-      newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, newEnemy.stats[1]);
+      let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.55, (enemy.enemy.level - 1)));
+      if (game.currentFloor % 10 === 0) enemyHP *= 10;
+      if (enemy.enemy.is_legendary) enemyHP *= 25;
+      if (enemy.enemy.is_mythical) enemyHP *= 20;
+
+      newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, enemyHP);
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
       dispatch(allActions.damageActions.setPlayerDPS(playerDPS));
       return;
