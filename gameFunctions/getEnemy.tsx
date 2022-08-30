@@ -75,8 +75,19 @@ const getEnemy = (pokedex: PokedexMap, floor: number, biome: string): PokemonMap
       enemyInfo.stats[i + 1] += statBoost;
     }
 
-    enemyInfo.stats[0] *= (1 + (enemyInfo.level * 0.1));
-    enemyInfo.stats[1] *= (1 + (enemyInfo.level * 0.1));
+    enemyInfo.stats[0] = 10 * (level - 1 + 1.55 ** (level - 1))
+
+    if (floor % 10 === 0) {
+      enemyInfo.stats[0] *= 10;
+    }
+
+    if (enemyInfo.is_legendary) {
+      enemyInfo.stats[0] *= 25;
+    }
+
+    if (enemyInfo.is_mythical) {
+      enemyInfo.stats[0] *= 20;
+    }
   }
 
   return enemyInfo;
