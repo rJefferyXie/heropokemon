@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 
 // Game Functions
 import healPokemon from '../gameFunctions/healPokemon';
+import levelUp from '../gameFunctions/levelUp';
 
 // Interfaces
 import PokemonMap from '../interfaces/PokemonMap';
@@ -35,11 +36,21 @@ interface PokemonCardProps {
 const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const { pokemon, setSwappingIdx, handleSwap, index } = props;
   const [showInfo, setShowInfo] = useState(false);
+  const [upgradeCost, setUpgradeCost] = useState(Math.floor(5 * (1.07 ** pokemon.level)));
 
   const dispatch = useDispatch();
   const items = useSelector((state: any) => {return state.itemReducer.items});
   const artwork = useSelector((state: any) => {return state.settingReducer.artwork});
+  const pokedex = useSelector((state: any) => {return state.pokedexReducer.pokedex});
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
+
+  const upgrade = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newTeam = JSON.parse(JSON.stringify(team));
+    levelUp(newTeam, index, pokedex);
+    setUpgradeCost(Math.floor(10 * (1.07 ** newTeam[index].level)));
+    dispatch(allActions.teamActions.setTeam(newTeam));
+  }
 
   const heal = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -75,21 +86,31 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
       onClick={() => setShowInfo(true)}
       draggable
       >
-      <div className={styles.topRow}>
-        <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
-        <div className={styles.pokemonInfo}>
-          <strong className={styles.pokemonName}>{pokemon.name}</strong>
-          <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>
-        </div>
-        {index !== 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
-      </div>
-      <div className={styles.bottomRow}>
-        <div className={styles.healthBarWrapper}>
-          <div className={styles.healthBar} style={{width: Math.floor(pokemon.stats[0] / pokemon.stats[1] * 100) + "%"}}>
-            <p className={styles.healthValue}>{Math.floor(pokemon.stats[0])}/{Math.floor(pokemon.stats[1])}</p>
+      <div className={styles.leftCol}>
+        <Button className={styles.levelButton} variant="contained" onClick={upgrade}>
+          <div className={styles.textCol}>
+            <p>LV. UP</p>
+            <p>{"$" + upgradeCost}</p>
           </div>
+        </Button>
+      </div>
+      <div className={styles.rightCol}>
+        <div className={styles.topRow}>
+          <img className={styles.pokemonImage} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
+          <div className={styles.pokemonInfo}>
+            <strong className={styles.pokemonName}>{pokemon.name}</strong>
+            <p className={styles.pokemonLevel}>{"LEVEL: " + pokemon.level}</p>
+          </div>
+          {index !== 0 && <Button className={styles.swapButton} variant="contained" onClick={swap}>SWAP</Button>}
         </div>
-        <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
+        <div className={styles.bottomRow}>
+          <div className={styles.healthBarWrapper}>
+            <div className={styles.healthBar} style={{width: Math.floor(pokemon.stats[0] / pokemon.stats[1] * 100) + "%"}}>
+              <p className={styles.healthValue}>{Math.floor(pokemon.stats[0])}/{Math.floor(pokemon.stats[1])}</p>
+            </div>
+          </div>
+          <Button className={styles.healButton} variant="contained" onClick={heal}>HEAL</Button>
+        </div>
       </div>
     </motion.div>
   );
