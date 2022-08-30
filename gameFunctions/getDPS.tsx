@@ -36,10 +36,16 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap, vigor: {level: number}) 
     }
   }
 
-  // make sure that both sides are doing more than 0 damage per interval
-  playerDPS = Math.max(playerDPS * (1 + (vigor.level * 0.1)), 1);
-  enemyDPS /= 25;
+  // scale the damage down depending on level of pokemon
+  if (pokemon.level < 20) {
+    playerDPS /= (20 - pokemon.level);
+  }
 
+  if (!enemy.is_legendary && !enemy.is_mythical) {
+    enemyDPS /= 25;
+  }
+
+  playerDPS *= (1 + (vigor.level * 0.1));
   if (Math.floor(pokemon.stats[0]) <= 0) playerDPS = 0;
   return { playerDPS, enemyDPS }
 }
