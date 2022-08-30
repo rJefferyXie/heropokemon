@@ -42,7 +42,7 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap, vigor: {level: number}) 
   }
 
   if (!enemy.is_legendary && !enemy.is_mythical) {
-    enemyDPS /= 25;
+    enemyDPS /= 50;
   }
 
   playerDPS *= (1 + (vigor.level * 0.1));
