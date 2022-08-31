@@ -27,7 +27,6 @@ const Enemy = () => {
       If player's first Pokemon has 0 HP, display an error message.
       Else deal damage to enemy equal to player's click damage.
     */
-
     if (Math.floor(team[0].stats[0]) <= 0) {
       const alertMessage = "You can't deal click damage while the first pokemon on your team has 0 HP.";
       if (!alerts.includes(alertMessage)) {
