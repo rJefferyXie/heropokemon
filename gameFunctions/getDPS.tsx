@@ -53,11 +53,11 @@ const scaleDMG = (pokemonLevel: number, DPS: number) => {
     return DPS /= 5;
   }
 
-  if (pokemonLevel < 20) {
+  if (pokemonLevel < 18) {
     return DPS /= 3;
   }
 
-  if (pokemonLevel < 30) {
+  if (pokemonLevel < 36) {
     return DPS /= 2;
   }
 
