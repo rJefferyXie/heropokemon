@@ -27,7 +27,7 @@ const Regions = () => {
     <div className={!visited ? styles.containerHidden : styles.container}>
       {selected && <RegionPreview></RegionPreview>}
 
-      <h1 className={styles.regionTitle}>HeroPokemon</h1>
+      <h1 className={styles.regionTitle}>Select a Region!</h1>
       <Button className={styles.playButton} variant="contained" onClick={selectRegion}>QUICK PLAY</Button>
 
       <div className={styles.regionContainer}>

@@ -28,9 +28,8 @@
 }
 
 .playButton {
-  width: fit-content;
-  height: fit-content;
   text-shadow: 1px 1px 1px $zinc-900;
+  font-size: 1.2rem !important;
   background-color: $emerald-600 !important;
   margin: 0.25rem auto !important;
 }
