@@ -47,17 +47,17 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
 
   useEffect(() => {
     if (pokemon.level < 18) {
-      setUpgradeCost(Math.floor(2 * pokemon.level * (1.07 ** pokemon.level)));
-      return;
-    }
-
-    if (pokemon.level < 36) {
       setUpgradeCost(Math.floor(3 * pokemon.level * (1.07 ** pokemon.level)));
       return;
     }
 
-    if (pokemon.level < 50) {
+    if (pokemon.level < 36) {
       setUpgradeCost(Math.floor(5 * pokemon.level * (1.07 ** pokemon.level)));
+      return;
+    }
+
+    if (pokemon.level < 50) {
+      setUpgradeCost(Math.floor(8 * pokemon.level * (1.07 ** pokemon.level)));
       return;
     }
   }, [pokemon.level]);
