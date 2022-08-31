@@ -41,9 +41,9 @@ const enemyFainted = (team: PokemonMap[], storage: PokemonMap[], pokedex: Pokede
   const newStorage = JSON.parse(JSON.stringify(storage));
   let joinMessage;
 
-  // 25% chance for the defeated pokemon to join our newTeam
+  // 10% chance for the defeated pokemon to join our newTeam
   const joinTeamChance = Math.floor(Math.random() * 100 + 1);
-  if (joinTeamChance >= (75 * (1 - kindSoul.level * 0.1))) {
+  if (joinTeamChance >= (90 * (1 - kindSoul.level * 0.1))) {
     if (!containsDuplicate(team, storage, enemy)) {
       newTeam.length < 6 ? addPokemon(newTeam, enemy) : addPokemon(newStorage, enemy);
       joinMessage = enemy.name.toUpperCase() + " has joined your party!";
