@@ -46,13 +46,26 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   const team: PokemonMap[] = useSelector((state: any) => {return state.teamReducer.team});
 
   useEffect(() => {
-    setUpgradeCost(Math.floor(10 * (1.07 ** pokemon.level)));
+    if (pokemon.level < 18) {
+      setUpgradeCost(Math.floor(2 * pokemon.level * (1.07 ** pokemon.level)));
+      return;
+    }
+
+    if (pokemon.level < 36) {
+      setUpgradeCost(Math.floor(3 * pokemon.level * (1.07 ** pokemon.level)));
+      return;
+    }
+
+    if (pokemon.level < 50) {
+      setUpgradeCost(Math.floor(5 * pokemon.level * (1.07 ** pokemon.level)));
+      return;
+    }
   }, [pokemon.level]);
 
   const upgrade = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (upgradeCost > currency) return;
-    
+
     const newTeam = JSON.parse(JSON.stringify(team));
     levelUp(newTeam, index, pokedex);
     dispatch(allActions.teamActions.setTeam(newTeam));
