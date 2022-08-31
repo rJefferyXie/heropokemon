@@ -50,9 +50,9 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
   }, [pokemon.level]);
 
   const upgrade = (e: React.MouseEvent) => {
-    if (upgradeCost > currency) return;
-
     e.stopPropagation();
+    if (upgradeCost > currency) return;
+    
     const newTeam = JSON.parse(JSON.stringify(team));
     levelUp(newTeam, index, pokedex);
     dispatch(allActions.teamActions.setTeam(newTeam));
