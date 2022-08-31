@@ -40,11 +40,11 @@ const Floors = () => {
     // Give players extra bonus points and gold after every 5th and 10th floor
     if ((floor.currentFloor % 6 === 0 || floor.currentFloor % 11 === 0) && floor.currentFloor > floor.highestFloor) {
       const goldReward = Math.ceil(floor.currentFloor ** 2.5);
-      const bpReward = Math.floor(floor.currentFloor ** 0.5);
+      const bpReward = Math.floor(floor.currentFloor ** 0.25);
 
       dispatch(allActions.gameActions.setCurrency(currency + goldReward));
       dispatch(allActions.bonusActions.setBonusPoints(bonusPoints + bpReward));
-      dispatch(allActions.alertActions.addAlert(`For beating floor ${floor.currentFloor}, you earned ${goldReward} and ${bpReward}BP!`));
+      dispatch(allActions.alertActions.addAlert(`For beating floor ${floor.currentFloor}, you earned $${goldReward} and ${bpReward}BP!`));
     }
     
     // Create a new biome every 5th floor
