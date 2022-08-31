@@ -75,7 +75,7 @@ const getEnemy = (pokedex: PokedexMap, floor: number, biome: string): PokemonMap
       enemyInfo.stats[i + 1] += statBoost;
     }
 
-    enemyInfo.stats[0] = 10 * (level - 1 + Math.pow(1.4, (level - 1)));
+    enemyInfo.stats[0] = 10 * (level - 1 + Math.pow(1.3, (level - 1)));
 
     if (floor % 10 === 0) {
       enemyInfo.stats[0] *= 2;
