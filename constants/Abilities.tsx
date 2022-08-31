@@ -71,19 +71,6 @@ const Abilities: Ability[] = [
     }
   },
   {
-    id: "swapper",
-    image: "/images/abilities/lustrousOrb.webp",
-    name: (_: any) => {
-      return "Auto Swapper"
-    },
-    cost: (_: any) => {
-      return 5;
-    },
-    description: (_: any) => {
-      return "Pokemon on your team will be swapped to the first slot automatically.";
-    } 
-  },
-  {
     id: "healer",
     image: "/images/abilities/soulDew.png",
     name: (_: any) => {
@@ -95,6 +82,19 @@ const Abilities: Ability[] = [
     description: (_: any) => {
       return "Automatically uses your potions on your pokemon when their health gets low.";
     }
+  },
+  {
+    id: "swapper",
+    image: "/images/abilities/lustrousOrb.webp",
+    name: (_: any) => {
+      return "Auto Swapper"
+    },
+    cost: (_: any) => {
+      return 5;
+    },
+    description: (_: any) => {
+      return "Pokemon on your team will be swapped to the first slot automatically.";
+    } 
   }
 ]
 
