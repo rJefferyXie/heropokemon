@@ -50,15 +50,15 @@ const getDPS = (enemy: PokemonMap, pokemon: PokemonMap, vigor: {level: number}) 
 
 const scaleDMG = (pokemonLevel: number, DPS: number) => {
   if (pokemonLevel < 10) {
-    return DPS /= 10;
+    return DPS /= 5;
   }
 
   if (pokemonLevel < 20) {
-    return DPS /= 7;
+    return DPS /= 3;
   }
 
   if (pokemonLevel < 30) {
-    return DPS /= 3;
+    return DPS /= 2;
   }
 
   return DPS;
