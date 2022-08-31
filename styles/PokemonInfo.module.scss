@@ -35,7 +35,7 @@
 .info {
   display: flex;
   flex-direction: column;
-  transform: rotateY(10deg);
+  transform: rotateY(7deg);
   transition: transform 0.3s ease;
   text-align: center;
 }
@@ -102,7 +102,7 @@
 .stats {
   display: flex;
   flex-direction: column;
-  transform: rotateY(-10deg);
+  transform: rotateY(-7deg);
   transition: transform 0.3s ease;
 }
 
