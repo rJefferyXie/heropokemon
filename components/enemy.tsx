@@ -44,9 +44,9 @@ const Enemy = () => {
     if (enemyName === enemy.name) return;
 
     let enemyHP = 10 * (enemy.level - 1 + Math.pow(1.55, (enemy.level - 1)));
-    if (currentFloor % 10 === 0) enemyHP *= 10;
-    if (enemy.is_legendary) enemyHP *= 25;
-    if (enemy.is_mythical) enemyHP *= 20;
+    if (currentFloor % 10 === 0) enemyHP *= 2;
+    if (enemy.is_mythical) enemyHP *= 5;
+    if (enemy.is_legendary) enemyHP *= 7;
     
     setEnemyName(enemy.name);
     setEnemyMaxHP(enemyHP);

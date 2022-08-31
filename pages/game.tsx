@@ -75,14 +75,13 @@ const Game: NextPage = () => {
 
       // calculate enemy hp
       let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.55, (enemy.enemy.level - 1)));
-      if (game.currentFloor % 10 === 0) enemyHP *= 10;
-      if (enemy.enemy.is_legendary) enemyHP *= 25;
-      if (enemy.enemy.is_mythical) enemyHP *= 20;
+      if (game.currentFloor % 10 === 0) enemyHP *= 2;
+      if (enemy.enemy.is_mythical) enemyHP *= 5;
+      if (enemy.enemy.is_legendary) enemyHP *= 7;
 
       // calculate currency and get the next enemy
       const goldDropped = Math.floor(1 + (enemyHP / 10) * (1 + bonus.bonuses["fortune"].level * 0.1));
-      const newCurrency = game.currency + goldDropped;
-      dispatch(allActions.gameActions.setCurrency(newCurrency));
+      dispatch(allActions.gameActions.setCurrency(game.currency + goldDropped));
       dispatch(allActions.bonusActions.setExperience(bonus.experience + goldDropped));
       dispatch(allActions.enemyActions.setEnemiesLeft(enemy.enemiesLeft - 1));
 
@@ -92,7 +91,6 @@ const Game: NextPage = () => {
         levelUps += 1;
         dispatch(allActions.bonusActions.setBonusPoints(bonus.bonusPoints + 1));
         dispatch(allActions.bonusActions.setLevel(bonus.level + 1));
-        dispatch(allActions.alertActions.addAlert("You have leveled up! You now have " + (bonus.bonusPoints + 1) + " BP."));
       }
     }
   }
