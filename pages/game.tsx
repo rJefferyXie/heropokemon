@@ -22,6 +22,7 @@ import enemyFainted from '../gameFunctions/enemyFainted';
 import experienceForLevel from '../gameFunctions/experienceForLevel';
 
 // Components
+import Utilities from '../components/utilities';
 import Navbar from '../components/navbar';
 import Floors from '../components/floors';
 import Biomes from '../components/biomes';
@@ -214,10 +215,10 @@ const Game: NextPage = () => {
 
     if (newTeam[0].stats[0] <= 0) {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
-      let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.55, (enemy.enemy.level - 1)));
-      if (game.currentFloor % 10 === 0) enemyHP *= 10;
-      if (enemy.enemy.is_legendary) enemyHP *= 25;
-      if (enemy.enemy.is_mythical) enemyHP *= 20;
+      let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.3, (enemy.enemy.level - 1)));
+      if (game.currentFloor % 10 === 0) enemyHP *= 2;
+      if (enemy.enemy.is_mythical) enemyHP *= 5;
+      if (enemy.enemy.is_legendary) enemyHP *= 7;
 
       newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, enemyHP);
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
@@ -335,6 +336,7 @@ const Game: NextPage = () => {
       </Head>
 
       <Navbar></Navbar>
+      <Utilities></Utilities>
 
       <Snackbar 
         open={showAlert}
