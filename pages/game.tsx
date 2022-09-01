@@ -161,18 +161,18 @@ const Game: NextPage = () => {
     localStorage.setItem(regions.selected + 'Save', JSON.stringify({
       "floor": game.highestFloor,
       "highestFloor": game.highestFloor,
-      "currency": game.currency,
+      "team": team,
       "storage": storage,
       "badges": game.badges,
       "biomes": biomes.biomes,
+      "currency": game.currency,
       "items": items,
-      "team": team,
-      "experience": bonus.experience,
       "level": bonus.level,
-      "bonusPoints": bonus.bonusPoints,
       "bonuses": bonus.bonuses,
+      "experience": bonus.experience,
+      "bonusPoints": bonus.bonusPoints,
       "gameBeaten": game.gameBeaten
-    }));  
+    })); 
   }
 
   const gameFlow = () => {
