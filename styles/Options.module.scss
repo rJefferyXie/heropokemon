@@ -3,6 +3,7 @@
 .optionSelected, .option {
   border-radius: 0px !important;
   width: calc(100% / 5) !important;
+  min-width: calc(100% / 5) !important;
 }
 
 .optionSelected {
