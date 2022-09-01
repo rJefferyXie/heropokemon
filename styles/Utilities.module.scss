@@ -1,0 +1,20 @@
+@import './constants.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  z-index: 999;
+}
+
+.tooltip {
+  font-size: 2.1rem !important;
+}
+
+.icon {
+  font-size: 2.1rem !important;
+  cursor: pointer;
+  margin: 4px auto;
+}
