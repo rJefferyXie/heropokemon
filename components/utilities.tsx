@@ -49,11 +49,11 @@ const Utilities = () => {
 
   return (
     <div className={styles.container}>
-      <Tooltip className={styles.tooltip} title="Return to home page." arrow placement="left">
+      <Tooltip className={styles.tooltip} title={<h3 className={styles.iconText}>Return to home page.</h3>} arrow placement="left">
         <HomeIcon className={styles.icon} onClick={goHome}></HomeIcon>
       </Tooltip>
 
-      <Tooltip className={styles.tooltip} title="Save the game." arrow placement="left">
+      <Tooltip className={styles.tooltip} title={<h3 className={styles.iconText}>Save the game.</h3>} arrow placement="left">
         <SaveIcon className={styles.icon} onClick={saveGame}></SaveIcon>
       </Tooltip>
 
