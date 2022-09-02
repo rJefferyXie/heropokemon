@@ -1,3 +1,4 @@
+import tutorialActions from './tutorialActions';
 import settingActions from './settingActions';
 import pokedexActions from './pokedexActions';
 import loadingActions from './loadingActions';
@@ -13,6 +14,7 @@ import teamActions from './teamActions';
 import itemActions from './itemActions';
 
 const allActions = {
+  tutorialActions,
   settingActions, 
   pokedexActions, 
   loadingActions, 

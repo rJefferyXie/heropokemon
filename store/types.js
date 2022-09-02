@@ -47,3 +47,7 @@ export const SET_BONUSES = "SET_BONUSES";
 export const SET_BONUS_POINTS = "SET_BONUS_POINTS";
 export const SET_LEVEL = "SET_LEVEL";
 export const SET_EXPERIENCE = "SET_EXPERIENCE";
+
+// Tutorial Types
+export const SET_SHOW_TUTORIAL = "SET_SHOW_TUTORIAL";
+export const SET_TUTORIAL_PAGE = "SET_TUTORIAL_PAGE";

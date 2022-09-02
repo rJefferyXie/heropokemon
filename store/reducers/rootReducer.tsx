@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
+import tutorialReducer from './tutorialReducer';
 import settingReducer from './settingReducer';
 import pokedexReducer from './pokedexReducer';
 import loadingReducer from './loadingReducer';
@@ -15,6 +16,7 @@ import teamReducer from './teamReducer';
 import itemReducer from './itemReducer';
 
 const rootReducer = combineReducers({
+    tutorialReducer,
     settingReducer, 
     pokedexReducer, 
     loadingReducer,
