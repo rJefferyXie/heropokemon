@@ -23,6 +23,7 @@ import experienceForLevel from '../gameFunctions/experienceForLevel';
 
 // Components
 import Utilities from '../components/utilities';
+import Tutorial from '../components/tutorial';
 import Navbar from '../components/navbar';
 import Floors from '../components/floors';
 import Biomes from '../components/biomes';
@@ -336,6 +337,7 @@ const Game: NextPage = () => {
       </Head>
 
       <Navbar></Navbar>
+      <Tutorial></Tutorial>
       <Utilities></Utilities>
 
       <Snackbar 
