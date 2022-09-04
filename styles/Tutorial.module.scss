@@ -1,1 +1,82 @@
 @import './constants.scss';
+
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  height: 100vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($zinc-900, 0.9);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: min(100%, 720px);
+  width: min(100%, 1240px);
+  background-color: $slate-800;
+  box-shadow: 2px 2px 4px $zinc-900;
+  padding: 1rem;
+  margin: auto;
+  position: relative;
+  overflow: auto;
+}
+
+.title {
+  margin: 0.5rem auto 1rem;
+  color: $zinc-50;
+  text-shadow: 1px 1px 1px rgba($zinc-800, 0.9);
+}
+
+.exitButton {
+  background-color: $red-700 !important;
+  color: $zinc-50 !important;
+  position: absolute !important;
+  text-shadow: 1px 1px 1px rgba($zinc-800, 0.9);
+  box-shadow: 2px 2px 4px $zinc-900 !important;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.exitButton:hover {
+  filter: brightness(110%);
+}
+
+.tutorialCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tutorialCard {
+  display: flex;
+  flex-direction: column;
+  width: calc(75% / 3 - 1rem);
+  aspect-ratio: 1/1;
+  margin: 0.5rem;
+  background-color: rgba($slate-50, 0.2);
+  box-shadow: 2px 2px 4px $zinc-900;
+  cursor: pointer;
+  position: relative;
+}
+
+.tutorialCard:hover, .tutorialCard:focus {
+  background-color: rgba($slate-50, 0.4);
+}
+
+.subtitle {
+  margin: 0 auto 0.25rem;
+}
+
+.description {
+  margin: 0 auto 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.icon {
+  margin: 0.25rem auto 0;
+  font-size: 3rem !important;
+}
