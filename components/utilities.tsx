@@ -64,9 +64,9 @@ const Utilities = () => {
         <SaveIcon className={styles.icon} onClick={saveGame}></SaveIcon>
       </Tooltip>
 
-      <Tooltip className={styles.tooltip} title={<h3 className={styles.iconText}>Open the tutorial.</h3>} arrow placement="left">
+      {/* <Tooltip className={styles.tooltip} title={<h3 className={styles.iconText}>Open the tutorial.</h3>} arrow placement="left">
         <HelpOutlineIcon className={styles.icon} onClick={showTutorial}></HelpOutlineIcon>
-      </Tooltip>
+      </Tooltip> */}
 
       {/* <Tooltip className={styles.tooltip} title="Change your settings." arrow placement="left">
         <SettingsIcon className={styles.icon}></SettingsIcon>
