@@ -21,6 +21,11 @@ const Regions = () => {
   const selectRegion = () => {
     const region = regions[Math.floor(Math.random() * (regions.length - 1))];
     dispatch(allActions.regionsActions.setRegion(region));
+
+    const pokedex = localStorage.getItem(region);
+    if (pokedex) {
+      dispatch(allActions.pokedexActions.setPokedex(JSON.parse(pokedex)));
+    }
   }
 
   return (
