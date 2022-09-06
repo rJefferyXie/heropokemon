@@ -337,7 +337,7 @@ const Game: NextPage = () => {
       </Head>
 
       <Navbar></Navbar>
-      <Tutorial></Tutorial>
+      {/* <Tutorial></Tutorial> */}
       <Utilities></Utilities>
 
       <Snackbar 
