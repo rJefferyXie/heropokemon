@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, setLogLevel } from "firebase/firestore";
+
+setLogLevel('silent');
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgItNhQBLdKwB-uBp7Vj8ldhZc5rTu7W0",
