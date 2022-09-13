@@ -64,4 +64,4 @@ const ReleaseScreen = (props: React.PropsWithChildren<ReleaseScreenProps>) => {
   );
 }
 
-export default ReleaseScreen
+export default ReleaseScreen;
