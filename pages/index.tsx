@@ -28,25 +28,21 @@ const Home: NextPage = () => {
   const visited = useSelector((state: any) => {return state.settingReducer.visited});
   const loading = useSelector((state: any) => {return state.loadingReducer.loading});
 
-  const setLoading = (loading: boolean) => {
-    dispatch(allActions.loadingActions.setLoading(loading));
-  }
-
   useEffect(() => {
+    const setLoading = (loading: boolean) => {
+      dispatch(allActions.loadingActions.setLoading(loading));
+    }
+
     const downloadPokedexes = async () => {
       for (const region of RegionList) {
         const regionPokedex = localStorage.getItem(region);
         if (regionPokedex) continue;
-
-        console.log("downloading pokedex for " + region);
 
         const ref = doc(db, "regions", region);
         const snapshot = await getDoc(ref);
         if (snapshot.exists()) {
           const snapData = snapshot.data().pokedex;
           localStorage.setItem(region, JSON.stringify(snapData));
-        } else {
-          console.log("Could not find pokedex.");
         }
       }
 
@@ -54,7 +50,7 @@ const Home: NextPage = () => {
     }
 
     downloadPokedexes();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
