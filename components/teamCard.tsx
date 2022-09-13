@@ -94,11 +94,9 @@ const PokemonCard = (props: React.PropsWithChildren<PokemonCardProps>) => {
     showInfo ? <PokemonInfo pokemon={pokemon} theme={TypeColorSchemes[pokemon.types[0]]} exit={() => setShowInfo(false)}></PokemonInfo> :
     <motion.div 
       className={styles.container} 
-      key="modal" 
       initial="hidden" 
       animate="visible" 
       variants={PokemonJoin}
-      transition={{duration: 0.2, type: "spring"}} 
       onDragStart={() => setSwappingIdx(index)}
       onDragEnter={(e) => e.preventDefault()}
       onDragOver={(e) => e.preventDefault()}

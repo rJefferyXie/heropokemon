@@ -51,12 +51,10 @@ const StorageCard = (props: React.PropsWithChildren<StorageCardProps>) => {
     showInfo ? <PokemonInfo pokemon={pokemon} theme={TypeColorSchemes[pokemon.types[0]]} exit={() => setShowInfo(false)}></PokemonInfo> :
     <motion.div 
       className={styles.container}
-      key="modal" 
       initial="hidden" 
       animate="visible" 
       variants={PokemonJoin}
       onClick={() => setShowInfo(true)}
-      transition={{duration: 0.2, type: "spring"}} 
       >
       <img className={styles.image} src={pokemon.sprites[artwork]} alt={"An image of " + pokemon.name} draggable={false}></img>
       <div className={styles.pokemonInfo}>
