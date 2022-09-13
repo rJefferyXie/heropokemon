@@ -15,10 +15,6 @@ const nextConfig = {
     storePicturesInWEBP: true,
     generateAndUseBlurImages: true
   },
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en"
-  },
   trailingSlash: true
 }
 

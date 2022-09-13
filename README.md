@@ -95,4 +95,3 @@ Check it out here! https://heropokemon.web.app/
 * Setting up Redux in NextJS: https://medium.com/how-to-react/how-to-setup-redux-in-nextjs-5bce0d82b8de
 * Rerouting Error in NextJS: https://stackoverflow.com/questions/54815348/nextjs-page-goes-to-404-on-refresh
 * Disabling Firebase Error Logging: https://github.com/firebase/firebase-js-sdk/issues/5977
-* Setting English as the default language: https://melvingeorge.me/blog/set-html-lang-attribute-in-nextjs
