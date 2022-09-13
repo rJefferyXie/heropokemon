@@ -5,6 +5,9 @@ import PokemonMap from '../interfaces/PokemonMap';
 // Constants
 import BiomeTypes from '../constants/BiomeTypes';
 
+// Game Functions
+import getEnemyHealth from './getEnemyHealth';
+
 const evolvePokemon = (enemy: PokemonMap, pokedex: PokedexMap): PokemonMap => {
   if (enemy.evolutions.length > 0) {
     const evolution = Math.floor(Math.random() * enemy.evolutions.length);   
@@ -75,19 +78,7 @@ const getEnemy = (pokedex: PokedexMap, floor: number, biome: string): PokemonMap
       enemyInfo.stats[i + 1] += statBoost;
     }
 
-    enemyInfo.stats[0] = 10 * (level - 1 + Math.pow(1.3, (level - 1)));
-
-    if (floor % 10 === 0) {
-      enemyInfo.stats[0] *= 2;
-    }
-
-    if (enemyInfo.is_mythical) {
-      enemyInfo.stats[0] *= 5;
-    }
-
-    if (enemyInfo.is_legendary) {
-      enemyInfo.stats[0] *= 7;
-    }
+    enemyInfo.stats[0] = getEnemyHealth(enemyInfo, floor);
   }
 
   return enemyInfo;

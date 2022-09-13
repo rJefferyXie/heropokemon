@@ -1,6 +1,3 @@
-// Next
-import ExportedImage from 'next-image-export-optimizer';
-
 // React and Styling
 import { useState } from 'react';
 import styles from '../styles/Shop.module.scss';
@@ -123,8 +120,7 @@ const Shop = () => {
                     <h3 className={styles.infoHeader}>How many would you like?</h3>
                     <p className={styles.currency}>{"You have: $" + currency}</p>
                     <p className={styles.itemCalculation}>
-                      {"It will cost $" + itemAmount * item.cost + 
-                      " to purchase " + itemAmount + " " + 
+                      {"It will cost $" + itemAmount * item.cost + " to purchase " + itemAmount + " " + 
                       ((item.name === "Rare Candy" && (itemAmount > 1 || itemAmount === 0)) ? "Rare Candie" : item.name) + 
                       (((item.name.includes("Potion") || (item.name === "Rare Candy")) 
                       && (itemAmount > 1 || itemAmount === 0)) ? "s" : '') + "."

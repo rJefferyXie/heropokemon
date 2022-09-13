@@ -24,7 +24,7 @@ import experienceForLevel from '../gameFunctions/experienceForLevel';
 
 // Components
 import Utilities from '../components/utilities';
-import Tutorial from '../components/tutorial';
+// import Tutorial from '../components/tutorial';
 import Navbar from '../components/navbar';
 import Floors from '../components/floors';
 import Biomes from '../components/biomes';
@@ -216,7 +216,7 @@ const Game: NextPage = () => {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
       const enemyHP = getEnemyHealth(enemy.enemy, game.currentFloor)
       newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, enemyHP);
-      
+
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
       dispatch(allActions.damageActions.setPlayerDPS(playerDPS));
       return;
