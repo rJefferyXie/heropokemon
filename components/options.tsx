@@ -1,8 +1,10 @@
 // Styling
 import styles from '../styles/Options.module.scss';
 
-// MUI and MUI Icons
-import { Button } from '@mui/material';
+// Components
+import OptionButton from './optionButton';
+
+// MUI Icons
 import ScienceIcon from '@mui/icons-material/Science';
 import InsightsIcon from '@mui/icons-material/Insights';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -17,42 +19,27 @@ interface OptionsProps {
 const Options = (props: React.PropsWithChildren<OptionsProps>) => {
   const { select, selected } = props;
 
+  const icons = [
+    <CatchingPokemonIcon key={"TeamIcon"}></CatchingPokemonIcon>,
+    <DesktopWindowsIcon key={"StorageIcon"}></DesktopWindowsIcon>,
+    <ScienceIcon key={"ItemsIcon"}></ScienceIcon>,
+    <ShoppingCartIcon key={"ShopIcon"}></ShoppingCartIcon>,
+    <InsightsIcon key={"AbilitiesIcon"}></InsightsIcon>
+  ]
+
   return (
     <div className={styles.container}>
-      <Button 
-        className={selected === 0 ? styles.optionSelected : styles.option} 
-        variant="contained" 
-        onClick={() => select(0)}>
-        <CatchingPokemonIcon></CatchingPokemonIcon>
-      </Button>
-
-      <Button 
-        className={selected === 1 ? styles.optionSelected : styles.option} 
-        variant="contained" 
-        onClick={() => select(1)}>
-        <DesktopWindowsIcon></DesktopWindowsIcon>
-      </Button>
-
-      <Button 
-        className={selected === 2 ? styles.optionSelected : styles.option} 
-        variant="contained" 
-        onClick={() => select(2)}>
-        <ScienceIcon></ScienceIcon>
-      </Button>
-
-      <Button 
-        className={selected === 3 ? styles.optionSelected : styles.option} 
-        variant="contained" 
-        onClick={() => select(3)}>        
-        <ShoppingCartIcon></ShoppingCartIcon>
-      </Button>
-
-      <Button 
-        className={selected === 4 ? styles.optionSelected : styles.option} 
-        variant="contained" 
-        onClick={() => select(4)}>
-        <InsightsIcon></InsightsIcon>
-      </Button>
+      {[...Array(5)].map((_, i) => {
+        return (
+          <OptionButton 
+            key={i}
+            className={selected === i ? styles.optionSelected : styles.option}
+            select={() => select(i)}
+            icon={icons[i]}
+          >
+          </OptionButton>
+        )}
+      )}
     </div>
   );
 }
