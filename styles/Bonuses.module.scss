@@ -68,13 +68,6 @@
   margin: 0 0.5rem !important;
 }
 
-.imagePreview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 .costPreview, .namePreview {
   margin: 4px auto 0;
 }
@@ -119,12 +112,6 @@
 
 .ability:hover {
   background-color: rgba($sky-500, 0.5);
-}
-
-.abilityImage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .abilityName, .abilityCost {

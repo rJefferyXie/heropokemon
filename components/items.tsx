@@ -1,6 +1,3 @@
-// Next
-import ExportedImage from 'next-image-export-optimizer';
-
 // React and Styling
 import { useState } from 'react';
 import styles from '../styles/Items.module.scss';
@@ -11,6 +8,7 @@ import PokemonMap from '../interfaces/PokemonMap';
 
 // Components
 import PokemonPreview from './pokemonPreview';
+import IconImage from './reusable/iconImage';
 
 // Game Functions
 import UseItem from '../gameFunctions/useItem';
@@ -72,16 +70,12 @@ const Items = () => {
                 >
                 <div className={styles.previewRow}>
                   <div className={styles.itemColPreview}>
-                    <div className={styles.imagePreview}>
-                      <ExportedImage 
-                        layout="fixed" 
-                        width="128px" 
-                        height="128px" 
-                        alt={item.name} 
-                        src={item.image}
-                      >
-                      </ExportedImage>
-                    </div>                    
+                    <IconImage
+                      size="large"
+                      src={item.image}
+                      alt={item.name}
+                    >
+                    </IconImage>                   
                     <p className={styles.namePreview}>{item.name}</p>
                     <p className={styles.quantityPreview}>{"Quantity: " + item.quantity}</p>
                     <p className={styles.descriptionPreview}>{item.description}</p>
@@ -107,16 +101,12 @@ const Items = () => {
 
       {Object.keys(items).map((item, idx) => {
         return items[item].quantity > 0 && <div className={styles.item} onClick={() => selectItem(items[item])} key={idx}>
-          <div className={styles.itemImage}>
-            <ExportedImage 
-              layout="fixed" 
-              width="64px" 
-              height="64px" 
-              alt={items[item].name} 
-              src={items[item].image}
-            >
-            </ExportedImage>
-          </div>          
+          <IconImage
+            size="small"
+            src={items[item].image}
+            alt={items[item].name}
+          >
+          </IconImage>      
           <div className={styles.infoCol}>
             <div className={styles.nameAndQuantity}>
               <p className={styles.itemName}>{items[item].name}</p>

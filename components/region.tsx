@@ -1,8 +1,11 @@
 // Next
 import ExportedImage from 'next-image-export-optimizer';
 
-// React and Styling
+// Styling
 import styles from '../styles/Region.module.scss';
+
+// Components
+import IconImage from './reusable/iconImage';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,14 +47,12 @@ const Region = (props: React.PropsWithChildren<RegionProps>) => {
       
       {regions.regions.includes(name) && images.map((image, idx) => {
         return <div className={styles.regionImage} key={idx}>
-          <ExportedImage 
-            layout="fixed" 
-            width="64px" 
-            height="64px" 
-            alt={image} 
+          <IconImage
+            size="small"
             src={"images/pokemon/" + image + ".png"}
+            alt={image}
           >
-          </ExportedImage>
+          </IconImage>
         </div>
       })}
     </div>

@@ -1,6 +1,3 @@
-// Next
-import ExportedImage from 'next-image-export-optimizer';
-
 // Styles
 import styles from '../styles/Tutorial.module.scss';
 

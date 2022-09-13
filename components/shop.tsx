@@ -7,6 +7,7 @@ import styles from '../styles/Shop.module.scss';
 
 // Constants
 import ShopItems from '../constants/ShopItems';
+import IconImage from './reusable/iconImage';
 
 // Interfaces
 import ShopItem from '../interfaces/ShopItem';
@@ -107,16 +108,12 @@ const Shop = () => {
                 >
                 <div className={styles.previewRow}>
                   <div className={styles.itemCol}>
-                    <div className={styles.imagePreview}>
-                      <ExportedImage 
-                        layout="fixed" 
-                        width="128px" 
-                        height="128px" 
-                        alt={item.name} 
-                        src={item.image}
-                      >
-                      </ExportedImage>
-                    </div>
+                    <IconImage
+                      size="large"
+                      src={item.image}
+                      alt={item.name}
+                    >
+                    </IconImage>
                     <p className={styles.costPreview}>{"$" + item.cost}</p>
                     <p className={styles.namePreview}>{item.name}</p>
                     <p className={styles.itemDescription}>{item.description}</p>
@@ -151,16 +148,12 @@ const Shop = () => {
 
       {ShopItems.map((item: ShopItem, idx) => {
         return <div onClick={() => selectItem(item)} className={styles.shopItem} key={idx}>
-          <div className={styles.itemImage}>
-            <ExportedImage 
-              layout="fixed" 
-              width="64px" 
-              height="64px" 
-              alt={item.name} 
-              src={item.image}
-            >
-            </ExportedImage>
-          </div>
+          <IconImage
+            size="small"
+            src={item.image}
+            alt={item.name}
+          >
+          </IconImage>
           <p className={styles.itemCost}>{"$" + item.cost}</p>
           <p className={styles.itemName}>{item.name}</p>
         </div>

@@ -10,7 +10,7 @@ import { Tooltip } from '@mui/material';
 // MUI Icons
 import HomeIcon from '@mui/icons-material/Home';
 import SaveIcon from '@mui/icons-material/Save';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+// import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 // import SettingsIcon from '@mui/icons-material/Settings';
 
 // Redux

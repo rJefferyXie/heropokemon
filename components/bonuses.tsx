@@ -1,12 +1,12 @@
-// Next
-import ExportedImage from 'next-image-export-optimizer';
-
 // React and Styling
 import { useState } from 'react';
 import styles from '../styles/Bonuses.module.scss';
 
 // Constants
 import Abilities from '../constants/Abilities';
+
+// Components
+import IconImage from './reusable/iconImage';
 
 // Game Functions
 import experienceForLevel from '../gameFunctions/experienceForLevel';
@@ -92,16 +92,12 @@ const Bonuses = () => {
                 >
                 <div className={styles.previewRow}>
                   <div className={styles.abilityCol}>
-                    <div className={styles.imagePreview}>
-                      <ExportedImage 
-                        layout="fixed" 
-                        width="128px" 
-                        height="128px" 
-                        alt={ability.name(bonus.bonuses[ability.id].level + 1)} 
-                        src={ability.image}
-                      >
-                      </ExportedImage>
-                    </div>
+                    <IconImage
+                      size="large"
+                      src={ability.image}
+                      alt={ability.name(bonus.bonuses[ability.id].level + 1)} 
+                    >
+                    </IconImage>
                     <p className={styles.namePreview}>{ability.name(bonus.bonuses[ability.id].level + 1)}</p>
                     <p className={styles.costPreview}>{"Cost: " + ability.cost(bonus.bonuses[ability.id].level + 1) + " BP"}</p>
                     <p className={styles.currency}>{"You have " + bonus.bonusPoints + " BP."}</p>
@@ -140,16 +136,12 @@ const Bonuses = () => {
       <div className={styles.abilityContainer}>
         {Abilities.map((ability: Ability, idx) => {
           return <div className={styles.ability} onClick={() => selectAbility(ability)} key={idx}>
-            <div className={styles.abilityImage}>
-              <ExportedImage 
-                layout="fixed" 
-                width="64px" 
-                height="64px" 
-                alt={ability.name(bonus.bonuses[ability.id].level)} 
-                src={ability.image}
-              >
-              </ExportedImage>
-            </div>
+            <IconImage
+              size="small"
+              src={ability.image}
+              alt={ability.name(bonus.bonuses[ability.id].level)}
+            >
+            </IconImage>
             <p className={styles.abilityName}>
               {ability.name(bonus.bonuses[ability.id].level)}
             </p>
