@@ -3,7 +3,10 @@ const growRight = {
     width: "0px"
   },
   visible: {
-    width: "164px"
+    width: "164px",
+    transition: {
+      duration: 0.7
+    }
   }
 }
 

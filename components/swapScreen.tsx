@@ -41,7 +41,6 @@ const SwapScreen = (props: React.PropsWithChildren<SwapScreenProps>) => {
       <ClickAwayListener onClickAway={exit}>
         <motion.div 
           className={styles.wrapper}
-          key="modal" 
           initial="hidden" 
           animate="visible" 
           exit="exit" 

@@ -160,7 +160,7 @@ const RegionPreview = () => {
           Object.keys(gameSave).length > 0 ? 
               <AnimatePresence onExitComplete={() => exit()}>
                 {starterPokemon.length > 0 &&
-                  <motion.div className={styles.container} key="modal" initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
+                  <motion.div className={styles.container} initial="hidden" animate="visible" exit="exit" variants={DropInTop}>
                     
                     <h1 className={styles.regionTitle}>{regions.selected}</h1>
                     <div className={styles.topRow}>

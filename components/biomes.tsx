@@ -19,14 +19,13 @@ const Biomes = () => {
         key={biome} 
         initial="hidden" 
         animate="visible" 
-        transition={{duration: 0.5}}
         variants={GrowRight}
       >
         <img className={styles.biomeIcon} src={`/images/biomes/${biome}.webp`} alt={biome}></img>
         <p className={styles.biomeName}>{biome}</p>
       </motion.div>
     </div>
-  )
+  );
 }
 
 export default Biomes;

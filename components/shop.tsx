@@ -100,7 +100,6 @@ const Shop = () => {
           <div className={styles.overlay}>
             <ClickAwayListener onClickAway={exit}>
               <motion.div className={styles.itemPreview} 
-                key="modal" 
                 initial="hidden" 
                 animate="visible" 
                 exit="exit" 

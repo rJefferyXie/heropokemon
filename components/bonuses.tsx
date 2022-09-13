@@ -85,7 +85,6 @@ const Bonuses = () => {
           <div className={styles.overlay}>
             <ClickAwayListener onClickAway={exit}>
               <motion.div className={styles.abilityPreview} 
-                key="modal" 
                 initial="hidden" 
                 animate="visible" 
                 exit="exit" 
