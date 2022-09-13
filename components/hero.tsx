@@ -86,7 +86,7 @@ const Hero = () => {
           </div>
 
           <div className={styles.rightColumn}>
-            <h1 className={styles.heroHeader}>Ready To Play?</h1>
+            <h2 className={styles.heroHeader}>Ready To Play?</h2>
             <img 
               className={styles.heroImage} 
               src={pokemon.sprites[artwork]} 

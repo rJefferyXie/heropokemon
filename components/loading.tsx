@@ -17,7 +17,7 @@ const Loading = () => {
       <section className={styles.loadingScreen}>
           <div className={styles.loadingContainer}>
               <Card variant="outlined" className={styles.factCard}>
-                  <h1 className={styles.factHeader}>Random Pokémon Fact</h1>
+                  <h2 className={styles.factHeader}>Random Pokémon Fact</h2>
                   <p className={styles.factText}>{fact}</p>
               </Card>
               <div className={styles.loadingAnimation}>
