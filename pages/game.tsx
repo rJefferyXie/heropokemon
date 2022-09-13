@@ -96,8 +96,6 @@ const Game: NextPage = () => {
   }
 
   useEffect(() => {
-    if (!router) return;
-
     const gameSave: GameSave | false = getGameSave(regions.selected);
     if (gameSave === false) {
       router.push("/");
@@ -119,8 +117,7 @@ const Game: NextPage = () => {
     dispatch(allActions.itemActions.setItems(gameSave.items));
     dispatch(allActions.teamActions.setTeam(gameSave.team));
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [dispatch, router, regions.selected]);
 
   useEffect(() => {
     if (!pokedex.pokedex) return;
