@@ -125,7 +125,7 @@ const Game: NextPage = () => {
   }, [router]);
 
   useEffect(() => {
-    if (pokedex.pokedex === {}) return;
+    if (!pokedex.pokedex) return;
     const enemyInfo = getEnemy(pokedex.pokedex, game.currentFloor, biomes.activeBiome);
     dispatch(allActions.enemyActions.setEnemy(enemyInfo));
 
@@ -177,7 +177,7 @@ const Game: NextPage = () => {
   }
 
   const gameFlow = () => {
-    if (enemy.enemy === {} || team.length === 0) return;
+    if (!enemy.enemy || team.length === 0) return;
 
     const { playerDPS, enemyDPS } = getDPS(enemy.enemy, team[0], bonus.bonuses["vigor"]);
     const newTeam = JSON.parse(JSON.stringify(team));
