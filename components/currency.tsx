@@ -9,9 +9,7 @@ const Currency = () => {
 
   return (
     <div className={styles.container}>
-      <p>
-        $<span>{currency}</span>
-      </p>
+      <p>${currency}</p>
     </div>
   );
 }
