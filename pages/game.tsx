@@ -19,6 +19,7 @@ import getDPS from '../gameFunctions/getDPS';
 import getEnemy from '../gameFunctions/getEnemy';
 import getGameSave from '../gameFunctions/getGameSave';
 import enemyFainted from '../gameFunctions/enemyFainted';
+import getEnemyHealth from '../gameFunctions/getEnemyHealth';
 import experienceForLevel from '../gameFunctions/experienceForLevel';
 
 // Components
@@ -76,10 +77,7 @@ const Game: NextPage = () => {
       joinMessage !== undefined && dispatch(allActions.alertActions.addAlert(joinMessage));
 
       // calculate enemy hp
-      let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.55, (enemy.enemy.level - 1)));
-      if (game.currentFloor % 10 === 0) enemyHP *= 2;
-      if (enemy.enemy.is_mythical) enemyHP *= 5;
-      if (enemy.enemy.is_legendary) enemyHP *= 7;
+      const enemyHP = getEnemyHealth(enemy.enemy, game.currentFloor);
 
       // calculate currency and get the next enemy
       const goldDropped = Math.floor(1 + (enemyHP / 10) * (1 + bonus.bonuses["fortune"].level * 0.1));
@@ -216,12 +214,9 @@ const Game: NextPage = () => {
 
     if (newTeam[0].stats[0] <= 0) {
       const newEnemy = JSON.parse(JSON.stringify(enemy.enemy));
-      let enemyHP = 10 * (enemy.enemy.level - 1 + Math.pow(1.3, (enemy.enemy.level - 1)));
-      if (game.currentFloor % 10 === 0) enemyHP *= 2;
-      if (enemy.enemy.is_mythical) enemyHP *= 5;
-      if (enemy.enemy.is_legendary) enemyHP *= 7;
-
+      const enemyHP = getEnemyHealth(enemy.enemy, game.currentFloor)
       newEnemy.stats[0] = Math.min(newEnemy.stats[0] + 0.2, enemyHP);
+      
       dispatch(allActions.enemyActions.setEnemy(newEnemy));
       dispatch(allActions.damageActions.setPlayerDPS(playerDPS));
       return;
